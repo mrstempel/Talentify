@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.Web", "Talentify.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.Web.Tests", "Talentify.Web.Tests\Talentify.Web.Tests.csproj", "{720164D3-0890-44CD-9410-651A68971F46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwIt.Project.Pattern", "KwIt.Project.Pattern\KwIt.Project.Pattern.csproj", "{B11CECC4-7760-4C38-A0F4-A23EB760E8E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.ORM", "Talentify.ORM\Talentify.ORM.csproj", "{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{720164D3-0890-44CD-9410-651A68971F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{720164D3-0890-44CD-9410-651A68971F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{720164D3-0890-44CD-9410-651A68971F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11CECC4-7760-4C38-A0F4-A23EB760E8E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11CECC4-7760-4C38-A0F4-A23EB760E8E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11CECC4-7760-4C38-A0F4-A23EB760E8E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11CECC4-7760-4C38-A0F4-A23EB760E8E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
