@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\Context\TalentifyContext.cs" />
+    <Compile Include="DAL\Models\Coaching\SubjectCategory.cs" />
+    <Compile Include="DAL\Models\School\School.cs" />
+    <Compile Include="DAL\Models\School\SchoolType.cs" />
+    <Compile Include="DAL\Models\User\BaseUser.cs" />
+    <Compile Include="DAL\Models\User\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,12 +59,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Context\" />
-    <Folder Include="Library\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Models\" />
-    <Folder Include="Repository\" />
-    <Folder Include="UnitOfWork\" />
+    <Folder Include="DAL\Library\" />
+    <Folder Include="DAL\Migrations\" />
+    <Folder Include="DAL\Repository\" />
+    <Folder Include="DAL\UnitOfWork\" />
+    <Folder Include="Utils\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KwIt.Project.Pattern\KwIt.Project.Pattern.csproj">
+      <Project>{b11cecc4-7760-4c38-a0f4-a23eb760e8e9}</Project>
+      <Name>KwIt.Project.Pattern</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

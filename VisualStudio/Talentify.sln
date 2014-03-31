@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.Web.Tests", "Tale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwIt.Project.Pattern", "KwIt.Project.Pattern\KwIt.Project.Pattern.csproj", "{B11CECC4-7760-4C38-A0F4-A23EB760E8E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.ORM", "Talentify.ORM\Talentify.ORM.csproj", "{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.Core", "Talentify.ORM\Talentify.Core.csproj", "{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
