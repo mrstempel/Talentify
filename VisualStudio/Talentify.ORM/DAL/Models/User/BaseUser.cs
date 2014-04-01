@@ -14,14 +14,15 @@ namespace Talentify.ORM.DAL.Models.User
 		public string Password { get; set; }
 		public string Firstname { get; set; }
 		public string Surname { get; set; }
-		public DateTime BirthDate { get; set; }
+		public DateTime? BirthDate { get; set; }
 		public string Address { get; set; }
 		public string ZipCode { get; set; }
 		public string City { get; set; }
 		public string Country { get; set; }
 		public string Phone { get; set; }
+		public Guid RegisterCode { get; set; }
 		public DateTime JoinedDate { get; set; }
-		public DateTime UpdateDate { get; set; }
+		public DateTime? UpdateDate { get; set; }
 	}
 
 	public class BaseUserMap : EntityTypeConfiguration<BaseUser>
@@ -32,6 +33,10 @@ namespace Talentify.ORM.DAL.Models.User
 			this.ToTable("BaseUser");
 			// Primary Key
 			this.HasKey(t => t.Id);
+
+			this.Property(t => t.BirthDate).HasColumnName("BirthDate").HasColumnType("datetime2");
+			this.Property(t => t.JoinedDate).HasColumnName("JoinedDate").HasColumnType("datetime2");
+			this.Property(t => t.UpdateDate).HasColumnName("UpdateDate").HasColumnType("datetime2");
 		}
 	}
 }

@@ -65,14 +65,13 @@
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\WebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Email.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\KwIt.Project.Pattern\KwIt.Project.Pattern.csproj">
       <Project>{b11cecc4-7760-4c38-a0f4-a23eb760e8e9}</Project>
