@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,14 +137,24 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KwIt.Project.Pattern\KwIt.Project.Pattern.csproj">
+      <Project>{b11cecc4-7760-4c38-a0f4-a23eb760e8e9}</Project>
+      <Name>KwIt.Project.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Talentify.ORM\Talentify.Core.csproj">
+      <Project>{e3d0b096-f25c-41b9-ab1a-f18e5c8f9e15}</Project>
+      <Name>Talentify.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

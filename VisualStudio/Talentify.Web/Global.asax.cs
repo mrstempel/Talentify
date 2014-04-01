@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Migrations;
 
 namespace Talentify.Web
 {
@@ -19,6 +22,8 @@ namespace Talentify.Web
 			WebApiConfig.Register(GlobalConfiguration.Configuration);
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<TalentifyContext, TalentifyConfiguration>());
 		}
 	}
 }

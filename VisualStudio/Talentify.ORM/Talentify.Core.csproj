@@ -39,6 +39,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,11 +49,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\Context\TalentifyContext.cs" />
+    <Compile Include="DAL\Library\ISeeder.cs" />
+    <Compile Include="DAL\Migrations\BaseSeeder.cs" />
+    <Compile Include="DAL\Migrations\InitialSeeder.cs" />
+    <Compile Include="DAL\Migrations\TalentifyConfiguration.cs" />
     <Compile Include="DAL\Models\Coaching\SubjectCategory.cs" />
+    <Compile Include="DAL\Models\DBMigrationHistory.cs" />
     <Compile Include="DAL\Models\School\School.cs" />
     <Compile Include="DAL\Models\School\SchoolType.cs" />
     <Compile Include="DAL\Models\User\BaseUser.cs" />
     <Compile Include="DAL\Models\User\Student.cs" />
+    <Compile Include="DAL\Repository\BaseUserRepository.cs" />
+    <Compile Include="DAL\Repository\TalentifyRepository.cs" />
+    <Compile Include="DAL\UnitOfWork\TalentifyUnitOfWork.cs" />
+    <Compile Include="Mvc\BaseController.cs" />
+    <Compile Include="Mvc\WebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,10 +71,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAL\Library\" />
-    <Folder Include="DAL\Migrations\" />
-    <Folder Include="DAL\Repository\" />
-    <Folder Include="DAL\UnitOfWork\" />
     <Folder Include="Utils\" />
   </ItemGroup>
   <ItemGroup>
