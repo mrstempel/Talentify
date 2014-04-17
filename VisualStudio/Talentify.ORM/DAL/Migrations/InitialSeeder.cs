@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.Coaching;
+using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.School;
+using Talentify.ORM.DAL.Models.User;
 
 namespace Talentify.ORM.DAL.Migrations
 {
@@ -29,11 +32,12 @@ namespace Talentify.ORM.DAL.Migrations
 
 			addSchools();
 			addSubjectCategories();
+			addMemberships();
 
 			return true;
 		}
 
-		public void addSchools()
+		private void addSchools()
 		{
 			// cretae school types
 			var htl = new SchoolType() {Code = "HTL", Name = "Höhere Technische Lehranstalt", StartClass = 1, EndClass = 5};
@@ -111,7 +115,7 @@ namespace Talentify.ORM.DAL.Migrations
 
 		}
 
-		public void addSubjectCategories()
+		private void addSubjectCategories()
 		{
 			Unit.SubjectCategoryRepository.Insert(new SubjectCategory() { Name = "Mathematik" });
 			Unit.SubjectCategoryRepository.Insert(new SubjectCategory() { Name = "Deutsch" });
@@ -136,6 +140,18 @@ namespace Talentify.ORM.DAL.Migrations
 			Unit.SubjectCategoryRepository.Insert(new SubjectCategory() { Name = "Technik" });
 			Unit.SubjectCategoryRepository.Insert(new SubjectCategory() { Name = "Darstellende Geometrie" });
 			Unit.SubjectCategoryRepository.Insert(new SubjectCategory() { Name = "Wirtschaft" });
+		}
+
+		private void addMemberships()
+		{
+			Unit.MembershipRepository.Insert(new Membership()
+			{
+				Type = MembershipType.Free,
+				Name = "Gratis",
+				Description = "Beschreibung für Gratis Membership",
+				Price = 10,
+				ValidDays = 181
+			});
 		}
 	}
 }

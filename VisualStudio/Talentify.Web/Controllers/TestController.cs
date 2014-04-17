@@ -11,22 +11,10 @@ namespace Talentify.Web.Controllers
 {
     public class TestController : BaseController
     {
-        //
-        // GET: /Test/
-
-        public ActionResult Index()
+        public ActionResult Register(string email, string password, string firstname, string surname, int schoolId)
         {
-	        var testUser = new Student()
-	        {
-		        Email = "dstempel@gmail.com",
-		        Password = PasswordHashing.CalculateSha1("haifisch"),
-		        Firstname = "David",
-		        Surname = "Stempel",
-		        SchoolId = 1
-	        };
-	        UnitOfWork.BaseUseRepository.Register(testUser);
+	        UnitOfWork.StudentRepository.Register(email, password, firstname, surname, schoolId);
             return View();
         }
-
     }
 }

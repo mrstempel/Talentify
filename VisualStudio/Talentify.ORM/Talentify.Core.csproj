@@ -55,11 +55,16 @@
     <Compile Include="DAL\Migrations\TalentifyConfiguration.cs" />
     <Compile Include="DAL\Models\Coaching\SubjectCategory.cs" />
     <Compile Include="DAL\Models\DBMigrationHistory.cs" />
+    <Compile Include="DAL\Models\Membership\Membership.cs" />
+    <Compile Include="DAL\Models\Membership\Subscription.cs" />
     <Compile Include="DAL\Models\School\School.cs" />
     <Compile Include="DAL\Models\School\SchoolType.cs" />
+    <Compile Include="DAL\Models\User\ActionToken.cs" />
     <Compile Include="DAL\Models\User\BaseUser.cs" />
     <Compile Include="DAL\Models\User\Student.cs" />
+    <Compile Include="DAL\Models\User\Teacher.cs" />
     <Compile Include="DAL\Repository\BaseUserRepository.cs" />
+    <Compile Include="DAL\Repository\StudentRepository.cs" />
     <Compile Include="DAL\Repository\TalentifyRepository.cs" />
     <Compile Include="DAL\UnitOfWork\TalentifyUnitOfWork.cs" />
     <Compile Include="Mvc\BaseController.cs" />

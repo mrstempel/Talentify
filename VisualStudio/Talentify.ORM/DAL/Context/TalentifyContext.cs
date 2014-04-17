@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 using KwIt.Project.Pattern.DAL.Context;
 using Talentify.ORM.DAL.Models;
 using Talentify.ORM.DAL.Models.Coaching;
+using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.School;
 using Talentify.ORM.DAL.Models.User;
+using Membership = System.Web.Security.Membership;
 
 namespace Talentify.ORM.DAL.Context
 {
@@ -28,6 +30,12 @@ namespace Talentify.ORM.DAL.Context
 		// users
 		public DbSet<BaseUser> BasUsers { get; set; }
 		public DbSet<Student> Students { get; set; }
+		public DbSet<Teacher> Teachers { get; set; }
+		public DbSet<ActionToken> ActionToken { get; set; }
+
+		// memberships
+		public DbSet<Talentify.ORM.DAL.Models.Membership.Membership> Memberships { get; set; }
+		public DbSet<Subscription> Subscriptions { get; set; }
 
 		public TalentifyContext() : base("EFConnectionString")
 		{
@@ -52,6 +60,12 @@ namespace Talentify.ORM.DAL.Context
 			// users
 			modelBuilder.Configurations.Add(new BaseUserMap());
 			modelBuilder.Configurations.Add(new StudentMap());
+			modelBuilder.Configurations.Add(new TeacherMap());
+			modelBuilder.Configurations.Add(new ActionTokenMap());
+
+			// memberships
+			modelBuilder.Configurations.Add(new MembershipMap());
+			modelBuilder.Configurations.Add(new SubscriptionMap());
 
 			base.OnModelCreating(modelBuilder);
 		}

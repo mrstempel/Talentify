@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.Utils;
 
@@ -29,14 +30,18 @@ namespace Talentify.ORM.DAL.Repository
 			user.JoinedDate = DateTime.Now;
 			// create register code
 			user.RegisterCode = Guid.NewGuid();
-			// save in database
+			// insert user
 			Insert(user);
-			// send confirmation e-mail
-			var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], user.Email);
-			mailMsg.Subject = WebConfigurationManager.AppSettings["Email.Register.Subject"];
-			mailMsg.Body = string.Format(WebConfigurationManager.AppSettings["Email.Register.Body"], user.RegisterCode);
-			Email.Send(mailMsg);
-
+			// create default subscription
+			var subscription = new Subscription()
+			{
+				Membership = UnitOfWork.MembershipRepository.AsQueryable().FirstOrDefault(m => m.Type == MembershipType.Free),
+				User = user,
+				PurchaseDate = DateTime.Now
+			};
+			// insert default subscription
+			UnitOfWork.SubscriptionRepository.Insert(subscription);
+			// commit to database
 			UnitOfWork.Save();
 
 			return true;

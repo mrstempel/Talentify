@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KwIt.Project.Pattern.DAL.Models;
+using Talentify.ORM.DAL.Models.Membership;
 
 namespace Talentify.ORM.DAL.Models.User
 {
@@ -23,6 +24,7 @@ namespace Talentify.ORM.DAL.Models.User
 		public Guid RegisterCode { get; set; }
 		public DateTime JoinedDate { get; set; }
 		public DateTime? UpdateDate { get; set; }
+		public ICollection<Subscription> Subscriptions { get; set; } 
 	}
 
 	public class BaseUserMap : EntityTypeConfiguration<BaseUser>
