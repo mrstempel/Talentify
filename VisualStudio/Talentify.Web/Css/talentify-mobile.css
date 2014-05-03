@@ -12,7 +12,8 @@
 
 .form-container {
   font-size: 17px;
-  width: 100%; }
+  width: 100%;
+  margin: 0 0 50px 0; }
   .form-container input {
     width: 100%;
     border-left: 0px;
