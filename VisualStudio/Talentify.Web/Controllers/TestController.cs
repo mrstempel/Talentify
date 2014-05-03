@@ -14,7 +14,17 @@ namespace Talentify.Web.Controllers
         public ActionResult Register(string email, string password, string firstname, string surname, int schoolId)
         {
 	        UnitOfWork.StudentRepository.Register(email, password, firstname, surname, schoolId);
-            return View();
+            return View("Empty");
         }
+
+	    public ActionResult RegisterConfirm(string registerCode)
+	    {
+		    return View("Empty");
+	    }
+
+	    public ActionResult PasswordReset(string email)
+	    {
+		    return View("Empty");
+	    }
     }
 }

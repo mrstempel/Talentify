@@ -124,10 +124,43 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Css\MyFontsWebfontsKit.css" />
+    <Content Include="Css\sprite.css">
+      <DependentUpon>sprite.scss</DependentUpon>
+    </Content>
+    <Content Include="Css\sprite.min.css" />
+    <Content Include="Css\sprite.scss" />
+    <None Include="Css\talentify-mobile.scss" />
+    <Content Include="Css\talentify-mobile.css">
+      <DependentUpon>talentify-mobile.scss</DependentUpon>
+    </Content>
+    <Content Include="Css\talentify-mobile.min.css" />
+    <Content Include="Css\talentify.css">
+      <DependentUpon>talentify.scss</DependentUpon>
+    </Content>
+    <Content Include="Css\talentify.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Css\talentify.scss" />
+    <Content Include="Css\webfonts\2AA7EA_0_0.eot" />
+    <Content Include="Css\webfonts\2AA7EA_0_0.ttf" />
+    <Content Include="Css\webfonts\2AA7EA_0_0.woff" />
+    <Content Include="Css\webfonts\2AA7EA_1_0.eot" />
+    <Content Include="Css\webfonts\2AA7EA_1_0.ttf" />
+    <Content Include="Css\webfonts\2AA7EA_1_0.woff" />
+    <Content Include="Css\webfonts\2AA7EA_2_0.eot" />
+    <Content Include="Css\webfonts\2AA7EA_2_0.ttf" />
+    <Content Include="Css\webfonts\2AA7EA_2_0.woff" />
+    <None Include="Properties\PublishProfiles\talentify - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\talentify - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Html\Index.html" />
+    <Content Include="Html\Register.html" />
+    <Content Include="Html\Home.html" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\sprite.png" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\screen.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -137,7 +170,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
-    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Empty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

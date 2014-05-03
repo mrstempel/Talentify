@@ -46,5 +46,12 @@ namespace Talentify.ORM.DAL.Repository
 
 			return true;
 		}
+
+		public virtual bool RegisterConfirm(Guid registerCode)
+		{
+
+
+			return true;
+		}
 	}
 }

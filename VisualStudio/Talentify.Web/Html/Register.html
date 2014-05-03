@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Talentify - Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<script src="/Scripts/jquery-2.1.0.min.js"></script>
+	<script src="/Scripts/screen.js"></script>
+	<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+	<link rel="stylesheet" href="/Css/talentify.min.css" />
+	<link rel="stylesheet" href="/Css/talentify-mobile.min.css" media="screen and (max-width: 767px)" />
+	<link rel="stylesheet" href="/Css/sprite.min.css" />
+	
+	<script>
+		$(this).ready(function ()
+		{
+			initScreen();
+		});
+
+		$(window).resize(function () { initSectionSizes(); });
+	</script>
+</head>
+<body>
+	<header id="page-header">
+		<h1>
+			<a href="Home.html"><img src="/Images/logo.png" alt="talentify"/></a>
+			<input type="button" value="Einloggen" class="desktop" />
+		</h1>
+	</header>
+	
+	<div id="page-container" class="form">
+		<section id="register">
+			<h1 class="desktop"><span>Die einzigartige & tolle Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+			<article>
+				<header>
+					<div class="sprite t-button desktop"></div>
+					<h2>Anmelden</h2>
+				</header>
+				<div class="form-container register">
+					<div class="field-container">
+						<input type="text" name="Firstname" id="Firstname" placeholder="Vorname"/>
+						<input type="text" name="Surname" id="Surname" placeholder="Nachname"/>
+					</div>
+					<div class="field-container">
+						<input type="text" name="Email" id="Email" placeholder="E-Mail Adresse"/>
+						<input type="password" name="Password" id="Password" placeholder="Passwort (mind. 6 Zeichen)"/>
+					</div>
+					<div class="field-container">
+						<input type="text" name="Schule" id="Schule" placeholder="Schule"/>
+					</div>
+					<div class="field-container">
+						<p>Ich bestätige, die <a href="#">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
+					</div>
+					<div class="field-container desktop">
+						<input type="button" value="Absenden"/>
+					</div>
+				</div>
+			</article>
+			<footer class="submit mobile">
+				<input type="button" value="Absenden" />
+			</footer>
+		</section>
+	</div>
+</body>
+</html>
