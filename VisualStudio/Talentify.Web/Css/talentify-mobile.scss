@@ -17,7 +17,7 @@ body
 	font-size: 17px;
 	width: 100%;
 	margin: 0 0 50px 0;
-	input
+	input, select
 	{
 		width: 100%;
 		border-left: 0px;
@@ -37,6 +37,23 @@ body
 	}
 }
 .form-container.register { margin-top: 20px; }
+.form-container.search
+{
+	width: 100% !important;
+	border: 0px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin: 0;
+	input, select 
+	{ 
+		width: 100%; 
+		border-left: 0px;
+		border-right: 0px;
+		border-bottom: 0px;
+	}
+	.field-container { margin: 0px; }
+}
 
 #page-container
 {
@@ -89,5 +106,18 @@ body
 			border-right: 1px solid #FFF;
 			width: 50% !important;
 		}
+	}
+}
+
+#search-results
+{
+	margin: 20px 0 0 0 !important;
+	article
+	{
+		width: 100%;
+		img { float: left; margin-right: 10px; }
+		h3 { font-size: 18px; text-align: left; }
+		
+		margin: 0 0 30px 0;
 	}
 }

@@ -153,11 +153,14 @@
     <None Include="Properties\PublishProfiles\talentify - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Html\Search.html" />
     <Content Include="Html\Index.html" />
     <Content Include="Html\Register.html" />
     <Content Include="Html\Home.html" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\search-result-header.png" />
     <Content Include="Images\sprite.png" />
+    <Content Include="Images\user-profile.png" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\screen.js" />
