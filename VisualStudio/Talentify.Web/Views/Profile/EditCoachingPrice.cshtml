@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "EditCoaching";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
+		<div id="msg-success" class="msg success"><h2>Preis/h gspeichert.</h2><p>Dein Lernhilfepreis/h wurde erfolgreich gespeichert.</p></div>
+	</div>
+	@if (FormSuccess == null)
+	{
+		using (Html.BeginForm("EditCoachingPrice", "Profile", FormMethod.Post, new { @class = "form-container" }))
+		{
+			<div class="field-container">
+				<input type="text" name="price" id="price" value="@ViewBag.Price" placeholder="Preis/h für Lernhilfe" />
+			</div>
+			<div class="field-container">
+				<input type="submit" value="Speichern" onclick="return validateCoachingPrice();"/>
+			</div>
+		}
+	}
+	else
+	{
+		<script>
+			window.parent.setProfileCoachingPrice(@ViewBag.Price);
+			setTimeout(function () { window.parent.hideModal('modal-edit-price'); }, 3000);
+		</script>
+	}
+</article>

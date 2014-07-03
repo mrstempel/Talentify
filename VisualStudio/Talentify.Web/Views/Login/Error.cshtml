@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		$(this).ready(function ()
+		{
+			$('#header-login').hide();
+		});
+	</script>
+}
+
+<div id="page-container">
+	<section>
+		<div class="msg-container visible">
+			<div id="msg-error" class="msg error">
+				<h2>Login fehlgeschlagen</h2>
+				<p>Falsche Login Daten!</p>
+			</div>
+		</div>
+		@using (Html.BeginForm("Login", "Login", FormMethod.Post, new {@class = "form-container register"}))
+		{
+			<article class="password-form">
+				
+				<div class="field-container">
+					<input type="text" id="login-email-screen" class="mandatory" placeholder="E-Mail Adresse"/>
+					<input type="password" id="login-password-screen" class="mandatory" placeholder="Passwort"/>
+				</div>
+				<div class="field-container desktop">
+					<input type="button" value="Log-In" onclick="submitLoginScreenForm(); "/>
+				</div>
+				<div class="field-container">
+					<a href="javscript:void(0);">Passwort vergessen?</a>
+				</div>
+			</article>
+		}
+	</section>
+</div>

@@ -1,0 +1,37 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.FrontendLogic.Models.SearchParams>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		$(this).ready(function()
+		{
+			searchCoaching();
+		});
+	</script>
+}
+
+<div id="page-container">
+	<section id="search">
+		<article>
+			<header>
+				<div class="sprite t-button desktop"></div>
+				<h2>Lernhilfe finden</h2>
+			</header>
+			@using (Html.BeginForm("Index", "Search", FormMethod.Post, new {@class = "form-container search"}))
+			{
+				<div class="field-container">
+					@Html.DropDownListFor(m => m.Class, AllClasses, "Schulstufe")
+					@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach")
+					<input type="button" value="Finden" onclick="searchCoaching();"/>
+				</div>
+			}
+		</article>
+	</section>
+	<div id="search-loading">Lade Suchergebnisse ...</div>
+	<section id="search-results"></section>
+</div>

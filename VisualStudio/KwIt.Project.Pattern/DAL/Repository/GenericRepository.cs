@@ -183,7 +183,7 @@ namespace KwIt.Project.Pattern.DAL.Repository
             return entity;
         }
 
-        public TEntity GetAttachedModel(TEntity entity)
+        public virtual TEntity GetAttachedModel(TEntity entity)
         {
             TEntity attachedModel = GetById(entity.Id);
             Context.Entry(attachedModel).CurrentValues.SetValues(entity);

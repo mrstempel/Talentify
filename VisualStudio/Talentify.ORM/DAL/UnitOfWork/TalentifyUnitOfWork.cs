@@ -9,6 +9,7 @@ using KwIt.Project.Pattern.DAL.UnitOfWork;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models;
 using Talentify.ORM.DAL.Models.Coaching;
+using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.School;
 using Talentify.ORM.DAL.Models.User;
@@ -31,13 +32,13 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private IRepository<School> _schoolRepository;
-		public IRepository<School> SchoolRepository
+		private SchoolRepository _schoolRepository;
+		public SchoolRepository SchoolRepository
 		{
 			get
 			{
 				if (_schoolRepository == null)
-					_schoolRepository = new TalentifyRepository<School>(this.Context);
+					_schoolRepository = new SchoolRepository(this.Context);
 
 				return _schoolRepository;
 			}
@@ -55,15 +56,27 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private BaseUserRepository _baseUseRepository;
-		public BaseUserRepository BaseUseRepository
+		private CoachingOfferRepository _coachingOfferRepository;
+		public CoachingOfferRepository CoachingOfferRepository
 		{
 			get
 			{
-				if (_baseUseRepository == null)
-					_baseUseRepository = new BaseUserRepository(this.Context);
+				if (_coachingOfferRepository == null)
+					_coachingOfferRepository = new CoachingOfferRepository(this.Context);
 
-				return _baseUseRepository;
+				return _coachingOfferRepository;
+			}
+		}
+
+		private BaseUserRepository<BaseUser> _baseUserRepository;
+		public BaseUserRepository<BaseUser> BaseUserRepository
+		{
+			get
+			{
+				if (_baseUserRepository == null)
+					_baseUserRepository = new BaseUserRepository<BaseUser>(this.Context);
+
+				return _baseUserRepository;
 			}
 		}
 
@@ -79,15 +92,27 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private BaseUserRepository _teacherRepository;
-		public BaseUserRepository TeacherRepository
+		private BaseUserRepository<Teacher> _teacherRepository;
+		public BaseUserRepository<Teacher> TeacherRepository
 		{
 			get
 			{
 				if (_teacherRepository == null)
-					_teacherRepository = new BaseUserRepository(this.Context);
+					_teacherRepository = new BaseUserRepository<Teacher>(this.Context);
 
 				return _teacherRepository;
+			}
+		}
+
+		private BaseUserRepository<Admin> _adminRepository;
+		public BaseUserRepository<Admin> AdminRepository
+		{
+			get
+			{
+				if (_adminRepository == null)
+					_adminRepository = new BaseUserRepository<Admin>(this.Context);
+
+				return _adminRepository;
 			}
 		}
 
@@ -100,6 +125,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 					_actionTokenRepository = new TalentifyRepository<ActionToken>(this.Context);
 
 				return _actionTokenRepository;
+			}
+		}
+
+		private IRepository<UserSettings> _userSettingsRepository;
+		public IRepository<UserSettings> UserSettingsRepository
+		{
+			get
+			{
+				if (_userSettingsRepository == null)
+					_userSettingsRepository = new TalentifyRepository<UserSettings>(this.Context);
+
+				return _userSettingsRepository;
 			}
 		}
 
@@ -127,6 +164,42 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
+		private BasePageRepository<BasePage> _basePageRepository;
+		public BasePageRepository<BasePage> BasePageRepository
+		{
+			get
+			{
+				if (_basePageRepository == null)
+					_basePageRepository = new BasePageRepository<BasePage>(this.Context);
+
+				return _basePageRepository;
+			}
+		}
+
+		private EventRepository _eventRepository;
+		public EventRepository EventRepository
+		{
+			get
+			{
+				if (_eventRepository == null)
+					_eventRepository = new EventRepository(this.Context);
+
+				return _eventRepository;
+			}
+		}
+
+		private IRepository<EventRegistration> _eventRegistrationRepository;
+		public IRepository<EventRegistration> EventRegistrationRepository
+		{
+			get
+			{
+				if (_eventRegistrationRepository == null)
+					_eventRegistrationRepository = new TalentifyRepository<EventRegistration>(this.Context);
+
+				return _eventRegistrationRepository;
+			}
+		}
+
 		private IRepository<DBMigrationHistory> _dBMigrationHistoryRepository;
 		public IRepository<DBMigrationHistory> DBMigrationHistoryRepository
 		{
@@ -137,6 +210,12 @@ namespace Talentify.ORM.DAL.UnitOfWork
 
 				return _dBMigrationHistoryRepository;
 			}
+		}
+
+		public bool ProxyCreationEnabled
+		{
+			get { return this.Context.Configuration.ProxyCreationEnabled; }
+			set { this.Context.Configuration.ProxyCreationEnabled = value; }
 		}
 
 		public TalentifyUnitOfWork()

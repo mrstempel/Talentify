@@ -1,0 +1,21 @@
+﻿<h1><a href="/Start"><img src="/Images/logo.png" alt="talentify"/></a></h1>
+<div class="logged-container">
+	<ul>
+		<li class="profile-img"><a href="/Profile" title="@LoggedUser.Firstname @LoggedUser.Surname" style="background:url('@LoggedUser.ProfileImageSmall')"></a></li>
+		<li class="notifications">
+			<a href="javascript:void(0);" onclick="toggleMenu('nav-menu-notifications');" class="nav-icon-link"><img src="/Images/header-notifications.png" alt="Benachrichtigungen" id="header-notifications"/></a>
+			<div class="nav-menu" id="nav-menu-notifications">
+				<div class="arrow"></div>
+				<a href="javascript:void(0);">Alle Notifications anzeigen</a>
+			</div>
+		</li>
+		<li class="settings">
+			<a href="javascript:void(0);" onclick="toggleMenu('nav-menu-settings');" class="nav-icon-link"><img src="/Images/header-settings.png" alt="Einstellungen" id="header-settings"/></a>
+			<div class="nav-menu" id="nav-menu-settings">
+				<div class="arrow"></div>
+				@Html.ActionLink("Einstellungen", "Index", "Settings")
+				<a href="javascript:void(0);" onclick="logout();">Logout</a>
+			</div>
+		</li>
+	</ul>
+</div>

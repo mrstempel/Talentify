@@ -1,0 +1,81 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.FrontendLogic.Models.PasswordChange>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		$(this).ready(function()
+		{
+			var notificationsEnabled = 'off';
+			@if (LoggedUser.Settings.HasNotifications)
+			{
+				<text>notificationsEnabled = 'on';</text>
+			}
+			$('#enable-notifications').addClass(notificationsEnabled);
+
+			var newsletterEnabled = 'off';
+			@if (LoggedUser.Settings.HasNewsletter)
+			{
+				<text>newsletterEnabled = 'on';</text>
+			}
+			$('#enable-newsletter').addClass(newsletterEnabled);
+		});
+	</script>
+}
+
+<div id="page-container" class="form">
+	<section class="user-settings">
+		<header>
+			<div class="sprite t-button desktop"></div>
+			<h2>Einstellungen</h2>
+		</header>
+		<article>
+			<div class="form-view no-border">
+				<div class="row">
+					<label class="for-input" style="vertical-align:top;">Notifications:</label>
+					<div class="input-switch" id="enable-notifications">
+						<a href="javascript:void(0);" onclick="setInputSwitch('enable-notifications', '/Settings/SetNotificationsEnabled')" class="switch-link"></a>
+						<div class="option on">Ja</div>
+						<div class="option off">Nein</div>
+					</div><div class="input-switch-feedback" id="enable-notifications-feedback">Eingabe gespeichert</div>
+				</div>
+				<div class="row">
+					<label class="for-input" style="vertical-align:top;">Newsletter:</label>
+					<div class="input-switch" id="enable-newsletter">
+						<a href="javascript:void(0);" onclick="setInputSwitch('enable-newsletter', '/Settings/SetNewsletterEnabled')" class="switch-link"></a>
+						<div class="option on">Ja</div>
+						<div class="option off">Nein</div>
+					</div><div class="input-switch-feedback" id="enable-newsletter-feedback">Eingabe gespeichert</div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<section>
+		<header>
+			<h2>Passwort ändern</h2>
+		</header>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2>Fehler beim Speichern</h2><p>Bitte versuche es erneut!</p></div>
+			<div id="msg-success" class="msg success"><h2>Dein Passwort wurde erfolgreich aktualisiert.</h2></div>
+		</article>
+		@using (Html.BeginForm("Index", "Settings", FormMethod.Post, new {@class = "form-container register"}))
+		{
+			<article class="password-form">
+				<div class="field-container">
+					@Html.PasswordFor(m => m.OldPassword, new {@placeholder = "Altes Passwort", @class = "mandatory"})
+				</div>
+				<div class="field-container">
+					@Html.PasswordFor(m => m.NewPassword1, new {@placeholder = "Neues Passwort", @class = "mandatory"})
+					@Html.PasswordFor(m => m.NewPassword2, new {@placeholder = "Passwort wiederholen", @class = "mandatory"})
+				</div>
+				<div class="field-container desktop">
+					<input type="submit" value="Passwort speichern" onclick="return validatePasswordForm()"/>
+				</div>
+			</article>
+		}
+	</section>
+</div>

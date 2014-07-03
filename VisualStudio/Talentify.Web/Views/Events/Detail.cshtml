@@ -1,0 +1,85 @@
+﻿@model Talentify.ORM.DAL.Models.Content.Event
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<!-- bootstrap -->
+	<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
+	<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<!-- maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=de&libraries=places,geometry" type="text/javascript"></script>
+	<script src="/Scripts/maps.js"></script>
+	<script>
+		latitude = @Model.Latitude;
+		longitude = @Model.Longitude;
+		google.maps.event.addDomListener(window, 'load', initMap);
+
+		$(this).ready(function()
+		{
+			loadEventOpenSeats(@Model.Id);
+			@if (ViewBag.DisableRegistration)
+			{
+				<text>disableRegistration();</text>
+			}
+		});
+
+		function disableRegistration()
+		{
+			$('#register-link').hide();
+			$('#registered').css('display', 'inline-block');
+		}
+	</script>
+}
+
+<div id="page-container">
+	<section>
+		<article class="event-detail">
+			<header>
+				<div class="sprite t-button desktop"></div>
+				<h2>Events</h2>
+			</header>
+			<div class="content-container">
+			<div class="left">
+				<h1>@Html.Raw(Model.Headline)</h1>
+				<div class="content">
+					<img src="@(@ContentUploadUrl)@(@Model.Image)" class="event-image" alt="@Html.Raw(Model.Title)"/>
+					<h4>Eventinformationen</h4>
+					@Html.Raw(Model.Content)
+				</div>
+			</div>
+			<div class="right">
+				<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
+				<span id="registered" class="link-button">Du bist angemeldet</span>
+				<div class="map-container" id="map-container"></div>
+				<div class="address">
+					<span class="important">Zeit und Ort</span><br/>
+					@Model.LocationName<br/>
+					@Model.Address<br/>
+					@Model.ZipCode @Model.City<br/>
+					@Model.Country
+				</div>
+				<div class="time">
+					@Model.BeginDate.ToString("dddd d.M.yyyy")<br/>
+					von @Model.BeginTime bis @Model.EndTime
+				</div>
+				<div class="open-seats">
+					<p>Noch Freie Plätze</p>
+					<span id="event-open-seats"></span>
+				</div>
+			</div>
+		</article>
+	</section>
+</div>
+
+<div class="modal fade" id="modal-event-register" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+  <div class="modal-dialog" id="event-register-form">
+	<header>
+		<h1>Eventanmeldung<a href="javascript:void(0);" onclick="$('#modal-event-register').modal('hide');" class="close-link"></a></h1>
+	</header>
+	<iframe id="event-register-frame" width="600" height="300" scrolling="no"></iframe>
+  </div>
+</div>

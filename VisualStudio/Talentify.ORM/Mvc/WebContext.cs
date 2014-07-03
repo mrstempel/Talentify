@@ -34,16 +34,16 @@ namespace Talentify.ORM.Mvc
 		{
 			get
 			{
-				if (HttpContext.Current.Session["CmsContext.User"] == null)
+				if (HttpContext.Current.Session["WebContext.User"] == null)
 				{
-					HttpContext.Current.Session["CmsContext.User"] =
-						unitOfWork.BaseUseRepository.GetByEmail(HttpContext.Current.User.Identity.Name) ?? new BaseUser();
+					HttpContext.Current.Session["WebContext.User"] =
+						unitOfWork.BaseUserRepository.GetByEmail(HttpContext.Current.User.Identity.Name) ?? new BaseUser();
 				}
-				return (BaseUser)HttpContext.Current.Session["CmsContext.User"];
+				return (BaseUser)HttpContext.Current.Session["WebContext.User"];
 			}
 			set
 			{
-				HttpContext.Current.Session["CmsContext.User"] = value;
+				HttpContext.Current.Session["WebContext.User"] = value;
 			}
 		}
 

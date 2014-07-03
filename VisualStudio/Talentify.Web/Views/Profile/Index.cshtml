@@ -1,0 +1,30 @@
+﻿@model Talentify.ORM.DAL.Models.User.Student
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<!-- bootstrap -->
+	<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
+	<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+}
+
+<div id="page-container">
+	<section>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2>Fehler beim Speichern</h2><p>Bitte versuche es erneut!</p></div>
+			<div id="msg-success" class="msg success"><h2>Dein Profil wurde erfolgreich aktualisiert.</h2></div>
+		</article>
+	</section>
+	@if (Model.Id == LoggedUser.Id)
+	{
+		@Html.Partial("_MyProfile")
+	}
+	else
+	{
+		@Html.Partial("_UserProfile")
+	}
+</div>

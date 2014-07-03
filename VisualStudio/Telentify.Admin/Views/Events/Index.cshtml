@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.Content.Event>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container">
+	
+	<ul>
+		@foreach (var e in Model)
+		{
+			<li>@Html.ActionLink(e.Title, "Edit", "Events", new {id=e.Id}, null)</li>
+		}
+	</ul>
+	
+
+	@Html.ActionLink("Neues Event erstellen", "Create")
+</div>

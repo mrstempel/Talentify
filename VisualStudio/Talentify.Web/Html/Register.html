@@ -5,7 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<script src="/Scripts/jquery-2.1.0.min.js"></script>
 	<script src="/Scripts/screen.js"></script>
-	<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+	<script src="/Scripts/forms.js"></script>
+	<!--<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />-->
 	<link rel="stylesheet" href="/Css/talentify.min.css" />
 	<link rel="stylesheet" href="/Css/talentify-mobile.min.css" media="screen and (max-width: 767px)" />
 	<link rel="stylesheet" href="/Css/sprite.min.css" />
@@ -13,7 +14,7 @@
 	<script>
 		$(this).ready(function ()
 		{
-			initScreen();
+			initScreen(false);
 		});
 
 		$(window).resize(function () { initSectionSizes(); });
@@ -29,36 +30,56 @@
 	
 	<div id="page-container" class="form">
 		<section id="register">
-			<h1 class="desktop"><span>Die einzigartige & tolle Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+			<h1 class="desktop"><span>Die einzigartige & nachhaltige Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+			<article>
+				<div class="msg error">
+					<h2>Fehlermeldung</h2>
+					<p>Nunc sollicitudin nunc in ornare volutpat. Donec vehicula tincidunt tempus. Vestibulum condimentum sit amet felis euismod vulputate. Sed gravida tellus sit amet odio vestibulum consectetur. Integer erat urna, viverra sit amet pulvinar in blandit sed lacus.</p>
+				</div>
+				<div class="msg success">
+					<h2>Erfolgsmeldung</h2>
+					<p>Nunc sollicitudin nunc in ornare volutpat. Donec vehicula tincidunt tempus. Vestibulum condimentum sit amet felis euismod vulputate. Sed gravida tellus sit amet odio vestibulum consectetur. Integer erat urna, viverra sit amet pulvinar in blandit sed lacus.</p>
+				</div>
+			</article>
 			<article>
 				<header>
 					<div class="sprite t-button desktop"></div>
 					<h2>Anmelden</h2>
 				</header>
-				<div class="form-container register">
+				<form class="form-container register">
 					<div class="field-container">
-						<input type="text" name="Firstname" id="Firstname" placeholder="Vorname"/>
-						<input type="text" name="Surname" id="Surname" placeholder="Nachname"/>
+						<input type="text" name="Firstname" id="Firstname" placeholder="Vorname" class="mandatory"/>
+						<input type="text" name="Surname" id="Surname" placeholder="Nachname" class="mandatory"/>
 					</div>
 					<div class="field-container">
-						<input type="text" name="Email" id="Email" placeholder="E-Mail Adresse"/>
-						<input type="password" name="Password" id="Password" placeholder="Passwort (mind. 6 Zeichen)"/>
+						<input type="text" name="Email" id="Email" placeholder="E-Mail Adresse" class="mandatory"/>
+						<input type="password" name="Password" id="Password" placeholder="Passwort (mind. 6 Zeichen)" class="mandatory"/>
 					</div>
 					<div class="field-container">
-						<input type="text" name="Schule" id="Schule" placeholder="Schule"/>
+						<input type="text" name="Schule" id="Schule" placeholder="Schule" class="mandatory"/>
 					</div>
 					<div class="field-container">
 						<p>Ich bestätige, die <a href="#">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
 					</div>
 					<div class="field-container desktop">
-						<input type="button" value="Absenden"/>
+						<input type="submit" value="Absenden" onclick="return validateMandatoryFields();"/>
 					</div>
-				</div>
+				</form>
 			</article>
 			<footer class="submit mobile">
-				<input type="button" value="Absenden" />
+				<input type="submit" value="Absenden"  onclick="return validateMandatoryFields();" />
 			</footer>
 		</section>
+		<footer class="desktop page">
+			<div class="share">Share-Icons</div>
+			<nav>
+				<ul>
+					<li>&copy; 2014 talentify</li>
+					<li><a href="javascript:void(0);">Impressum</a></li>
+					<li><a href="javascript:void(0);">Datenschutzbestimmungen</a></li>
+				</ul>
+			</nav>
+		</footer>
 	</div>
 </body>
 </html>

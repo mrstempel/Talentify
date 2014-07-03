@@ -1,0 +1,41 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.Coaching.CoachingOffer>
+
+@{
+    ViewBag.Title = "EditCoaching";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
+		<div id="msg-success" class="msg success"><h2>Lernhilfe erfolgreich gespeichert.</h2><p>Deine Lernhilfe wurde erfolgreich aktualisiert.</p></div>
+	</div>
+	@if (FormSuccess == null)
+	{
+		using (Html.BeginForm("EditCoaching", "Profile", FormMethod.Post, new {@class = "form-container"}))
+		{
+			@Html.HiddenFor(m => m.UserId)
+			@Html.HiddenFor(m => m.Id)
+			<input type="hidden" name="deleteOffer" id="deleteOffer" value="false"/>
+			<div class="field-container">
+				<label>Ich gebe Lernhilfe in:</label>
+				@Html.DropDownListFor(m => m.SubjectCategoryId, GetEditSubjects(Model.SubjectCategoryId), "bitte auswählen", new {@class = "mandatory"})
+				<label>Schulstufe:</label>
+				@Html.DropDownListFor(m => m.FromClass, AllClasses, "bitte auswählen", new {@class = "mandatory", @style = "width:252px;margin-right: 5px;"}) bis @Html.DropDownListFor(m => m.ToClass, AllClasses, "bitte auswählen", new {@class = "mandatory", @style = "margin-left: 5px;width:252px;"})
+				<label>Weitere Informationen:</label>
+				@Html.TextAreaFor(m => m.Comments, new {@maxlength = "140"})
+			</div>
+			<div class="field-container">
+				<input type="submit" value="Speichern" onclick=" return validateCoachingForm(); "/>
+				<input type="submit" value="Lernhilfe löschen" onclick="return checkDeleteCoachingOffer();"/>
+			</div>
+		}
+	}
+	else
+	{
+		<script>
+			window.parent.loadMyProfileCoachings(true, @LoggedUser.Id);
+			setTimeout(function () { window.parent.hideModal('modal-edit-coaching'); }, 3000);
+		</script>
+	}
+</article>

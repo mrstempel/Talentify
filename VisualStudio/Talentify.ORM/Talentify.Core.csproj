@@ -36,47 +36,193 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\Context\TalentifyContext.cs" />
     <Compile Include="DAL\Library\ISeeder.cs" />
     <Compile Include="DAL\Migrations\BaseSeeder.cs" />
+    <Compile Include="DAL\Migrations\AdminSeeder.cs" />
     <Compile Include="DAL\Migrations\InitialSeeder.cs" />
     <Compile Include="DAL\Migrations\TalentifyConfiguration.cs" />
+    <Compile Include="DAL\Models\Coaching\CoachingOffer.cs" />
     <Compile Include="DAL\Models\Coaching\SubjectCategory.cs" />
+    <Compile Include="DAL\Models\Content\BasePage.cs" />
+    <Compile Include="DAL\Models\Content\Event.cs" />
+    <Compile Include="DAL\Models\Content\EventRegistration.cs" />
     <Compile Include="DAL\Models\DBMigrationHistory.cs" />
     <Compile Include="DAL\Models\Membership\Membership.cs" />
     <Compile Include="DAL\Models\Membership\Subscription.cs" />
     <Compile Include="DAL\Models\School\School.cs" />
     <Compile Include="DAL\Models\School\SchoolType.cs" />
     <Compile Include="DAL\Models\User\ActionToken.cs" />
+    <Compile Include="DAL\Models\User\Admin.cs" />
     <Compile Include="DAL\Models\User\BaseUser.cs" />
     <Compile Include="DAL\Models\User\Student.cs" />
     <Compile Include="DAL\Models\User\Teacher.cs" />
+    <Compile Include="DAL\Models\User\UserSettings.cs" />
     <Compile Include="DAL\Repository\BaseUserRepository.cs" />
+    <Compile Include="DAL\Repository\BasePageRepository.cs" />
+    <Compile Include="DAL\Repository\CoachingOfferRepository.cs" />
+    <Compile Include="DAL\Repository\SchoolRepository.cs" />
+    <Compile Include="DAL\Repository\EventRepository.cs" />
     <Compile Include="DAL\Repository\StudentRepository.cs" />
     <Compile Include="DAL\Repository\TalentifyRepository.cs" />
     <Compile Include="DAL\UnitOfWork\TalentifyUnitOfWork.cs" />
+    <Compile Include="FrontendLogic\Models\AutocompleteItem.cs" />
+    <Compile Include="FrontendLogic\Models\PasswordChange.cs" />
+    <Compile Include="FrontendLogic\Models\SearchParams.cs" />
+    <Compile Include="FrontendLogic\Models\SearchResultItem.cs" />
+    <Compile Include="FrontendLogic\Models\StreamItem.cs" />
+    <Compile Include="FrontendLogic\StreamProvider.cs" />
+    <Compile Include="Migrations\201406121551325_registercode_nullify.cs" />
+    <Compile Include="Migrations\201406121551325_registercode_nullify.Designer.cs">
+      <DependentUpon>201406121551325_registercode_nullify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406201320208_user-settings.cs" />
+    <Compile Include="Migrations\201406201320208_user-settings.Designer.cs">
+      <DependentUpon>201406201320208_user-settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406201502509_user-new-profile-fields.cs" />
+    <Compile Include="Migrations\201406201502509_user-new-profile-fields.Designer.cs">
+      <DependentUpon>201406201502509_user-new-profile-fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406211047093_user-profile-picture.cs" />
+    <Compile Include="Migrations\201406211047093_user-profile-picture.Designer.cs">
+      <DependentUpon>201406211047093_user-profile-picture.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406211401485_add-admin-user.cs" />
+    <Compile Include="Migrations\201406211401485_add-admin-user.Designer.cs">
+      <DependentUpon>201406211401485_add-admin-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406211525002_add-events.cs" />
+    <Compile Include="Migrations\201406211525002_add-events.Designer.cs">
+      <DependentUpon>201406211525002_add-events.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406211742345_events-add-time.cs" />
+    <Compile Include="Migrations\201406211742345_events-add-time.Designer.cs">
+      <DependentUpon>201406211742345_events-add-time.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406221555358_events-add-location-and-country.cs" />
+    <Compile Include="Migrations\201406221555358_events-add-location-and-country.Designer.cs">
+      <DependentUpon>201406221555358_events-add-location-and-country.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406260955476_add-coachingoffer.cs" />
+    <Compile Include="Migrations\201406260955476_add-coachingoffer.Designer.cs">
+      <DependentUpon>201406260955476_add-coachingoffer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406260956419_add-coachingoffer-comments.cs" />
+    <Compile Include="Migrations\201406260956419_add-coachingoffer-comments.Designer.cs">
+      <DependentUpon>201406260956419_add-coachingoffer-comments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201406261056144_change-coaching-subject-property.cs" />
+    <Compile Include="Migrations\201406261056144_change-coaching-subject-property.Designer.cs">
+      <DependentUpon>201406261056144_change-coaching-subject-property.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407031017018_add-gender.cs" />
+    <Compile Include="Migrations\201407031017018_add-gender.Designer.cs">
+      <DependentUpon>201407031017018_add-gender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407031509071_add-event-registration.cs" />
+    <Compile Include="Migrations\201407031509071_add-event-registration.Designer.cs">
+      <DependentUpon>201407031509071_add-event-registration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\BaseController.cs" />
+    <Compile Include="Mvc\BaseView.cs" />
+    <Compile Include="FrontendLogic\Models\FormFeedback.cs" />
+    <Compile Include="FrontendLogic\Models\Login.cs" />
+    <Compile Include="Mvc\FormView.cs" />
+    <Compile Include="Mvc\Security\AdminMembershipProvider.cs" />
+    <Compile Include="Mvc\Security\TalentifyMembershipProvider.cs" />
     <Compile Include="Mvc\WebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Email.cs" />
+    <Compile Include="Utils\ProfileCompleteAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201406121551325_registercode_nullify.resx">
+      <DependentUpon>201406121551325_registercode_nullify.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406201320208_user-settings.resx">
+      <DependentUpon>201406201320208_user-settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406201502509_user-new-profile-fields.resx">
+      <DependentUpon>201406201502509_user-new-profile-fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406211047093_user-profile-picture.resx">
+      <DependentUpon>201406211047093_user-profile-picture.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406211401485_add-admin-user.resx">
+      <DependentUpon>201406211401485_add-admin-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406211525002_add-events.resx">
+      <DependentUpon>201406211525002_add-events.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406211742345_events-add-time.resx">
+      <DependentUpon>201406211742345_events-add-time.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406221555358_events-add-location-and-country.resx">
+      <DependentUpon>201406221555358_events-add-location-and-country.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406260955476_add-coachingoffer.resx">
+      <DependentUpon>201406260955476_add-coachingoffer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406260956419_add-coachingoffer-comments.resx">
+      <DependentUpon>201406260956419_add-coachingoffer-comments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201406261056144_change-coaching-subject-property.resx">
+      <DependentUpon>201406261056144_change-coaching-subject-property.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407031017018_add-gender.resx">
+      <DependentUpon>201407031017018_add-gender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407031509071_add-event-registration.resx">
+      <DependentUpon>201407031509071_add-event-registration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KwIt.Project.Pattern\KwIt.Project.Pattern.csproj">
       <Project>{b11cecc4-7760-4c38-a0f4-a23eb760e8e9}</Project>

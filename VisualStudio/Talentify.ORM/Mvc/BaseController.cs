@@ -7,9 +7,11 @@ using System.Web.Mvc;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.DAL.UnitOfWork;
+using Talentify.ORM.FrontendLogic.Models;
 
 namespace Talentify.ORM.Mvc
 {
+	[Authorize]
 	public class BaseController : Controller
 	{
 		public BaseUser LoggedUser
@@ -29,11 +31,22 @@ namespace Talentify.ORM.Mvc
 			}
 		}
 
+		public FormFeedback FormError { get; set; }
+		public FormFeedback FormSuccess { get; set; }
 		public WebContext WebContext { get; set; }
 
 		public BaseController()
 		{
 			WebContext = new WebContext(this.UnitOfWork);
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			//dispose unitofwork
+			if (this.UnitOfWork != null)
+				this.UnitOfWork.Dispose();
+
+			base.Dispose(disposing);
 		}
 	}
 }

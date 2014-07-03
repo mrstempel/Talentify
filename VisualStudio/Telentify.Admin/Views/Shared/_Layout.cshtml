@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Talentify</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<script src="/Scripts/jquery-2.1.0.min.js"></script>
+		<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+		<link rel="stylesheet" href="/Css/talentify-admin.min.css" />
+		
+		@RenderSection("CustomJavascript", required: false)
+		@RenderSection("CustomCss", required: false)
+		<script>
+			$(this).ready(function ()
+			{
+				
+			});
+		</script>
+	</head>
+	<body>
+		<header>
+			<div class="content">
+				<h1><a href="/"><img src="/Images/logo.png" alt="talentify"/></a></h1>
+			</div>
+		</header>
+		@RenderBody()
+		<footer>
+		</footer>
+	</body>
+</html>

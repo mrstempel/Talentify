@@ -1,0 +1,8 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.Content.Event>
+
+@foreach (var item in Model)
+{
+	@Html.Partial("_EventPreview", item)	
+}
+
+@Html.ActionLink("Alle Events anzeigen", "Index", "Events")

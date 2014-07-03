@@ -1,0 +1,25 @@
+﻿.ui-autocomplete 
+{
+	
+	.ui-menu-item
+	{
+		a
+		{
+			background: #FFF;
+			border-radius: 0px;
+			border: 0;
+		}
+		a:hover, a:focus, a:active
+		{
+			background: #0eb48d !important;
+			color: #fff;
+		}
+	}
+	.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus 
+	{
+		border-radius: 0px;
+		border: 0;
+		background: #0eb48d !important;
+		color: #fff;
+	}	
+}

@@ -55,6 +55,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -112,8 +116,25 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Api\AuthController.cs" />
+    <Compile Include="Controllers\Api\AutocompleteController.cs" />
+    <Compile Include="Controllers\Api\FormHelperController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\StartController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -130,6 +151,11 @@
     </Content>
     <Content Include="Css\sprite.min.css" />
     <Content Include="Css\sprite.scss" />
+    <Content Include="Css\talentify-jq-ui.css">
+      <DependentUpon>talentify-jq-ui.scss</DependentUpon>
+    </Content>
+    <Content Include="Css\talentify-jq-ui.min.css" />
+    <Content Include="Css\talentify-jq-ui.scss" />
     <None Include="Css\talentify-mobile.scss" />
     <Content Include="Css\talentify-mobile.css">
       <DependentUpon>talentify-mobile.scss</DependentUpon>
@@ -139,6 +165,23 @@
       <DependentUpon>talentify.scss</DependentUpon>
     </Content>
     <Content Include="Css\talentify.min.css" />
+    <Content Include="Css\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="Css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="Css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="Css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="Css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="Css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Css\ui-lightness\jquery-ui-1.10.4.custom.css" />
+    <Content Include="Css\ui-lightness\jquery-ui-1.10.4.custom.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Css\talentify.scss" />
     <Content Include="Css\webfonts\2AA7EA_0_0.eot" />
@@ -157,14 +200,46 @@
     <Content Include="Html\Index.html" />
     <Content Include="Html\Register.html" />
     <Content Include="Html\Home.html" />
+    <Content Include="Images\bg-content-headline.png" />
+    <Content Include="Images\header-notifications-active.png" />
+    <Content Include="Images\header-notifications.png" />
+    <Content Include="Images\header-settings-active.png" />
+    <Content Include="Images\header-settings.png" />
+    <Content Include="Images\icon-close.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\mandatory.png" />
+    <Content Include="Images\map-eumel.png" />
+    <Content Include="Images\nav-menu-arrow.png" />
     <Content Include="Images\search-result-header.png" />
+    <Content Include="Images\share-fb.png" />
+    <Content Include="Images\share-google.png" />
+    <Content Include="Images\share-twitter.png" />
     <Content Include="Images\sprite.png" />
-    <Content Include="Images\user-profile.png" />
+    <Content Include="Images\tmp-event.png" />
+    <Content Include="Images\default-profile-small.png" />
+    <Content Include="Images\default-profile-medium.png" />
+    <Content Include="Images\default-profile-large.png" />
+    <Content Include="Scripts\api.js" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\Bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Scripts\forms.js" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.easyModal.js" />
+    <Content Include="Scripts\maps.js" />
+    <Content Include="Scripts\Opentip\opentip-jquery.min.js" />
+    <Content Include="Scripts\Opentip\opentip.css" />
     <Content Include="Scripts\screen.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="uploads\profile\65ecab19-6584-49f3-8a7f-5aa4b8dbc8cf_large.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -174,6 +249,33 @@
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
     <Content Include="Views\Test\Empty.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Shared\Forms\_Register.cshtml" />
+    <Content Include="Views\Register\Confirm.cshtml" />
+    <Content Include="Views\Start\Index.cshtml" />
+    <Content Include="Views\Shared\Forms\_HeaderLogin.cshtml" />
+    <Content Include="Views\Shared\_LoggedHeader.cshtml" />
+    <Content Include="Views\Shared\_FirstLoginOptions.cshtml" />
+    <Content Include="Views\Login\Error.cshtml" />
+    <Content Include="Views\Settings\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_MyProfile.cshtml" />
+    <Content Include="Views\Start\Stream.cshtml" />
+    <Content Include="Views\Shared\_UserProfile.cshtml" />
+    <Content Include="Views\Start\Events.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\Detail.cshtml" />
+    <Content Include="Views\Shared\_EventPreview.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Profile\AddCoaching.cshtml" />
+    <Content Include="Views\Shared\_LayoutModal.cshtml" />
+    <Content Include="Views\Profile\EditCoaching.cshtml" />
+    <Content Include="Views\Profile\EditCoachingPrice.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Events\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

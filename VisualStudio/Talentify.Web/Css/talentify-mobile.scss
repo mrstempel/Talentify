@@ -1,6 +1,15 @@
 ﻿// variables
 $form-background: #f3f5f5;
 
+// base
+.box-sizing
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body
 {
 	padding: 0;
@@ -26,9 +35,7 @@ body
 		font-size: 17px;
 		display:block;
 		padding: 10px;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
+		@extend .box-sizing;
 	}
 	.field-container
 	{
@@ -36,7 +43,13 @@ body
 		p { padding: 0 5px; }
 	}
 }
-.form-container.register { margin-top: 20px; }
+.form-container.register 
+{ 
+	header
+	{
+		margin-bottom: 20px !important; 
+	}
+}
 .form-container.search
 {
 	width: 100% !important;
@@ -71,41 +84,47 @@ body
 				h2 { font-size: 18px; color: #ef4d69; }
 			}
 		}
-		footer.submit
+	}
+	footer.submit
+	{
+		width: 100%;
+		position: fixed;
+		z-index: 9999;
+		bottom: 0px;
+		left: 0px;
+		input[type="button"], input[type="submit"], .link-button
 		{
+			@extend .box-sizing;
+			margin: 0;
+			float: left;
 			width: 100%;
-			position: absolute;
-			z-index: 9999;
-			bottom: 0px;
-			left: 0px;
-			input[type="button"]
-			{
-				margin: 0;
-				float: left;
-				width: 100%;
-				font-size: 20px;
-				padding: 8px 0; 
-				text-align: center;
-			}
+			font-size: 20px;
+			padding: 8px 0; 
+			text-align: center;
+		}
+		input[type="button"]:first-child, input[type="submit"]:first-child, .link-button:first-child
+		{
+			border-right: 1px solid #fff;
+		}
+	}
+	footer.submit.cols2
+	{
+		input[type="button"], input[type="submit"], .link-button
+		{
+			width: 50% !important;
 		}
 	}
 }
 #page-container.form {background: $form-background; }
 
-#home
+.home
 {
+	h1 { width: 100%; }
 	article
 	{
+		width: auto;
 		p { font-size: 18px; }
 		margin-bottom: 50px;
-	}
-	footer
-	{
-		input[type="button"]
-		{
-			border-right: 1px solid #FFF;
-			width: 50% !important;
-		}
 	}
 }
 
@@ -115,9 +134,20 @@ body
 	article
 	{
 		width: 100%;
+		margin: 0 0 30px 0;
 		img { float: left; margin-right: 10px; }
 		h3 { font-size: 18px; text-align: left; }
-		
-		margin: 0 0 30px 0;
 	}
+}
+
+.msg
+{
+	@extend .box-sizing;
+	width: 100%;
+	margin: 0 auto 20px auto;
+}
+.msg.error, .msg.success
+{ 
+	border-left: 0;
+	border-right: 0;
 }

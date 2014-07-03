@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container">
+	@using (Html.BeginForm("Index", "Login", FormMethod.Post, new {@class = ""}))
+	{
+		<label>E-Mail:</label><input type="text" name="username"/><br/>
+		<label>Passwort:</label><input type="password" name="password"/><br/>
+		<input type="submit" value="Login"/>
+	}
+</div>

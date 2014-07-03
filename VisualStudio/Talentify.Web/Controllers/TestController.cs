@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using KwIt.Project.Pattern.Utils;
+﻿using System.Web.Mvc;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.Mvc;
 
@@ -13,7 +8,7 @@ namespace Talentify.Web.Controllers
     {
         public ActionResult Register(string email, string password, string firstname, string surname, int schoolId)
         {
-	        UnitOfWork.StudentRepository.Register(email, password, firstname, surname, schoolId);
+	        UnitOfWork.StudentRepository.Register(new Student() { Email =  email, Password =  password, Firstname =  firstname, Surname =  surname, SchoolId = schoolId});
             return View("Empty");
         }
 

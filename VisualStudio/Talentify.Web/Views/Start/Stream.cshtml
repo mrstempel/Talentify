@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Talentify.ORM.FrontendLogic.Models.StreamItem>
+
+@foreach (var item in Model)
+{
+	<article class="stream-item">
+		<a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>
+		<p>@item.Text</p>
+	</article>
+}

@@ -4,8 +4,9 @@
 	<title>Talentify - Home</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 	<script src="/Scripts/jquery-2.1.0.min.js"></script>
+	<script src="/Scripts/waypoints.min.js"></script>
 	<script src="/Scripts/screen.js"></script>
-	<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+	<!--<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />-->
 	<link rel="stylesheet" href="/Css/talentify.min.css" />
 	<link rel="stylesheet" href="/Css/talentify-mobile.min.css" media="screen and (max-width: 767px)" />
 	<link rel="stylesheet" href="/Css/sprite.min.css" />
@@ -13,7 +14,26 @@
 	<script>
 		$(this).ready(function ()
 		{
-			initScreen();
+			initScreen(true);
+		});
+
+		$(function ()
+		{
+			$('a[href*=#]:not([href=#])').click(function ()
+			{
+				if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname)
+				{
+					var target = $(this.hash);
+					target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+					if (target.length)
+					{
+						$('html,body').animate({
+							scrollTop: target.offset().top - topMargin
+						}, 1000);
+						return false;
+					}
+				}
+			});
 		});
 
 		$(window).resize(function () { initSectionSizes(); });
@@ -23,22 +43,70 @@
 	<header id="page-header">
 		<h1>
 			<a href="Home.html"><img src="/Images/logo.png" alt="talentify"/></a>
-			<input type="button" value="Einloggen" class="desktop" />
+			<a href="#" class="link-button desktop">Einloggen</a>
 		</h1>
 	</header>
 	
+	<nav id="home-nav" class="desktop">
+		<ul>
+			<li><a id="nav-fact1" href="#fact1"><span>Fact 1</span></a></li>
+			<li><a id="nav-fact2" href="#fact2"><span>Fact 2</span></a></li>
+			<li><a id="nav-fact3" href="#fact3"><span>Fact 3</span></a></li>
+			<li><a id="nav-fact4" href="#fact4"><span>Fact 4</span></a></li>
+		</ul>
+	</nav>
+	
 	<div id="page-container">
-		<section id="home">
-			<h1><span>Die einzigartige & tolle Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+		<section class="home" id="fact1">
+			<h1><span>Die einzigartige & nachhaltige Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
 			<article>
 				<header><h2>Fact 1</h2></header>
-				<p>Ich mache hier nur den ersten Fakt. Ich bin mir nicht sicher wie das Scrollen auf der mobilen Variante ausschaut. Sind da die Buttons "Anmelden" und "Einloggen" immer fix oder scrollen die mit?</p>
-				<footer class="desktop"><input type="button" value="Jetzt anmelden" onclick="location.href = 'Register.html'"/></footer>
+				<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+				<footer class="desktop">
+					<a href="Register.html" class="link-button">Jetzt anmelden</a>
+				</footer>
 			</article>
-			<footer class="submit mobile">
-				<input type="button" value="Anmelden" onclick="location.href='Register.html'" /><input type="button" value="Einloggen"/>
-			</footer>
 		</section>
+		<section class="home" id="fact2">
+			<article>
+				<header><h2>Fact 2</h2></header>
+				<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+				<footer class="desktop">
+					<a href="Register.html" class="link-button">Jetzt anmelden</a>
+				</footer>
+			</article>
+		</section>
+		<section class="home" id="fact3">
+			<article>
+				<header><h2>Fact 3</h2></header>
+				<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+				<footer class="desktop">
+					<a href="Register.html" class="link-button">Jetzt anmelden</a>
+				</footer>
+			</article>
+		</section>
+		<section class="home" id="fact4">
+			<article>
+				<header><h2>Fact 4</h2></header>
+				<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+				<footer class="desktop">
+					<a href="Register.html" class="link-button">Jetzt anmelden</a>
+				</footer>
+			</article>
+		</section>
+		<footer class="mobile submit cols2">
+			<a href="Register.html" class="link-button">Anmelden</a><a href="javascript:void(0);" class="link-button">Einloggen</a>
+		</footer>
+		<footer class="desktop page">
+			<div class="share">Share-Icons</div>
+			<nav>
+				<ul>
+					<li>&copy; 2014 talentify</li>
+					<li><a href="javascript:void(0);">Impressum</a></li>
+					<li><a href="javascript:void(0);">Datenschutzbestimmungen</a></li>
+				</ul>
+			</nav>
+		</footer>
 	</div>
 </body>
 </html>

@@ -1,0 +1,42 @@
+﻿@model Talentify.ORM.DAL.Models.User.Student
+
+<script>
+	$(this).ready(function()
+	{
+		loadMyProfileCoachings(false, @Model.Id);
+	});
+</script>
+
+
+<section class="user-profile">
+	<article class="user-profile">
+		<div class="left">
+			<img src="@Model.ProfileImageLarge" alt="Neues Bild hochladen" class="profile-img"/>
+		</div>
+		<div class="right">
+			<h3>@Model.Firstname @Model.Surname</h3>
+			<div class="content-part no-border">
+				@(@Model.School.ZipCode)-@(@Model.School.City)<br/>
+				@(@Model.School.Name)
+				@if (!string.IsNullOrEmpty(Model.AboutMe))
+				{
+					<p class="important">"@(@Model.AboutMe)"</p>
+				}
+			</div>
+			@if (Model.IsCoachingEnabled)
+			{
+				<div class="form-view no-border">
+					<div class="row">
+						<div class="left"><label class="for-input">Gebe Lernhilfe in:</label></div>
+						<div class="right">
+							<span id="my-offers"></span>
+						</div>
+					</div>
+					<div class="row">
+						<label class="for-input">Preis/h:</label><span class="tag">@Model.CoachingPrice €</span>
+					</div>
+				</div>
+			}
+		</div>
+	</article>
+</section>

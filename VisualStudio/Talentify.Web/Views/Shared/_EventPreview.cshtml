@@ -1,0 +1,9 @@
+﻿@model Talentify.ORM.DAL.Models.Content.Event
+
+<article class="event-preview">
+	<a href="/Events/Detail/@Model.Id"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt=""/></a>
+	<h3>@Html.Raw(Model.Title)</h3>
+	@Model.BeginDate.ToString("d") | @Model.BeginTime - @Model.EndTime
+	<p>@Html.Raw(Model.Content.Substring(0, 105))...</p>
+	<a href="/Events/Detail/@Model.Id">Hier geht's zur Anmeldung</a>
+</article>	

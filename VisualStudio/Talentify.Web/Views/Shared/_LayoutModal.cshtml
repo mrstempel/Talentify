@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Talentify</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<script src="/Scripts/jquery-2.1.0.min.js"></script>
+		<script src="/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="/Scripts/forms.js"></script>
+		<script src="/Scripts/screen.js"></script>
+		<script src="/Scripts/api.js"></script>
+		<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+		<link rel="stylesheet" href="/Css/ui-lightness/jquery-ui-1.10.4.custom.min.css" />
+		<link rel="stylesheet" href="/Css/talentify.min.css" />
+		@*<link rel="stylesheet" href="/Css/talentify-mobile.min.css" media="screen and (max-width: 767px)" />*@
+		<link rel="stylesheet" href="/Css/sprite.min.css" />
+		<link rel="stylesheet" href="/Css/talentify-jq-ui.min.css" />
+	
+		@RenderSection("CustomJavascript", required: false)
+		@RenderSection("CustomCss", required: false)
+		<script>
+			$(this).ready(function ()
+			{
+				initScreen();
+
+				@if (FormError != null)
+				{
+					<text>showErrorMsg('@FormError.Headline', '@FormError.Text');</text>
+				}
+
+				@if (FormSuccess != null)
+				{
+					<text>showSuccessMsg('@FormSuccess.Headline', '@FormSuccess.Text');</text>
+				}
+			});
+
+			$(window).resize(function () { initSectionSizes(); });
+		</script>
+	</head>
+	<body>
+		<div class="talentify-modal-container">
+			@RenderBody()
+		</div>
+	</body>
+</html>

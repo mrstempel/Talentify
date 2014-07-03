@@ -1,0 +1,83 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.User.Student>
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+	$(this).ready(function ()
+	{
+		setClassDropdown('SchoolId', 'Class', @Model.Class);
+
+		$('#SchoolId').change(function()
+		{
+			setClassDropdown('SchoolId', 'Class', 0);
+		});
+
+		@if (!string.IsNullOrEmpty(Model.Gender))
+		{
+			<text>$('#Gender').val('@Model.Gender');</text>
+		}
+	});
+</script>
+
+<div id="page-container" class="form">
+	<section>
+		<article>
+			<header>
+				<div class="sprite t-button desktop"></div>
+				<h2>Deine Daten</h2>
+			</header>
+		</article>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2>Fehler beim Speichern</h2><p></p></div>
+			<div id="msg-success" class="msg success">
+				<h2>Dein Profil wurde erfolgreich aktualisiert.</h2>
+				<p>@Html.ActionLink("Hier", "Index", "Profile") geht's zu deinem aktualisierten Profil.</p>
+			</div>
+		</article>
+		@if (FormSuccess == null)
+		{
+			using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new {@class = "form-container register"}))
+			{
+				@Html.HiddenFor(m => m.Id)
+				<article id="profile-form">
+					<div class="field-container">
+						@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})
+						@Html.TextBoxFor(m => m.Surname, new {@placeholder = "Nachname", @class = "mandatory"})
+						@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
+						@Html.TextBoxFor(m => m.BirthDate, new {@placeholder = "Geburtstag (tt.mm.yyyy)"})
+						<select name="Gender" id="Gender">
+							<option>Geschlecht wählen</option>
+							<option value="F">Weiblich</option>
+							<option value="M">Männlich</option>
+						</select>
+					</div>
+					<div class="field-container">
+						@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse"})
+						@Html.TextBoxFor(m => m.ZipCode, new {@placeholder = "PLZ"})
+						@Html.TextBoxFor(m => m.City, new {@placeholder = "Ort"})
+						@Html.TextBoxFor(m => m.Country, new {@placeholder = "Land"})
+						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon (Mobilnummer)"})
+					</div>
+					<div class="field-container">
+						@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
+						<select id="Class" name="Class">
+							<option value="0">wähle deine Schulstufe</option>
+						</select>
+					</div>
+					<div class="field-container">
+						@Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "Dein Lernmotto", @maxlength = "140"})
+					</div>
+					<div class="field-container desktop">
+						<input type="submit" value="Absenden" onclick=" return validateProfileForm(); "/>
+					</div>
+				</article>
+				<footer class="submit mobile">
+					<input type="submit" value="Absenden"  onclick=" return validateProfileForm(); " />
+				</footer>
+			}
+		}
+	</section>
+</div>

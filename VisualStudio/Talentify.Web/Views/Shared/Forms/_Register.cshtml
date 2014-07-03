@@ -1,0 +1,30 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.User.Student>
+
+@using (Html.BeginForm("Index", "Register", FormMethod.Post, new {@class = "form-container register"}))
+{
+	<article id="register-form">
+		<div class="field-container">
+			@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})
+			@Html.TextBoxFor(m => m.Surname, new {@placeholder = "Nachname", @class = "mandatory"})
+		</div>
+		<div class="field-container">
+			@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
+			@Html.PasswordFor(m => m.Password, new {@placeholder = "Passwort (mind. 6 Zeichen)", @class = "mandatory"})
+		</div>
+		<div class="field-container">
+			@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
+			@*<input type="text" id="SchoolSelect" placeholder="Schule" class="mandatory"/>
+			<input type="hidden" id="SchoolSelectName" />
+			@Html.HiddenFor(m => m.SchoolId)*@
+		</div>
+		<div class="field-container">
+			<p>Ich bestätige, die <a href="#">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
+		</div>
+		<div class="field-container desktop">
+			<input type="submit" value="Absenden" onclick=" return validateRegisterForm(); "/>
+		</div>
+	</article>
+	<footer class="submit mobile">
+		<input type="submit" value="Absenden"  onclick=" return validateRegisterForm(); " />
+	</footer>
+}

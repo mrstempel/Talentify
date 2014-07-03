@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.Content.Event>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container">
+	<section>
+		<article>
+			<header>
+				<div class="sprite t-button desktop"></div>
+				<h2>Events</h2>
+			</header>
+		</article>
+	</section>
+	<section id="event-overview">
+		@foreach (var item in Model)
+		{
+			@Html.Partial("_EventPreview", item)
+		}
+	</section>
+</div>

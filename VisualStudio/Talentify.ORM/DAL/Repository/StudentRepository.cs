@@ -9,33 +9,54 @@ using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
+using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Utils;
 
 namespace Talentify.ORM.DAL.Repository
 {
-	public class StudentRepository : BaseUserRepository
+	public class StudentRepository : BaseUserRepository<Student>
 	{
 		public StudentRepository(TalentifyContext context)
             : base(context)
         {
         }
 
-		public virtual bool Register(string email, string password, string firstname, string surname, int schoolId)
+		public new Student GetById(int id)
 		{
-			// create student
-			var student = new Student()
+			return GetById(id, "School,Settings") as Student;
+		}
+
+		public override Student GetAttachedModel(Student entity)
+		{
+			var dbEntry = UnitOfWork.StudentRepository.GetById(entity.Id);
+			entity.JoinedDate = dbEntry.JoinedDate;
+			entity.PictureGuid = dbEntry.PictureGuid;
+			entity.IsPictureLandscape = dbEntry.IsPictureLandscape;
+			entity.Password = dbEntry.Password;
+			entity.IsCoachingEnabled = dbEntry.IsCoachingEnabled;
+			entity.CoachingPrice = dbEntry.CoachingPrice;
+
+			UnitOfWork.StudentRepository.Detach(dbEntry);
+
+			return entity;
+		}
+
+		#region Register
+
+		public virtual FormFeedback Register(Student student)
+		{
+			// check if e-mail is unique
+			if (GetByEmail(student.Email) != null)
 			{
-				Email = email,
-				Password = PasswordHashing.CalculateSha1(password),
-				Firstname = firstname,
-				Surname = surname,
-				SchoolId = schoolId
-			};
+				return new FormFeedback() { IsError = true, Text = "Diese E-Mail Adresse ist bereits vergeben."};
+			}
 
+			// set password hash
+			student.Password = PasswordHashing.CalculateSha1(student.Password);
 			// base register (saves student in database)
-			var registerSuccess = Register(student);
+			var registerFeedback = base.Register(student);
 
-			if (registerSuccess)
+			if (!registerFeedback.IsError)
 			{
 				// send confirmation e-mail
 				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], student.Email);
@@ -44,7 +65,17 @@ namespace Talentify.ORM.DAL.Repository
 				Email.Send(mailMsg);
 			}
 
-			return registerSuccess;
+			return registerFeedback;
+		}
+
+		#endregion
+
+		public void Update(Student entity, bool doGetAttackedModel = true)
+		{
+			if (doGetAttackedModel)
+				entity = GetAttachedModel(entity);
+
+			base.Update(entity);
 		}
 	}
 }

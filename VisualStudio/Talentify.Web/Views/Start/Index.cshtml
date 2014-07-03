@@ -1,0 +1,57 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.FrontendLogic.Models.SearchParams>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		$(this).ready(function()
+		{
+			loadEvents();
+			loadStream();
+		});
+	</script>
+}
+
+<div id="page-container">
+	@if (IsFirstLogin)
+	{
+		@Html.Partial("_FirstLoginOptions")
+	}
+	else
+	{
+		<section id="search">
+			<h1 class="desktop"><span>Die einzigartige & tolle Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+			<article>
+				<header>
+					<div class="sprite t-button desktop"></div>
+					<h2>Lernhilfe finden</h2>
+				</header>
+				@using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @class = "form-container search" }))
+				{
+					<div class="field-container">
+						@Html.DropDownListFor(m => m.Class, AllClasses, "Schulstufe")
+						@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach")
+						<input type="submit" value="Finden"/>
+					</div>
+				}
+				<p>oder<br/><a href="javascript:void(0);" class="important">Lernhilfe anbieten</a></p>
+			</article>
+		</section>
+		<section class="two-col-container" id="">
+			<div class="col-container">
+				<h2>Events</h2>
+				<div class="ajax-module" id="events-container"></div>
+				<div class="loading-message" id="events-container-loading">Lade Events ...</div>
+			</div>
+			<div class="col-container">
+				<h2>Stream</h2>
+				<div class="ajax-module" id="stream-container"></div>
+				<div class="loading-message" id="stream-container-loading">Lade Stream ...</div>
+			</div>
+		</section>
+	}
+</div>

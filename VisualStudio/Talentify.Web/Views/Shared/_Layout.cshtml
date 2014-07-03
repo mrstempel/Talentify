@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Talentify</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<script src="/Scripts/jquery-2.1.0.min.js"></script>
+		<script src="/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="/Scripts/waypoints.min.js"></script>
+		<script src="/Scripts/forms.js"></script>
+		<script src="/Scripts/screen.js"></script>
+		<script src="/Scripts/api.js"></script>
+		<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+		<link rel="stylesheet" href="/Css/ui-lightness/jquery-ui-1.10.4.custom.min.css" />
+		<link rel="stylesheet" href="/Css/talentify.min.css" />
+		<link rel="stylesheet" href="/Css/talentify-mobile.min.css" media="screen and (max-width: 767px)" />
+		<link rel="stylesheet" href="/Css/sprite.min.css" />
+		<link rel="stylesheet" href="/Css/talentify-jq-ui.min.css" />
+		
+		<!-- tooltip -->
+		<script src="/Scripts/Opentip/opentip-jquery.min.js"></script><!-- Change to the adapter you actually use -->
+		<link href="/Scripts/Opentip/opentip.css" rel="stylesheet" type="text/css" />
+	
+		@RenderSection("CustomJavascript", required: false)
+		@RenderSection("CustomCss", required: false)
+		
+		<script>
+			$(this).ready(function ()
+			{
+				initScreen();
+
+				@if (FormError != null)
+				{
+					<text>showErrorMsg('@FormError.Headline', '@FormError.Text', @FormError.AutoClose.ToString().ToLower());</text>
+				}
+
+				@if (FormSuccess != null)
+				{
+					<text>showSuccessMsg('@FormSuccess.Headline', '@FormSuccess.Text', @FormSuccess.AutoClose.ToString().ToLower());</text>
+				}
+			});
+
+			$(window).resize(function () { initSectionSizes(); });
+		</script>
+	</head>
+	<body>
+		<header id="page-header">
+			<div class="content">
+				@if (IsAuthenticated)
+				{
+					@Html.Partial("_LoggedHeader")
+				}
+				else
+				{
+					@Html.Partial("Forms/_HeaderLogin")	
+				}
+			</div>
+		</header>
+		@RenderBody()
+		<footer id="page-footer" class="desktop">
+			<div class="container">
+				<div class="share">
+					<a href="https://www.facebook.com/talentify.at" target="_blank"><img src="/Images/share-fb.png"/ alt="talentify on Facebook"></a>
+					<a href="javascript:void(0);"><img src="/Images/share-google.png"/ alt="talentify on Google+"></a>
+					<a href="javascript:void(0);"><img src="/Images/share-twitter.png"/ alt="talentify on Twitter"></a>
+				</div>
+				<nav>
+					<ul>
+						<li>&copy; 2014 talentify</li>
+						<li><a href="javascript:void(0);">Impressum</a></li>
+						<li><a href="javascript:void(0);">Datenschutzbestimmungen</a></li>
+					</ul>
+				</nav>
+			</div>
+		</footer>
+	</body>
+</html>

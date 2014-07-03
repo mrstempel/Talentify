@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		hasWaypoints = true;
+
+		$(function ()
+		{
+			$('a[href*=#]:not([href=#])').click(function ()
+			{
+				if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname)
+				{
+					var target = $(this.hash);
+					target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+					if (target.length)
+					{
+						$('html,body').animate({
+							scrollTop: target.offset().top - topMargin
+						}, 1000);
+						return false;
+					}
+				}
+			});
+		});
+	</script>
+}
+
+<nav id="home-nav" class="desktop">
+	<ul>
+		<li><a id="nav-fact1" href="#fact1"><span>Fact 1</span></a></li>
+		<li><a id="nav-fact2" href="#fact2"><span>Fact 2</span></a></li>
+		<li><a id="nav-fact3" href="#fact3"><span>Fact 3</span></a></li>
+		<li><a id="nav-fact4" href="#fact4"><span>Fact 4</span></a></li>
+	</ul>
+</nav>
+	
+<div id="page-container">
+	<section class="home" id="fact1">
+		<h1><span>Die einzigartige & nachhaltige Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+		<article>
+			<header><h2>Fact 1</h2></header>
+			<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+			<footer class="desktop">
+				@Html.ActionLink("Jetzt anmelden", "Index", "Register", null, new { @class = "link-button"})
+			</footer>
+		</article>
+	</section>
+	<section class="home" id="fact2">
+		<article>
+			<header><h2>Fact 2</h2></header>
+			<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+			<footer class="desktop">
+				@Html.ActionLink("Jetzt anmelden", "Index", "Register", null, new { @class = "link-button"})
+			</footer>
+		</article>
+	</section>
+	<section class="home" id="fact3">
+		<article>
+			<header><h2>Fact 3</h2></header>
+			<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+			<footer class="desktop">
+				@Html.ActionLink("Jetzt anmelden", "Index", "Register", null, new { @class = "link-button"})
+			</footer>
+		</article>
+	</section>
+	<section class="home" id="fact4">
+		<article>
+			<header><h2>Fact 4</h2></header>
+			<p>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
+			<footer class="desktop">
+				@Html.ActionLink("Jetzt anmelden", "Index", "Register", null, new { @class = "link-button"})
+			</footer>
+		</article>
+	</section>
+	<footer class="mobile submit cols2">
+		@Html.ActionLink("Jetzt anmelden", "Index", "Register", null, new { @class = "link-button"})<a href="javascript:void(0);" class="link-button">Einloggen</a>
+	</footer>
+</div>

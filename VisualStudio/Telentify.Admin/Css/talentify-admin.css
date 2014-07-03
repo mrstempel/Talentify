@@ -1,0 +1,63 @@
+﻿.box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+* {
+  font-family: CaeciliaLTPro-55Roman;
+  font-weight: normal;
+  font-style: normal; }
+
+html, body {
+  height: 100%; }
+
+body {
+  padding: 0;
+  margin: 0;
+  color: #555;
+  font-size: 20px; }
+
+h1, h2, h3, h4, h5 {
+  font-family: CaeciliaLTPro-85Heavy;
+  padding: 0;
+  margin: 0;
+  text-align: center; }
+
+header {
+  width: 100%;
+  height: 55px;
+  position: fixed;
+  z-index: 9999;
+  background: #183343;
+  text-align: center;
+  padding: 10px 0 0 0; }
+  header .content {
+    max-width: 1105px;
+    width: 100%;
+    display: inline-block;
+    margin: auto;
+    text-align: center; }
+    header .content h1 {
+      float: left; }
+    header .content .logged-container {
+      float: right;
+      margin: 5px 0 0 0; }
+
+#page-container {
+  z-index: 1;
+  max-width: 1105px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  padding-top: 85px; }
+  #page-container table {
+    margin: 30px 0; }
+    #page-container table td {
+      text-align: left;
+      padding: 5px 15px; }
+  #page-container form input {
+    width: 400px; }
+  #page-container form textarea {
+    width: 700px;
+    height: 300px; }

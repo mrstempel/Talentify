@@ -1,0 +1,23 @@
+﻿@model Talentify.ORM.DAL.Models.User.Student
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" class="form">
+	<section id="register">
+		<header>
+			<div class="sprite t-button desktop"></div>
+			<h2>Anmelden</h2>
+		</header>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2>Anmeldung fehlgeschlagen</h2><p></p></div>
+			<div id="msg-success" class="msg success"><h2>Anmeldung erfolgreich</h2><p>Ein E-Mail mit Bestätigungslink wurde an deine E-Mail Adresse versendet. </p></div>
+		</article>
+		@if (FormSuccess == null)
+		{
+			@Html.Partial("Forms/_Register", Model)
+		}
+	</section>
+</div>

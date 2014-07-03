@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KwIt.Project.Pattern", "KwI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talentify.Core", "Talentify.ORM\Talentify.Core.csproj", "{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telentify.Admin", "Telentify.Admin\Telentify.Admin.csproj", "{2EBBEAE3-DD5D-4534-9A32-C033D49FACCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3D0B096-F25C-41B9-AB1A-F18E5C8F9E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EBBEAE3-DD5D-4534-9A32-C033D49FACCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EBBEAE3-DD5D-4534-9A32-C033D49FACCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EBBEAE3-DD5D-4534-9A32-C033D49FACCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EBBEAE3-DD5D-4534-9A32-C033D49FACCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
