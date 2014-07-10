@@ -13,7 +13,12 @@ namespace Talentify.Web.Controllers
 {
     public class ProfileController : BaseController
     {
-		public ActionResult Index(int id = 0, bool f = false)
+	    public override bool KeepSearchSessionAlive
+	    {
+		    get { return true; }
+	    }
+
+	    public ActionResult Index(int id = 0, bool f = false)
         {
 	        var user = (id == 0)
 				? UnitOfWork.StudentRepository.GetById(LoggedUser.Id)
@@ -22,11 +27,31 @@ namespace Talentify.Web.Controllers
 			ViewBag.CompletionCount = UnitOfWork.StudentRepository.GetProfileCompleteStatus(user);
 			ViewBag.CompletionCountFull = 100 - ViewBag.CompletionCount;
 
+		    if (HasSearchSession)
+		    {
+			    SetSearchSession(id);
+		    }
+
 			if (f)
 				FormSuccess = new FormFeedback() { AutoClose = true };
 
             return View(user);
         }
+
+	    private void SetSearchSession(int id)
+	    {
+		    var currentStudent = SearchSession.Items.FirstOrDefault(i => i.Id == id);
+		    if (currentStudent != null)
+		    {
+			    var currentIndex = SearchSession.Items.IndexOf(currentStudent);
+			    SearchSession.PrevItem = currentIndex > 0 
+					? SearchSession.Items.ElementAt(currentIndex - 1) : 
+					SearchSession.Items.ElementAt(SearchSession.Items.Count - 1);
+			    SearchSession.NextItem = currentIndex == SearchSession.Items.Count - 1
+				    ? SearchSession.Items.ElementAt(0)
+				    : SearchSession.Items.ElementAt(currentIndex + 1);
+		    }
+	    }
 
 		public ActionResult ImageUpload(HttpPostedFileBase profileUpload)
 		{
@@ -152,6 +177,28 @@ namespace Talentify.Web.Controllers
 				FormError = new FormFeedback();
 			}
 			
+			return View();
+		}
+
+	    public ActionResult CoachingRequest(int toUserId, int searchClass, int subjectCategoryId)
+	    {
+			// create available subjects
+			ViewBag.UserSubjects = new SelectList(UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == toUserId, null, "SubjectCategory"), "SubjectCategoryId", "SubjectCategory.Name");
+		    return View(new CoachingRequest() { FromUserId = LoggedUser.Id, ToUserId = toUserId, Class = searchClass, SubjectCategoryId = subjectCategoryId });
+	    }
+
+		[HttpPost]
+		public ActionResult CoachingRequest(CoachingRequest coachingRequest, string message)
+		{
+			var formFeedback = UnitOfWork.CoachingRequestRepository.Insert(coachingRequest, message);
+			if (formFeedback.IsError)
+			{
+				FormError = formFeedback;
+			}
+			else
+			{
+				FormSuccess = formFeedback;
+			}
 			return View();
 		}
     }

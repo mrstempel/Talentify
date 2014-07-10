@@ -1,0 +1,24 @@
+﻿@model Talentify.ORM.FrontendLogic.Models.CoachingRequestStream
+
+@{
+	var toUserId = Model.CoachingRequest.FromUserId == LoggedUser.Id ? Model.CoachingRequest.ToUserId : Model.CoachingRequest.FromUserId;
+}
+<div id="timeline-container">
+	@foreach (var item in Model.TimelineItems)
+	{
+		<div class="item">
+			<div class="profile-img">
+				<a href="/Profile/Index/@item.UserId" class="image-link" style="background: url('@item.UserImage');"></a>
+			</div>
+			<div class="content">
+				<h3>@item.Username</h3>
+				<p>@item.Text</p>
+			</div>
+		</div>
+	}
+</div>
+
+<div id="new-message-form">
+	<textarea id="coaching-new-message"></textarea>
+	<a href="javascript:void(0);" onclick="sendMessage(@Model.CoachingRequest.Id, @LoggedUser.Id, @toUserId, $('#coaching-new-message').val());" class="link-button">Nachricht senden</a>
+</div>

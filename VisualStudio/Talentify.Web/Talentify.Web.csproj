@@ -127,6 +127,8 @@
     <Compile Include="Controllers\Api\AuthController.cs" />
     <Compile Include="Controllers\Api\AutocompleteController.cs" />
     <Compile Include="Controllers\Api\FormHelperController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\CoachingCenterController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -135,11 +137,11 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StartController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -201,11 +203,14 @@
     <Content Include="Html\Register.html" />
     <Content Include="Html\Home.html" />
     <Content Include="Images\bg-content-headline.png" />
+    <Content Include="Images\header-menu-active.png" />
+    <Content Include="Images\header-menu.png" />
     <Content Include="Images\header-notifications-active.png" />
     <Content Include="Images\header-notifications.png" />
     <Content Include="Images\header-settings-active.png" />
     <Content Include="Images\header-settings.png" />
     <Content Include="Images\icon-close.png" />
+    <Content Include="Images\icon-mail.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mandatory.png" />
     <Content Include="Images\map-eumel.png" />
@@ -248,7 +253,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
-    <Content Include="Views\Test\Empty.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
@@ -276,6 +280,10 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
     <Content Include="Views\Events\Register.cshtml" />
+    <Content Include="Views\Profile\CoachingRequest.cshtml" />
+    <Content Include="Views\CoachingCenter\Index.cshtml" />
+    <Content Include="Views\CoachingCenter\Filter.cshtml" />
+    <Content Include="Views\CoachingCenter\Stream.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

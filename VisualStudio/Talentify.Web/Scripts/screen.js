@@ -58,21 +58,24 @@ function highlightNavigation(id)
 
 function initMenuLinks()
 {
-	$('.nav-icon-link').mouseover(function()
+	$('.nav-icon-link:not(.sticky)').mouseover(function()
 	{
 		var icon = $(this).find('img');
 		var imgSrc = $(icon).attr('id') + '-active.png';
 		$(icon).attr('src', '/Images/' + imgSrc);
 	});
-	$('.nav-icon-link').mouseleave(function ()
+	$('.nav-icon-link:not(.sticky)').mouseleave(function ()
 	{
-		var menu = $(this).parent().find('.nav-menu');
-		console.log($(menu).attr('id'));
-		if ($(menu).attr('id') && $(menu).is(':hidden'))
+		if (!$(this).hasClass('sticky'))
 		{
-			var icon = $(this).find('img');
-			var imgSrc = $(icon).attr('id') + '.png';
-			$(icon).attr('src', '/Images/' + imgSrc);
+			var menu = $(this).parent().find('.nav-menu');
+			console.log($(menu).attr('id'));
+			if ($(menu).attr('id') && $(menu).is(':hidden'))
+			{
+				var icon = $(this).find('img');
+				var imgSrc = $(icon).attr('id') + '.png';
+				$(icon).attr('src', '/Images/' + imgSrc);
+			}
 		}
 	});
 }
@@ -98,9 +101,12 @@ function resetMenu(id)
 {
 	var menu = $('#' + id);
 	var navLink = $(menu).parent().find('a');
-	var icon = $(navLink).find('img');
-	var imgSrc = $(icon).attr('id') + '.png';
-	$(icon).attr('src', '/Images/' + imgSrc);
+	if (!$(navLink).hasClass('sticky'))
+	{
+		var icon = $(navLink).find('img');
+		var imgSrc = $(icon).attr('id') + '.png';
+		$(icon).attr('src', '/Images/' + imgSrc);
+	}
 	$(menu).hide();
 }
 

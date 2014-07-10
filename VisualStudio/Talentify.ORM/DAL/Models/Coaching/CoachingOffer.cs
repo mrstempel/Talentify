@@ -26,7 +26,7 @@ namespace Talentify.ORM.DAL.Models.Coaching
 
 		public int SubjectCategoryId { get; set; }
 		private SubjectCategory _subjectCategory;
-		public SubjectCategory SubjectCategory
+		public virtual SubjectCategory SubjectCategory
 		{
 			get { return _subjectCategory; }
 			set

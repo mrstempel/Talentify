@@ -233,6 +233,7 @@ function loadMyProfileCoachings(isMyProfile, id)
 					}
 				});
 				$('#my-offers').show();
+				$('#choaching-request-btn').show();
 			}
 			else
 			{
@@ -262,6 +263,13 @@ function loadEditPriceForm()
 {
 	$('#edit-price-frame').attr('src', '/Profile/EditCoachingPrice');
 	$('#modal-edit-price').modal('show');
+}
+
+function loadRequestCoachingForm(toId, searchClass, subjectCategoryId)
+{
+	var requestUrl = '/Profile/CoachingRequest?toUserId=' + toId + '&searchClass=' + searchClass + '&subjectCategoryId=' + subjectCategoryId;
+	$('#request-coaching-frame').attr('src', requestUrl);
+	$('#modal-request-coaching').modal('show');
 }
 
 function searchCoaching()
@@ -305,4 +313,107 @@ function loadEventOpenSeats(id)
 			$('#event-open-seats').html('0');
 		}
 	});
+}
+
+function filterCoachingCenter()
+{
+	$('#coaching-center-results').hide();
+	$('#coaching-center-loading').show();
+	$('#coaching-center-results').load('/CoachingCenter/Filter?statusType=' + $('#StatusType').val(), function ()
+	{
+		$('#coaching-center-loading').hide();
+		$('#coaching-center-results').fadeIn('medium');
+	});
+}
+
+function loadCoachingRequestTimeline(requestId)
+{
+	$('.request-list').find('.item').each(function() { $(this).removeClass('active'); });
+	$('#request-item-' + requestId).addClass('active');
+	$('#request-stream').hide();
+	$('#request-stream-loading').show();
+	$('#request-stream').load('/CoachingCenter/Stream?coachingRequestId=' + requestId, function ()
+	{
+		$('#request-stream-loading').hide();
+		$('#request-stream').fadeIn('medium');
+	});
+}
+
+function sendMessage(conversationId, fromUserId, toUserId, text)
+{
+	$.ajax({
+		url: '/FormHelper/SendMessage',
+		type: 'get',
+		async: true,
+		data: { conversationId: conversationId, fromUserId: fromUserId, toUserId: toUserId, text: text },
+		success: function (data)
+		{
+			if (data)
+			{
+				var item = document.createElement('div');
+				$(item).addClass('item');
+				$(item).html('<div class="profile-img"><a href="/Profile/Index/' + data['UserId'] + '" class="image-link" style="background: url(\'' + data['UserImage'] + '\');"></a></div><div class="content"><h3>' + data['Username'] + '</h3><p>' + data['Text'] + '</p></div></div>');
+				$(item).appendTo($('#timeline-container'));
+				$('#coaching-new-message').val('');
+			}
+		},
+		error: function (request, status, error)
+		{
+		}
+	});
+}
+
+function checkNotifications()
+{
+	$.ajax({
+		url: '/Notification/Count',
+		type: 'get',
+		async: true,
+		success: function (data)
+		{
+			setNotificationCount(data, true);
+		},
+		error: function (request, status, error)
+		{
+		}
+	});
+}
+
+function setNotificationCount(count, doFadeIn)
+{
+	var navLink = $('#notification-link');
+	var icon = $(navLink).find('img');
+	var imgSrc = $(icon).attr('id') + '-active.png';
+	var lastKlammer = document.title.lastIndexOf("(");
+
+	if (count && count != "0")
+	{
+		$('#notification-count').html(count);
+		$(icon).attr('src', '/Images/' + imgSrc);
+		if (doFadeIn)
+		{
+			$('#notification-count').fadeIn('fast');
+		}
+		else
+		{
+			$('#notification-count').show();
+		}
+
+		if (lastKlammer != -1)
+			document.title = document.title.substring(0, lastKlammer) + ' (' + count + ')';
+		else
+			document.title = document.title + ' (' + count + ')';
+
+		$(navLink).addClass('sticky');
+	}
+	else
+	{
+		imgSrc = $(icon).attr('id') + '.png';
+		$(icon).attr('src', '/Images/' + imgSrc);
+		$('#notification-count').hide();
+		if (lastKlammer != -1)
+			document.title = document.title.substring(0, lastKlammer);
+
+		$(navLink).removeClass('sticky');
+	}
 }

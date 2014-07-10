@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		$(this).ready(function ()
+		{
+			filterCoachingCenter();
+		});
+	</script>
+}
+
+<div id="page-container">
+	<section id="coaching-center-filter">
+		<article>
+			<header>
+				<div class="sprite t-button desktop"></div>
+				<h2>Lernhilfecenter</h2>
+			</header>
+			@using (Html.BeginForm("Index", "CoachingCenter", FormMethod.Post, new { @class = "form-container coaching-center-filter" }))
+			{
+				<div class="field-container">
+					<label for="StatusType">Lernhilfecenter filtern nach:</label>
+					<select id="StatusType" name="StatusType">
+						<option value="0">Anfragen</option>
+						<option value="1">Termine</option>
+						<option value="2">Abgeschlossen</option>
+						<option value="3">Abgesagt</option>
+					</select>
+					<input type="button" value="Filtern" onclick=""/>
+				</div>
+			}
+		</article>
+	</section>
+	<div id="coaching-center-loading">Lade Einträge ...</div>
+	<section id="coaching-center-results"></section>
+</div>

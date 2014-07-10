@@ -1,9 +1,28 @@
-﻿<h1><a href="/Start"><img src="/Images/logo.png" alt="talentify"/></a></h1>
+﻿<script>
+	$(this).ready(function()
+	{
+		setNotificationCount(@NotificationCount, false);
+		var notificationCheck = window.setInterval("checkNotifications()", 1500);
+	});
+</script>
+
+<div class="logged-logo-container">
+	<div class="main-menu">
+		<a href="javascript:void(0);" onclick="toggleMenu('nav-menu-menu');" class="nav-icon-link"><img src="/Images/header-menu.png" id="header-menu"/></a>
+		<div class="nav-menu" id="nav-menu-menu">
+			<div class="arrow"></div>
+			@Html.ActionLink("Lernhilfecenter", "Index", "CoachingCenter")
+			@Html.ActionLink("Events", "Index", "Events")
+		</div>
+	</div>
+	<a href="/Start"><img src="/Images/logo.png" alt="talentify"/></a>
+</div>
 <div class="logged-container">
 	<ul>
 		<li class="profile-img"><a href="/Profile" title="@LoggedUser.Firstname @LoggedUser.Surname" style="background:url('@LoggedUser.ProfileImageSmall')"></a></li>
 		<li class="notifications">
-			<a href="javascript:void(0);" onclick="toggleMenu('nav-menu-notifications');" class="nav-icon-link"><img src="/Images/header-notifications.png" alt="Benachrichtigungen" id="header-notifications"/></a>
+			<span id="notification-count"></span>
+			<a href="javascript:void(0);" onclick="toggleMenu('nav-menu-notifications');" class="nav-icon-link" id="notification-link"><img src="/Images/header-notifications.png" alt="Benachrichtigungen" id="header-notifications"/></a>
 			<div class="nav-menu" id="nav-menu-notifications">
 				<div class="arrow"></div>
 				<a href="javascript:void(0);">Alle Notifications anzeigen</a>

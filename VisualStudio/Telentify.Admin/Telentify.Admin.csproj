@@ -155,6 +155,13 @@
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="uploads\pages\198a6bb0-2a02-40ae-9c3a-59e7043989b4.png" />
+    <Content Include="uploads\pages\3e73059f-86d8-40d6-b104-cc5910de7b8a.png" />
+    <Content Include="uploads\pages\63338e86-aead-4af7-8db6-719de450264b.png" />
+    <Content Include="uploads\pages\656758cd-58ad-4c2f-a383-c988a82027be.png" />
+    <Content Include="uploads\pages\b1612fa7-b26e-4423-a07e-36556b0edb1e.png" />
+    <Content Include="uploads\pages\c734ffc1-d34f-43e6-828a-f97c8765e900.png" />
+    <Content Include="uploads\pages\db50af7f-47b2-4964-b17d-1ffcdf69a9b4.png" />
+    <Content Include="uploads\pages\e5fe0e94-c80a-49ca-9a49-4b55815fa372.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

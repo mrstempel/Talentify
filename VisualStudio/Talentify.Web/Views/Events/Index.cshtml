@@ -1,23 +1,47 @@
-﻿@model IEnumerable<Talentify.ORM.DAL.Models.Content.Event>
+﻿@model Talentify.ORM.FrontendLogic.Models.EventOverview
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+	var viewCount = 0;
 }
 
 <div id="page-container">
-	<section>
-		<article>
-			<header>
-				<div class="sprite t-button desktop"></div>
-				<h2>Events</h2>
-			</header>
-		</article>
-	</section>
-	<section id="event-overview">
-		@foreach (var item in Model)
-		{
-			@Html.Partial("_EventPreview", item)
-		}
-	</section>
+	@if (Model.MyEvents.Any())
+	{
+		<section>
+			<article>
+				<header>
+					<div class="sprite t-button desktop"></div>
+					<h2>Meine Events</h2>
+				</header>
+			</article>
+		</section>
+		<section id="event-overview">
+			@foreach (var item in Model.MyEvents)
+			{
+				@Html.Partial("_EventPreview", item)
+			}
+		</section>
+	}
+	@if (Model.Events.Any())
+	{
+		<section>
+			<article>
+				<header>
+					@if (!Model.MyEvents.Any())
+					{
+						<div class="sprite t-button desktop"></div>
+					}
+					<h2>Events</h2>
+				</header>
+			</article>
+		</section>
+		<section id="event-overview">
+			@foreach (var item in Model.Events)
+			{
+				@Html.Partial("_EventPreview", item)
+			}
+		</section>
+	}
 </div>

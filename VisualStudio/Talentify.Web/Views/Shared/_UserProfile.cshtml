@@ -1,5 +1,10 @@
 ﻿@model Talentify.ORM.DAL.Models.User.Student
 
+@{
+	var searchClass = SearchSession != null ? SearchSession.SearchParams.Class : 0;
+	var searchSubjectCategoryId = SearchSession != null ? SearchSession.SearchParams.SubjectCategoryId : 0;
+}
+
 <script>
 	$(this).ready(function()
 	{
@@ -39,4 +44,14 @@
 			}
 		</div>
 	</article>
+	<input type="button" value="Lernhilfe anfragen" onclick="loadRequestCoachingForm('@Model.Id', '@searchClass', '@searchSubjectCategoryId');" id="choaching-request-btn"/>
 </section>
+
+<div class="modal fade" id="modal-request-coaching" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+  <div class="modal-dialog" id="request-coaching-form">
+	<header>
+		<h1>Lernhilfe anfragen<a href="javascript:void(0);" onclick="$('#modal-request-coaching').modal('hide');" class="close-link"></a></h1>
+	</header>
+	<iframe id="request-coaching-frame" width="600" height="450" scrolling="no"></iframe>
+  </div>
+</div>

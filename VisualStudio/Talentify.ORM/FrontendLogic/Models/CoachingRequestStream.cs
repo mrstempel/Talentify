@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Talentify.ORM.DAL.Models.Coaching;
+using Talentify.ORM.FrontendLogic.Library;
 
 namespace Talentify.ORM.FrontendLogic.Models
 {
-	public class SearchParams
+	public class CoachingRequestStream
 	{
-		public int Class { get; set; }
-		public int SubjectCategoryId { get; set; }
-		public SubjectCategory SubjectCategory { get; set; }
+		public CoachingRequest CoachingRequest { get; set; }
+		public IEnumerable<ICoachingRequestTimelineItem> TimelineItems { get; set; }
 	}
 }

@@ -29,6 +29,26 @@ namespace Talentify.ORM.DAL.Repository
 			return UnitOfWork.EventRepository.AsQueryable().Where(e => e.IsOnline && e.BeginDate >= DateTime.Now);
 		}
 
+		public EventOverview GetEventOverview(int userId)
+		{
+			var onlineEvents = GetOnlineEvents();
+			var myRegistrations = UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.UserId == userId).ToList();
+			var eventOverView = new EventOverview();
+			foreach (var e in onlineEvents)
+			{
+				if (myRegistrations.Any(r => r.EventId == e.Id))
+				{
+					eventOverView.MyEvents.Add(e);
+				}
+				else
+				{
+					eventOverView.Events.Add(e);
+				}
+			}
+
+			return eventOverView;
+		}
+
 		public int GetOpenSeats(int eventId)
 		{
 			var talentiyEvent = UnitOfWork.EventRepository.GetById(eventId);

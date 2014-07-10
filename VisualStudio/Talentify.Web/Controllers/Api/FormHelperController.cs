@@ -12,7 +12,12 @@ namespace Talentify.Web.Controllers.Api
 {
     public class FormHelperController : BaseController
     {
-        public JsonResult SchoolClasses(int schoolId)
+	    public override bool KeepSearchSessionAlive
+	    {
+		    get { return true; }
+	    }
+
+	    public JsonResult SchoolClasses(int schoolId)
         {
 			return Json(UnitOfWork.SchoolRepository.GetClasses(schoolId), JsonRequestBehavior.AllowGet);
         }
@@ -31,6 +36,12 @@ namespace Talentify.Web.Controllers.Api
 	    public JsonResult GetEventOpenSeats(int eventId)
 	    {
 		    return Json(UnitOfWork.EventRepository.GetOpenSeats(eventId), JsonRequestBehavior.AllowGet);
+	    }
+
+	    public JsonResult SendMessage(int conversationId, int fromUserId, int toUserId, string text)
+	    {
+		    var message = UnitOfWork.ConversationRepository.AddMessage(conversationId, fromUserId, toUserId, text);
+			return Json(new { UserId = message.UserId, UserImage = message.UserImage, Username = message.Username, Text = message.Text}, JsonRequestBehavior.AllowGet);
 	    }
     }
 }

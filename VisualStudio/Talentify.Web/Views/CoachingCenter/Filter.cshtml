@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.Coaching.CoachingRequest>
+
+<div class="request-list">
+	@foreach (var request in Model)
+	{
+		var user = request.FromUserId == LoggedUser.Id ? request.ToUser : request.FromUser;
+		<div id="request-item-@request.Id" class="item">
+			<a href="javascript:void(0);"  onclick="loadCoachingRequestTimeline(@request.Id)" class="image-link" style="background: url('@user.ProfileImageMedium');"></a>
+			<h3>@user.Firstname @user.Surname</h3>
+			@if (!string.IsNullOrEmpty(user.Phone))
+			{
+				<span>Tel: @user.Phone</span>
+			}
+			<span>E-Mail: <a href="mailto:@(@user.Email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
+		</div>
+	}
+</div>
+<script>
+		$(this).ready(function ()
+		{
+			loadCoachingRequestTimeline(@Model.ElementAt(0).Id);
+		});
+</script>
+
+<div id="request-stream-loading">Lade Stream ...</div>
+<div id="request-stream"></div>

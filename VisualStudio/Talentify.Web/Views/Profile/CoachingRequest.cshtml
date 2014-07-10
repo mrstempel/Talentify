@@ -1,0 +1,38 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.Coaching.CoachingRequest>
+
+@{
+    ViewBag.Title = "CoachingRequest";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-error" class="msg error"><h2>Fehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
+		<div id="msg-success" class="msg success"><h2>Lernhilfe erfolgreich angefragt.</h2><p>Deine Anfrage wurde erfolgreich gesendet.</p></div>
+	</div>
+	@if (FormSuccess == null)
+	{
+		using (Html.BeginForm("CoachingRequest", "Profile", FormMethod.Post, new { @class = "form-container" }))
+		{
+			@Html.HiddenFor(m => m.FromUserId)
+			@Html.HiddenFor(m => m.ToUserId)
+			<div class="field-container">
+				<label>Lernhilfe anfragen in:</label>
+				@Html.DropDownListFor(m => m.SubjectCategoryId, (SelectList)ViewBag.UserSubjects, "bitte auswählen", new {@class = "mandatory"})
+				<label>Schulstufe:</label>
+				@Html.DropDownListFor(m => m.Class, AllClasses, "bitte auswählen", new {@class = "mandatory"})
+				<label>Nachricht:</label>
+				<textarea name="Message" maxlength="140"></textarea>
+			</div>
+			<div class="field-container">
+				<input type="submit" value="Anfrage senden" onclick="return validateMandatoryOnlyForm();"/>
+			</div>
+		}
+	}
+	else
+	{
+		<script>
+			setTimeout(function () { window.parent.hideModal('modal-request-coaching'); }, 3000);
+		</script>
+	}
+</article>

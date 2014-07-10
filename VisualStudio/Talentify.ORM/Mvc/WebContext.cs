@@ -7,6 +7,7 @@ using System.Web;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.DAL.UnitOfWork;
+using Talentify.ORM.FrontendLogic.Models;
 
 namespace Talentify.ORM.Mvc
 {
@@ -45,6 +46,17 @@ namespace Talentify.ORM.Mvc
 			{
 				HttpContext.Current.Session["WebContext.User"] = value;
 			}
+		}
+
+		public SearchSession SearchSession
+		{
+			get
+			{
+				return (HttpContext.Current.Session["WebContext.SearchSession"] != null)
+					? HttpContext.Current.Session["WebContext.SearchSession"] as SearchSession
+					: null;
+			}
+			set { HttpContext.Current.Session["WebContext.SearchSession"] = value; }
 		}
 
 		public WebContext(TalentifyUnitOfWork<TalentifyContext> unitOfWork)

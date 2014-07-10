@@ -116,6 +116,19 @@ function showSuccessMsg(msgHeadline, msgText, autoclose)
 }
 
 /* specific form validation */
+function validateMandatoryOnlyForm()
+{
+	var isValid = true;
+
+	// check mandatory fields
+	if (!validateMandatoryFields())
+	{
+		return false;
+	}
+
+	return isValid;
+}
+
 function validateRegisterForm()
 {
 	var isValid = true;

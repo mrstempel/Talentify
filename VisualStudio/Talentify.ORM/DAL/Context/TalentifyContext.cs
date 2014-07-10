@@ -10,6 +10,8 @@ using Talentify.ORM.DAL.Models;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
+using Talentify.ORM.DAL.Models.Messaging;
+using Talentify.ORM.DAL.Models.Notification;
 using Talentify.ORM.DAL.Models.School;
 using Talentify.ORM.DAL.Models.User;
 using Membership = System.Web.Security.Membership;
@@ -28,6 +30,7 @@ namespace Talentify.ORM.DAL.Context
 		// coaching
 		public DbSet<SubjectCategory> SubjectCategories { get; set; }
 		public DbSet<CoachingOffer> CoachingOffers { get; set; }
+		public DbSet<CoachingRequest> CoachingRequests { get; set; }
 
 		// users
 		public DbSet<BaseUser> BasUsers { get; set; }
@@ -45,6 +48,14 @@ namespace Talentify.ORM.DAL.Context
 		public DbSet<BasePage> BasePages { get; set; }
 		public DbSet<Event> Events { get; set; }
 		public DbSet<EventRegistration> EventRegistrations { get; set; }
+
+		// messaging
+		public DbSet<Conversation> Conversations { get; set; }
+		public DbSet<Message> Messages { get; set; }
+		public DbSet<MessageRecipient> MessageRecipients { get; set; }
+
+		// notification
+		public DbSet<Notification> Notifications { get; set; }
 
 		public TalentifyContext() : base("EFConnectionString")
 		{
@@ -66,6 +77,8 @@ namespace Talentify.ORM.DAL.Context
 			// coaching
 			modelBuilder.Configurations.Add(new SubjectCategoryMap());
 			modelBuilder.Configurations.Add(new CoachingOfferMap());
+			modelBuilder.Configurations.Add(new CoachingRequestMap());
+			modelBuilder.Configurations.Add(new CoachingRequestStatusMap());
 
 			// users
 			modelBuilder.Configurations.Add(new BaseUserMap());
@@ -84,6 +97,14 @@ namespace Talentify.ORM.DAL.Context
 			modelBuilder.Configurations.Add(new EventMap());
 			modelBuilder.Configurations.Add(new EventRegistrationMap());
 
+			// messaging
+			modelBuilder.Configurations.Add(new ConversationMap());
+			modelBuilder.Configurations.Add(new MessageMap());
+			modelBuilder.Configurations.Add(new MessageRecipientMap());
+
+			// notifications
+			modelBuilder.Configurations.Add(new NotificationMap());
+			
 			base.OnModelCreating(modelBuilder);
 		}
 	}

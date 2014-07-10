@@ -11,6 +11,7 @@ using Talentify.ORM.DAL.Models;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
+using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.School;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.DAL.Repository;
@@ -65,6 +66,30 @@ namespace Talentify.ORM.DAL.UnitOfWork
 					_coachingOfferRepository = new CoachingOfferRepository(this.Context);
 
 				return _coachingOfferRepository;
+			}
+		}
+
+		private CoachingRequestRepository _coachingRequestRepository;
+		public CoachingRequestRepository CoachingRequestRepository
+		{
+			get
+			{
+				if (_coachingRequestRepository == null)
+					_coachingRequestRepository = new CoachingRequestRepository(this.Context);
+
+				return _coachingRequestRepository;
+			}
+		}
+
+		private IRepository<CoachingRequestStatus> _coachingRequestStatusRepository;
+		public IRepository<CoachingRequestStatus> CoachingRequestStatusRepository
+		{
+			get
+			{
+				if (_coachingRequestStatusRepository == null)
+					_coachingRequestStatusRepository = new TalentifyRepository<CoachingRequestStatus>(this.Context);
+
+				return _coachingRequestStatusRepository;
 			}
 		}
 
@@ -197,6 +222,54 @@ namespace Talentify.ORM.DAL.UnitOfWork
 					_eventRegistrationRepository = new TalentifyRepository<EventRegistration>(this.Context);
 
 				return _eventRegistrationRepository;
+			}
+		}
+
+		private ConversationRepository _conversationRepository;
+		public ConversationRepository ConversationRepository
+		{
+			get
+			{
+				if (_conversationRepository == null)
+					_conversationRepository = new ConversationRepository(this.Context);
+
+				return _conversationRepository;
+			}
+		}
+
+		private IRepository<Message> _messageRepository;
+		public IRepository<Message> MessageRepository
+		{
+			get
+			{
+				if (_messageRepository == null)
+					_messageRepository = new TalentifyRepository<Message>(this.Context);
+
+				return _messageRepository;
+			}
+		}
+
+		private IRepository<MessageRecipient> _messageRecipientRepository;
+		public IRepository<MessageRecipient> MessageRecipientRepository
+		{
+			get
+			{
+				if (_messageRecipientRepository == null)
+					_messageRecipientRepository = new TalentifyRepository<MessageRecipient>(this.Context);
+
+				return _messageRecipientRepository;
+			}
+		}
+
+		private NotificationRepository _notificationRepository;
+		public NotificationRepository NotificationRepository
+		{
+			get
+			{
+				if (_notificationRepository == null)
+					_notificationRepository = new NotificationRepository(this.Context);
+
+				return _notificationRepository;
 			}
 		}
 

@@ -17,7 +17,10 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Search(SearchParams searchParams)
 	    {
-		    return View(UnitOfWork.CoachingOfferRepository.Search(searchParams));
+		    var results = UnitOfWork.CoachingOfferRepository.Search(searchParams);
+		    searchParams.SubjectCategory = UnitOfWork.SubjectCategoryRepository.GetById(searchParams.SubjectCategoryId);
+		    this.WebContext.SearchSession = new SearchSession() {SearchParams = searchParams, Items = results.ToList()};
+		    return View(results);
 	    }
     }
 }

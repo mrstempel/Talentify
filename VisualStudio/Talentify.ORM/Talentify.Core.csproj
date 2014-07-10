@@ -85,6 +85,9 @@
     <Compile Include="DAL\Migrations\InitialSeeder.cs" />
     <Compile Include="DAL\Migrations\TalentifyConfiguration.cs" />
     <Compile Include="DAL\Models\Coaching\CoachingOffer.cs" />
+    <Compile Include="DAL\Models\Coaching\CoachingRating.cs" />
+    <Compile Include="DAL\Models\Coaching\CoachingRequest.cs" />
+    <Compile Include="DAL\Models\Coaching\CoachingRequestStatus.cs" />
     <Compile Include="DAL\Models\Coaching\SubjectCategory.cs" />
     <Compile Include="DAL\Models\Content\BasePage.cs" />
     <Compile Include="DAL\Models\Content\Event.cs" />
@@ -92,6 +95,10 @@
     <Compile Include="DAL\Models\DBMigrationHistory.cs" />
     <Compile Include="DAL\Models\Membership\Membership.cs" />
     <Compile Include="DAL\Models\Membership\Subscription.cs" />
+    <Compile Include="DAL\Models\Messaging\Conversation.cs" />
+    <Compile Include="DAL\Models\Messaging\Message.cs" />
+    <Compile Include="DAL\Models\Messaging\MessageRecipient.cs" />
+    <Compile Include="DAL\Models\Notification\Notification.cs" />
     <Compile Include="DAL\Models\School\School.cs" />
     <Compile Include="DAL\Models\School\SchoolType.cs" />
     <Compile Include="DAL\Models\User\ActionToken.cs" />
@@ -103,15 +110,23 @@
     <Compile Include="DAL\Repository\BaseUserRepository.cs" />
     <Compile Include="DAL\Repository\BasePageRepository.cs" />
     <Compile Include="DAL\Repository\CoachingOfferRepository.cs" />
+    <Compile Include="DAL\Repository\CoachingRequestRepository.cs" />
+    <Compile Include="DAL\Repository\ConversationRepository.cs" />
+    <Compile Include="DAL\Repository\NotificationRepository.cs" />
     <Compile Include="DAL\Repository\SchoolRepository.cs" />
     <Compile Include="DAL\Repository\EventRepository.cs" />
     <Compile Include="DAL\Repository\StudentRepository.cs" />
     <Compile Include="DAL\Repository\TalentifyRepository.cs" />
     <Compile Include="DAL\UnitOfWork\TalentifyUnitOfWork.cs" />
+    <Compile Include="FrontendLogic\Library\ICoachingRequestTimelineItem.cs" />
     <Compile Include="FrontendLogic\Models\AutocompleteItem.cs" />
+    <Compile Include="FrontendLogic\Models\CoachingRequestStream.cs" />
+    <Compile Include="FrontendLogic\Models\EventOverview.cs" />
+    <Compile Include="FrontendLogic\Models\NotificationListItem.cs" />
     <Compile Include="FrontendLogic\Models\PasswordChange.cs" />
     <Compile Include="FrontendLogic\Models\SearchParams.cs" />
     <Compile Include="FrontendLogic\Models\SearchResultItem.cs" />
+    <Compile Include="FrontendLogic\Models\SearchSession.cs" />
     <Compile Include="FrontendLogic\Models\StreamItem.cs" />
     <Compile Include="FrontendLogic\StreamProvider.cs" />
     <Compile Include="Migrations\201406121551325_registercode_nullify.cs" />
@@ -165,6 +180,18 @@
     <Compile Include="Migrations\201407031509071_add-event-registration.cs" />
     <Compile Include="Migrations\201407031509071_add-event-registration.Designer.cs">
       <DependentUpon>201407031509071_add-event-registration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407080932017_coaching-messaging.cs" />
+    <Compile Include="Migrations\201407080932017_coaching-messaging.Designer.cs">
+      <DependentUpon>201407080932017_coaching-messaging.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407081228396_notifications.cs" />
+    <Compile Include="Migrations\201407081228396_notifications.Designer.cs">
+      <DependentUpon>201407081228396_notifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407081231227_notifications-update1.cs" />
+    <Compile Include="Migrations\201407081231227_notifications-update1.Designer.cs">
+      <DependentUpon>201407081231227_notifications-update1.cs</DependentUpon>
     </Compile>
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\BaseView.cs" />
@@ -221,6 +248,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407031509071_add-event-registration.resx">
       <DependentUpon>201407031509071_add-event-registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407080932017_coaching-messaging.resx">
+      <DependentUpon>201407080932017_coaching-messaging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407081228396_notifications.resx">
+      <DependentUpon>201407081228396_notifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407081231227_notifications-update1.resx">
+      <DependentUpon>201407081231227_notifications-update1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

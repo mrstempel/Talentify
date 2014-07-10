@@ -12,7 +12,7 @@ namespace Talentify.Web.Controllers
     {
         public ActionResult Index()
         {
-	        return View(UnitOfWork.EventRepository.GetOnlineEvents());
+	        return View(UnitOfWork.EventRepository.GetEventOverview(LoggedUser.Id));
         }
 
 	    public ActionResult Detail(int id)

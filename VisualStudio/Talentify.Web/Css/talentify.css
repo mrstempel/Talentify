@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, #page-header .content .logged-container ul li .nav-menu, #page-header .content .logged-container ul li .nav-menu a, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, #event-overview article, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
+﻿.box-sizing, .input-switch .option, #notification-count, .nav-menu, .nav-menu a, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .request-list .item, .request-list .item span, #request-stream, #request-stream .item, #new-message-form, #new-message-form .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -163,18 +163,23 @@ iframe {
 .form-container.register header {
   margin-bottom: 10px !important; }
 
-.form-container.search {
+.form-container.search, .form-container.coaching-center-filter {
   margin-top: 20px;
   width: 98%;
   border: 1px solid #c3c3c3;
   -moz-box-shadow: 0 0 5px #c3c3c3;
   -webkit-box-shadow: 0 0 5px #c3c3c3;
   box-shadow: 0 0 5px #c3c3c3; }
-  .form-container.search input, .form-container.search select {
+  .form-container.search input, .form-container.search select, .form-container.coaching-center-filter input, .form-container.coaching-center-filter select {
     width: 31%;
     border: 1px solid #e3e4e8; }
-  .form-container.search .field-container {
+  .form-container.search .field-container, .form-container.coaching-center-filter .field-container {
     margin: 10px; }
+
+.form-container.coaching-center-filter {
+  margin: 20px 0 50px 0; }
+  .form-container.coaching-center-filter label, .form-container.coaching-center-filter select {
+    margin: 0 20px 0 0; }
 
 #register header {
   margin-bottom: 20px; }
@@ -195,6 +200,15 @@ iframe {
     text-align: center; }
     #page-header .content h1 {
       float: left; }
+    #page-header .content .logged-logo-container {
+      position: relative;
+      float: left; }
+      #page-header .content .logged-logo-container .main-menu {
+        float: left;
+        margin: 10px 15px 0 0; }
+        #page-header .content .logged-logo-container .main-menu .nav-menu {
+          width: 200px;
+          left: -163px; }
     #page-header .content .login {
       float: right;
       margin: 6px 0 0 0; }
@@ -223,36 +237,6 @@ iframe {
           #page-header .content .logged-container ul li img {
             float: left;
             vertical-align: middle; }
-          #page-header .content .logged-container ul li .nav-menu {
-            -moz-box-shadow: 0 0 5px #c3c3c3;
-            -webkit-box-shadow: 0 0 5px #c3c3c3;
-            box-shadow: 0 2px 2px #c3c3c3;
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            border-radius: 3px;
-            position: absolute;
-            top: 42px;
-            left: 0;
-            display: none;
-            padding: 5px 0; }
-            #page-header .content .logged-container ul li .nav-menu .arrow {
-              position: absolute;
-              right: 10px;
-              top: -6px;
-              width: 13px;
-              height: 6px;
-              background: url(../Images/nav-menu-arrow.png);
-              background-repeat: no-repeat; }
-            #page-header .content .logged-container ul li .nav-menu a {
-              width: 100%;
-              display: inline-block;
-              padding: 2px 30px;
-              text-decoration: none;
-              font-size: 15px;
-              text-align: left; }
-            #page-header .content .logged-container ul li .nav-menu a:hover {
-              background: #0eb48d;
-              color: #fff; }
         #page-header .content .logged-container ul li.profile-img a {
           display: inline-block;
           width: 35px;
@@ -270,6 +254,55 @@ iframe {
           #page-header .content .logged-container ul li.settings .nav-menu {
             width: 200px;
             left: -163px; }
+
+#notification-link {
+  position: relative; }
+
+#notification-count {
+  display: none;
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  width: 20px;
+  height: 20px;
+  background: #0eb48d;
+  color: #fff;
+  text-align: center;
+  border-radius: 120px;
+  font-size: 11px;
+  padding: 3px 0 0 0;
+  z-index: 10000; }
+
+.nav-menu {
+  -moz-box-shadow: 0 0 5px #c3c3c3;
+  -webkit-box-shadow: 0 0 5px #c3c3c3;
+  box-shadow: 0 2px 2px #c3c3c3;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  position: absolute;
+  top: 42px;
+  left: 0;
+  display: none;
+  padding: 5px 0; }
+  .nav-menu .arrow {
+    position: absolute;
+    right: 10px;
+    top: -6px;
+    width: 13px;
+    height: 6px;
+    background: url(../Images/nav-menu-arrow.png);
+    background-repeat: no-repeat; }
+  .nav-menu a {
+    width: 100%;
+    display: inline-block;
+    padding: 2px 30px;
+    text-decoration: none;
+    font-size: 15px;
+    text-align: left; }
+  .nav-menu a:hover {
+    background: #0eb48d;
+    color: #fff; }
 
 #page-footer {
   max-width: 1105px;
@@ -532,6 +565,40 @@ article.event-detail .content-container {
 #event-overview article:last-child {
   margin: 10px 0 10px 0 !important; }
 
+#search-session-view article {
+  -moz-box-shadow: 0 0 5px #c3c3c3;
+  -webkit-box-shadow: 0 0 5px #c3c3c3;
+  box-shadow: 0 0 5px #c3c3c3;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 10px 0;
+  padding: 10px;
+  background: #0eb48d;
+  color: #fff;
+  font-size: 14px; }
+  #search-session-view article .prev-item, #search-session-view article .next-item {
+    float: left;
+    width: 30%; }
+    #search-session-view article .prev-item p, #search-session-view article .prev-item h3, #search-session-view article .next-item p, #search-session-view article .next-item h3 {
+      text-align: left; }
+  #search-session-view article .next-item {
+    float: right; }
+    #search-session-view article .next-item .image-link {
+      float: right;
+      margin: 0 0 0 10px; }
+    #search-session-view article .next-item p, #search-session-view article .next-item h3 {
+      text-align: right; }
+  #search-session-view article .search-params {
+    float: left;
+    text-align: center;
+    width: 40%; }
+  #search-session-view article .image-link {
+    background-repeat: no-repeat;
+    width: 105px;
+    height: 105px;
+    float: left;
+    margin: 0 10px 0 0; }
+
 .user-profile .link-button, .user-settings .link-button {
   padding: 5px 10px !important;
   min-width: 113px !important;
@@ -544,7 +611,8 @@ article.event-detail .content-container {
   -webkit-box-shadow: 0 0 5px #c3c3c3;
   box-shadow: 0 0 5px #c3c3c3;
   padding: 10px;
-  font-size: 18px; }
+  font-size: 18px;
+  margin: 0 0 30px 0; }
   .user-profile article .left, .user-settings article .left {
     display: inline-block;
     width: 334px;
@@ -623,7 +691,6 @@ article.event-detail .content-container {
       padding: 0 21px;
       margin: 0; }
 .user-profile article.my-profile, .user-settings article.my-profile {
-  margin: 0 0 30px 0;
   font-size: 16px; }
 .user-profile article.user-profile .left .profile-img, .user-settings article.user-profile .left .profile-img {
   margin: 0;
@@ -633,10 +700,87 @@ article.event-detail .content-container {
 .user-profile article.user-profile .right .row .right, .user-settings article.user-profile .right .row .right {
   padding: 0; }
 
+#choaching-request-btn {
+  display: none; }
+
 .user-settings {
   margin: 0 0 20px 0; }
   .user-settings article {
     margin-top: 20px; }
+
+.request-list {
+  float: left;
+  display: inline-block;
+  width: 355px; }
+  .request-list .item {
+    float: left;
+    width: 355px;
+    padding: 10px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 16px; }
+    .request-list .item .image-link {
+      background-repeat: no-repeat;
+      width: 105px;
+      height: 105px;
+      float: left;
+      margin: 0 10px 0 0; }
+    .request-list .item h3 {
+      float: left;
+      font-size: 18px;
+      color: #0eb48d;
+      margin: 0 0 5px 0; }
+    .request-list .item span {
+      float: left;
+      width: 220px;
+      text-align: left;
+      margin: 5px 0 0 0; }
+  .request-list .item.active {
+    background: #e6f7f3; }
+
+#request-stream {
+  display: inline-block;
+  width: 710px; }
+  #request-stream .item {
+    display: inline-block;
+    width: 100%;
+    border-top: 1px solid #e5e5e5;
+    padding: 15px 3px 0 3px; }
+    #request-stream .item .profile-img {
+      float: left;
+      padding: 5px 10px 0 0; }
+      #request-stream .item .profile-img a {
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        background-repeat: no-repeat; }
+    #request-stream .item .content {
+      float: left; }
+      #request-stream .item .content h3 {
+        float: left;
+        text-align: left;
+        width: 100%;
+        font-size: 18px;
+        color: #0eb48d;
+        margin: 0 0 2px 0;
+        padding: 0; }
+      #request-stream .item .content p {
+        font-size: 14px;
+        text-align: left;
+        float: left;
+        width: 100%;
+        margin: 0; }
+
+#new-message-form {
+  display: inline-block;
+  width: 100%; }
+  #new-message-form textarea {
+    width: 100%;
+    height: 70px;
+    margin: 0 0 10px 0; }
+  #new-message-form .link-button {
+    display: inline-block;
+    width: 100%;
+    font-size: 16px; }
 
 .form-view {
   width: 100%;

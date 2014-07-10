@@ -35,9 +35,24 @@ namespace Talentify.ORM.Mvc
 		public FormFeedback FormSuccess { get; set; }
 		public WebContext WebContext { get; set; }
 
+		public virtual bool KeepSearchSessionAlive { get; set; }
+		public SearchSession SearchSession
+		{
+			get { return WebContext.SearchSession;  }
+			set { WebContext.SearchSession = value; }
+		}
+		public bool HasSearchSession
+		{
+			get { return SearchSession != null; }
+		}
+
 		public BaseController()
 		{
 			WebContext = new WebContext(this.UnitOfWork);
+
+			// kill search session if necessary
+			if (!KeepSearchSessionAlive)
+				WebContext.SearchSession = null;
 		}
 
 		protected override void Dispose(bool disposing)

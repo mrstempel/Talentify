@@ -59,6 +59,20 @@ namespace Talentify.ORM.Mvc
 			get { return string.Format("{0}/pages/", ConfigurationManager.AppSettings["Admin.Upload.Url"]); }
 		}
 
+		public bool HasSearchSession
+		{
+			get { return BaseController.HasSearchSession;  }
+		}
+		public SearchSession SearchSession
+		{
+			get { return BaseController.SearchSession; }
+		}
+
+		public int NotificationCount
+		{
+			get { return BaseController.UnitOfWork.NotificationRepository.Count(LoggedUser.Id); }
+		}
+
 		public override void Execute()
 		{
 		}
