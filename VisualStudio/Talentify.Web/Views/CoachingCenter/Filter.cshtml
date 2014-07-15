@@ -1,24 +1,42 @@
 ﻿@model IEnumerable<Talentify.ORM.DAL.Models.Coaching.CoachingRequest>
 
+@{
+	var selectedIndex = 0;
+}
+
 <div class="request-list">
-	@foreach (var request in Model)
+	@for (int i = 0; i < Model.Count(); i++)
 	{
-		var user = request.FromUserId == LoggedUser.Id ? request.ToUser : request.FromUser;
-		<div id="request-item-@request.Id" class="item">
-			<a href="javascript:void(0);"  onclick="loadCoachingRequestTimeline(@request.Id)" class="image-link" style="background: url('@user.ProfileImageMedium');"></a>
+		var user = Model.ElementAt(i).FromUserId == LoggedUser.Id ? Model.ElementAt(i).ToUser : Model.ElementAt(i).FromUser;
+		var detailClass = Model.ElementAt(i).FromUserId == LoggedUser.Id ? "out" : "in";
+
+		if (Model.ElementAt(i).Id == ViewBag.RequestId)
+		{
+			selectedIndex = i;
+		}
+
+		<div id="request-item-@Model.ElementAt(i).Id" class="item">
+			<a href="javascript:void(0);"  onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)" class="image-link" style="background: url('@user.ProfileImageMedium');"></a>
 			<h3>@user.Firstname @user.Surname</h3>
-			@if (!string.IsNullOrEmpty(user.Phone))
-			{
-				<span>Tel: @user.Phone</span>
-			}
-			<span>E-Mail: <a href="mailto:@(@user.Email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
+			<div class="details @detailClass">
+				<span class="important">Lernhilfeanfrage</span>
+				<span>@Model.ElementAt(i).SubjectCategory.Name</span>
+				<span>@(@Model.ElementAt(i).Class)te Schulstufe</span>
+			</div>
+			<div class="contact">
+				<span>E-Mail: <a href="mailto:@(@user.Email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
+				@if (!string.IsNullOrEmpty(user.Phone))
+				{
+					<span>Tel: @user.Phone</span>
+				}
+			</div>
 		</div>
 	}
 </div>
 <script>
 		$(this).ready(function ()
 		{
-			loadCoachingRequestTimeline(@Model.ElementAt(0).Id);
+			loadCoachingRequestTimeline(@Model.ElementAt(selectedIndex).Id);
 		});
 </script>
 

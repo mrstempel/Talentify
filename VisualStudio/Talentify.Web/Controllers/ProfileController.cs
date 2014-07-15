@@ -190,16 +190,24 @@ namespace Talentify.Web.Controllers
 		[HttpPost]
 		public ActionResult CoachingRequest(CoachingRequest coachingRequest, string message)
 		{
-			var formFeedback = UnitOfWork.CoachingRequestRepository.Insert(coachingRequest, message);
+			// check if a coaching request is pending or open
+			var formFeedback = new FormFeedback() { IsError = true, Headline = "Lernhilfeanfrage offen", Text = "Du hast in diesem Fach bereits eine bestehende Lernhilfeanfrage bei diesem User" };
+			var hasOpenRequest = UnitOfWork.CoachingRequestRepository.HasOpenRequest(LoggedUser.Id, coachingRequest.ToUserId,
+				coachingRequest.SubjectCategoryId);
+			
+			if (!hasOpenRequest)
+				formFeedback = UnitOfWork.CoachingRequestRepository.Insert(coachingRequest, message);
+
 			if (formFeedback.IsError)
 			{
+				ViewBag.UserSubjects = new SelectList(UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == coachingRequest.ToUserId, null, "SubjectCategory"), "SubjectCategoryId", "SubjectCategory.Name");
 				FormError = formFeedback;
 			}
 			else
 			{
 				FormSuccess = formFeedback;
 			}
-			return View();
+			return View(coachingRequest);
 		}
     }
 }

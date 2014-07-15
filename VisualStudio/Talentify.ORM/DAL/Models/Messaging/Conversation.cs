@@ -18,6 +18,7 @@ namespace Talentify.ORM.DAL.Models.Messaging
 	{
 		public string Subject { get; set; }
 		public ConversationType ConversationType { get; set; }
+		public DateTime CreatedDate { get; set; }
 		public virtual ICollection<Message> Messages { get; set; } 
 	}
 
@@ -29,6 +30,8 @@ namespace Talentify.ORM.DAL.Models.Messaging
 			this.ToTable("Conversation");
 			// Primary Key
 			this.HasKey(t => t.Id);
+
+			this.Property(t => t.CreatedDate).HasColumnName("CreatedDate").HasColumnType("datetime2");
 		}
 	}
 }

@@ -38,10 +38,10 @@ namespace Talentify.Web.Controllers.Api
 		    return Json(UnitOfWork.EventRepository.GetOpenSeats(eventId), JsonRequestBehavior.AllowGet);
 	    }
 
-	    public JsonResult SendMessage(int conversationId, int fromUserId, int toUserId, string text)
+	    public JsonResult SendMessage(int conversationId, int fromUserId, int toUserId, int targetId, string text)
 	    {
-		    var message = UnitOfWork.ConversationRepository.AddMessage(conversationId, fromUserId, toUserId, text);
-			return Json(new { UserId = message.UserId, UserImage = message.UserImage, Username = message.Username, Text = message.Text}, JsonRequestBehavior.AllowGet);
+		    var message = UnitOfWork.ConversationRepository.AddMessage(conversationId, fromUserId, toUserId, targetId, text);
+			return Json(new { UserId = message.UserId, UserImage = message.UserImage, Username = message.Username, CreatedDate = message.CreatedDate.ToString("g"), Text = message.Text}, JsonRequestBehavior.AllowGet);
 	    }
     }
 }

@@ -315,11 +315,11 @@ function loadEventOpenSeats(id)
 	});
 }
 
-function filterCoachingCenter()
+function filterCoachingCenter(requestId)
 {
 	$('#coaching-center-results').hide();
 	$('#coaching-center-loading').show();
-	$('#coaching-center-results').load('/CoachingCenter/Filter?statusType=' + $('#StatusType').val(), function ()
+	$('#coaching-center-results').load('/CoachingCenter/Filter?statusType=' + $('#StatusType').val() + '&requestId=' + requestId, function ()
 	{
 		$('#coaching-center-loading').hide();
 		$('#coaching-center-results').fadeIn('medium');
@@ -339,22 +339,23 @@ function loadCoachingRequestTimeline(requestId)
 	});
 }
 
-function sendMessage(conversationId, fromUserId, toUserId, text)
+function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
 {
 	$.ajax({
 		url: '/FormHelper/SendMessage',
 		type: 'get',
 		async: true,
-		data: { conversationId: conversationId, fromUserId: fromUserId, toUserId: toUserId, text: text },
+		data: { conversationId: conversationId, fromUserId: fromUserId, toUserId: toUserId, targetId: targetId, text: text },
 		success: function (data)
 		{
 			if (data)
 			{
 				var item = document.createElement('div');
 				$(item).addClass('item');
-				$(item).html('<div class="profile-img"><a href="/Profile/Index/' + data['UserId'] + '" class="image-link" style="background: url(\'' + data['UserImage'] + '\');"></a></div><div class="content"><h3>' + data['Username'] + '</h3><p>' + data['Text'] + '</p></div></div>');
+				$(item).html('<div class="profile-img"><a href="/Profile/Index/' + data['UserId'] + '" class="image-link" style="background: url(\'' + data['UserImage'] + '\');"></a></div><div class="content"><h3>' + data['Username'] + '<span>' + data['CreatedDate'] + '</span></h3><p>' + data['Text'] + '</p></div></div>');
 				$(item).appendTo($('#timeline-container'));
 				$('#coaching-new-message').val('');
+				$('#coaching-new-message-btn').hide();
 			}
 		},
 		error: function (request, status, error)
@@ -415,5 +416,53 @@ function setNotificationCount(count, doFadeIn)
 			document.title = document.title.substring(0, lastKlammer);
 
 		$(navLink).removeClass('sticky');
+	}
+}
+
+function loadNotifactionlist()
+{
+	$('#notification-list').hide();
+	$('#notification-list-loading').show();
+	$('#notification-list').load('/Notification/PopupList', function ()
+	{
+		$('#notification-list-loading').hide();
+		$('#notification-list').fadeIn('medium');
+	});
+}
+
+function updateCoachingRequestStatus(coachingRequestId, status)
+{
+	$.ajax({
+		url: '/CoachingCenter/UpdateStatus',
+		type: 'get',
+		async: true,
+		data: { coachingRequestId: coachingRequestId, status: status},
+		success: function (data)
+		{
+			if (data && !data.error)
+			{
+				$('#status-update-error').hide();
+				addCoachingRequestStatusToTimeline(data.status);
+			}
+			else
+			{
+				$('#status-update-error').fadeIn();
+			}
+		},
+		error: function (request, status, error)
+		{
+		}
+	});
+}
+
+function addCoachingRequestStatusToTimeline(status)
+{
+	// add status to timeline
+	$('#timeline-container').append('<div class="item ' + status.type + '"><div class="profile-img"><a href="/Profile/Index/' + status.userId + '" class="image-link" style="background: url(\'' + status.image + '\');"></a></div><div class="content"><h3>' + status.username + '</h3><p>' + status.message + '</p></div></div>');
+	
+	// show new status options
+	if (status.type == 'confirm')
+	{
+		$('#status-update-confirm').hide();
 	}
 }

@@ -1,0 +1,17 @@
+﻿@using Talentify.ORM.DAL.Models.Notification
+@model IEnumerable<Talentify.ORM.FrontendLogic.Models.NotificationListItem>
+
+@foreach (var item in Model)
+{
+	var style = string.Empty;
+	
+	if (item.IconType == NotificationIconType.Confirmed)
+	{
+		style = "background-image: url(/Images/icon-zusagen.png);";
+	}
+	
+	<div class="item" onclick="location.href='@item.Link'" style="@style">
+		<a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>
+		<div class="text">@Html.Raw(item.Text)</div>
+	</div>
+}

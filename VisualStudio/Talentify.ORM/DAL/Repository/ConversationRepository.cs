@@ -25,7 +25,7 @@ namespace Talentify.ORM.DAL.Repository
         {
         }
 
-		public Message AddMessage(int conversationId, int fromUserId, int toUserId, string text)
+		public Message AddMessage(int conversationId, int fromUserId, int toUserId, int targetId, string text)
 		{
 			var fromUser = UnitOfWork.BaseUserRepository.GetById(fromUserId);
 			var conversation = GetById(conversationId);
@@ -49,7 +49,8 @@ namespace Talentify.ORM.DAL.Repository
 			{
 				ToUserId = toUserId,
 				SenderId = fromUser.Id,
-				Text = string.Format("Neue Nachricht von: {0} {1}", fromUser.Firstname, fromUser.Surname),
+				TargetId = targetId,
+				Text = string.Format("Neue Nachricht von:<br/>{0} {1}", fromUser.Firstname, fromUser.Surname),
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.CoachingRequest,
 				IconType = NotificationIconType.None

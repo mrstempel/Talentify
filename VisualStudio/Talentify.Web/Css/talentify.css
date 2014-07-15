@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, #notification-count, .nav-menu, .nav-menu a, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .request-list .item, .request-list .item span, #request-stream, #request-stream .item, #new-message-form, #new-message-form .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
+﻿.box-sizing, .input-switch .option, #notification-count, #notification-list-loading, #notification-list, #notification-list .item, .nav-menu, .nav-menu a, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -35,6 +35,9 @@ a {
 
 a:hover {
   color: #167e64; }
+
+textarea:focus, input:focus {
+  outline: 0; }
 
 input, select {
   fonts-ize: 20px;
@@ -272,6 +275,47 @@ iframe {
   font-size: 11px;
   padding: 3px 0 0 0;
   z-index: 10000; }
+
+#notification-list-loading {
+  padding: 2px 30px;
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+  background: #0eb48d;
+  color: #fff;
+  margin: 0 0 10px 0; }
+
+#notification-list {
+  width: 100%;
+  display: inline-block;
+  margin: 0 0 20px 0; }
+  #notification-list .item {
+    width: 100%;
+    background-color: #0eb48d;
+    background-repeat: no-repeat;
+    background-position: right 5px top 5px;
+    color: #fff;
+    font-size: 16px;
+    padding: 5px;
+    float: left;
+    cursor: pointer;
+    border-bottom: 1px solid #fff; }
+    #notification-list .item .image-link {
+      background-repeat: no-repeat !important;
+      width: 35px;
+      height: 35px;
+      float: left;
+      margin: 0 10px 0 0;
+      padding: 0 !important; }
+    #notification-list .item .text {
+      float: left;
+      text-align: left;
+      width: 200px;
+      font-size: 14px; }
+  #notification-list .item:hover {
+    background-color: #167e64;
+    background-repeat: no-repeat;
+    background-position: right 5px top 5px; }
 
 .nav-menu {
   -moz-box-shadow: 0 0 5px #c3c3c3;
@@ -734,6 +778,29 @@ article.event-detail .content-container {
       width: 220px;
       text-align: left;
       margin: 5px 0 0 0; }
+    .request-list .item .details {
+      background: url(../Images/icon-links.png);
+      background-position: 0 4px;
+      background-repeat: no-repeat;
+      float: left;
+      width: 220px;
+      padding: 0 0 0 25px; }
+      .request-list .item .details .important {
+        margin: 0;
+        color: #ef4d69 !important; }
+    .request-list .item .details.out {
+      background: url(../Images/icon-rechts.png);
+      background-repeat: no-repeat;
+      background-position: 0 4px; }
+    .request-list .item .contact {
+      float: left;
+      width: 100%;
+      margin: 10px 0 0 0;
+      border-top: 1px solid #e5e5e5;
+      padding: 10px 0 0 0; }
+      .request-list .item .contact span {
+        width: auto;
+        margin: 0 20px 0 0; }
   .request-list .item.active {
     background: #e6f7f3; }
 
@@ -744,17 +811,18 @@ article.event-detail .content-container {
     display: inline-block;
     width: 100%;
     border-top: 1px solid #e5e5e5;
-    padding: 15px 3px 0 3px; }
+    padding: 15px 0px 0 0px; }
     #request-stream .item .profile-img {
       float: left;
-      padding: 5px 10px 0 0; }
+      padding: 5px 10px 0 3px; }
       #request-stream .item .profile-img a {
         display: inline-block;
         width: 35px;
         height: 35px;
         background-repeat: no-repeat; }
     #request-stream .item .content {
-      float: left; }
+      float: left;
+      width: 659px; }
       #request-stream .item .content h3 {
         float: left;
         text-align: left;
@@ -763,24 +831,75 @@ article.event-detail .content-container {
         color: #0eb48d;
         margin: 0 0 2px 0;
         padding: 0; }
+        #request-stream .item .content h3 span {
+          margin: 0 0 0 10px;
+          color: #CCC;
+          font-size: 12px;
+          float: right; }
       #request-stream .item .content p {
         font-size: 14px;
         text-align: left;
         float: left;
         width: 100%;
-        margin: 0; }
+        margin: 5px 0 0 0; }
+  #request-stream .item.Confirmation .content, #request-stream .item.Confirmation .profile-img, #request-stream .item.Appointment .content, #request-stream .item.Appointment .profile-img {
+    background: #e6f7f3; }
+  #request-stream .item.Confirmation .profile-img, #request-stream .item.Appointment .profile-img {
+    padding: 4px 10px 0 3px; }
+  #request-stream .item.Confirmation .content, #request-stream .item.Appointment .content {
+    background: url(../Images/icon-zusagen.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #e6f7f3;
+    height: 35px;
+    padding: 5px 0; }
+    #request-stream .item.Confirmation .content h3, #request-stream .item.Appointment .content h3 {
+      float: left;
+      width: auto;
+      margin: 5px 10px 0 0; }
+      #request-stream .item.Confirmation .content h3 span, #request-stream .item.Appointment .content h3 span {
+        display: none; }
+    #request-stream .item.Confirmation .content p, #request-stream .item.Appointment .content p {
+      float: left;
+      font-size: 14px;
+      margin: 9px 0 0 0;
+      width: auto; }
+  #request-stream .msg {
+    font-size: 16px;
+    margin: 10px 0 0 0; }
+  #request-stream .btn-container {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0; }
+    #request-stream .btn-container .link-button {
+      width: 49%;
+      display: inline-block;
+      margin: 0;
+      float: left; }
+    #request-stream .btn-container .link-button:last-of-type {
+      float: right; }
 
 #new-message-form {
   display: inline-block;
-  width: 100%; }
+  width: 100%;
+  margin: 20px 0 0 0; }
   #new-message-form textarea {
     width: 100%;
     height: 70px;
-    margin: 0 0 10px 0; }
+    margin: 0 0 0px 0;
+    float: left;
+    padding: 5px; }
   #new-message-form .link-button {
-    display: inline-block;
+    float: left;
     width: 100%;
-    font-size: 16px; }
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    padding: 3px;
+    display: none;
+    border-top: 0;
+    border-left: 1px solid darkgrey;
+    border-right: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey; }
 
 .form-view {
   width: 100%;

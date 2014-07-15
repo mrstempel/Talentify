@@ -33,6 +33,7 @@ namespace Talentify.ORM.DAL.Repository
 			var feedback = new FormFeedback();
 			try
 			{
+				coachingRequest.CreatedDate = DateTime.Now;
 				var subjectCategory = UnitOfWork.SubjectCategoryRepository.GetById(coachingRequest.SubjectCategoryId);
 				var fromUser = UnitOfWork.BaseUserRepository.GetById(coachingRequest.FromUserId);
 				// add initial status
@@ -64,7 +65,8 @@ namespace Talentify.ORM.DAL.Repository
 					ConversationType = ConversationType.CoachingRequest,
 					Subject = string.Format("Lernanfrage für {0} in Schulstufe {1}", subjectCategory.Name,
 						coachingRequest.Class),
-					Messages = new List<Message>()
+					Messages = new List<Message>(),
+					CreatedDate = DateTime.Now
 				};
 				conversation.Messages.Add(initialMessage);
 
@@ -79,6 +81,7 @@ namespace Talentify.ORM.DAL.Repository
 				{
 					ToUserId = coachingRequest.ToUserId,
 					SenderId = fromUser.Id,
+					TargetId = coachingRequest.Id,
 					Text = string.Format("Lernhilfeanfrage von: {0} {1}", fromUser.Firstname, fromUser.Surname),
 					CreatedDate = DateTime.Now,
 					SenderType = NotificationSenderType.CoachingRequest,
@@ -101,6 +104,7 @@ namespace Talentify.ORM.DAL.Repository
 				join coachingRequest in UnitOfWork.CoachingRequestRepository.AsQueryable() on status.CoachingRequestId equals coachingRequest.Id
 				join u in UnitOfWork.BaseUserRepository.AsQueryable() on coachingRequest.FromUserId equals u.Id
 				where status.StatusType == statusType
+				orderby coachingRequest.CreatedDate descending 
 				select coachingRequest;
 
 			return requests;
@@ -109,15 +113,75 @@ namespace Talentify.ORM.DAL.Repository
 		public CoachingRequestStream GetStream(int coachingRequestId)
 		{
 			var stream = new CoachingRequestStream() { CoachingRequest  = UnitOfWork.CoachingRequestRepository.GetById(coachingRequestId)};
+			
+			var status = stream.CoachingRequest.StatusHistory.LastOrDefault();
+			
+			if (status != null)
+				stream.Status = status.StatusType;
+			
 			var conversation = (from r in UnitOfWork.CoachingRequestRepository.AsQueryable()
 				join c in UnitOfWork.ConversationRepository.AsQueryable() on r.Conversation.Id equals c.Id
 				where r.Id == coachingRequestId
 				select c).FirstOrDefault();
 
+			var timeLineItems = stream.CoachingRequest.StatusHistory.Cast<ICoachingRequestTimelineItem>().Skip(1).ToList();
+			
 			if (conversation != null)
-				stream.TimelineItems = conversation.Messages;
+				timeLineItems.AddRange(conversation.Messages);
+
+			stream.TimelineItems = timeLineItems.OrderBy(i => i.CreatedDate).ToList();
 
 			return stream;
+		}
+
+		public bool HasOpenRequest(int fromUserId, int toUserId, int subjectCategoryId)
+		{
+			var openRequest = (from cr in UnitOfWork.CoachingRequestRepository.AsQueryable()
+							   join status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable() on cr.Id equals status.CoachingRequestId
+							   where cr.FromUserId == fromUserId && cr.ToUserId == toUserId && cr.SubjectCategoryId == subjectCategoryId
+							   orderby status.CreatedDate descending
+							   select new
+							   {
+								   crId = cr.Id,
+								   sType = status.StatusType
+							   }).FirstOrDefault();
+
+			return (openRequest != null && (openRequest.sType != StatusType.Completed || openRequest.sType != StatusType.Canceled));
+		}
+
+		public CoachingRequestStatus UpdateStatus(int coachingRequestId, StatusType status, BaseUser fromUser)
+		{
+			var statusMessage = string.Format("hat deine Lernanfrage bestätigt", fromUser.Firstname, fromUser.Surname);
+			var notificationMessage = string.Format("Lernhilfeanfrage bestätigt von: {0} {1}", fromUser.Firstname, fromUser.Surname);
+
+			// insert new status
+			var newStatus = new CoachingRequestStatus()
+			{
+				Text = statusMessage,
+				CreatedDate = DateTime.Now,
+				CreatedById = fromUser.Id,
+				StatusType = status
+			};
+			var coachingRequest = GetById(coachingRequestId);
+			coachingRequest.StatusHistory.Add(newStatus);
+			Update(coachingRequest);
+			UnitOfWork.Save();
+
+			// send notification
+			var notifiction = new Notification()
+			{
+				ToUserId = (coachingRequest.ToUserId == fromUser.Id) ? coachingRequest.FromUserId : coachingRequest.ToUserId,
+				SenderId = fromUser.Id,
+				TargetId = coachingRequest.Id,
+				Text = notificationMessage,
+				CreatedDate = DateTime.Now,
+				SenderType = NotificationSenderType.CoachingRequest,
+				IconType = NotificationIconType.Confirmed
+			};
+			UnitOfWork.NotificationRepository.Insert(notifiction);
+			UnitOfWork.Save();
+
+			return newStatus;
 		}
 	}
 }

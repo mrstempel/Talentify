@@ -209,8 +209,12 @@
     <Content Include="Images\header-notifications.png" />
     <Content Include="Images\header-settings-active.png" />
     <Content Include="Images\header-settings.png" />
+    <Content Include="Images\icon-absagen.png" />
     <Content Include="Images\icon-close.png" />
+    <Content Include="Images\icon-links.png" />
     <Content Include="Images\icon-mail.png" />
+    <Content Include="Images\icon-rechts.png" />
+    <Content Include="Images\icon-zusagen.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mandatory.png" />
     <Content Include="Images\map-eumel.png" />
@@ -284,6 +288,7 @@
     <Content Include="Views\CoachingCenter\Index.cshtml" />
     <Content Include="Views\CoachingCenter\Filter.cshtml" />
     <Content Include="Views\CoachingCenter\Stream.cshtml" />
+    <Content Include="Views\Notification\PopupList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

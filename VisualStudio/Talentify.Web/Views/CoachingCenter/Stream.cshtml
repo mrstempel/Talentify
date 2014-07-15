@@ -1,4 +1,20 @@
-﻿@model Talentify.ORM.FrontendLogic.Models.CoachingRequestStream
+﻿@using System.Activities.Expressions
+@using System.Net.Configuration
+@using Talentify.ORM.DAL.Models.Coaching
+@model Talentify.ORM.FrontendLogic.Models.CoachingRequestStream
+
+<script>
+	$(this).ready(function()
+	{
+		$('#coaching-new-message').bind('input propertychange', function ()
+		{
+			if ($(this).val().length > 0)
+				$('#coaching-new-message-btn').slideDown(150);
+			else
+				$('#coaching-new-message-btn').slideUp(150);
+		});
+	});
+</script>
 
 @{
 	var toUserId = Model.CoachingRequest.FromUserId == LoggedUser.Id ? Model.CoachingRequest.ToUserId : Model.CoachingRequest.FromUserId;
@@ -6,12 +22,12 @@
 <div id="timeline-container">
 	@foreach (var item in Model.TimelineItems)
 	{
-		<div class="item">
+		<div class="item @item.ItemType.ToString()">
 			<div class="profile-img">
 				<a href="/Profile/Index/@item.UserId" class="image-link" style="background: url('@item.UserImage');"></a>
 			</div>
 			<div class="content">
-				<h3>@item.Username</h3>
+				<h3>@item.Username<span>@item.CreatedDate.ToString("g")</span></h3>
 				<p>@item.Text</p>
 			</div>
 		</div>
@@ -19,6 +35,18 @@
 </div>
 
 <div id="new-message-form">
-	<textarea id="coaching-new-message"></textarea>
-	<a href="javascript:void(0);" onclick="sendMessage(@Model.CoachingRequest.Id, @LoggedUser.Id, @toUserId, $('#coaching-new-message').val());" class="link-button">Nachricht senden</a>
+	<textarea id="coaching-new-message" placeholder="Neue Nachricht senden"></textarea>
+	<a href="javascript:void(0);" id="coaching-new-message-btn" onclick="sendMessage(@Model.CoachingRequest.Id, @LoggedUser.Id, @toUserId, @Model.CoachingRequest.Id, $('#coaching-new-message').val());" class="link-button">Nachricht senden</a>
 </div>
+
+<div id="status-update-error" class="msg error">
+	Beim Speichern ist ein Fehler aufgetreten. Bitte versuche es erneut!
+</div>
+
+@if (Model.Status == StatusType.Request && Model.CoachingRequest.ToUserId == LoggedUser.Id)
+{
+	<div id="status-update-confirm" class="btn-container">
+		<a href="javascript:void(0);" onclick="updateCoachingRequestStatus(@Model.CoachingRequest.Id, 1, @LoggedUser.Id)" class="link-button">Annehmen</a>
+		<a href="javascript:void(0);" onclick="" class="link-button">Ablehnen</a>
+	</div>
+}

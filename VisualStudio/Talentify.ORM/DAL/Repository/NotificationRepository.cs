@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -31,12 +32,48 @@ namespace Talentify.ORM.DAL.Repository
 
 		private IEnumerable<NotificationListItem> ConvertToListItems(IEnumerable<Notification> notifictions)
 		{
+			if (notifictions.Any())
+			{
+				var listItems = new List<NotificationListItem>();
+				var profileImages = new Dictionary<int, string>();
+				foreach (var notification in notifictions)
+				{
+					if (notification.SenderType == NotificationSenderType.CoachingRequest)
+					{
+						if (!profileImages.ContainsKey(notification.SenderId))
+						{
+							var user = UnitOfWork.BaseUserRepository.GetById(notification.SenderId);
+							profileImages.Add(notification.SenderId, user.ProfileImageSmall);
+						}
+
+						var item = new NotificationListItem
+						{
+							Image = profileImages[notification.SenderId],
+							Link =
+								string.Format("{0}/{1}",
+									ConfigurationManager.AppSettings["Notifications.SenderType." + (int) notification.SenderType + ".Url"],
+									notification.TargetId),
+							Text = notification.Text,
+							IconType = notification.IconType,
+							IsNew = notification.ReadDate == null
+						};
+						listItems.Add(item);
+					}
+
+					notification.ReadDate = DateTime.Now;
+					UnitOfWork.NotificationRepository.Update(notification);
+				}
+
+				UnitOfWork.Save();
+				return listItems;
+			}
+
 			return null;
 		}
 
 		public IEnumerable<NotificationListItem> GetPopupList(int userId)
 		{
-			var notifications = UnitOfWork.NotificationRepository.Get().OrderByDescending(n => n.CreatedDate).Take(5);
+			var notifications = UnitOfWork.NotificationRepository.Get(n => n.ToUserId == userId).OrderByDescending(n => n.CreatedDate).Take(5);
 			return ConvertToListItems(notifications);
 		}
 	}

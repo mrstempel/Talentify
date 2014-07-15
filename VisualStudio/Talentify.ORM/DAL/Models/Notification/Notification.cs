@@ -41,6 +41,7 @@ namespace Talentify.ORM.DAL.Models.Notification
 		}
 
 		public int SenderId { get; set; }
+		public int TargetId { get; set; }
 		public DateTime CreatedDate { get; set; }
 		public DateTime? ReadDate { get; set; }
 		public int Bonus { get; set; }

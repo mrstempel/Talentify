@@ -129,5 +129,10 @@ function toggleMenu(id)
 		var imgSrc = $(icon).attr('id') + '-active.png';
 		$(icon).attr('src', '/Images/' + imgSrc);
 		$(menu).slideDown(100);
+
+		if (id == 'nav-menu-notifications')
+		{
+			loadNotifactionlist();
+		}
 	}
 }

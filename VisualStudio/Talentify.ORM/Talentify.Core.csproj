@@ -193,6 +193,14 @@
     <Compile Include="Migrations\201407081231227_notifications-update1.Designer.cs">
       <DependentUpon>201407081231227_notifications-update1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201407101514340_notification-targetid.cs" />
+    <Compile Include="Migrations\201407101514340_notification-targetid.Designer.cs">
+      <DependentUpon>201407101514340_notification-targetid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201407111258269_add-createddate.cs" />
+    <Compile Include="Migrations\201407111258269_add-createddate.Designer.cs">
+      <DependentUpon>201407111258269_add-createddate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\BaseView.cs" />
     <Compile Include="FrontendLogic\Models\FormFeedback.cs" />
@@ -257,6 +265,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201407081231227_notifications-update1.resx">
       <DependentUpon>201407081231227_notifications-update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407101514340_notification-targetid.resx">
+      <DependentUpon>201407101514340_notification-targetid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201407111258269_add-createddate.resx">
+      <DependentUpon>201407111258269_add-createddate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -16,5 +16,11 @@ namespace Talentify.Web.Controllers
 			var count = UnitOfWork.NotificationRepository.Count(LoggedUser.Id);
 		    return Json(count, JsonRequestBehavior.AllowGet);
 	    }
+
+		public ActionResult PopupList()
+		{
+			var list = UnitOfWork.NotificationRepository.GetPopupList(LoggedUser.Id);
+		    return View(list);
+	    }
     }
 }

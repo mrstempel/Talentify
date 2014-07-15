@@ -51,6 +51,7 @@ namespace Talentify.ORM.DAL.Models.Coaching
 			}
 		}
 
+		public DateTime CreatedDate { get; set; }
 		public int Class { get; set; }
 		public decimal Price { get; set; }
 		public virtual ICollection<CoachingRequestStatus> StatusHistory { get; set; }
@@ -70,6 +71,7 @@ namespace Talentify.ORM.DAL.Models.Coaching
 			// Primary Key
 			this.HasKey(t => t.Id);
 
+			this.Property(t => t.CreatedDate).HasColumnName("CreatedDate").HasColumnType("datetime2");
 			this.Property(t => t.Date).HasColumnName("Date").HasColumnType("datetime2");
 		}
 	}

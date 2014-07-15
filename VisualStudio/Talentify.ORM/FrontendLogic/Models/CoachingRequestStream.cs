@@ -11,6 +11,7 @@ namespace Talentify.ORM.FrontendLogic.Models
 	public class CoachingRequestStream
 	{
 		public CoachingRequest CoachingRequest { get; set; }
-		public IEnumerable<ICoachingRequestTimelineItem> TimelineItems { get; set; }
+		public List<ICoachingRequestTimelineItem> TimelineItems { get; set; }
+		public StatusType Status { get; set; }
 	}
 }

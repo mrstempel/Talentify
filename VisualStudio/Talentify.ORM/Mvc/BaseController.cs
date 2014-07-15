@@ -27,6 +27,7 @@ namespace Talentify.ORM.Mvc
 				if (unitOfWork == null)
 					unitOfWork = new TalentifyUnitOfWork<TalentifyContext>();
 
+
 				return unitOfWork;
 			}
 		}
