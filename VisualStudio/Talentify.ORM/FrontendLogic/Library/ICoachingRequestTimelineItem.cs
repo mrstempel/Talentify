@@ -11,7 +11,7 @@ namespace Talentify.ORM.FrontendLogic.Library
 	{
 		Message,
 		Confirmation,
-		Cancellation,
+		Canceled,
 		Bonus
 	}
 

@@ -24,7 +24,7 @@
 				<span>@(@Model.ElementAt(i).Class)te Schulstufe</span>
 			</div>
 			<div class="contact">
-				<span>E-Mail: <a href="mailto:@(@user.Email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
+				<span><a href="mailto:@(@user.Email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
 				@if (!string.IsNullOrEmpty(user.Phone))
 				{
 					<span>Tel: @user.Phone</span>

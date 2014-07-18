@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, #notification-count, #notification-list-loading, #notification-list, #notification-list .item, .nav-menu, .nav-menu a, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
+﻿.box-sizing, .input-switch .option, #notification-count, #notification-list-loading, #notification-list, #notification-list .item, .nav-menu, .nav-menu a, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -137,23 +137,6 @@ iframe {
     font-size: 16px; }
   .form-container input[type="submit"], .form-container select {
     width: 542px; }
-  .form-container input.error, .form-container select.error, .form-container textarea.error {
-    background: #f7a6b4;
-    color: #fff; }
-  .form-container .error::-webkit-input-placeholder {
-    color: #fff; }
-  .form-container .error:-moz-placeholder {
-    color: #fff;
-    opacity: 1; }
-  .form-container .error::-moz-placeholder {
-    color: #fff;
-    opacity: 1; }
-  .form-container .error:-ms-input-placeholder {
-    color: #fff; }
-  .form-container input[type="text"].mandatory, .form-container input[type="password"].mandatory {
-    background-image: url(/Images/mandatory.png);
-    background-repeat: no-repeat;
-    background-position: 98% 8px; }
   .form-container input[type="button"], .form-container input[type="submit"], .form-container .link-button {
     border: 0px;
     color: #FFF; }
@@ -162,6 +145,29 @@ iframe {
     margin-bottom: 30px; }
     .form-container .field-container input:last-child, .form-container .field-container select:last-child {
       border-bottom: 1px solid #e3e4e8; }
+
+input.error, select.error, textarea.error {
+  background: #f7a6b4;
+  color: #fff; }
+
+.error::-webkit-input-placeholder {
+  color: #fff; }
+
+.error:-moz-placeholder {
+  color: #fff;
+  opacity: 1; }
+
+.error::-moz-placeholder {
+  color: #fff;
+  opacity: 1; }
+
+.error:-ms-input-placeholder {
+  color: #fff; }
+
+input[type="text"].mandatory, input[type="password"].mandatory {
+  background-image: url(/Images/mandatory.png);
+  background-repeat: no-repeat;
+  background-position: 98% 8px; }
 
 .form-container.register header {
   margin-bottom: 10px !important; }
@@ -291,15 +297,14 @@ iframe {
   margin: 0 0 20px 0; }
   #notification-list .item {
     width: 100%;
-    background-color: #0eb48d;
+    background-color: #e6f7f3;
     background-repeat: no-repeat;
     background-position: right 5px top 5px;
-    color: #fff;
     font-size: 16px;
     padding: 5px;
     float: left;
     cursor: pointer;
-    border-bottom: 1px solid #fff; }
+    border-bottom: 1px solid #e5e5e5; }
     #notification-list .item .image-link {
       background-repeat: no-repeat !important;
       width: 35px;
@@ -313,7 +318,8 @@ iframe {
       width: 200px;
       font-size: 14px; }
   #notification-list .item:hover {
-    background-color: #167e64;
+    color: #fff;
+    background-color: #0eb48d;
     background-repeat: no-repeat;
     background-position: right 5px top 5px; }
 
@@ -759,7 +765,7 @@ article.event-detail .content-container {
   .request-list .item {
     float: left;
     width: 355px;
-    padding: 10px;
+    padding: 10px 10px 5px 10px;
     border-bottom: 1px solid #e5e5e5;
     font-size: 16px; }
     .request-list .item .image-link {
@@ -811,7 +817,7 @@ article.event-detail .content-container {
     display: inline-block;
     width: 100%;
     border-top: 1px solid #e5e5e5;
-    padding: 15px 0px 0 0px; }
+    padding: 5px 0px 0 0px; }
     #request-stream .item .profile-img {
       float: left;
       padding: 5px 10px 0 3px; }
@@ -842,28 +848,33 @@ article.event-detail .content-container {
         float: left;
         width: 100%;
         margin: 5px 0 0 0; }
-  #request-stream .item.Confirmation .content, #request-stream .item.Confirmation .profile-img, #request-stream .item.Appointment .content, #request-stream .item.Appointment .profile-img {
+  #request-stream .item.Confirmation .content, #request-stream .item.Confirmation .profile-img, #request-stream .item.Appointment .content, #request-stream .item.Appointment .profile-img, #request-stream .item.Completed .content, #request-stream .item.Completed .profile-img, #request-stream .item.Bonus .content, #request-stream .item.Bonus .profile-img, #request-stream .item.Canceled .content, #request-stream .item.Canceled .profile-img {
     background: #e6f7f3; }
-  #request-stream .item.Confirmation .profile-img, #request-stream .item.Appointment .profile-img {
+  #request-stream .item.Confirmation .profile-img, #request-stream .item.Appointment .profile-img, #request-stream .item.Completed .profile-img, #request-stream .item.Bonus .profile-img, #request-stream .item.Canceled .profile-img {
     padding: 4px 10px 0 3px; }
-  #request-stream .item.Confirmation .content, #request-stream .item.Appointment .content {
+  #request-stream .item.Confirmation .content, #request-stream .item.Appointment .content, #request-stream .item.Completed .content, #request-stream .item.Bonus .content, #request-stream .item.Canceled .content {
     background: url(../Images/icon-zusagen.png);
     background-repeat: no-repeat;
     background-position: right;
     background-color: #e6f7f3;
     height: 35px;
     padding: 5px 0; }
-    #request-stream .item.Confirmation .content h3, #request-stream .item.Appointment .content h3 {
+    #request-stream .item.Confirmation .content h3, #request-stream .item.Appointment .content h3, #request-stream .item.Completed .content h3, #request-stream .item.Bonus .content h3, #request-stream .item.Canceled .content h3 {
       float: left;
       width: auto;
       margin: 5px 10px 0 0; }
-      #request-stream .item.Confirmation .content h3 span, #request-stream .item.Appointment .content h3 span {
+      #request-stream .item.Confirmation .content h3 span, #request-stream .item.Appointment .content h3 span, #request-stream .item.Completed .content h3 span, #request-stream .item.Bonus .content h3 span, #request-stream .item.Canceled .content h3 span {
         display: none; }
-    #request-stream .item.Confirmation .content p, #request-stream .item.Appointment .content p {
+    #request-stream .item.Confirmation .content p, #request-stream .item.Appointment .content p, #request-stream .item.Completed .content p, #request-stream .item.Bonus .content p, #request-stream .item.Canceled .content p {
       float: left;
       font-size: 14px;
       margin: 9px 0 0 0;
       width: auto; }
+  #request-stream .item.Canceled .content {
+    background: url(../Images/icon-absagen.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #e6f7f3; }
   #request-stream .msg {
     font-size: 16px;
     margin: 10px 0 0 0; }
@@ -900,6 +911,96 @@ article.event-detail .content-container {
     border-left: 1px solid darkgrey;
     border-right: 1px solid darkgrey;
     border-bottom: 1px solid darkgrey; }
+
+#status-update-complete-loading {
+  display: none; }
+
+#status-update-complete {
+  width: 100%;
+  display: inline-block;
+  margin: 10px 0;
+  font-size: 14px;
+  text-align: left; }
+  #status-update-complete .msg {
+    margin: 0 0 20px 0; }
+    #status-update-complete .msg h2 {
+      font-size: 16px; }
+  #status-update-complete label {
+    display: inline-block;
+    width: 90px;
+    vertical-align: top; }
+  #status-update-complete .feedback-container {
+    display: inline-block;
+    width: 49%;
+    text-align: left;
+    border-right: 1px solid #e5e5e5;
+    margin: 0 0 20px 0; }
+    #status-update-complete .feedback-container h3 {
+      font-size: 16px;
+      margin: 0 0 10px 0; }
+    #status-update-complete .feedback-container .subject {
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      margin: 5px 0; }
+    #status-update-complete .feedback-container .row {
+      display: inline-block;
+      width: 100%; }
+      #status-update-complete .feedback-container .row label {
+        margin: 20px 0 0 0; }
+      #status-update-complete .feedback-container .row .values {
+        display: inline-block; }
+        #status-update-complete .feedback-container .row .values a, #status-update-complete .feedback-container .row .values span {
+          display: inline-block;
+          margin: 10px 5px 0 0;
+          width: 40px;
+          height: 40px;
+          background: #e6f7f3; }
+        #status-update-complete .feedback-container .row .values a.selectable:hover, #status-update-complete .feedback-container .row .values a.selected, #status-update-complete .feedback-container .row .values span.selected {
+          background: url(../Images/icon-star.png);
+          background-repeat: no-repeat; }
+        #status-update-complete .feedback-container .row .values a.disabled {
+          cursor: default; }
+  #status-update-complete .feedback-container.right {
+    border: 0;
+    float: right; }
+  #status-update-complete select {
+    font-size: 16px;
+    padding: 5px;
+    margin-right: 10px; }
+  #status-update-complete .date-form {
+    display: inline-block;
+    width: 100%; }
+    #status-update-complete .date-form label {
+      margin: 10px 0 0 0; }
+    #status-update-complete .date-form label:last-of-type {
+      margin: 10px 0 0 33px; }
+  #status-update-complete .date-form.view label {
+    margin: 0; }
+  #status-update-complete .date-form.view label:last-of-type {
+    margin: 0 0 0 33px; }
+  #status-update-complete .confirm-btn-container {
+    display: inline-block;
+    width: 100%;
+    margin: 20px 0 0 0; }
+    #status-update-complete .confirm-btn-container .link-button {
+      display: inline-block;
+      width: 100%;
+      text-align: center; }
+  #status-update-complete .cancel-btn-container {
+    display: inline-block;
+    width: 100%;
+    margin: 20px 0 0 0;
+    padding: 10px 0 0 0;
+    border-top: 1px solid #e5e5e5; }
+    #status-update-complete .cancel-btn-container span {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      margin: 0 0 15px 0; }
+    #status-update-complete .cancel-btn-container select {
+      width: 244px;
+      margin: 0 20px 0 0; }
 
 .form-view {
   width: 100%;

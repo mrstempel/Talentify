@@ -103,7 +103,9 @@ namespace Talentify.ORM.DAL.Repository
 			var requests = from status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable()
 				join coachingRequest in UnitOfWork.CoachingRequestRepository.AsQueryable() on status.CoachingRequestId equals coachingRequest.Id
 				join u in UnitOfWork.BaseUserRepository.AsQueryable() on coachingRequest.FromUserId equals u.Id
-				where status.StatusType == statusType
+				where 
+					status.StatusType == statusType && 
+					(coachingRequest.FromUserId == toUserId || coachingRequest.ToUserId == toUserId)
 				orderby coachingRequest.CreatedDate descending 
 				select coachingRequest;
 
@@ -115,10 +117,20 @@ namespace Talentify.ORM.DAL.Repository
 			var stream = new CoachingRequestStream() { CoachingRequest  = UnitOfWork.CoachingRequestRepository.GetById(coachingRequestId)};
 			
 			var status = stream.CoachingRequest.StatusHistory.LastOrDefault();
-			
+
 			if (status != null)
-				stream.Status = status.StatusType;
-			
+			{
+				if ((status.StatusType == StatusType.Canceled && stream.CoachingRequest.StatusHistory.Any(s => s.StatusType == StatusType.Completed)) ||
+					(status.StatusType == StatusType.Completed && stream.CoachingRequest.StatusHistory.Any(s => s.StatusType == StatusType.Canceled)))
+				{
+					stream.Status = StatusType.Conflicted;
+				}
+				else
+				{
+					stream.Status = status.StatusType;	
+				}
+			}
+
 			var conversation = (from r in UnitOfWork.CoachingRequestRepository.AsQueryable()
 				join c in UnitOfWork.ConversationRepository.AsQueryable() on r.Conversation.Id equals c.Id
 				where r.Id == coachingRequestId
@@ -151,9 +163,20 @@ namespace Talentify.ORM.DAL.Repository
 
 		public CoachingRequestStatus UpdateStatus(int coachingRequestId, StatusType status, BaseUser fromUser)
 		{
-			var statusMessage = string.Format("hat deine Lernanfrage bestätigt", fromUser.Firstname, fromUser.Surname);
+			var statusMessage = "hat Lernanfrage bestätigt";
 			var notificationMessage = string.Format("Lernhilfeanfrage bestätigt von: {0} {1}", fromUser.Firstname, fromUser.Surname);
 
+			if (status == StatusType.Completed)
+			{
+				statusMessage = string.Format("hat Lernhilfe bewertet");
+				notificationMessage = string.Format("Lernhilfe bewertet von: {0} {1}", fromUser.Firstname, fromUser.Surname);
+			}
+
+			return UpdateStatus(coachingRequestId, status, fromUser, statusMessage, notificationMessage);
+		}
+
+		public CoachingRequestStatus UpdateStatus(int coachingRequestId, StatusType status, BaseUser fromUser, string statusMessage, string notificationMessage)
+		{
 			// insert new status
 			var newStatus = new CoachingRequestStatus()
 			{
@@ -176,12 +199,74 @@ namespace Talentify.ORM.DAL.Repository
 				Text = notificationMessage,
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.CoachingRequest,
-				IconType = NotificationIconType.Confirmed
+				IconType = (status != StatusType.Canceled) ? NotificationIconType.Confirmed : NotificationIconType.Cancelled
 			};
 			UnitOfWork.NotificationRepository.Insert(notifiction);
 			UnitOfWork.Save();
 
 			return newStatus;
+		}
+
+		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser)
+		{
+			var coachingRequest = GetById(coachingRequestId);
+
+			if (coachingRequest.Ratings == null)
+				coachingRequest.Ratings = new List<CoachingRating>();
+
+			var toUserId = coachingRequest.FromUserId == fromUser.Id ? coachingRequest.ToUserId : coachingRequest.FromUserId;
+
+			// check if ratings from this user already exist
+			if (coachingRequest.Ratings.Any(r => r.FromUserId == fromUser.Id))
+				return false;
+
+			coachingRequest.Ratings.Add(new CoachingRating()
+			{
+				CoachingRequestId = coachingRequestId,
+				FromUserId = fromUser.Id,
+				RatingType = RatingType.Helpful,
+				ToUserId = toUserId,
+				Value = val1
+			});
+
+			coachingRequest.Ratings.Add(new CoachingRating()
+			{
+				CoachingRequestId = coachingRequestId,
+				FromUserId = fromUser.Id,
+				RatingType = RatingType.OnTime,
+				ToUserId = toUserId,
+				Value = val2
+			});
+
+			coachingRequest.Ratings.Add(new CoachingRating()
+			{
+				CoachingRequestId = coachingRequestId,
+				FromUserId = fromUser.Id,
+				RatingType = RatingType.Price,
+				ToUserId = toUserId,
+				Value = val3
+			});
+
+			Update(coachingRequest);
+			UnitOfWork.Save();
+
+			return true;
+		}
+
+		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser, DateTime date, int duration)
+		{
+			var isRatingOkay = SetCoachingRequestRating(coachingRequestId, val1, val2, val3, fromUser);
+			if (isRatingOkay)
+			{
+				var coachingRequest = GetById(coachingRequestId);
+				coachingRequest.Date = date;
+				coachingRequest.Duration = duration;
+				Update(coachingRequest);
+				UnitOfWork.Save();
+				return true;
+			}
+
+			return false;
 		}
 	}
 }

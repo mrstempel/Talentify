@@ -315,30 +315,6 @@ function loadEventOpenSeats(id)
 	});
 }
 
-function filterCoachingCenter(requestId)
-{
-	$('#coaching-center-results').hide();
-	$('#coaching-center-loading').show();
-	$('#coaching-center-results').load('/CoachingCenter/Filter?statusType=' + $('#StatusType').val() + '&requestId=' + requestId, function ()
-	{
-		$('#coaching-center-loading').hide();
-		$('#coaching-center-results').fadeIn('medium');
-	});
-}
-
-function loadCoachingRequestTimeline(requestId)
-{
-	$('.request-list').find('.item').each(function() { $(this).removeClass('active'); });
-	$('#request-item-' + requestId).addClass('active');
-	$('#request-stream').hide();
-	$('#request-stream-loading').show();
-	$('#request-stream').load('/CoachingCenter/Stream?coachingRequestId=' + requestId, function ()
-	{
-		$('#request-stream-loading').hide();
-		$('#request-stream').fadeIn('medium');
-	});
-}
-
 function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
 {
 	$.ajax({
@@ -428,41 +404,4 @@ function loadNotifactionlist()
 		$('#notification-list-loading').hide();
 		$('#notification-list').fadeIn('medium');
 	});
-}
-
-function updateCoachingRequestStatus(coachingRequestId, status)
-{
-	$.ajax({
-		url: '/CoachingCenter/UpdateStatus',
-		type: 'get',
-		async: true,
-		data: { coachingRequestId: coachingRequestId, status: status},
-		success: function (data)
-		{
-			if (data && !data.error)
-			{
-				$('#status-update-error').hide();
-				addCoachingRequestStatusToTimeline(data.status);
-			}
-			else
-			{
-				$('#status-update-error').fadeIn();
-			}
-		},
-		error: function (request, status, error)
-		{
-		}
-	});
-}
-
-function addCoachingRequestStatusToTimeline(status)
-{
-	// add status to timeline
-	$('#timeline-container').append('<div class="item ' + status.type + '"><div class="profile-img"><a href="/Profile/Index/' + status.userId + '" class="image-link" style="background: url(\'' + status.image + '\');"></a></div><div class="content"><h3>' + status.username + '</h3><p>' + status.message + '</p></div></div>');
-	
-	// show new status options
-	if (status.type == 'confirm')
-	{
-		$('#status-update-confirm').hide();
-	}
 }

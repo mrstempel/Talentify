@@ -13,6 +13,11 @@
 			else
 				$('#coaching-new-message-btn').slideUp(150);
 		});
+
+		@if (Model.Status == StatusType.Appointment || Model.Status == StatusType.Completed || Model.Status == StatusType.Conflicted)
+		{
+			<text>loadCoachingRequestCompleteForm(@Model.CoachingRequest.Id, '@Model.Status.ToString()');</text>
+		}
 	});
 </script>
 
@@ -46,7 +51,13 @@
 @if (Model.Status == StatusType.Request && Model.CoachingRequest.ToUserId == LoggedUser.Id)
 {
 	<div id="status-update-confirm" class="btn-container">
-		<a href="javascript:void(0);" onclick="updateCoachingRequestStatus(@Model.CoachingRequest.Id, 1, @LoggedUser.Id)" class="link-button">Annehmen</a>
+		<a href="javascript:void(0);" onclick="updateCoachingRequestStatus(@Model.CoachingRequest.Id, 1)" class="link-button">Annehmen</a>
 		<a href="javascript:void(0);" onclick="" class="link-button">Ablehnen</a>
 	</div>
+}
+
+@if (Model.Status == StatusType.Appointment || Model.Status == StatusType.Completed || Model.Status == StatusType.Conflicted)
+{
+	<div id="status-update-complete-loading">Lade Bewertung ...</div>
+	<div id="status-update-complete"></div>
 }

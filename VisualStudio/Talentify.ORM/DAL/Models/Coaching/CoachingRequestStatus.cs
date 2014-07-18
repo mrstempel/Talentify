@@ -15,14 +15,15 @@ namespace Talentify.ORM.DAL.Models.Coaching
 		Request,
 		Appointment,
 		Completed,
-		Canceled
+		Canceled,
+		Conflicted
 	}
 
 	public class CoachingRequestStatus : BaseEntity, ICoachingRequestTimelineItem
 	{
 		public int CoachingRequestId { get; set; }
 		private CoachingRequest _coachingRequest;
-		public CoachingRequest CoachingRequest
+		public virtual CoachingRequest CoachingRequest
 		{
 			get { return _coachingRequest; }
 			set
@@ -35,7 +36,7 @@ namespace Talentify.ORM.DAL.Models.Coaching
 
 		public int CreatedById { get; set; }
 		private BaseUser _createdBy;
-		public BaseUser CreatedBy
+		public virtual BaseUser CreatedBy
 		{
 			get { return _createdBy; }
 			set
@@ -71,10 +72,10 @@ namespace Talentify.ORM.DAL.Models.Coaching
 		{
 			get
 			{
-				if (StatusType == StatusType.Completed)
-					return TimelineItemType.Bonus;
+				//if (StatusType == StatusType.Completed)
+				//	return TimelineItemType.Bonus;
 				if (StatusType == StatusType.Canceled)
-					return TimelineItemType.Cancellation;
+					return TimelineItemType.Canceled;
 
 				return TimelineItemType.Confirmation;
 			}

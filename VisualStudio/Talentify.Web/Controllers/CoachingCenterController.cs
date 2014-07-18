@@ -39,7 +39,7 @@ namespace Talentify.Web.Controllers
 
 				if (status == StatusType.Completed)
 				{
-					message = "hat die Lernanfrage bewertet";
+					message = "hat Lernhilfe bewertet";
 				}
 
 				return Json(
@@ -60,5 +60,57 @@ namespace Talentify.Web.Controllers
 
 		    return Json(new {error = true}, JsonRequestBehavior.AllowGet);
 	    }
+
+		public JsonResult CancelRequest(int coachingRequestId, string reason)
+		{
+			var statusMessage = "hat Lernhilfe nicht bestätigt. Grund: " + reason;
+			var notificationMessage = string.Format("Lernhilfe nicht bestätigt von: {0} {1}", LoggedUser.Firstname, LoggedUser.Surname);
+
+			if (string.IsNullOrEmpty(reason))
+			{
+				statusMessage = "hat Lernanfrage angelehnt";
+				notificationMessage = string.Format("Lernanfrage abgelehnt von: {0} {1}", LoggedUser.Firstname, LoggedUser.Surname);
+			}
+
+			var newStatus = UnitOfWork.CoachingRequestRepository.UpdateStatus(coachingRequestId, StatusType.Canceled, LoggedUser, statusMessage, notificationMessage);
+
+			if (newStatus != null)
+			{
+				var message = (string.IsNullOrEmpty(reason)) ? "hat Lernanfrage abgelehnt" : "hat Lernhilfe nicht bestätigt. Grund: " + reason;
+
+				return Json(
+					new
+					{
+						error = false,
+						status = new
+						{
+							type = newStatus.StatusType.ToString(),
+							username = string.Format("{0} {1}", LoggedUser.Firstname, LoggedUser.Surname),
+							userId = LoggedUser.Id,
+							image = LoggedUser.ProfileImageSmall,
+							message,
+							date = newStatus.CreatedDate
+						}
+					}, JsonRequestBehavior.AllowGet);
+			}
+
+			return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+		}
+
+	    public ActionResult CompleteCoachingRequest(int coachingRequestId, string status)
+	    {
+		    ViewBag.Status = status;
+		    return View(UnitOfWork.CoachingRequestRepository.GetById(coachingRequestId));
+	    }
+
+	    public JsonResult SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3)
+	    {
+			return Json(UnitOfWork.CoachingRequestRepository.SetCoachingRequestRating(coachingRequestId, val1, val2, val3, LoggedUser), JsonRequestBehavior.AllowGet);
+	    }
+
+		public JsonResult SetCoachingRequestRatingWithDate(int coachingRequestId, int val1, int val2, int val3, DateTime date, int duration)
+		{
+			return Json(UnitOfWork.CoachingRequestRepository.SetCoachingRequestRating(coachingRequestId, val1, val2, val3, LoggedUser, date, duration), JsonRequestBehavior.AllowGet);
+		}
     }
 }

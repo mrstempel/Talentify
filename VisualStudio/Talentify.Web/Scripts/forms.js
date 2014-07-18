@@ -75,7 +75,6 @@ function validateMandatoryFields()
 			isValid = false;
 		}
 	});
-
 	return isValid;
 }
 
@@ -116,6 +115,26 @@ function showSuccessMsg(msgHeadline, msgText, autoclose)
 }
 
 /* specific form validation */
+function validateDate(prefix)
+{
+	var day = $('#' + prefix + '_day').val();
+	var month = $('#' + prefix + '_month').val();
+	var year = $('#' + prefix + '_year').val();
+	var date = day + "." + month + "." + year;
+
+	var matches = /^(\d{2})[.\/](\d{2})[.\/](\d{4})$/.exec(date);
+	if (matches == null) return false;
+	var m = matches[2] - 1;
+	var d = matches[1];
+	var y = matches[3];
+
+	var composedDate = new Date(y, m, d);
+
+	return composedDate.getDate() == d &&
+            composedDate.getMonth() == m &&
+            composedDate.getFullYear() == y;
+}
+
 function validateMandatoryOnlyForm()
 {
 	var isValid = true;
@@ -289,6 +308,29 @@ function validatePasswordForm()
 	{
 		showErrorMsg(errorHeadline, errorText, false);
 	}
+
+	return isValid;
+}
+
+function validateCoachingConfirmForm(doValidateDate)
+{
+	var isValid = true;
+	var errorMsg = 'Bitte bewerte den Termin vollständig!';
+	
+	if ($('#wertRatingValue').val() == '' || $('#puenktlichRatingValue').val() == '' || $('#preisRatingValue').val() == '')
+		isValid = false;
+
+	if (isValid && doValidateDate && !validateDate('coachingdate'))
+	{
+		isValid = false;
+		errorMsg = 'Bitte trage das Datum und die Dauer des Termins ein!';
+	}
+
+
+	if (!isValid)
+		showErrorMsg(errorMsg, '', false);
+	else
+		$('#msg-container').hide();
 
 	return isValid;
 }

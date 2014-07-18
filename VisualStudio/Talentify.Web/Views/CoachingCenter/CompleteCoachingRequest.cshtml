@@ -1,0 +1,178 @@
+﻿@using Talentify.ORM.DAL.Models.Coaching
+@model Talentify.ORM.DAL.Models.Coaching.CoachingRequest
+
+@{
+	var validateDate = (Model.FromUserId == LoggedUser.Id) ? "true" : "false";
+	var hasMyRatings = false;
+	var hasOtherRatings = false;
+	var myRatingValues = new List<int>();
+	var otherRatingValues = new List<int>();
+	var otherUser = Model.FromUserId == LoggedUser.Id ? Model.ToUser : Model.FromUser;
+	
+	if (Model.Ratings.Any(r => r.FromUserId == LoggedUser.Id))
+	{
+		hasMyRatings = true;
+		myRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == LoggedUser.Id && r.RatingType == RatingType.Helpful).Value);
+		myRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == LoggedUser.Id && r.RatingType == RatingType.OnTime).Value);
+		myRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == LoggedUser.Id && r.RatingType == RatingType.Price).Value);
+	}
+
+	if (Model.Ratings.Any(r => r.FromUserId == otherUser.Id))
+	{
+		hasOtherRatings = true;
+		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.Helpful).Value);
+		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.OnTime).Value);
+		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.Price).Value);
+	}
+}
+
+<script>
+	$(this).ready(function()
+	{
+		initForms();
+		@if (hasMyRatings)
+		{
+			<text>setMyCoachingRatings(@myRatingValues[0], @myRatingValues[1], @myRatingValues[2]);</text>
+		}
+
+		@if (hasOtherRatings)
+		{
+			<text>setOtherCoachingRatings(@otherRatingValues[0], @otherRatingValues[1], @otherRatingValues[2]);</text>
+		}
+
+		@if (ViewBag.Status == "Conflicted")
+		{
+			<text>disableCoachingFeedbackForm();</text>
+		}
+	});
+	function setFeedback(type, value, sender)
+	{
+		$('#' + type).find('a').each(function() {$(this).removeClass('selected');});
+		$(sender).addClass('selected');
+		$('#' + type + 'RatingValue').val(value);
+	}
+</script>
+
+<div id="msg-container">
+	<div id="msg-error" class="msg error">
+		<h2>Bitte bewerte den Termin vollständig</h2>
+	</div>
+</div>
+
+<div class="feedback-container">
+	<h3>Deine Bewertung</h3>
+	<div class="subject">
+		<label>Fach:</label>
+		<span>@Model.SubjectCategory.Name</span>
+	</div>
+	<div class="row">
+		<label>Wert:</label>
+		<div id="wert" class="values">
+			<input type="hidden" id="wertRatingValue" value=""/>
+			<a id="link-wert-0" href="javascript:void(0);" onclick="setFeedback('wert', 0, this)" class="selectable"></a>
+			<a id="link-wert-1" href="javascript:void(0);" onclick="setFeedback('wert', 1, this)" class="selectable"></a>
+			<a id="link-wert-2" href="javascript:void(0);" onclick="setFeedback('wert', 2, this)" class="selectable"></a>
+			<a id="link-wert-3" href="javascript:void(0);" onclick="setFeedback('wert', 3, this)" class="selectable"></a>
+			<a id="link-wert-4" href="javascript:void(0);" onclick="setFeedback('wert', 4, this)" class="selectable"></a>
+		</div>
+	</div>
+	<div class="row">
+		<label>Pünktlich:</label>
+		<div id="puenktlich" class="values">
+			<input type="hidden" id="puenktlichRatingValue" value=""/>
+			<a id="link-puenktlich-0" href="javascript:void(0);" onclick="setFeedback('puenktlich', 0, this)" class="selectable"></a>
+			<a id="link-puenktlich-1" href="javascript:void(0);" onclick="setFeedback('puenktlich', 1, this)" class="selectable"></a>
+			<a id="link-puenktlich-2" href="javascript:void(0);" onclick="setFeedback('puenktlich', 2, this)" class="selectable"></a>
+			<a id="link-puenktlich-3" href="javascript:void(0);" onclick="setFeedback('puenktlich', 3, this)" class="selectable"></a>
+			<a id="link-puenktlich-4" href="javascript:void(0);" onclick="setFeedback('puenktlich', 4, this)" class="selectable"></a>
+		</div>
+	</div>
+	<div class="row">
+		<label>Preis:</label>
+		<div id="preis" class="values">
+			<input type="hidden" id="preisRatingValue" value=""/>
+			<a id="link-preis-0" href="javascript:void(0);" onclick="setFeedback('preis', 0, this)" class="selectable"></a>
+			<a id="link-preis-1" href="javascript:void(0);" onclick="setFeedback('preis', 1, this)" class="selectable"></a>
+			<a id="link-preis-2" href="javascript:void(0);" onclick="setFeedback('preis', 2, this)" class="selectable"></a>
+			<a id="link-preis-3" href="javascript:void(0);" onclick="setFeedback('preis', 3, this)" class="selectable"></a>
+			<a id="link-preis-4" href="javascript:void(0);" onclick="setFeedback('preis', 4, this)" class="selectable"></a>
+		</div>
+	</div>
+</div>
+
+<div class="feedback-container right">
+	<h3>@(@otherUser.Firstname)s Bewertung</h3>
+	<div class="subject">
+		<label>Fach:</label>
+		<span>@Model.SubjectCategory.Name</span>
+	</div>
+	<div class="row">
+		<label>Wert:</label>
+		<div class="values">
+			<span id="span-wert-0"></span>
+			<span id="span-wert-1"></span>
+			<span id="span-wert-2"></span>
+			<span id="span-wert-3"></span>
+			<span id="span-wert-4"></span>
+		</div>
+	</div>
+	<div class="row">
+		<label>Pünktlich:</label>
+		<div class="values">
+			<span id="span-puenktlich-0"></span>
+			<span id="span-puenktlich-1"></span>
+			<span id="span-puenktlich-2"></span>
+			<span id="span-puenktlich-3"></span>
+			<span id="span-puenktlich-4"></span>
+		</div>
+	</div>
+	<div class="row">
+		<label>Preis:</label>
+		<div class="values">
+			<span id="span-preis-0"></span>
+			<span id="span-preis-1"></span>
+			<span id="span-preis-2"></span>
+			<span id="span-preis-3"></span>
+			<span id="span-preis-4"></span>
+		</div>
+	</div>
+</div>
+@if (Model.FromUserId == LoggedUser.Id)
+{
+	<div id="date-form" class="date-form">
+		<label>Datum:</label>
+		@Html.DatePicker("coachingdate", true)
+		<label>Dauer:</label>
+		<select id="duration">
+			<option value="1">1 h</option>
+			<option value="2">2 h</option>
+			<option value="3">3 h</option>
+			<option value="4">4 h</option>
+		</select>
+	</div>
+}
+@if (Model.Date.HasValue)
+{
+	<div class="date-form view">
+		<label>Datum:</label>
+		@Model.Date.Value.ToString("d")
+		<label>Dauer:</label>
+		@Model.Duration h
+	</div>
+}
+
+<div id="confirm-btn-container" class="confirm-btn-container">
+	<a href="javascript:void(0);" onclick="submitCoachingConfirmForm(@Model.Id, @validateDate);" class="link-button">Termin bestätigen & bewerten</a>
+</div>
+
+<div id="cancel-btn-container" class="cancel-btn-container">
+	<span>Oder Lernhilfe hat nicht stattgefunden</span>
+	<select id="cancel-reason" class="mandatory">
+		<option value="">Grund auswählen</option>
+		<option value="Abstehende Ohren">Abstehende Ohren</option>
+		<option value="Das Wetter war zu schön">Das Wetter war zu schön</option>
+		<option value="Turnsackerl vergessen">Turnsackerl vergessen</option>
+		<option value="Zum Testen">Zum Testen</option>
+	</select>
+	<a href="javascript:void(0);" onclick="cancelCoachingRequestWithReason(@Model.Id, $('#cancel-reason').val())" class="link-button">Termin nicht bestätigen</a>
+</div>

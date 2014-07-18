@@ -9,6 +9,11 @@
 	{
 		style = "background-image: url(/Images/icon-zusagen.png);";
 	}
+
+	if (item.IconType == NotificationIconType.Cancelled)
+	{
+		style = "background-image: url(/Images/icon-absagen.png);";
+	}
 	
 	<div class="item" onclick="location.href='@item.Link'" style="@style">
 		<a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>

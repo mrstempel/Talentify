@@ -205,6 +205,7 @@
     <Compile Include="Mvc\BaseView.cs" />
     <Compile Include="FrontendLogic\Models\FormFeedback.cs" />
     <Compile Include="FrontendLogic\Models\Login.cs" />
+    <Compile Include="Mvc\Extensions\FormExtensions.cs" />
     <Compile Include="Mvc\FormView.cs" />
     <Compile Include="Mvc\Security\AdminMembershipProvider.cs" />
     <Compile Include="Mvc\Security\TalentifyMembershipProvider.cs" />
@@ -279,6 +280,7 @@
       <Name>KwIt.Project.Pattern</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
