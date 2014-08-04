@@ -16,7 +16,8 @@ namespace Talentify.ORM.DAL.Models.Coaching
 		Appointment,
 		Completed,
 		Canceled,
-		Conflicted
+		Conflicted,
+		Rejected 
 	}
 
 	public class CoachingRequestStatus : BaseEntity, ICoachingRequestTimelineItem
@@ -74,7 +75,7 @@ namespace Talentify.ORM.DAL.Models.Coaching
 			{
 				//if (StatusType == StatusType.Completed)
 				//	return TimelineItemType.Bonus;
-				if (StatusType == StatusType.Canceled)
+				if (StatusType == StatusType.Canceled || StatusType == StatusType.Rejected)
 					return TimelineItemType.Canceled;
 
 				return TimelineItemType.Confirmation;

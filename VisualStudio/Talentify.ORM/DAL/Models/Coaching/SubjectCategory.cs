@@ -5,12 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KwIt.Project.Pattern.DAL.Models;
+using Talentify.ORM.DAL.Library;
+using Talentify.ORM.DAL.Models.User;
 
 namespace Talentify.ORM.DAL.Models.Coaching
 {
-	public class SubjectCategory : BaseEntity
+	public class SubjectCategory : BaseEntity, IFormCheckable
 	{
 		public string Name { get; set; }
+		public ICollection<Teacher> Teachers { get; set; } 
+
+		#region Implement IFormCheckable
+
+		public string FormLabel
+		{
+			get { return Name; }
+		}
+
+		#endregion
 	}
 
 	public class SubjectCategoryMap : EntityTypeConfiguration<SubjectCategory>

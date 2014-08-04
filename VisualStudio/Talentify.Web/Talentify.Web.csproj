@@ -127,6 +127,7 @@
     <Compile Include="Controllers\Api\AuthController.cs" />
     <Compile Include="Controllers\Api\AutocompleteController.cs" />
     <Compile Include="Controllers\Api\FormHelperController.cs" />
+    <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\CoachingCenterController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StartController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +204,12 @@
     <Content Include="Html\Register.html" />
     <Content Include="Html\Home.html" />
     <Content Include="Images\bg-content-headline.png" />
+    <Content Include="Images\default-profile-large-f.png" />
+    <Content Include="Images\default-profile-large-m.png" />
+    <Content Include="Images\default-profile-medium-f.png" />
+    <Content Include="Images\default-profile-medium-m.png" />
+    <Content Include="Images\default-profile-small-f.png" />
+    <Content Include="Images\default-profile-small-m.png" />
     <Content Include="Images\header-menu-active.png" />
     <Content Include="Images\header-menu.png" />
     <Content Include="Images\header-notifications-active.png" />
@@ -209,17 +217,25 @@
     <Content Include="Images\header-settings-active.png" />
     <Content Include="Images\header-settings.png" />
     <Content Include="Images\icon-absagen.png" />
+    <Content Include="Images\icon-bonus10.png" />
+    <Content Include="Images\icon-bonus15.png" />
+    <Content Include="Images\icon-bonus20.png" />
+    <Content Include="Images\icon-bonus5.png" />
     <Content Include="Images\icon-close.png" />
     <Content Include="Images\icon-links.png" />
     <Content Include="Images\icon-mail.png" />
     <Content Include="Images\icon-rechts.png" />
     <Content Include="Images\icon-star.png" />
     <Content Include="Images\icon-zusagen.png" />
+    <Content Include="Images\illu.jpg" />
+    <Content Include="Images\illu2.jpg" />
+    <Content Include="Images\illu3.jpg" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mandatory.png" />
     <Content Include="Images\map-eumel.png" />
     <Content Include="Images\nav-menu-arrow.png" />
     <Content Include="Images\search-result-header.png" />
+    <Content Include="Images\sender-talentify.png" />
     <Content Include="Images\share-fb.png" />
     <Content Include="Images\share-google.png" />
     <Content Include="Images\share-twitter.png" />
@@ -291,6 +307,13 @@
     <Content Include="Views\CoachingCenter\Stream.cshtml" />
     <Content Include="Views\Notification\PopupList.cshtml" />
     <Content Include="Views\CoachingCenter\CompleteCoachingRequest.cshtml" />
+    <Content Include="Views\Register\Agb.cshtml" />
+    <Content Include="Views\Content\Impressum.cshtml" />
+    <Content Include="Views\Content\Datenschutz.cshtml" />
+    <Content Include="Views\Register\Teacher.cshtml" />
+    <Content Include="Views\Shared\Forms\_RegisterTeacher.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

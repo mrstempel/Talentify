@@ -60,6 +60,20 @@ namespace Talentify.ORM.DAL.Repository
 						listItems.Add(item);
 					}
 
+					if (notification.IconType == NotificationIconType.Bonus)
+					{
+						var item = new NotificationListItem
+						{
+							Image = "/Images/sender-talentify.png",
+							Link = "/Profile",
+							Text = notification.Text,
+							IconType = notification.IconType,
+							IsNew = notification.ReadDate == null,
+							Bonus = notification.Bonus
+						};
+						listItems.Add(item);
+					}
+
 					notification.ReadDate = DateTime.Now;
 					UnitOfWork.NotificationRepository.Update(notification);
 				}

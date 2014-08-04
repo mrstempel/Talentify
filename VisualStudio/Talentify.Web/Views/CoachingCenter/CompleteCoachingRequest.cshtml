@@ -24,6 +24,7 @@
 		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.OnTime).Value);
 		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.Price).Value);
 	}
+
 }
 
 <script>
@@ -174,5 +175,5 @@
 		<option value="Turnsackerl vergessen">Turnsackerl vergessen</option>
 		<option value="Zum Testen">Zum Testen</option>
 	</select>
-	<a href="javascript:void(0);" onclick="cancelCoachingRequestWithReason(@Model.Id, $('#cancel-reason').val())" class="link-button">Termin nicht bestätigen</a>
+	<a href="javascript:void(0);" onclick="cancelCoachingRequest(@Model.Id, $('#cancel-reason').val())" class="link-button">Termin nicht bestätigen</a>
 </div>

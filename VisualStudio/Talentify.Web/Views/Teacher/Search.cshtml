@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Talentify.ORM.FrontendLogic.Models.SearchResultItem>
+
+@foreach (var i in Model)
+{
+	<article>
+		<h3>@i.Name</h3>
+		<p>@i.Address<br/>@i.School</p>
+		<p><a href="mailto:@i.Email"><img src="/Images/icon-mail.png"/></a> Telefon: @i.Phone</p>
+		<p class="comments">"@(@i.Comments)"</p>
+	</article>
+}

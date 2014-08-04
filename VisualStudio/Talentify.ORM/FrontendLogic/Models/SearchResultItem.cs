@@ -15,5 +15,7 @@ namespace Talentify.ORM.FrontendLogic.Models
 		public string Address { get; set; }
 		public string School { get; set; }
 		public string Comments { get; set; }
+		public string Email { get; set; }
+		public string Phone { get; set; }
 	}
 }

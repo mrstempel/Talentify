@@ -19,6 +19,11 @@
 		{
 			<text>$('#Gender').val('@Model.Gender');</text>
 		}
+
+		@if (!string.IsNullOrEmpty(Model.Country) && Model.Country.Length == 2)
+		{
+			<text>$('#Country').val('@Model.Country');</text>
+		}
 	});
 </script>
 
@@ -47,31 +52,40 @@
 						@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})
 						@Html.TextBoxFor(m => m.Surname, new {@placeholder = "Nachname", @class = "mandatory"})
 						@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
-						@Html.TextBoxFor(m => m.BirthDate, new {@placeholder = "Geburtstag (tt.mm.yyyy)"})
-						<select name="Gender" id="Gender">
+						<select name="Gender" id="Gender" class="border-bottom">
 							<option>Geschlecht wählen</option>
 							<option value="F">Weiblich</option>
 							<option value="M">Männlich</option>
 						</select>
+						<div class="datepicker">
+							<label>Geburtsdatum</label>
+							@Html.DatePicker("birthday", false, Model.BirthDate)
+						</div>
+						
 					</div>
 					<div class="field-container">
 						@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse"})
 						@Html.TextBoxFor(m => m.ZipCode, new {@placeholder = "PLZ"})
 						@Html.TextBoxFor(m => m.City, new {@placeholder = "Ort"})
-						@Html.TextBoxFor(m => m.Country, new {@placeholder = "Land"})
+						<select name="Country" id="Country">
+							<option value="">Land auswählen</option>
+							<option value="AT">Österreich</option>
+						</select>
 						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon (Mobilnummer)"})
 					</div>
 					<div class="field-container">
 						@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
 						<select id="Class" name="Class">
-							<option value="0">wähle deine Schulstufe</option>
+							<option value="0">wähle deine Klasse</option>
 						</select>
 					</div>
 					<div class="field-container">
-						@Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "Dein Lernmotto", @maxlength = "140"})
+						@Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "Dein Lernmotto", @maxlength = "140", @class="border-bottom"})
 					</div>
 					<div class="field-container desktop">
-						<input type="submit" value="Absenden" onclick=" return validateProfileForm(); "/>
+						<input type="submit" value="Absenden" onclick=" return validateProfileForm(); " style="margin-bottom: 15px;"/><br/>
+						oder<br/>
+						@Html.ActionLink("Abbrechen und zurück zum Profil", "Index", "Profile")
 					</div>
 				</article>
 				<footer class="submit mobile">

@@ -1,0 +1,30 @@
+﻿@model Talentify.ORM.DAL.Models.User.Teacher
+
+@{
+    ViewBag.Title = "Teacher";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<!-- bootstrap -->
+	<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
+	<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+}
+
+<div id="page-container" class="form">
+	<section id="register">
+		<header>
+			<div class="sprite t-button desktop"></div>
+			<h2>Anmelden</h2>
+		</header>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2>Anmeldung fehlgeschlagen</h2><p></p></div>
+			<div id="msg-success" class="msg success"><h2>Anmeldung erfolgreich</h2><p>Ein Bestätigungs E-Mail wurde versendet.</p></div>
+		</article>
+		@if (FormSuccess == null)
+		{
+			@Html.Partial("Forms/_RegisterTeacher", Model)
+		}
+	</section>
+</div>

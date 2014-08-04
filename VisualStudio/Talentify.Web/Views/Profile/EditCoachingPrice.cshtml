@@ -3,6 +3,34 @@
     Layout = "~/Views/Shared/_LayoutModal.cshtml";
 }
 
+<script>
+	$(this).ready(function()
+	{
+		@if (ViewBag.Price.ToString() != "0")
+		{
+			<text>$('#price').val('@ViewBag.Price.ToString()');</text>
+		}
+		else 
+		{
+			<text>$('#isFree').prop('checked', true);</text>
+		}
+		setSelectBox();
+	});
+	function setSelectBox()
+	{
+		if ($('#isFree').is(':checked'))
+		{
+			$('#price').prop('disabled', 'disabled');
+			$('#price').addClass('disabled');
+		}
+		else
+		{
+			$('#price').prop('disabled', false);
+			$('#price').removeClass('disabled');
+		}
+	}
+</script>
+
 <article>
 	<div class="msg-container" id="msg-container">
 		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
@@ -10,10 +38,22 @@
 	</div>
 	@if (FormSuccess == null)
 	{
-		using (Html.BeginForm("EditCoachingPrice", "Profile", FormMethod.Post, new { @class = "form-container" }))
+		using (Html.BeginForm("EditCoachingPrice", "Profile", FormMethod.Post, new { @class = "form-container price" }))
 		{
 			<div class="field-container">
-				<input type="text" name="price" id="price" value="@ViewBag.Price" placeholder="Preis/h für Lernhilfe" />
+				<label>Kostenlos</label><input type="checkbox" value="true" name="isFree" id="isFree" onclick="setSelectBox();"/> <label>oder Preis pro Stunde:</label>
+				<select name="price" id="price">
+					<option value="1">1€</option>
+					<option value="2">2€</option>
+					<option value="3">3€</option>
+					<option value="4">4€</option>
+					<option value="5">5€</option>
+					<option value="6">6€</option>
+					<option value="7">7€</option>
+					<option value="8">8€</option>
+					<option value="9">9€</option>
+					<option value="10">10€</option>
+				</select>
 			</div>
 			<div class="field-container">
 				<input type="submit" value="Speichern" onclick="return validateCoachingPrice();"/>

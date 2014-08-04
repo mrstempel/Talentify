@@ -3,6 +3,10 @@
 @using Talentify.ORM.DAL.Models.Coaching
 @model Talentify.ORM.FrontendLogic.Models.CoachingRequestStream
 
+@{
+	var isCancled = Model.CoachingRequest.StatusHistory.Count(s => s.StatusType == StatusType.Canceled) > 1;
+}
+
 <script>
 	$(this).ready(function()
 	{
@@ -14,9 +18,14 @@
 				$('#coaching-new-message-btn').slideUp(150);
 		});
 
-		@if (Model.Status == StatusType.Appointment || Model.Status == StatusType.Completed || Model.Status == StatusType.Conflicted)
+		@if (isCancled == false && (Model.Status == StatusType.Appointment || Model.Status == StatusType.Completed || Model.Status == StatusType.Conflicted || Model.Status == StatusType.Canceled))
 		{
 			<text>loadCoachingRequestCompleteForm(@Model.CoachingRequest.Id, '@Model.Status.ToString()');</text>
+		}
+
+		@if (isCancled || Model.Status == StatusType.Rejected)
+		{
+			<text>$('#new-message-form').hide();</text>
 		}
 	});
 </script>
@@ -52,11 +61,11 @@
 {
 	<div id="status-update-confirm" class="btn-container">
 		<a href="javascript:void(0);" onclick="updateCoachingRequestStatus(@Model.CoachingRequest.Id, 1)" class="link-button">Annehmen</a>
-		<a href="javascript:void(0);" onclick="" class="link-button">Ablehnen</a>
+		<a href="javascript:void(0);" onclick="rejectCoachingRequest(@Model.CoachingRequest.Id)" class="link-button">Ablehnen</a>
 	</div>
 }
 
-@if (Model.Status == StatusType.Appointment || Model.Status == StatusType.Completed || Model.Status == StatusType.Conflicted)
+@if (Model.Status == StatusType.Appointment || Model.Status == StatusType.Completed || Model.Status == StatusType.Conflicted || Model.Status == StatusType.Canceled)
 {
 	<div id="status-update-complete-loading">Lade Bewertung ...</div>
 	<div id="status-update-complete"></div>

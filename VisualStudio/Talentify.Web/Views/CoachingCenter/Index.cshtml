@@ -26,12 +26,13 @@
 				<div class="field-container">
 					<label for="StatusType">Lernhilfecenter filtern nach:</label>
 					<select id="StatusType" name="StatusType">
-						<option value="0">Anfragen</option>
-						<option value="1">Termine</option>
-						<option value="2">Abgeschlossen</option>
-						<option value="3">Abgesagt</option>
+						<option value="0">Offene Anfragen</option>
+						<option value="1">Vereinbarte Termine</option>
+						<option value="2">Abgeschlossene Lernhilfe</option>
+						<option value="5">Abgelehnte Anfragen</option>
+						<option value="3">Abgesagte Lernhilfe</option>
 					</select>
-					<input type="button" value="Filtern" onclick=""/>
+					<input type="button" value="Filtern" onclick="filterCoachingCenter(@ViewBag.RequestId);"/>
 				</div>
 			}
 		</article>

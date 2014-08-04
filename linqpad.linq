@@ -25,16 +25,17 @@
 
 var UnitOfWork = new Talentify.ORM.DAL.UnitOfWork.TalentifyUnitOfWork<Talentify.ORM.DAL.Context.TalentifyContext>();
 
-var test = UnitOfWork.CoachingRequestRepository.GetById(8).Id;
-Console.WriteLine(test);
+//var test = UnitOfWork.CoachingRequestRepository.GetById(8).Id;
+//Console.WriteLine(test);
 
-	var test2 = from cr in UnitOfWork.CoachingRequestRepository.AsQueryable()
-				join status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable() on cr.Id equals status.CoachingRequestId
-				where cr.FromUserId==3 && cr.ToUserId==6 && cr.SubjectCategoryId==10
-				orderby status.CreatedDate descending
-				select new
-				{
-					crId = cr.Id,
-					sType = status.StatusType
-				};
+	var requestGroup = from coachingRequest in UnitOfWork.CoachingRequestRepository.AsQueryable()
+						where (coachingRequest.FromUserId == 6 || coachingRequest.ToUserId == 6)
+						group coachingRequest by coachingRequest.Id into rGrouped
+						select new { Id = rGrouped.Key, All = rGrouped};
+
+	var test2 = from schools in UnitOfWork.SchoolRepository.AsQueryable() join
+				student in UnitOfWork.SchoolRepository.AsQueryable()
+				select schools;
+				
+	//var test3 = from test in test2 group test by test.Id into groupedTest select groupedTest.AsQueryable();
 Console.WriteLine(test2);

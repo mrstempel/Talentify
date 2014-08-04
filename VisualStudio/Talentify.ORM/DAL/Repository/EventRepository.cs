@@ -56,6 +56,20 @@ namespace Talentify.ORM.DAL.Repository
 			return talentiyEvent.MaxParticipant - registrations.Count();
 		}
 
+		public bool CancelRegistration(int eventId, int userId)
+		{
+			var registration =
+				UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.EventId == eventId && r.UserId == userId);
+			
+			if (registration != null)
+			{
+				UnitOfWork.EventRegistrationRepository.Delete(registration);
+				UnitOfWork.Save();
+			}
+
+			return true;
+		}
+
 		public bool AddRegistration(int eventId, int userId)
 		{
 			if (GetOpenSeats(eventId) > 0)

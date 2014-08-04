@@ -65,14 +65,16 @@ namespace Talentify.Web.Controllers
 		{
 			var statusMessage = "hat Lernhilfe nicht bestätigt. Grund: " + reason;
 			var notificationMessage = string.Format("Lernhilfe nicht bestätigt von: {0} {1}", LoggedUser.Firstname, LoggedUser.Surname);
+			var status = StatusType.Canceled;
 
 			if (string.IsNullOrEmpty(reason))
 			{
-				statusMessage = "hat Lernanfrage angelehnt";
+				statusMessage = "hat Lernanfrage abgelehnt";
 				notificationMessage = string.Format("Lernanfrage abgelehnt von: {0} {1}", LoggedUser.Firstname, LoggedUser.Surname);
+				status = StatusType.Rejected;
 			}
 
-			var newStatus = UnitOfWork.CoachingRequestRepository.UpdateStatus(coachingRequestId, StatusType.Canceled, LoggedUser, statusMessage, notificationMessage);
+			var newStatus = UnitOfWork.CoachingRequestRepository.UpdateStatus(coachingRequestId, status, LoggedUser, statusMessage, notificationMessage);
 
 			if (newStatus != null)
 			{

@@ -19,29 +19,57 @@ namespace Talentify.ORM.FrontendLogic
 			this.unitOfWork = unitOfWork;
 		}
 
-		public IEnumerable<StreamItem> GetStream()
+		public IEnumerable<StreamItem> GetStream(DateTime? lastTime)
 		{
-			// at this point just load the last 10 registrations
-			var lastRegistrations = unitOfWork.StudentRepository.AsQueryable().OrderByDescending(u => u.JoinedDate).Take(10);
+			var stream = new List<StreamItem>();
+
+			if (!lastTime.HasValue)
+				lastTime = DateTime.MaxValue;
+
+			// load latest registrations
+			var lastRegistrations = unitOfWork.StudentRepository.AsQueryable().Where(s => s.JoinedDate < lastTime.Value && s.IsDeleted == false).OrderByDescending(u => u.JoinedDate);
 
 			if (lastRegistrations.Any())
 			{
-				var stream = new List<StreamItem>();
 				foreach (var user in lastRegistrations)
 				{
 					var item = new StreamItem
 					{
 						Image =
 							user.HasProfilePicture
-								? string.Format("{0}{1}_medium.png", ConfigurationManager.AppSettings["Upload.Profile"], user.PictureGuid.ToString())
-								: "/Images/tmp-profile-medium.png",
+								? string.Format("{0}{1}_small.png", ConfigurationManager.AppSettings["Upload.Profile"], user.PictureGuid.ToString())
+								: "/Images/default-profile-small.png",
 						Text = string.Format("{0} {1} ist talentify beigetreten", user.Firstname, user.Surname),
-						Link = string.Format("/Profile/Index/{0}", user.Id)
+						Link = string.Format("/Profile/Index/{0}", user.Id),
+						Time = user.JoinedDate
 					};
 					stream.Add(item);
 				}
+			}
 
-				return stream;
+			// get latest coaching offers
+			var lastCoachingOffers = unitOfWork.CoachingOfferRepository.AsQueryable().Where(c => c.CreatedDate < lastTime.Value).OrderByDescending(c => c.CreatedDate);
+			if (lastCoachingOffers.Any())
+			{
+				foreach (var offer in lastCoachingOffers)
+				{
+					var item = new StreamItem
+					{
+						Image =
+							offer.User.HasProfilePicture
+								? string.Format("{0}{1}_small.png", ConfigurationManager.AppSettings["Upload.Profile"], offer.User.PictureGuid.ToString())
+								: "/Images/default-profile-small.png",
+						Text = string.Format("{0} {1} bietet jetzt Lernhilfe in {2} an", offer.User.Firstname, offer.User.Surname, offer.SubjectCategory.Name),
+						Link = string.Format("/Profile/Index/{0}", offer.User.Id),
+						Time = offer.CreatedDate
+					};
+					stream.Add(item);
+				}
+			}
+
+			if (stream.Any())
+			{
+				return stream.OrderByDescending(i => i.Time).ToList().Take(5);
 			}
 
 			return null;

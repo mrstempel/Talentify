@@ -196,6 +196,34 @@ function validateRegisterForm()
 	return isValid;
 }
 
+function validateTeacherRegisterForm()
+{
+	var isValid = true;
+	var errorHeadline = "Fehler bei Anmeldung";
+	var errorText = "";
+
+	// check mandatory fields
+	if (!validateMandatoryFields())
+	{
+		return false;
+	}
+
+	// check e-mail syntax
+	if (!validateEmail($('#Email').val()))
+	{
+		$('#Email').addClass('error');
+		errorText += "Bitte gib eine gültige E-Mail Adresse an.";
+		isValid = false;
+	}
+
+	if (!isValid)
+	{
+		showErrorMsg(errorHeadline, errorText, false);
+	}
+
+	return isValid;
+}
+
 function validateProfileForm()
 {
 	var isValid = true;

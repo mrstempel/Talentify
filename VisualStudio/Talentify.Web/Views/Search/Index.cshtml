@@ -10,6 +10,7 @@
 	<script>
 		$(this).ready(function()
 		{
+			$('#Class').val('@Model.Class');
 			searchCoaching();
 		});
 	</script>
@@ -25,8 +26,29 @@
 			@using (Html.BeginForm("Index", "Search", FormMethod.Post, new {@class = "form-container search"}))
 			{
 				<div class="field-container">
-					@Html.DropDownListFor(m => m.Class, AllClasses, "Schulstufe")
-					@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach")
+					<select name="Class" id="Class" class="mandatory">
+						<option value="">Schulstufe</option>
+						<optgroup label="Volksschule">
+							<option value="1">1. Klasse</option>
+							<option value="2">2. Klasse</option>
+							<option value="3">3. Klasse</option>
+							<option value="4">4. Klasse</option>
+						</optgroup>
+						<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
+							<option value="5">1. Klasse</option>
+							<option value="6">2. Klasse</option>
+							<option value="7">3. Klasse</option>
+							<option value="8">4. Klasse</option>
+						</optgroup>
+						<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
+							<option value="9">1./5. Klasse</option>
+							<option value="10">2./6. Klasse</option>
+							<option value="11">3./7. Klasse</option>
+							<option value="12">4./8. Klasse</option>
+							<option value="13">5. Klasse</option>
+						</optgroup>
+					</select>
+					@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach", new {@class = "mandatory"})
 					<input type="button" value="Finden" onclick="searchCoaching();"/>
 				</div>
 			}

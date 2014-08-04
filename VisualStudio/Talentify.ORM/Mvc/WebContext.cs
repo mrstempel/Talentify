@@ -59,6 +59,12 @@ namespace Talentify.ORM.Mvc
 			set { HttpContext.Current.Session["WebContext.SearchSession"] = value; }
 		}
 
+		public void ClearContext()
+		{
+			this.User = null;
+			this.SearchSession = null;
+		}
+
 		public WebContext(TalentifyUnitOfWork<TalentifyContext> unitOfWork)
 		{
 			this.UnitOfWork = unitOfWork;

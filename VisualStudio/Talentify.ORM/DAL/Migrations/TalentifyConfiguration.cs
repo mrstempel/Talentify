@@ -21,6 +21,7 @@ namespace Talentify.ORM.DAL.Migrations
 			List<BaseSeeder> seeder = new List<BaseSeeder>();
 			seeder.Add(new InitialSeeder(context));
 			seeder.Add(new AdminSeeder(context));
+			seeder.Add(new SchoolLatLngSeeder(context));
 
 			foreach (var baseSeeder in seeder)
 			{

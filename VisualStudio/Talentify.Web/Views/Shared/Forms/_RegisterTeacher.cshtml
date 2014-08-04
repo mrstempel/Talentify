@@ -1,0 +1,44 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.User.Teacher>
+
+<script>
+	function loadAgb()
+	{
+		$('#agb-frame').attr('src', '/Register/Agb');
+		$('#modal-agb').modal('show');
+	}
+</script>
+
+@using (Html.BeginForm("Teacher", "Register", FormMethod.Post, new {@class = "form-container register"}))
+{
+	<article id="register-form">
+		<div class="field-container">
+			@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})
+			@Html.TextBoxFor(m => m.Surname, new {@placeholder = "Nachname", @class = "mandatory"})
+		</div>
+		<div class="field-container">
+			@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
+			@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon", @class = "mandatory"})
+		</div>
+		<div class="field-container">
+			@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
+		</div>
+		<div class="field-container">
+			@Html.CheckBoxList("CoachingSubjects", AllCoachingSubjectsCheckable, null)
+		</div>
+		<div class="field-container">
+			<p>Ich bestätige, die <a href="javascript:void(0);" onclick="loadAgb()">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
+		</div>
+		<div class="field-container desktop">
+			<input type="submit" value="Absenden" onclick=" return validateTeacherRegisterForm(); "/>
+		</div>
+	</article>
+}
+
+<div class="modal fade" id="modal-agb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+  <div class="modal-dialog">
+	<header>
+		<h1>AGB<a href="javascript:void(0);" onclick="$('#modal-agb').modal('hide');" class="close-link"></a></h1>
+	</header>
+	<iframe id="agb-frame" width="600" height="200" scrolling="no"></iframe>
+  </div>
+</div>

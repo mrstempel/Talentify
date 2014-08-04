@@ -17,8 +17,9 @@
 		}
 
 		$('#enable-coaching').addClass(coachingEnabled);
-		$('#profile-img-edit').mouseover(function() { $('.profile-upload-edit').show(); });
-		$('#profile-img-edit').mouseout(function() { $('.profile-upload-edit').hide(); });
+		$('#profileUpload').mouseover(function() { $('.profile-upload-edit').show(); });
+		$('#profileUpload').mouseout(function() { $('.profile-upload-edit').hide(); });
+		$('#profile-upload-form').mouseout(function() { $('.profile-upload-edit').hide(); });
 		$('.profile-upload-edit').mouseover(function () { $('.profile-upload-edit').show(); });
 		loadMyProfileCoachings(true, @LoggedUser.Id);
 		setProfileCoachingPrice(@Model.CoachingPrice.ToString().Replace(",", "."));
@@ -28,14 +29,14 @@
 	{
 		if (price > 0)
 		{
-			$('#link-edit-price').html(price.toFixed(2) + " €");
+			$('#link-edit-price').html(price.toFixed(0) + " €");
 			$('#link-edit-price').css('padding', '8px 0');
 			$('#link-edit-price').css('width', 113);
 			$('#link-edit-price').css('text-align', 'center');
 		}
 		else
 		{
-			$('#link-edit-price').html('+');
+			$('#link-edit-price').html('kostenlos');
 		}
 	}
 </script>
@@ -45,22 +46,11 @@
 	<article class="my-profile">
 		<div class="left">
 			<div class="profile-upload" id="profile-upload">
-				@if (!Model.HasProfilePicture)
-				{
-					using (Html.BeginForm("ImageUpload", "Profile", FormMethod.Post, new { @id = "profile-upload-form", @enctype = "multipart/form-data" }))
-					{
-						<img src="@Model.ProfileImageLarge" alt="Neues Bild hochladen" class="profile-img"/>
-						<input type="file" name="profileUpload" onchange="$('#profile-upload-form').submit();">
-					}
-				}
-				else
+				@using (Html.BeginForm("ImageUpload", "Profile", FormMethod.Post, new { @id = "profile-upload-form", @enctype = "multipart/form-data" }))
 				{
 					<img src="@Model.ProfileImageLarge" alt="Neues Bild hochladen" class="profile-img" id="profile-img-edit"/>
-					using (Html.BeginForm("ImageUpload", "Profile", FormMethod.Post, new { @class = "profile-upload-edit", @id = "profile-upload-form", @enctype = "multipart/form-data" }))
-					{
-									<span>Neues Bild auswählen</span>
-									<input type="file" name="profileUpload" onchange="$('#profile-upload-form').submit();">
-					}
+					<div class="profile-upload-edit"><span>Neues Bild auswählen</span></div>
+					<input type="file" id="profileUpload" name="profileUpload" onchange="$('#profile-upload-form').submit();">
 				}
 			</div>
 			<div id="profile-complete-bar">
@@ -68,14 +58,14 @@
 				<div class="bar">
 					<div class="left" style="width:@(@ViewBag.CompletionCount)%;"></div>
 					@if (ViewBag.CompletionCount < 100)
-					{
-						<div class="right" style="width:@(@ViewBag.CompletionCountFull)%;"></div>
-					}
+	 {
+							<div class="right" style="width:@(@ViewBag.CompletionCountFull)%;"></div>
+	 }
 				</div>
 				@if (ViewBag.CompletionCount < 100)
-				{
+	{
 					@Html.ActionLink("Jetzt Profil vervollständigen", "Edit")
-				}
+	}
 			</div>
 		</div>
 		<div class="right">
@@ -83,13 +73,13 @@
 			<div class="content-part">
 				@(@Model.School.ZipCode)-@(@Model.School.City)<br/>
 				@(@Model.School.Name)@if (Model.Class != 0)
-						 {<span>, @(@Model.Class). Schulstufe</span>}
+						 {<span>, @(@Model.Class). Klasse</span>}
 			</div>
 			<div class="form-view">
 				<div class="row"><label>E-Mail:</label><span>@Model.Email</span></div>
 				<div class="row">
 					<label>Geburtstag:</label>@if (Model.BirthDate.HasValue)
-							   {<span>@Model.BirthDate.Value.ToString("d")</span>}
+							   {<span>@Model.BirthDate.Value.ToString("dd.MM.yyyy")</span>}
 							   else
 							   {<span>-</span>}
 				</div>
@@ -104,11 +94,11 @@
 				<div class="row">
 					<label class="important">Dein Lernmotto:</label>
 					@if (!string.IsNullOrEmpty(Model.AboutMe))
-					{
+	 {
 						<span>@Model.AboutMe</span>
-					}
-					else
-					{
+	 }
+	 else
+	 {
 						<span>-</span>
 					}
 				</div>
@@ -162,6 +152,6 @@
 	<header>
 		<h1>Preis/h bearbeiten<a href="javascript:void(0);" onclick="$('#modal-edit-price').modal('hide');" class="close-link"></a></h1>
 	</header>
-	<iframe id="edit-price-frame" width="600" height="200" scrolling="no"></iframe>
+	<iframe id="edit-price-frame" width="600" height="150" scrolling="no"></iframe>
   </div>
 </div>

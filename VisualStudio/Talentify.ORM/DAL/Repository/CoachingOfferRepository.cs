@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Configuration;
 using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
@@ -23,15 +24,29 @@ namespace Talentify.ORM.DAL.Repository
         {
         }
 
+		public override void Insert(CoachingOffer entity)
+		{
+			// check if this is the first coaching offer
+			var bonuspoints = (AsQueryable().Any(c => c.UserId == entity.UserId))
+				? BonusPointsFor.CoachingOffer
+				: BonusPointsFor.InitialCoachingOffer;
+
+			// add bonuspoints
+			UnitOfWork.BonuspointRepository.Insert(entity.UserId, bonuspoints, "Lernhilfe hinzugefügt");
+			base.Insert(entity);
+		}
+
 		public IEnumerable<SearchResultItem> Search(SearchParams searchParams)
 		{
 			string uploadDir = ConfigurationManager.AppSettings["Upload.Profile"];
 			var results = from offer in UnitOfWork.CoachingOfferRepository.AsQueryable()
 						join student in UnitOfWork.StudentRepository.AsQueryable() on offer.UserId equals student.Id
 						join school in UnitOfWork.SchoolRepository.AsQueryable() on student.SchoolId equals school.Id
-						where offer.FromClass <= searchParams.Class &&
-						offer.ToClass >= searchParams.Class &&
-						offer.SubjectCategoryId == searchParams.SubjectCategoryId
+						where 
+							offer.FromClass <= searchParams.Class &&
+							offer.ToClass >= searchParams.Class &&
+							offer.SubjectCategoryId == searchParams.SubjectCategoryId &&
+							offer.UserId != searchParams.SearchBy.Id
 				select new SearchResultItem()
 				{
 					Id = student.Id,

@@ -40,5 +40,28 @@ namespace Talentify.ORM.DAL.Repository
 
 			return classes;
 		}
+
+		public IEnumerable<SchoolInfo> GetSchoolsWithInfo()
+		{
+			var schoolInfos = new List<SchoolInfo>();
+			var allSchools = Get();
+			
+			foreach (var school in allSchools)
+			{
+				var info = from student in UnitOfWork.StudentRepository.AsQueryable()
+						   join coaching in UnitOfWork.CoachingOfferRepository.AsQueryable() on student.Id equals coaching.UserId
+						   where student.SchoolId == school.Id
+						   select new
+						   {
+							   studentId = student.Id,
+							   coachingId = coaching.Id
+						   };
+				var studentCount = info.GroupBy(i => i.studentId).Count();
+				var schoolInfo = new SchoolInfo() {School = school, CoachingSubjectCount = info.Count(), CoachingStudentCount = studentCount};
+				schoolInfos.Add(schoolInfo);
+			}
+
+			return schoolInfos;
+		}
 	}
 }

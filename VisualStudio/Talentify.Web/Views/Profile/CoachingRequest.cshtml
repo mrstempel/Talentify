@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_LayoutModal.cshtml";
 }
 
+<script>
+	$(this).ready(function()
+	{
+		@if (Model.Class != 0)
+		{
+			<text>$('#Class').val('@Model.Class');</text>
+		}
+	});
+</script>
+
 <article>
 	<div class="msg-container" id="msg-container">
 		<div id="msg-error" class="msg error"><h2>Fehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
@@ -20,7 +30,28 @@
 				<label>Lernhilfe anfragen in:</label>
 				@Html.DropDownListFor(m => m.SubjectCategoryId, (SelectList)ViewBag.UserSubjects, "bitte auswählen", new {@class = "mandatory"})
 				<label>Schulstufe:</label>
-				@Html.DropDownListFor(m => m.Class, AllClasses, "bitte auswählen", new {@class = "mandatory"})
+				<select class="mandatory" name="Class" id="Class">
+					<option value="">bitte auswählen</option>
+					<optgroup label="Volksschule">
+						<option value="1">1. Klasse</option>
+						<option value="2">2. Klasse</option>
+						<option value="3">3. Klasse</option>
+						<option value="4">4. Klasse</option>
+					</optgroup>
+					<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
+						<option value="5">1. Klasse</option>
+						<option value="6">2. Klasse</option>
+						<option value="7">3. Klasse</option>
+						<option value="8">4. Klasse</option>
+					</optgroup>
+					<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
+						<option value="9">1./5. Klasse</option>
+						<option value="10">2./6. Klasse</option>
+						<option value="11">3./7. Klasse</option>
+						<option value="12">4./8. Klasse</option>
+						<option value="13">5. Klasse</option>
+					</optgroup>
+				</select>
 				<label>Nachricht:</label>
 				<textarea name="Message" maxlength="140"></textarea>
 			</div>

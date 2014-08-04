@@ -10,6 +10,17 @@
 		{
 			$('#header-login').hide();
 		});
+
+		function checkLoginErrorEnterClick(e)
+		{
+			if (e.keyCode == 13)
+			{
+				submitLoginScreenForm();
+				return false;
+			}
+
+			return true;
+		}
 	</script>
 }
 
@@ -26,8 +37,8 @@
 			<article class="password-form">
 				
 				<div class="field-container">
-					<input type="text" id="login-email-screen" class="mandatory" placeholder="E-Mail Adresse"/>
-					<input type="password" id="login-password-screen" class="mandatory" placeholder="Passwort"/>
+					<input type="text" id="login-email-screen" class="mandatory" placeholder="E-Mail Adresse" onkeypress="checkLoginErrorEnterClick(event)"/>
+					<input type="password" id="login-password-screen" class="mandatory" placeholder="Passwort" onkeypress="checkLoginErrorEnterClick(event)"/>
 				</div>
 				<div class="field-container desktop">
 					<input type="button" value="Log-In" onclick="submitLoginScreenForm(); "/>

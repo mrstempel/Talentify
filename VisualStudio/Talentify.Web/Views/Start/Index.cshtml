@@ -1,13 +1,33 @@
-﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.FrontendLogic.Models.SearchParams>
+﻿@using System.Collections
+@using System.Web.UI.WebControls
+@using Talentify.ORM.DAL.Models.School
+@using Talentify.ORM.FrontendLogic.Models
+@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.FrontendLogic.Models.SearchParams>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+	var schoolInfos = ViewBag.AllSchools as IEnumerable<SchoolInfo>;
+}
+
 @section CustomJavascript 
 {
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=de&libraries=places,geometry" type="text/javascript"></script>
+	<script src="/Scripts/maps.js"></script>
 	<script>
+		latitude = @ViewBag.Latitude;
+		longitude = @ViewBag.Longitude;
+		google.maps.event.addDomListener(window, 'load', initBackgroundMap);
+
+		schoolLatLngs = new Array();
+		@foreach (var schoolInfo in schoolInfos)
+		{
+			<text>schoolLatLngs.push({name: '@schoolInfo.School.Name', address: '@schoolInfo.School.Address', zipCode: '@schoolInfo.School.ZipCode', city: '@schoolInfo.School.City', website: '@schoolInfo.School.Website', lat: @schoolInfo.School.Latitude, lng: @schoolInfo.School.Longitude, coachingStudentCount: @schoolInfo.CoachingStudentCount, coachingSubjectCount: @schoolInfo.CoachingSubjectCount});</text>
+		}
+
 		$(this).ready(function()
 		{
 			loadEvents();
@@ -16,6 +36,7 @@
 	</script>
 }
 
+<div class="search-map-container" id="map-container"></div>
 <div id="page-container">
 	@if (IsFirstLogin)
 	{
@@ -23,22 +44,41 @@
 	}
 	else
 	{
-		<section id="search">
-			<h1 class="desktop"><span>Die einzigartige & tolle Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
+		<section>
+			<h1 class="desktop" style="margin: 0;"><span>Die einzigartige und nachhaltige Lernhilfe -</span><br/><span>von Schüler/innen für Schüler/innen</span></h1>
+		</section>
+		<section id="start-search">
 			<article>
-				<header>
-					<div class="sprite t-button desktop"></div>
-					<h2>Lernhilfe finden</h2>
-				</header>
 				@using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @class = "form-container search" }))
 				{
 					<div class="field-container">
-						@Html.DropDownListFor(m => m.Class, AllClasses, "Schulstufe")
-						@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach")
-						<input type="submit" value="Finden"/>
+						<select name="Class" class="mandatory">
+							<option value="">Schulstufe</option>
+							<optgroup label="Volksschule">
+								<option value="1">1. Klasse</option>
+								<option value="2">2. Klasse</option>
+								<option value="3">3. Klasse</option>
+								<option value="4">4. Klasse</option>
+							</optgroup>
+							<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
+								<option value="5">1. Klasse</option>
+								<option value="6">2. Klasse</option>
+								<option value="7">3. Klasse</option>
+								<option value="8">4. Klasse</option>
+							</optgroup>
+							<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
+								<option value="9">1./5. Klasse</option>
+								<option value="10">2./6. Klasse</option>
+								<option value="11">3./7. Klasse</option>
+								<option value="12">4./8. Klasse</option>
+								<option value="13">5. Klasse</option>
+							</optgroup>
+						</select>
+						@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach", new {@class = "mandatory"})
+						<input type="submit" value="Lernhilfe Finden" onclick="return validateMandatoryOnlyForm();"/>
 					</div>
 				}
-				<p>oder<br/><a href="javascript:void(0);" class="important">Lernhilfe anbieten</a></p>
+				<p>oder<br/><a href="/Profile" class="important">Lernhilfe anbieten</a></p>
 			</article>
 		</section>
 		<section class="two-col-container" id="">
@@ -48,8 +88,9 @@
 				<div class="loading-message" id="events-container-loading">Lade Events ...</div>
 			</div>
 			<div class="col-container">
-				<h2>Stream</h2>
+				<h2>Aktivitäten</h2>
 				<div class="ajax-module" id="stream-container"></div>
+				<div id="stream-container-load-more"><a href="javascript:void(0);" onclick="loadStream();">Mehr laden</a></div>
 				<div class="loading-message" id="stream-container-loading">Lade Stream ...</div>
 			</div>
 		</section>

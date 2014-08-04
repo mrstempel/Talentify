@@ -44,5 +44,15 @@ namespace Talentify.Web.Controllers
 				return View(UnitOfWork.EventRepository.GetById(id));
 			}
 	    }
+
+		public JsonResult GetOpenSeats(int eventId)
+	    {
+		    return Json(UnitOfWork.EventRepository.GetOpenSeats(eventId), JsonRequestBehavior.AllowGet);
+	    }
+
+	    public JsonResult CancelRegistration(int eventId)
+	    {
+		    return Json(UnitOfWork.EventRepository.CancelRegistration(eventId, LoggedUser.Id), JsonRequestBehavior.AllowGet);
+	    }
     }
 }

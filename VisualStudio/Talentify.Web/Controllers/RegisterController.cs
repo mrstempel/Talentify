@@ -48,5 +48,27 @@ namespace Talentify.Web.Controllers
 			this.FormError = new FormFeedback();
 			return View(new Login());
 	    }
+
+		public ActionResult Agb()
+		{
+			return View();
+		}
+
+		public ActionResult Teacher()
+		{
+			return View(new Teacher());
+		}
+
+		[HttpPost]
+		public ActionResult Teacher(Teacher teacher)
+		{
+			var saveFeedback = UnitOfWork.TeacherRepository.Register(teacher, Request["CoachingSubjects"]);
+
+			if (saveFeedback.IsError)
+				this.FormError = saveFeedback;
+			else
+				this.FormSuccess = saveFeedback;
+			return View(teacher);
+		}
     }
 }

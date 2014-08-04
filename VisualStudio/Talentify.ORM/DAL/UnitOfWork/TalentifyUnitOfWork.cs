@@ -8,6 +8,7 @@ using KwIt.Project.Pattern.DAL.Library;
 using KwIt.Project.Pattern.DAL.UnitOfWork;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
@@ -117,13 +118,13 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private BaseUserRepository<Teacher> _teacherRepository;
-		public BaseUserRepository<Teacher> TeacherRepository
+		private TeacherRepository _teacherRepository;
+		public TeacherRepository TeacherRepository
 		{
 			get
 			{
 				if (_teacherRepository == null)
-					_teacherRepository = new BaseUserRepository<Teacher>(this.Context);
+					_teacherRepository = new TeacherRepository(this.Context);
 
 				return _teacherRepository;
 			}
@@ -270,6 +271,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 					_notificationRepository = new NotificationRepository(this.Context);
 
 				return _notificationRepository;
+			}
+		}
+
+		private BonusPointRepository _bonuspointRepository;
+		public BonusPointRepository BonuspointRepository
+		{
+			get
+			{
+				if (_bonuspointRepository == null)
+					_bonuspointRepository = new BonusPointRepository(this.Context);
+
+				return _bonuspointRepository;
 			}
 		}
 

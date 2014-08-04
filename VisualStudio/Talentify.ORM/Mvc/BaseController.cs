@@ -50,10 +50,6 @@ namespace Talentify.ORM.Mvc
 		public BaseController()
 		{
 			WebContext = new WebContext(this.UnitOfWork);
-
-			// kill search session if necessary
-			if (!KeepSearchSessionAlive)
-				WebContext.SearchSession = null;
 		}
 
 		protected override void Dispose(bool disposing)

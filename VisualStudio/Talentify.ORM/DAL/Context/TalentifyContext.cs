@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KwIt.Project.Pattern.DAL.Context;
 using Talentify.ORM.DAL.Models;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
@@ -57,6 +58,9 @@ namespace Talentify.ORM.DAL.Context
 		// notification
 		public DbSet<Notification> Notifications { get; set; }
 
+		// achievements
+		public DbSet<BonusPoint> BonusPoints { get; set; }
+
 		public TalentifyContext() : base("EFConnectionString")
 		{
 			this.Configuration.LazyLoadingEnabled = true;
@@ -104,6 +108,9 @@ namespace Talentify.ORM.DAL.Context
 
 			// notifications
 			modelBuilder.Configurations.Add(new NotificationMap());
+
+			// achievements
+			modelBuilder.Configurations.Add(new BonusPointMap());
 			
 			base.OnModelCreating(modelBuilder);
 		}

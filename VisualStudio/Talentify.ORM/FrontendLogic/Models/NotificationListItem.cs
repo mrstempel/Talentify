@@ -14,5 +14,6 @@ namespace Talentify.ORM.FrontendLogic.Models
 		public string Text { get; set; }
 		public NotificationIconType IconType { get; set; }
 		public bool IsNew { get; set; }
+		public int Bonus { get; set; }
 	}
 }

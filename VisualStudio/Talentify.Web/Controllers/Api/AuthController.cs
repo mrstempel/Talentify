@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,7 +32,13 @@ namespace Talentify.Web.Controllers.Api
 		public JsonResult Logout()
 		{
 			WebSecurity.Logout();
-			this.WebContext.User = null;
+			this.WebContext.ClearContext();
+			return Json(true, JsonRequestBehavior.AllowGet);
+		}
+
+		public JsonResult DeleteAccount()
+		{
+			UnitOfWork.StudentRepository.DeleteAccount(LoggedUser.Id, Server.MapPath("~" + ConfigurationManager.AppSettings["Upload.Profile"]));
 			return Json(true, JsonRequestBehavior.AllowGet);
 		}
     }

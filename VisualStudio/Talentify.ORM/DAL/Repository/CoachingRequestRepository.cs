@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Configuration;
 using System.Data.Entity.Core;
 using System.Linq;
@@ -9,7 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using KwIt.Project.Pattern.Utils;
+using MoreLinq;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
@@ -109,7 +112,12 @@ namespace Talentify.ORM.DAL.Repository
 				orderby coachingRequest.CreatedDate descending 
 				select coachingRequest;
 
-			return requests;
+			//var groupedRequests = from g in requests
+			//	group g by g.Id
+			//	into requestGrouped
+			//	select requestGrouped.AsQueryable().ToList();
+
+			return requests.DistinctBy(r => r.Id);
 		}
 
 		public CoachingRequestStream GetStream(int coachingRequestId)
@@ -158,7 +166,7 @@ namespace Talentify.ORM.DAL.Repository
 								   sType = status.StatusType
 							   }).FirstOrDefault();
 
-			return (openRequest != null && (openRequest.sType != StatusType.Completed || openRequest.sType != StatusType.Canceled));
+			return (openRequest != null && openRequest.sType != StatusType.Completed && openRequest.sType != StatusType.Canceled);
 		}
 
 		public CoachingRequestStatus UpdateStatus(int coachingRequestId, StatusType status, BaseUser fromUser)
@@ -199,7 +207,7 @@ namespace Talentify.ORM.DAL.Repository
 				Text = notificationMessage,
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.CoachingRequest,
-				IconType = (status != StatusType.Canceled) ? NotificationIconType.Confirmed : NotificationIconType.Cancelled
+				IconType = (status != StatusType.Canceled && status != StatusType.Rejected) ? NotificationIconType.Confirmed : NotificationIconType.Cancelled
 			};
 			UnitOfWork.NotificationRepository.Insert(notifiction);
 			UnitOfWork.Save();
@@ -207,7 +215,7 @@ namespace Talentify.ORM.DAL.Repository
 			return newStatus;
 		}
 
-		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser)
+		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser, bool setBonus = true)
 		{
 			var coachingRequest = GetById(coachingRequestId);
 
@@ -250,12 +258,18 @@ namespace Talentify.ORM.DAL.Repository
 			Update(coachingRequest);
 			UnitOfWork.Save();
 
+			if (setBonus)
+			{
+				var bonusUserId = coachingRequest.FromUserId == fromUser.Id ? coachingRequest.FromUserId : coachingRequest.ToUserId;
+				SetCoachingRequestBonus(coachingRequest, bonusUserId);
+			}
+
 			return true;
 		}
 
 		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser, DateTime date, int duration)
 		{
-			var isRatingOkay = SetCoachingRequestRating(coachingRequestId, val1, val2, val3, fromUser);
+			var isRatingOkay = SetCoachingRequestRating(coachingRequestId, val1, val2, val3, fromUser, false);
 			if (isRatingOkay)
 			{
 				var coachingRequest = GetById(coachingRequestId);
@@ -263,10 +277,28 @@ namespace Talentify.ORM.DAL.Repository
 				coachingRequest.Duration = duration;
 				Update(coachingRequest);
 				UnitOfWork.Save();
+
+				var bonusUserId = coachingRequest.FromUserId == fromUser.Id ? coachingRequest.ToUserId : coachingRequest.FromUserId;
+				SetCoachingRequestBonus(coachingRequest, bonusUserId);
+
 				return true;
 			}
 
 			return false;
+		}
+
+		private void SetCoachingRequestBonus(CoachingRequest coachingRequest, int bonusUserId)
+		{
+			// check if both ratings are set
+			if (coachingRequest.Ratings != null && coachingRequest.Ratings.Count > 3)
+			{
+				// set bonuspoints
+				var bonuspoints = Convert.ToInt32(BonusPointsFor.CoachingOfferCompleted*coachingRequest.Duration);
+				if (coachingRequest.Price < 5)
+					bonuspoints = bonuspoints*2;
+
+				UnitOfWork.BonuspointRepository.Insert(bonusUserId, bonuspoints, "Bestätigte Lernhilfe");
+			}
 		}
 	}
 }

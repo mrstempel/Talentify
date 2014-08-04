@@ -9,7 +9,20 @@
 	$(this).ready(function()
 	{
 		loadMyProfileCoachings(false, @Model.Id);
+		setProfileCoachingPrice(@Model.CoachingPrice);
 	});
+
+	function setProfileCoachingPrice(price)
+	{
+		if (price > 0)
+		{
+			$('#price-tag').html(price.toFixed(0) + " €");
+		}
+		else
+		{
+			$('#price-tag').html('kostenlos');
+		}
+	}
 </script>
 
 
@@ -38,7 +51,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="for-input">Preis/h:</label><span class="tag">@Model.CoachingPrice €</span>
+						<label class="for-input">Preis/h:</label><span class="tag" id="price-tag"></span>
 					</div>
 				</div>
 			}

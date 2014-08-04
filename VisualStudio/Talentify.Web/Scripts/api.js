@@ -73,6 +73,28 @@ function logout()
 	});
 }
 
+function deleteAccount()
+{
+	if (confirm("Willst du dein Konto wirklich löschen?"))
+	{
+		$.ajax({
+			url: '/Auth/DeleteAccount',
+			type: 'get',
+			async: true,
+			success: function(data)
+			{
+				if (data)
+				{
+					logout();
+				}
+			},
+			error: function(request, status, error)
+			{
+			}
+		});
+	}
+}
+
 function setInputSwitch(id, url)
 {
 	changeInputSwitch(id);
@@ -166,7 +188,7 @@ function setClassDropdown(schoolListId, classListId, selectedClass)
 		{
 			$.each(data, function(i, option)
 			{
-				$('#' + classListId).append($('<option/>').attr("value", option).text(option + ". Schulstufe"));
+				$('#' + classListId).append($('<option/>').attr("value", option).text(option + ". Klasse"));
 			});
 			if (selectedClass != 0)
 			{
@@ -182,10 +204,22 @@ function setClassDropdown(schoolListId, classListId, selectedClass)
 
 function loadStream()
 {
-	$('#stream-container').load('/Start/Stream', function ()
+	$('#stream-container-loading').show();
+	$('#stream-container-load-more').hide();
+
+	$.get('/Start/Stream', function (data)
 	{
-		$('#stream-container-loading').hide();
-		$('#stream-container').fadeIn('medium');
+		if (data.length > 0)
+		{
+			$('#stream-container').html($('#stream-container').html() + data);
+			$('#stream-container-loading').hide();
+			$('#stream-container').fadeIn('medium');
+			$('#stream-container-load-more').fadeIn('medium');
+		}
+		else
+		{
+			$('#stream-container-loading').hide();
+		}
 	});
 }
 
@@ -213,7 +247,15 @@ function loadMyProfileCoachings(isMyProfile, id)
 				$('#my-offers').html('');
 				jQuery.each(data, function (key, val)
 				{
-					$('#my-offers').html($('#my-offers').html() + '<a href="javascript:void(0);" class="link-button" onclick="loadEditCoachingForm(' + val['Id'] + ')" data-ot="' + val['Comments'] + '">' + val['SubjectCategory']['Name'] + '</a>');
+					if (isMyProfile)
+					{
+						$('#my-offers').html($('#my-offers').html() + '<a href="javascript:void(0);" class="link-button" onclick="loadEditCoachingForm(' + val['Id'] + ')" data-ot="' + val['Comments'] + '">' + val['SubjectCategory']['Name'] + '</a>');
+					}
+					else
+					{
+
+						$('#my-offers').html($('#my-offers').html() + '<a href="javascript:void(0);" class="link-button" onclick="loadRequestCoachingForm(\'' + id + '\', \'0\', \'' + val['SubjectCategory']['Id'] + '\')" data-ot="' + val['Comments'] + '">' + val['SubjectCategory']['Name'] + '</a>');
+					}
 				});
 				$("#my-offers a").each(function ()
 				{
@@ -274,13 +316,30 @@ function loadRequestCoachingForm(toId, searchClass, subjectCategoryId)
 
 function searchCoaching()
 {
-	$('#search-results').hide();
-	$('#search-loading').show();
-	$('#search-results').load('/Search/Search?Class=' + $('#Class').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function ()
+	if (validateMandatoryOnlyForm())
 	{
-		$('#search-loading').hide();
-		$('#search-results').fadeIn('medium');
-	});
+		$('#search-results').hide();
+		$('#search-loading').show();
+		$('#search-results').load('/Search/Search?Class=' + $('#Class').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function()
+		{
+			$('#search-loading').hide();
+			$('#search-results').fadeIn('medium');
+		});
+	}
+}
+
+function searchTeachers()
+{
+	if (validateMandatoryOnlyForm())
+	{
+		$('#search-results').hide();
+		$('#search-loading').show();
+		$('#search-results').load('/Teacher/Search?SchoolId=' + $('#SchoolId').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function ()
+		{
+			$('#search-loading').hide();
+			$('#search-results').fadeIn('medium');
+		});
+	}
 }
 
 function loadEventRegistrationForm(id)
@@ -293,7 +352,7 @@ function loadEventOpenSeats(id)
 {
 	$('#event-open-seats').html('lade freie Plätze ...');
 	$.ajax({
-		url: '/FormHelper/GetEventOpenSeats',
+		url: '/Events/GetOpenSeats',
 		type: 'get',
 		async: true,
 		data: { eventId: id },
@@ -301,11 +360,11 @@ function loadEventOpenSeats(id)
 		{
 			if (data)
 			{
-				$('#event-open-seats').html(data);
+				$('#event-open-seats').html('Noch freie Plätze: ' + data);
 			}
 			else
 			{
-				$('#event-open-seats').html('0');
+				$('#event-open-seats').html('Keine Plätze mehr frei');
 			}
 		},
 		error: function (request, status, error)
@@ -313,6 +372,32 @@ function loadEventOpenSeats(id)
 			$('#event-open-seats').html('0');
 		}
 	});
+}
+
+function cancelEventRegistration(id)
+{
+	if (confirm('Willst du dich wirklich abmelden?'))
+	{
+		$.ajax({
+			url: '/Events/CancelRegistration',
+			type: 'get',
+			async: true,
+			data: { eventId: id },
+			success: function (data)
+			{
+				if (data)
+				{
+					loadEventOpenSeats(id);
+					$('#register-link').css('display', 'inline-block');
+					$('#unregister-link').hide();
+					$('#registered').hide();
+				}
+			},
+			error: function (request, status, error)
+			{
+			}
+		});
+	}
 }
 
 function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
@@ -386,7 +471,7 @@ function setNotificationCount(count, doFadeIn)
 	else
 	{
 		imgSrc = $(icon).attr('id') + '.png';
-		$(icon).attr('src', '/Images/' + imgSrc);
+		//$(icon).attr('src', '/Images/' + imgSrc);
 		$('#notification-count').hide();
 		if (lastKlammer != -1)
 			document.title = document.title.substring(0, lastKlammer);

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web.Mvc;
+using Talentify.ORM.DAL.Library;
 using Talentify.ORM.DAL.Models.Coaching;
 
 namespace Talentify.ORM.Mvc
@@ -29,6 +30,18 @@ namespace Talentify.ORM.Mvc
 					_allCoachingSubjects = new SelectList(BaseController.UnitOfWork.SubjectCategoryRepository.Get(), "Id", "Name");
 
 				return _allCoachingSubjects;
+			}
+		}
+
+		private IEnumerable<IFormCheckable> _allCoachingSubjectsCheckable;
+		public IEnumerable<IFormCheckable> AllCoachingSubjectsCheckable
+		{
+			get
+			{
+				if (_allCoachingSubjectsCheckable == null)
+					_allCoachingSubjectsCheckable = BaseController.UnitOfWork.SubjectCategoryRepository.Get();
+
+				return _allCoachingSubjectsCheckable;
 			}
 		}
 

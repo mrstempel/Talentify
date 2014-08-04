@@ -19,7 +19,51 @@
 				<label>Ich gebe Lernhilfe in:</label>
 				@Html.DropDownListFor(m => m.SubjectCategoryId, OpenCoachingSubjects, "bitte auswählen", new {@class = "mandatory"})
 				<label>Schulstufe:</label>
-				@Html.DropDownListFor(m => m.FromClass, AllClasses, "bitte auswählen", new {@class = "mandatory", @style = "width:252px;margin-right: 5px;"}) bis @Html.DropDownListFor(m => m.ToClass, AllClasses, "bitte auswählen", new {@class = "mandatory", @style = "margin-left: 5px;width:252px;"})
+				<select style="width:252px;margin-right: 5px;" class="mandatory" name="FromClass">
+					<option value="">bitte auswählen</option>
+					<optgroup label="Volksschule">
+						<option value="1">1. Klasse</option>
+						<option value="2">2. Klasse</option>
+						<option value="3">3. Klasse</option>
+						<option value="4">4. Klasse</option>
+					</optgroup>
+					<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
+						<option value="5">1. Klasse</option>
+						<option value="6">2. Klasse</option>
+						<option value="7">3. Klasse</option>
+						<option value="8">4. Klasse</option>
+					</optgroup>
+					<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
+						<option value="9">1./5. Klasse</option>
+						<option value="10">2./6. Klasse</option>
+						<option value="11">3./7. Klasse</option>
+						<option value="12">4./8. Klasse</option>
+						<option value="13">5. Klasse</option>
+					</optgroup>
+				</select>
+				bis 
+				<select style="width:252px;margin-left: 5px;" class="mandatory" name="ToClass">
+					<option value="">bitte auswählen</option>
+					<optgroup label="Volksschule">
+						<option value="1">1. Klasse</option>
+						<option value="2">2. Klasse</option>
+						<option value="3">3. Klasse</option>
+						<option value="4">4. Klasse</option>
+					</optgroup>
+					<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
+						<option value="5">1. Klasse</option>
+						<option value="6">2. Klasse</option>
+						<option value="7">3. Klasse</option>
+						<option value="8">4. Klasse</option>
+					</optgroup>
+					<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
+						<option value="9">1./5. Klasse</option>
+						<option value="10">2./6. Klasse</option>
+						<option value="11">3./7. Klasse</option>
+						<option value="12">4./8. Klasse</option>
+						<option value="13">5. Klasse</option>
+					</optgroup>
+				</select>
 				<label>Weitere Informationen:</label>
 				@Html.TextAreaFor(m => m.Comments, new {@maxlength = "140"})
 			</div>

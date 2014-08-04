@@ -168,20 +168,22 @@ function setOtherCoachingRatings(myVal1, myVal2, myVal3)
 	$('#span-preis-' + myVal3).addClass('selected');
 }
 
-function cancelCoachingRequest(coachingRequestId, reason)
+function rejectCoachingRequest(coachingRequestId)
 {
-
 	$.ajax({
 		url: '/CoachingCenter/CancelRequest',
 		type: 'get',
 		async: true,
-		data: { coachingRequestId: coachingRequestId, reason: reason },
+		data: { coachingRequestId: coachingRequestId, reason: null },
 		success: function (data)
 		{
 			if (data && !data.error)
 			{
 				$('#status-update-error').hide();
-				disableCoachingFeedbackForm();
+				// hide confirm options
+				$('#status-update-confirm').hide();
+				// hide messaging form
+				$('#new-message-form').hide();
 				addCoachingRequestStatusToTimeline(data.status);
 			}
 			else
@@ -193,10 +195,29 @@ function cancelCoachingRequest(coachingRequestId, reason)
 	});
 }
 
-function cancelCoachingRequestWithReason(coachingRequestId, reason)
+function cancelCoachingRequest(coachingRequestId, reason)
 {
 	if (validateMandatoryFields())
 	{
-		cancelCoachingRequest(coachingRequestId, reason);
+		$.ajax({
+			url: '/CoachingCenter/CancelRequest',
+			type: 'get',
+			async: true,
+			data: { coachingRequestId: coachingRequestId, reason: reason },
+			success: function (data)
+			{
+				if (data && !data.error)
+				{
+					$('#status-update-error').hide();
+					disableCoachingFeedbackForm();
+					addCoachingRequestStatusToTimeline(data.status);
+				}
+				else
+				{
+					$('#status-update-error').fadeIn();
+				}
+			},
+			error: function (request, status, error) { }
+		});
 	}
 }

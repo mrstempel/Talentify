@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using KwIt.Project.Pattern.DAL.Models;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.Utils;
 
@@ -58,6 +59,12 @@ namespace Talentify.ORM.DAL.Models.User
 		public Guid? PictureGuid { get; set; }
 		public bool IsPictureLandscape { get; set; }
 
+		public bool IsDeleted { get; set; }
+
+		public ICollection<BonusPoint> BonusPoints { get; set; } 
+
+		#region Frontend Properties
+
 		// frontend properties
 		public string FormattedAddress
 		{
@@ -106,6 +113,8 @@ namespace Talentify.ORM.DAL.Models.User
 					"/Images/default-profile-large.png";
 			}
 		}
+
+		#endregion
 	}
 
 	public class BaseUserMap : EntityTypeConfiguration<BaseUser>

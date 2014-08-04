@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -53,8 +54,36 @@ namespace Talentify.ORM.DAL.Repository
 
 			// set password hash
 			student.Password = PasswordHashing.CalculateSha1(student.Password);
-			// base register (saves student in database)
-			var registerFeedback = base.Register(student);
+			var registerFeedback = new FormFeedback() { IsError = false };
+			try
+			{
+				// set dates
+				student.JoinedDate = DateTime.Now;
+				// create register code
+				student.RegisterCode = Guid.NewGuid();
+				// set default settings
+				if (!student.SettingsId.HasValue && student.Settings == null)
+				{
+					AddDefaultSettings(student);
+				}
+				// insert user
+				Insert(student);
+				// create default subscription
+				var subscription = new Subscription()
+				{
+					Membership = UnitOfWork.MembershipRepository.AsQueryable().FirstOrDefault(m => m.Type == MembershipType.Free),
+					User = student,
+					PurchaseDate = DateTime.Now
+				};
+				// insert default subscription
+				UnitOfWork.SubscriptionRepository.Insert(subscription);
+				// commit to database
+				UnitOfWork.Save();
+			}
+			catch (Exception ex)
+			{
+				registerFeedback = new FormFeedback() { IsError = true, Text = ex.Message };
+			}
 
 			if (!registerFeedback.IsError)
 			{
@@ -77,5 +106,61 @@ namespace Talentify.ORM.DAL.Repository
 
 			base.Update(entity);
 		}
+
+		#region Delete
+
+		public void DeleteAccount(int userId, string uploadPath)
+		{
+			// delete all coaching offers from this user
+			var coachingOffers = UnitOfWork.CoachingOfferRepository.Get(c => c.UserId == userId);
+			//while (coachingOffers.Count() > 0)
+			foreach (var offer in coachingOffers)
+			{
+				// delete offer
+				UnitOfWork.CoachingOfferRepository.Delete(offer);
+			}
+
+			UnitOfWork.Save();
+
+			var student = GetById(userId);
+			var pictureGuid = student.PictureGuid;
+			// reset user data
+			student.IsDeleted = true;
+			student.Email = null;
+			student.Password = null;
+			student.Firstname = "Gelöschter";
+			student.Surname = "Benutzer";
+			student.BirthDate = null;
+			student.Address = null;
+			student.ZipCode = null;
+			student.City = null;
+			student.Country = null;
+			student.Phone = null;
+			student.RegisterCode = null;
+			student.PictureGuid = null;
+			student.Gender = null;
+			// reset student data
+			student.School = null;
+			student.Class = 0;
+			student.AboutMe = null;
+			student.IsCoachingEnabled = false;
+			student.CoachingPrice = 0;
+			Update(student);
+			UnitOfWork.Save();
+			
+			// delete avatar
+			if (pictureGuid.HasValue)
+			{
+				var filenameSmall = pictureGuid.Value.ToString() + "_small.png";
+				var filenameMedium = pictureGuid.Value.ToString() + "_medium.png";
+				var filenameLarge = pictureGuid.Value.ToString() + "_large.png";
+
+				System.IO.File.Delete(Path.Combine(uploadPath, filenameSmall));
+				System.IO.File.Delete(Path.Combine(uploadPath, filenameMedium));
+				System.IO.File.Delete(Path.Combine(uploadPath, filenameLarge));
+			}
+		}
+
+		#endregion
 	}
 }

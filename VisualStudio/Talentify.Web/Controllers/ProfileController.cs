@@ -13,11 +13,6 @@ namespace Talentify.Web.Controllers
 {
     public class ProfileController : BaseController
     {
-	    public override bool KeepSearchSessionAlive
-	    {
-		    get { return true; }
-	    }
-
 	    public ActionResult Index(int id = 0, bool f = false)
         {
 	        var user = (id == 0)
@@ -26,11 +21,6 @@ namespace Talentify.Web.Controllers
 
 			ViewBag.CompletionCount = UnitOfWork.StudentRepository.GetProfileCompleteStatus(user);
 			ViewBag.CompletionCountFull = 100 - ViewBag.CompletionCount;
-
-		    if (HasSearchSession)
-		    {
-			    SetSearchSession(id);
-		    }
 
 			if (f)
 				FormSuccess = new FormFeedback() { AutoClose = true };
@@ -86,6 +76,17 @@ namespace Talentify.Web.Controllers
 		{
 			try
 			{
+				try
+				{
+					if (!string.IsNullOrEmpty(Request["birthday_day"]) && !string.IsNullOrEmpty(Request["birthday_month"]) &&
+					    !string.IsNullOrEmpty(Request["birthday_year"]))
+					{
+						student.BirthDate = new DateTime(Convert.ToInt32(Request["birthday_year"]), Convert.ToInt32(Request["birthday_month"]), Convert.ToInt32(Request["birthday_day"]));
+					}
+				}
+				catch (Exception){}
+
+
 				UnitOfWork.StudentRepository.Update(student);
 				UnitOfWork.Save();
 				return RedirectToAction("Index", new { id = 0, f = true });
@@ -156,18 +157,23 @@ namespace Talentify.Web.Controllers
 	    public ActionResult EditCoachingPrice()
 	    {
 		    var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
-		    ViewBag.Price = student.CoachingPrice;
+		    ViewBag.Price = Convert.ToInt32(student.CoachingPrice);
 			return View();
 	    }
 
 		[HttpPost]
-		public ActionResult EditCoachingPrice(decimal price)
+		public ActionResult EditCoachingPrice(decimal? price)
 		{
-			ViewBag.Price = price;
+			if (!price.HasValue)
+			{
+				price = 0;
+			}
+
+			ViewBag.Price = Convert.ToInt32(price.Value);
 			try
 			{
 				var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
-				student.CoachingPrice = price;
+				student.CoachingPrice = price.Value;
 				UnitOfWork.StudentRepository.Update(student, false);
 				UnitOfWork.Save();
 				FormSuccess = new FormFeedback();

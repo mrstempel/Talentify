@@ -1,4 +1,5 @@
-﻿@model Talentify.ORM.DAL.Models.Content.Event
+﻿@using System.Globalization
+@model Talentify.ORM.DAL.Models.Content.Event
 
 @{
     ViewBag.Title = "Detail";
@@ -16,7 +17,7 @@
 	<script>
 		latitude = @Model.Latitude;
 		longitude = @Model.Longitude;
-		google.maps.event.addDomListener(window, 'load', initMap);
+		google.maps.event.addDomListener(window, 'load', initEventMap);
 
 		$(this).ready(function()
 		{
@@ -30,6 +31,7 @@
 		function disableRegistration()
 		{
 			$('#register-link').hide();
+			$('#unregister-link').css('display', 'inline-block');
 			$('#registered').css('display', 'inline-block');
 		}
 	</script>
@@ -54,6 +56,7 @@
 			<div class="right">
 				<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
 				<span id="registered" class="link-button">Du bist angemeldet</span>
+				<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
 				<div class="map-container" id="map-container"></div>
 				<div class="address">
 					<span class="important">Zeit und Ort</span><br/>
@@ -63,11 +66,10 @@
 					@Model.Country
 				</div>
 				<div class="time">
-					@Model.BeginDate.ToString("dddd d.M.yyyy")<br/>
+					@Model.BeginDate.ToString("dddd d.M.yyyy", new CultureInfo("de"))<br/>
 					von @Model.BeginTime bis @Model.EndTime
 				</div>
 				<div class="open-seats">
-					<p>Noch Freie Plätze</p>
 					<span id="event-open-seats"></span>
 				</div>
 			</div>

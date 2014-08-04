@@ -13,7 +13,7 @@ namespace Talentify.ORM.DAL.Models.User
 	{
 		public int SchoolId { get; set; }
 		private School.School _school;
-		public School.School School
+		public virtual School.School School
 		{
 			get { return _school; }
 			set
@@ -24,7 +24,7 @@ namespace Talentify.ORM.DAL.Models.User
 			}
 		}
 
-		public ICollection<SubjectCategory> SubjectCategories { get; set; } 
+		public virtual ICollection<SubjectCategory> SubjectCategories { get; set; } 
 	}
 
 	public class TeacherMap : EntityTypeConfiguration<Teacher>
@@ -35,6 +35,11 @@ namespace Talentify.ORM.DAL.Models.User
 			this.ToTable("Teacher");
 			// Primary Key
 			this.HasKey(t => t.Id);
+
+			// user-groups relation
+			this.HasMany(t => t.SubjectCategories)
+				.WithMany(t => t.Teachers)
+				.Map(m => { m.ToTable("SubjectCategoriesToTeachers"); });
 		}
 	}
 }

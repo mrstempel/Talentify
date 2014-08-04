@@ -19,7 +19,7 @@
 			<div id="msg-success" class="msg success"><h2>Dein Profil wurde erfolgreich aktualisiert.</h2></div>
 		</article>
 	</section>
-	@if (HasSearchSession)
+	@*@if (HasSearchSession)
 	{
 		<section id="search-session-view">
 			<article>
@@ -40,7 +40,7 @@
 				</div>
 			</article>
 		</section>
-	}
+	}*@
 	@if (Model.Id == LoggedUser.Id)
 	{
 		@Html.Partial("_MyProfile")

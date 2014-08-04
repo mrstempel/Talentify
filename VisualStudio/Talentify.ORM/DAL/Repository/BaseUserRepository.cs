@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Configuration;
 using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.FrontendLogic.Models;
@@ -40,42 +41,6 @@ namespace Talentify.ORM.DAL.Repository
 
 		#region Register
 
-		public virtual FormFeedback Register(TEntity user)
-		{
-			try
-			{
-				// set dates
-				user.JoinedDate = DateTime.Now;
-				// create register code
-				user.RegisterCode = Guid.NewGuid();
-				// set default settings
-				if (!user.SettingsId.HasValue && user.Settings == null)
-				{
-					AddDefaultSettings(user);
-				}
-				// insert user
-				Insert(user);
-				// create default subscription
-				var subscription = new Subscription()
-				{
-					Membership = UnitOfWork.MembershipRepository.AsQueryable().FirstOrDefault(m => m.Type == MembershipType.Free),
-					User = user,
-					PurchaseDate = DateTime.Now
-				};
-				// insert default subscription
-				UnitOfWork.SubscriptionRepository.Insert(subscription);
-				// commit to database
-				UnitOfWork.Save();
-
-				return new FormFeedback() { IsError = false };
-			}
-			catch (Exception ex)
-			{
-				
-				return new FormFeedback() { IsError = true, Text = ex.Message };
-			}
-		}
-
 		public void AddDefaultSettings(TEntity user)
 		{
 			user.Settings = new UserSettings() { HasNewsletter = true, HasNotifications = true };
@@ -89,6 +54,9 @@ namespace Talentify.ORM.DAL.Repository
 			{
 				user.RegisterCode = null;
 				UnitOfWork.Save();
+
+				// add bonuspoints for registration
+				UnitOfWork.BonuspointRepository.Insert(user.Id, BonusPointsFor.Register, "Erfolgreiche Registrierung");
 				return user;
 			}
 
@@ -176,6 +144,19 @@ namespace Talentify.ORM.DAL.Repository
 			}
 
 			var completeteStatus = (int)(((double)completionValueCount/completionFieldCount)*100);
+
+			// check if profile is 100% complete and no bonus points where rewarded for that
+			if (completeteStatus == 100)
+			{
+				var profileBonus =
+					UnitOfWork.BonuspointRepository.AsQueryable().FirstOrDefault(b => b.Message == "Profildaten vollständig" && b.UserId == entity.Id);
+				if (profileBonus == null)
+				{
+					// add bonuspoints for registration
+					UnitOfWork.BonuspointRepository.Insert(entity.Id, BonusPointsFor.ProfileFull, "Profildaten vollständig");
+				}
+			}
+
 			return completeteStatus;
 		}
 

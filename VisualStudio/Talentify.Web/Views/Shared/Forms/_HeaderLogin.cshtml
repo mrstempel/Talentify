@@ -1,4 +1,16 @@
 ﻿<h1><a href="/"><img src="/Images/logo.png" alt="talentify"/></a></h1>
+<script>
+	function checkLoginEnterClick(e)
+	{
+		if (e.keyCode == 13)
+		{
+			login();
+			return false;
+		}
+
+		return true;
+	}
+</script>
 <div class="login" id="header-login">
-	<input type="text" id="login-email" placeholder="E-Mail Adresse"/><input type="password" id="login-password" placeholder="Passwort"/><a href="javascript:void(0);" onclick="login()" class="link-button desktop">Log-In</a>
+	<input type="text" id="login-email" placeholder="E-Mail Adresse"/><input type="password" id="login-password" placeholder="Passwort" onkeypress="checkLoginEnterClick(event)"/><a href="javascript:void(0);" onclick="login()" class="link-button desktop">Login</a>
 </div>
