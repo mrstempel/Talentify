@@ -1,9 +1,14 @@
 ﻿@model Talentify.ORM.DAL.Models.Content.Event
 
-<article class="event-preview">
+@{
+	var cssClass = Model.BeginDate < DateTime.Now ? "past" : string.Empty;
+	var linkText = Model.BeginDate < DateTime.Now ? "Details anzeigen" : "Hier geht's zur Anmeldung";
+}
+
+<article class="event-preview @cssClass" onclick="location.href='/Events/Detail/@Model.Id'">
 	<a href="/Events/Detail/@Model.Id"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt=""/></a>
 	<h3>@Html.Raw(Model.Title)</h3>
 	@Model.BeginDate.ToString("dd.MM.yyyy") | @Model.BeginTime - @Model.EndTime
 	<p>@Html.Raw(Model.Content.Substring(0, 105))...</p>
-	<a href="/Events/Detail/@Model.Id">Hier geht's zur Anmeldung</a>
+	<a href="/Events/Detail/@Model.Id">@linkText</a>
 </article>	

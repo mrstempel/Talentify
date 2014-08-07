@@ -22,5 +22,10 @@ namespace Talentify.Web.Controllers
 			var list = UnitOfWork.NotificationRepository.GetPopupList(LoggedUser.Id);
 		    return View(list);
 	    }
+
+	    public ActionResult AllNotifications()
+	    {
+		    return View(UnitOfWork.NotificationRepository.GetAll(LoggedUser.Id));
+	    }
     }
 }

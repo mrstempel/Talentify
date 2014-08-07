@@ -483,7 +483,7 @@ input[type="text"].mandatory, input[type="password"].mandatory
 	color: #fff;
 	margin: 0 0 10px 0;
 }
-#notification-list
+#notification-list, .all-notifications
 {
 	@extend .box-sizing;
 	width: 100%;
@@ -537,6 +537,27 @@ input[type="text"].mandatory, input[type="password"].mandatory
 		background-repeat: no-repeat;
 		background-position: right 5px top 5px;
 	}
+}
+.all-notifications
+{
+	.date 
+	{
+		@extend .box-sizing;
+		padding: 5px 5px;
+		font-size: 16px;
+		font-family: $font-bold;
+		margin: 20px 0 0 0;
+		display: inline-block;
+		width: 100%;
+		background: $color-green;
+		color: #fff;
+	}
+	.item
+	{
+		background-color: #fff;
+		.text { width: auto; }
+	}
+	.item:hover { background-color: #e6f7f3; color: #555; }
 }
 
 .nav-menu
@@ -888,6 +909,7 @@ header.search-map-overlay
 		margin: 0 0 20px 0;
 		padding: 10px;
 		img { float: left; margin-right: 10px; }
+		cursor: pointer;
 		.image-link
 		{
 			background-repeat: no-repeat;
@@ -912,6 +934,10 @@ header.search-map-overlay
 	article:nth-child(2n)
 	{
 		float: right !important;
+	}
+	article:hover
+	{
+		background: #e6f7f3;
 	}
 }
 
@@ -998,9 +1024,20 @@ header.search-map-overlay
 
 article.event-preview
 {
+	cursor: pointer;
 	h3 { text-align: left; }
 	p { text-align: left !important; margin: 10 0 10px 0; }
 	img { float: left; margin: 0 10px 0 0; }
+}
+article.event-preview:hover, article.event-preview.past:hover
+{
+	background: #e6f7f3;
+}
+article.event-preview.past
+{
+	background: #effdfa;
+	color: #999;
+	img { opacity: 0.7; }
 }
 
 article.event-detail
@@ -1104,6 +1141,13 @@ article.event-detail
 		}
 	}
 }
+#past-event-options
+{
+	@extend .box-sizing;
+	width: 100%;
+	min-height: 95px;
+	display: none;
+}
 #registered 
 { 
 	background: #ef4d69;
@@ -1114,11 +1158,13 @@ article.event-detail
 
 #event-overview
 {
+	margin: 20px 0 0 0;
+	padding: 10px;
 	article
 	{
 		@extend .box-sizing;
 		@include shadow($color-shadow, 5px);
-		width: 49%;
+		width: 48%;
 		margin: 10px 22px 10px 0 !important;
 		padding: 10px;
 		float: left;
@@ -1396,6 +1442,7 @@ article.event-detail
 				margin: 0;
 				color: $color-red !important;
 			}
+			span.small { font-size: 14px; }
 		}
 		.details.out 
 		{ 
@@ -1407,14 +1454,13 @@ article.event-detail
 		{
 			@extend .box-sizing;
 			float: left;
-			width: 100%;
-			margin: 10px 0 0 0;
-			border-top: 1px solid $color-border;
-			padding: 10px 0 0 0;
+			width: 220px;
+			padding: 5px 0 0 25px;
+			font-size: 14px;
 			span
 			{
 				width: auto;
-				margin: 0 20px 0 0;
+				margin: 0 10px 0 0;
 			}
 		}
 	}

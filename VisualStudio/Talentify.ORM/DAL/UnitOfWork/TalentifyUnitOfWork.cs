@@ -142,13 +142,13 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private IRepository<ActionToken> _actionTokenRepository;
-		public IRepository<ActionToken> ActionTokenRepository
+		private ActionTokenRepository _actionTokenRepository;
+		public ActionTokenRepository ActionTokenRepository
 		{
 			get
 			{
 				if (_actionTokenRepository == null)
-					_actionTokenRepository = new TalentifyRepository<ActionToken>(this.Context);
+					_actionTokenRepository = new ActionTokenRepository(this.Context);
 
 				return _actionTokenRepository;
 			}
@@ -283,6 +283,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 					_bonuspointRepository = new BonusPointRepository(this.Context);
 
 				return _bonuspointRepository;
+			}
+		}
+
+		private BadgeRepository _badgeRepository;
+		public BadgeRepository BadgeRepository
+		{
+			get
+			{
+				if (_badgeRepository == null)
+					_badgeRepository = new BadgeRepository(this.Context);
+
+				return _badgeRepository;
 			}
 		}
 

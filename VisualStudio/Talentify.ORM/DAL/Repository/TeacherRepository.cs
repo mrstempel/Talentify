@@ -50,7 +50,11 @@ namespace Talentify.ORM.DAL.Repository
 				teacher.SubjectCategories = new List<SubjectCategory>();
 				foreach (var s in subjectList)
 				{
-					teacher.SubjectCategories.Add(UnitOfWork.SubjectCategoryRepository.GetById(Convert.ToInt32(s)));
+					try
+					{
+						teacher.SubjectCategories.Add(UnitOfWork.SubjectCategoryRepository.GetById(Convert.ToInt32(s)));
+					}
+					catch (Exception) {}
 				}
 				// insert user
 				Insert(teacher);

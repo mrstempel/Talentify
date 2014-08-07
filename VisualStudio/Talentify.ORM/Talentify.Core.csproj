@@ -86,9 +86,11 @@
     <Compile Include="DAL\Library\ISeeder.cs" />
     <Compile Include="DAL\Migrations\BaseSeeder.cs" />
     <Compile Include="DAL\Migrations\AdminSeeder.cs" />
+    <Compile Include="DAL\Migrations\BadgeSeeder.cs" />
     <Compile Include="DAL\Migrations\SchoolLatLngSeeder.cs" />
     <Compile Include="DAL\Migrations\InitialSeeder.cs" />
     <Compile Include="DAL\Migrations\TalentifyConfiguration.cs" />
+    <Compile Include="DAL\Models\Achievements\Badge.cs" />
     <Compile Include="DAL\Models\Achievements\BonusPoint.cs" />
     <Compile Include="DAL\Models\Coaching\CoachingOffer.cs" />
     <Compile Include="DAL\Models\Coaching\CoachingRating.cs" />
@@ -119,6 +121,8 @@
     <Compile Include="DAL\Repository\CoachingRequestRepository.cs" />
     <Compile Include="DAL\Repository\ConversationRepository.cs" />
     <Compile Include="DAL\Repository\BonusPointRepository.cs" />
+    <Compile Include="DAL\Repository\BadgeRepository.cs" />
+    <Compile Include="DAL\Repository\ActionTokenRepository.cs" />
     <Compile Include="DAL\Repository\TeacherRepository.cs" />
     <Compile Include="DAL\Repository\NotificationRepository.cs" />
     <Compile Include="DAL\Repository\SchoolRepository.cs" />
@@ -218,6 +222,22 @@
     <Compile Include="Migrations\201408041355564_teacher-subjects.Designer.cs">
       <DependentUpon>201408041355564_teacher-subjects.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201408051005271_badges.cs" />
+    <Compile Include="Migrations\201408051005271_badges.Designer.cs">
+      <DependentUpon>201408051005271_badges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408051122343_additionalnotificationinfo.cs" />
+    <Compile Include="Migrations\201408051122343_additionalnotificationinfo.Designer.cs">
+      <DependentUpon>201408051122343_additionalnotificationinfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408051229118_eventtype.cs" />
+    <Compile Include="Migrations\201408051229118_eventtype.Designer.cs">
+      <DependentUpon>201408051229118_eventtype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201408051522113_actiontokenupdate.cs" />
+    <Compile Include="Migrations\201408051522113_actiontokenupdate.Designer.cs">
+      <DependentUpon>201408051522113_actiontokenupdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\BaseView.cs" />
     <Compile Include="FrontendLogic\Models\FormFeedback.cs" />
@@ -295,6 +315,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201408041355564_teacher-subjects.resx">
       <DependentUpon>201408041355564_teacher-subjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408051005271_badges.resx">
+      <DependentUpon>201408051005271_badges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408051122343_additionalnotificationinfo.resx">
+      <DependentUpon>201408051122343_additionalnotificationinfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408051229118_eventtype.resx">
+      <DependentUpon>201408051229118_eventtype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201408051522113_actiontokenupdate.resx">
+      <DependentUpon>201408051522113_actiontokenupdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

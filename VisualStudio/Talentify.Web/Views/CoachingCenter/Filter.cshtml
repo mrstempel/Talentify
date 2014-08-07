@@ -16,12 +16,11 @@
 		}
 
 		<div id="request-item-@Model.ElementAt(i).Id" class="item">
-			<a href="javascript:void(0);"  onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)" class="image-link" style="background: url('@user.ProfileImageMedium');"></a>
-			<h3 onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)">@user.Firstname @user.Surname</h3>
+			<a href="javascript:void(0);" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)" class="image-link" style="background: url('@user.ProfileImageMedium');"></a>
+			<h3>@user.Firstname @user.Surname</h3>
 			<div class="details @detailClass" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)">
-				<span class="important">Lernhilfeanfrage</span>
-				<span>@Model.ElementAt(i).SubjectCategory.Name</span>
-				<span>@(@Model.ElementAt(i).Class)te Schulstufe</span>
+				<span class="important">@Model.ElementAt(i).SubjectCategory.Name</span>
+				<span class="small">@(@Model.ElementAt(i).Class)te Schulstufe</span>
 			</div>
 			@if (!string.IsNullOrEmpty(user.Email) || !string.IsNullOrEmpty(user.Phone))
 			{

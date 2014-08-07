@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -54,6 +55,9 @@ namespace Talentify.ORM.DAL.Repository
 			{
 				user.RegisterCode = null;
 				UnitOfWork.Save();
+
+				// add greenhorn badge
+				UnitOfWork.BadgeRepository.AddBadgeToUser(user, "Greenhorn");
 
 				// add bonuspoints for registration
 				UnitOfWork.BonuspointRepository.Insert(user.Id, BonusPointsFor.Register, "Erfolgreiche Registrierung");
@@ -120,6 +124,25 @@ namespace Talentify.ORM.DAL.Repository
 			return false;
 		}
 
+		public bool ResetPassword(ActionToken token, string password)
+		{
+			if (token.ValidUntil >= DateTime.Now)
+			{
+				var user = GetById(token.UserId);
+				user.Password = PasswordHashing.CalculateSha1(password);
+				Update(user);
+
+				// reset token
+				token.ValidUntil = DateTime.MinValue;
+				UnitOfWork.ActionTokenRepository.Update(token);
+
+				UnitOfWork.Save();
+				return true;
+			}
+
+			return false;
+		}
+
 		#endregion
 
 		#region Profile Utils
@@ -158,6 +181,70 @@ namespace Talentify.ORM.DAL.Repository
 			}
 
 			return completeteStatus;
+		}
+
+		#endregion
+
+		#region Password Reset
+
+		public void StartPasswordReset(string email)
+		{
+			var user = GetByEmail(email);
+			if (user != null)
+			{
+				// create action token
+				var resetToken = new ActionToken()
+				{
+					CreatedDate = DateTime.Now,
+					Token = Guid.NewGuid(),
+					Type = ActionTokenType.PasswordReset,
+					UserId = user.Id,
+					ValidUntil =
+						DateTime.Now.AddHours(Convert.ToInt32(ConfigurationManager.AppSettings["ActionToken.PasswordReset.Timeout"]))
+				};
+				UnitOfWork.ActionTokenRepository.Insert(resetToken);
+				UnitOfWork.Save();
+
+				// send e-mail with instructions
+				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], user.Email);
+				mailMsg.Subject = WebConfigurationManager.AppSettings["Email.PasswordReset.Subject"];
+				var resetLink = string.Format(ConfigurationManager.AppSettings["BaseUrl"] + "/Login/PasswordReset?token={0}",
+					resetToken.Token.ToString());
+				mailMsg.Body = string.Format("Link: {0}", resetLink);
+				Email.Send(mailMsg);
+			}
+		}
+
+		#endregion
+
+		#region Invites
+
+		public FormFeedback SenInvite(ActionToken token, string toEmail)
+		{
+			try
+			{
+				var existingUser = GetByEmail(toEmail);
+				if (existingUser != null)
+				{
+					return new FormFeedback()
+					{
+						IsError = true, 
+						Headline = "E-Mail Adresse schon vorhanden", 
+						Text = string.Format("Ein User mit der E-Mail Adresse {0} ist schon vorhanden.", toEmail)
+					};
+				}
+
+				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], toEmail);
+				mailMsg.Subject = WebConfigurationManager.AppSettings["Email.Invite.Subject"];
+				var inviteUrl = string.Format("{0}/Register/Index?token={1}", ConfigurationManager.AppSettings["BaseUrl"], token.Token.ToString());
+				mailMsg.Body = inviteUrl;
+				Email.Send(mailMsg);
+				return new FormFeedback() { IsError = false };
+			}
+			catch (Exception)
+			{
+				return new FormFeedback() { IsError = true };
+			}
 		}
 
 		#endregion

@@ -61,7 +61,8 @@ namespace Talentify.ORM.DAL.Models.User
 
 		public bool IsDeleted { get; set; }
 
-		public ICollection<BonusPoint> BonusPoints { get; set; } 
+		public ICollection<BonusPoint> BonusPoints { get; set; }
+		public virtual ICollection<Badge> Badges { get; set; } 
 
 		#region Frontend Properties
 

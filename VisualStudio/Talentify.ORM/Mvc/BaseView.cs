@@ -51,7 +51,11 @@ namespace Talentify.ORM.Mvc
 
 		public bool IsFirstLogin
 		{
-			get { return (ViewBag.IsFirstLogin != null && Convert.ToBoolean(ViewBag.IsFirstLogin)); }
+			get
+			{
+				//return true;
+				return (ViewBag.IsFirstLogin != null && Convert.ToBoolean(ViewBag.IsFirstLogin));
+			}
 		}
 
 		public string ContentUploadUrl
@@ -71,6 +75,11 @@ namespace Talentify.ORM.Mvc
 		public int NotificationCount
 		{
 			get { return BaseController.UnitOfWork.NotificationRepository.Count(LoggedUser.Id); }
+		}
+
+		public string BaseUrl
+		{
+			get { return ConfigurationManager.AppSettings["BaseUrl"]; }
 		}
 
 		public override void Execute()

@@ -125,10 +125,11 @@ function initBackgroundMap()
 		mapTypeControl: false,
 		overviewMapControl: false,
 		streetViewControl: false,
-		scaleControl: false,
+		scaleControl: true,
 		panControl: false,
 		rotateControl: false,
-		zoomControl: false
+		zoomControl: true,
+		scrollwheel: false
 	};
 
 	map = new google.maps.Map(document.getElementById('map-container'), mapOptions);

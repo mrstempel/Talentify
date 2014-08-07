@@ -49,6 +49,39 @@ namespace Talentify.ORM.DAL.Repository
 			return eventOverView;
 		}
 
+		public IEnumerable<Event> Filter(string filter, int userId)
+		{
+			var events = UnitOfWork.EventRepository.Get();
+
+			if (filter == "future")
+			{
+				return events.Where(e => e.BeginDate >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0));
+			}
+			
+			// my events
+			if (filter == "my")
+			{
+				return from e in events join
+						myRegistrations in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.UserId == userId) on e.Id equals myRegistrations.EventId
+					select e;
+			}
+			
+			// specific event types
+			if (filter.StartsWith("type"))
+			{
+				int typeInt = Convert.ToInt32(filter.Substring(filter.Length - 1));
+				var type = (EventType) typeInt;
+				return events.Where(e => e.Type == type);
+			}
+
+			if (filter == "past")
+			{
+				return events.Where(e => e.BeginDate < DateTime.Now);
+			}
+
+			return events;
+		}
+
 		public int GetOpenSeats(int eventId)
 		{
 			var talentiyEvent = UnitOfWork.EventRepository.GetById(eventId);

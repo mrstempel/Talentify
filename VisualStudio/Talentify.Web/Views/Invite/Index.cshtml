@@ -1,0 +1,27 @@
+﻿@model Talentify.ORM.DAL.Models.User.ActionToken
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-error" class="msg error"><h2>Fehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
+		<div id="msg-success" class="msg success"><h2>Deine Einladung wurde erfolgreich verschickt.</h2><p>Du kannst jetzt weitere Freunde einladen.</p></div>
+	</div>
+	@using (Html.BeginForm("Index", "Invite", FormMethod.Post, new {@class = "form-container register"}))
+	{
+		<div class="field-container">
+			<label>E-Mail Adresse:</label>
+			<input type="text" name="email" id="email" class="mandatory"/>
+		</div>
+		<div class="field-container">
+			<input type="submit" value="Einladung verschicken" onclick="return validateMandatoryOnlyForm();"/>
+		</div>
+	}
+</article>
+
+<a href="javascript:void(0);" onclick="shareFacebook('@(@BaseUrl)/Register/Index?token=@Model.Token.ToString()')">Facebook</a><br/>
+<a href="javascript:void(0);" onclick="shareGoogle('@(@BaseUrl)/Register/Index?token=@Model.Token.ToString()')">Google+</a><br/>
+<a href="javascript:void(0);" onclick="shareTwitter('@(@BaseUrl)/Register/Index?token=@Model.Token.ToString()')">Twitter</a>

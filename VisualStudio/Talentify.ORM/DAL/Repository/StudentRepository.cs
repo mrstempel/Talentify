@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Configuration;
 using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.FrontendLogic.Models;

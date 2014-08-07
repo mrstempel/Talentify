@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@using Talentify.ORM.DAL.Models.Notification
+@model IEnumerable<Talentify.ORM.FrontendLogic.Models.NotificationListItem>
+
+@{
+    ViewBag.Title = "AllNotifications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+	var checkDate = DateTime.Now;
+}
+
+<div id="page-container">
+	<section>
+		<article class="all-notifications">
+			<header>
+				<div class="sprite t-button desktop"></div>
+				<h2>Alle Notifications</h2>
+			</header>
+			@foreach (var item in Model)
+			{
+				var style = string.Empty;
+
+				if (item.CreatedDate < checkDate)
+				{
+					<div class="date">@item.CreatedDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))</div>
+				}
+
+				checkDate = new DateTime(item.CreatedDate.Year, item.CreatedDate.Month, item.CreatedDate.Day, 0, 0, 0);
+	
+				if (item.IconType == NotificationIconType.Confirmed)
+				{
+					style += "background-image: url(/Images/icon-zusagen.png);";
+				}
+
+				if (item.IconType == NotificationIconType.Cancelled)
+				{
+					style += "background-image: url(/Images/icon-absagen.png);";
+				}
+
+				if (item.Bonus > 0)
+				{
+					style += "background-image: url(/Images/icon-bonus" + item.Bonus + ".png);";
+				}
+	
+				<div class="item" onclick="location.href='@item.Link'" style="@style">
+					<a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>
+					<div class="text">
+						@if (item.Bonus > 0)
+						{
+							<span class="system">@Html.Raw(item.Text)</span>
+						}
+						else
+						{
+							@Html.Raw(item.Text)
+						}
+					</div>
+				</div>
+			}
+		</article>
+	</section>
+</div>

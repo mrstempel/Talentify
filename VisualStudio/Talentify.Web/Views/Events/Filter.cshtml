@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.Content.Event>
+
+@if (Model.Any())
+{
+	foreach (var item in Model)
+	{
+		@Html.Partial("_EventPreview", item)
+	}
+}
+else
+{
+	<p>Keine Events gefunden</p>
+}

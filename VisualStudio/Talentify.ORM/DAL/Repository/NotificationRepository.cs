@@ -55,7 +55,8 @@ namespace Talentify.ORM.DAL.Repository
 									notification.TargetId),
 							Text = notification.Text,
 							IconType = notification.IconType,
-							IsNew = notification.ReadDate == null
+							IsNew = notification.ReadDate == null,
+							CreatedDate = notification.CreatedDate
 						};
 						listItems.Add(item);
 					}
@@ -69,7 +70,23 @@ namespace Talentify.ORM.DAL.Repository
 							Text = notification.Text,
 							IconType = notification.IconType,
 							IsNew = notification.ReadDate == null,
-							Bonus = notification.Bonus
+							Bonus = notification.Bonus,
+							CreatedDate = notification.CreatedDate
+						};
+						listItems.Add(item);
+					}
+
+					if (notification.IconType == NotificationIconType.Badge)
+					{
+						var item = new NotificationListItem
+						{
+							Image = "/Images/sender-talentify.png",
+							Link = "/Profile",
+							Text = notification.Text,
+							IconType = notification.IconType,
+							IsNew = notification.ReadDate == null,
+							BadgeIcon = notification.AdditionalInfo,
+							CreatedDate = notification.CreatedDate
 						};
 						listItems.Add(item);
 					}
@@ -88,6 +105,12 @@ namespace Talentify.ORM.DAL.Repository
 		public IEnumerable<NotificationListItem> GetPopupList(int userId)
 		{
 			var notifications = UnitOfWork.NotificationRepository.Get(n => n.ToUserId == userId).OrderByDescending(n => n.CreatedDate).Take(5);
+			return ConvertToListItems(notifications);
+		}
+
+		public IEnumerable<NotificationListItem> GetAll(int userId)
+		{
+			var notifications = UnitOfWork.NotificationRepository.Get(n => n.ToUserId == userId).OrderByDescending(n => n.CreatedDate);
 			return ConvertToListItems(notifications);
 		}
 	}

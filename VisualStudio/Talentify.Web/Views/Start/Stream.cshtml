@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Talentify.ORM.FrontendLogic.Models.StreamItem>
+﻿@using System.Globalization
+@model IEnumerable<Talentify.ORM.FrontendLogic.Models.StreamItem>
 
 @if (Model != null)
 {
@@ -6,7 +7,7 @@
 	{
 		<article class="stream-item" onclick="location.href='@item.Link'">
 			<a href="@item.Link" class="image-link" style="background-image: url('@item.Image');"></a>
-			<p><span class="text">@item.Text</span><span class="date">@item.Time.ToString("g")</span></p>
+			<p><span class="text">@item.Text</span><span class="date">@item.Time.ToString("g", new CultureInfo("de"))</span></p>
 		</article>
 	}
 }

@@ -12,12 +12,17 @@ namespace Talentify.Web.Controllers
     {
         public ActionResult Index()
         {
-	        return View(UnitOfWork.EventRepository.GetEventOverview(LoggedUser.Id));
+			return View();
         }
+
+		public ActionResult Filter(string filter)
+		{
+			return View(UnitOfWork.EventRepository.Filter(filter, LoggedUser.Id));
+		}
 
 	    public ActionResult Detail(int id)
 	    {
-		    ViewBag.DisableRegistration = UnitOfWork.EventRepository.IsUserRegistered(id, LoggedUser.Id);
+			ViewBag.IsUserRegistered = UnitOfWork.EventRepository.IsUserRegistered(id, LoggedUser.Id);
 		    return View(UnitOfWork.EventRepository.GetById(id));
 	    }
 

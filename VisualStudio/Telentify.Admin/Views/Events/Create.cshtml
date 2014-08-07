@@ -18,6 +18,17 @@
 				<td>@Html.CheckBoxFor(m => m.IsOnline)</td>
 			</tr>
 			<tr>
+				<td>Typ</td>
+				<td>
+					<select name="Type" id="Type">
+						<option value="0">talentify Academy (Workshops)</option>
+						<option value="1">talentify Social Skill Lab</option>
+						<option value="2">talentify on Tour</option>
+						<option value="3">Eventtipps</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td>@Html.LabelFor(m => m.Title)</td>
 				<td>@Html.TextBoxFor(m => m.Title)</td>
 			</tr>

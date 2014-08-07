@@ -31,6 +31,13 @@ namespace Talentify.ORM.DAL.Models.User
 		public string AboutMe { get; set; }
 		public bool IsCoachingEnabled { get; set; }
 		public decimal CoachingPrice { get; set; }
+		public string ParentEducation { get; set; }
+		public string HeardOfTalentify { get; set; }
+		public string FacebookUrl { get; set; }
+		public string GooglePlusUrl { get; set; }
+		public string TwitterUrl { get; set; }
+		public string PinterestUrl { get; set; }
+		public string InstagramUrl { get; set; }
 	}
 
 	public class StudentMap : EntityTypeConfiguration<Student>

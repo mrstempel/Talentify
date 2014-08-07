@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, #page-header .content, #notification-count, #notification-list-loading, #notification-list, #notification-list .item, .nav-menu, .nav-menu a, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
+﻿.box-sizing, .input-switch .option, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, #past-event-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -360,11 +360,11 @@ input[type="text"].mandatory, input[type="password"].mandatory {
   color: #fff;
   margin: 0 0 10px 0; }
 
-#notification-list {
+#notification-list, .all-notifications {
   width: 100%;
   display: inline-block;
   margin: 0 0 20px 0; }
-  #notification-list .item {
+  #notification-list .item, .all-notifications .item {
     width: 100%;
     background-color: #e6f7f3;
     background-repeat: no-repeat;
@@ -374,31 +374,48 @@ input[type="text"].mandatory, input[type="password"].mandatory {
     float: left;
     cursor: pointer;
     border-bottom: 1px solid #e5e5e5; }
-    #notification-list .item .image-link {
+    #notification-list .item .image-link, .all-notifications .item .image-link {
       background-repeat: no-repeat !important;
       width: 35px;
       height: 35px;
       float: left;
       margin: 0 10px 0 0;
       padding: 0 !important; }
-    #notification-list .item .text {
+    #notification-list .item .text, .all-notifications .item .text {
       float: left;
       text-align: left;
       width: 200px;
       font-size: 14px; }
-      #notification-list .item .text .system {
+      #notification-list .item .text .system, .all-notifications .item .text .system {
         float: left;
         margin: 10px 0 0 0; }
-      #notification-list .item .text .bonus {
+      #notification-list .item .text .bonus, .all-notifications .item .text .bonus {
         float: right;
         background: #ef4d69;
         color: #fff;
         padding: 10px; }
-  #notification-list .item:hover {
+  #notification-list .item:hover, .all-notifications .item:hover {
     color: #fff;
     background-color: #0eb48d;
     background-repeat: no-repeat;
     background-position: right 5px top 5px; }
+
+.all-notifications .date {
+  padding: 5px 5px;
+  font-size: 16px;
+  font-family: CaeciliaLTPro-85Heavy;
+  margin: 20px 0 0 0;
+  display: inline-block;
+  width: 100%;
+  background: #0eb48d;
+  color: #fff; }
+.all-notifications .item {
+  background-color: #fff; }
+  .all-notifications .item .text {
+    width: auto; }
+.all-notifications .item:hover {
+  background-color: #e6f7f3;
+  color: #555; }
 
 .nav-menu {
   -moz-box-shadow: 0 0 5px #c3c3c3;
@@ -656,7 +673,8 @@ header.search-map-overlay {
     float: left;
     min-width: 49%;
     margin: 0 0 20px 0;
-    padding: 10px; }
+    padding: 10px;
+    cursor: pointer; }
     #search-results article img {
       float: left;
       margin-right: 10px; }
@@ -681,6 +699,8 @@ header.search-map-overlay {
       margin: 10px 0 0 0; }
   #search-results article:nth-child(2n) {
     float: right !important; }
+  #search-results article:hover {
+    background: #e6f7f3; }
 
 .two-col-container .col-container {
   width: 50%;
@@ -740,14 +760,25 @@ header.search-map-overlay {
     display: inline-block;
     width: 100%; }
 
-article.event-preview h3 {
-  text-align: left; }
-article.event-preview p {
-  text-align: left !important;
-  margin: 10 0 10px 0; }
-article.event-preview img {
-  float: left;
-  margin: 0 10px 0 0; }
+article.event-preview {
+  cursor: pointer; }
+  article.event-preview h3 {
+    text-align: left; }
+  article.event-preview p {
+    text-align: left !important;
+    margin: 10 0 10px 0; }
+  article.event-preview img {
+    float: left;
+    margin: 0 10px 0 0; }
+
+article.event-preview:hover, article.event-preview.past:hover {
+  background: #e6f7f3; }
+
+article.event-preview.past {
+  background: #effdfa;
+  color: #999; }
+  article.event-preview.past img {
+    opacity: 0.7; }
 
 article.event-detail .content-container {
   -moz-box-shadow: 0 0 5px #c3c3c3;
@@ -820,6 +851,11 @@ article.event-detail .content-container {
         padding: 8px 0;
         font-family: CaeciliaLTPro-85Heavy; }
 
+#past-event-options {
+  width: 100%;
+  min-height: 95px;
+  display: none; }
+
 #registered {
   background: #ef4d69;
   display: none; }
@@ -831,19 +867,22 @@ article.event-detail .content-container {
 #unregister-link {
   display: none; }
 
-#event-overview article {
-  -moz-box-shadow: 0 0 5px #c3c3c3;
-  -webkit-box-shadow: 0 0 5px #c3c3c3;
-  box-shadow: 0 0 5px #c3c3c3;
-  width: 49%;
-  margin: 10px 22px 10px 0 !important;
-  padding: 10px;
-  float: left;
-  font-size: 18px; }
-  #event-overview article h3 {
+#event-overview {
+  margin: 20px 0 0 0;
+  padding: 10px; }
+  #event-overview article {
+    -moz-box-shadow: 0 0 5px #c3c3c3;
+    -webkit-box-shadow: 0 0 5px #c3c3c3;
+    box-shadow: 0 0 5px #c3c3c3;
+    width: 48%;
+    margin: 10px 22px 10px 0 !important;
+    padding: 10px;
+    float: left;
     font-size: 18px; }
-#event-overview article:last-child {
-  margin: 10px 0 10px 0 !important; }
+    #event-overview article h3 {
+      font-size: 18px; }
+  #event-overview article:last-child {
+    margin: 10px 0 10px 0 !important; }
 
 #search-session-view article {
   -moz-box-shadow: 0 0 5px #c3c3c3;
@@ -1040,19 +1079,20 @@ article.event-detail .content-container {
       .request-list .item .details .important {
         margin: 0;
         color: #ef4d69 !important; }
+      .request-list .item .details span.small {
+        font-size: 14px; }
     .request-list .item .details.out {
       background: url(../Images/icon-rechts.png);
       background-repeat: no-repeat;
       background-position: 0 4px; }
     .request-list .item .contact {
       float: left;
-      width: 100%;
-      margin: 10px 0 0 0;
-      border-top: 1px solid #e5e5e5;
-      padding: 10px 0 0 0; }
+      width: 220px;
+      padding: 5px 0 0 25px;
+      font-size: 14px; }
       .request-list .item .contact span {
         width: auto;
-        margin: 0 20px 0 0; }
+        margin: 0 10px 0 0; }
   .request-list .item.active {
     background: #e6f7f3; }
 

@@ -82,6 +82,13 @@
 					<div class="field-container">
 						@Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "Dein Lernmotto", @maxlength = "140", @class="border-bottom"})
 					</div>
+					<div class="field-container">
+						@Html.TextBoxFor(m => m.FacebookUrl, new {@placeholder = "Url zu deinem Facebook Profil"})
+						@Html.TextBoxFor(m => m.GooglePlusUrl, new {@placeholder = "Url zu deinem Google+ Profil"})
+						@Html.TextBoxFor(m => m.TwitterUrl, new {@placeholder = "Url zu deinem Twitter Profil"})
+						@Html.TextBoxFor(m => m.InstagramUrl, new {@placeholder = "Url zu deinem Instagram Profil"})
+						@Html.TextBoxFor(m => m.PinterestUrl, new {@placeholder = "Url zu deinem Pinterest Profil"})
+					</div>
 					<div class="field-container desktop">
 						<input type="submit" value="Absenden" onclick=" return validateProfileForm(); " style="margin-bottom: 15px;"/><br/>
 						oder<br/>

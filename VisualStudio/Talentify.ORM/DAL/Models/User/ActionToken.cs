@@ -10,13 +10,15 @@ namespace Talentify.ORM.DAL.Models.User
 {
 	public enum ActionTokenType
 	{
-		PasswordReset
+		PasswordReset,
+		Invite
 	}
 
 	public class ActionToken : BaseEntity
 	{
 		public ActionTokenType Type { get; set; }
 		public Guid Token { get; set; }
+		public DateTime CreatedDate { get; set; }
 		public DateTime ValidUntil { get; set; }
 		public int UserId { get; set; }
 		private BaseUser _user;
@@ -40,6 +42,9 @@ namespace Talentify.ORM.DAL.Models.User
 			this.ToTable("ActionToken");
 			// Primary Key
 			this.HasKey(t => t.Id);
+
+			this.Property(t => t.CreatedDate).HasColumnName("CreatedDate").HasColumnType("datetime2");
+			this.Property(t => t.ValidUntil).HasColumnName("ValidUntil").HasColumnType("datetime2");
 		}
 	}
 }

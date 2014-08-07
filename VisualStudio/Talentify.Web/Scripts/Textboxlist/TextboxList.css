@@ -1,0 +1,49 @@
+.textboxlist { font-size: 16px; cursor: text; }
+.textboxlist-bits
+{
+	 zoom: 1; 
+	 overflow: hidden; 
+	 margin: 0; 
+	 padding: 5px; 
+	 border: 1px solid #e5e5e5;
+}
+.textboxlist-bit
+{
+	 list-style-type: none; 
+	 float: left; 
+	 display: block; 
+	 padding: 0; 
+	 margin: 0 5px 0 0; 
+	 cursor: default;
+}
+.textboxlist-bit-editable
+{
+	/* border: 1px solid #fff;*/
+}
+.textboxlist-bit-editable-input { border: 0; padding: 2px 0; *padding-bottom: 0; border: 0px !important;font-size: 16px !important;padding: 2px !important;margin: 0px !important; }
+.textboxlist-bit-editable-input:focus { outline: 0; }
+.textboxlist-bit-box
+{
+	position: relative; 
+	padding: 0 5px;
+	border: 1px solid #e5e5e5; 
+	background: #0eb48d;
+	color: #fff;
+	cursor: default;
+}
+.textboxlist-bit-box-deletable { padding-right: 15px; }
+.textboxlist-bit-box-deletebutton
+{
+	 position: absolute; 
+	 right: 4px; 
+	 top: 7px; 
+	 display: block; 
+	 width: 7px; 
+	 height: 7px; 
+	 font-size: 1px; 
+	 background: url('close.gif');
+}
+.textboxlist-bit-box-deletebutton:hover { border: none; background-position: 7px; text-decoration: none; }
+.textboxlist-bit-box-hover { background: #167e64; }
+.textboxlist-bit-box-focus { background: #0eb48d; }
+.textboxlist-bit-box-focus .textboxlist-bit-box-deletebutton { background-position: bottom; }

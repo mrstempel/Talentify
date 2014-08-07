@@ -7,6 +7,14 @@ using System.Threading.Tasks;
 
 namespace Talentify.ORM.DAL.Models.Content
 {
+	public enum EventType
+	{
+		Academy,
+		SocialSkillLab,
+		OnTour,
+		Tipp
+	}
+
 	public class Event : BasePage
 	{
 		public DateTime BeginDate { get; set; }
@@ -20,6 +28,7 @@ namespace Talentify.ORM.DAL.Models.Content
 		public string Latitude { get; set; }
 		public string Longitude { get; set; }
 		public int MaxParticipant { get; set; }
+		public EventType Type { get; set; }
 	}
 
 	public class EventMap : EntityTypeConfiguration<Event>

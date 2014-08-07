@@ -8,9 +8,6 @@
 
 @section CustomJavascript 
 {
-	<!-- bootstrap -->
-	<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
-	<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
 	<!-- maps -->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=de&libraries=places,geometry" type="text/javascript"></script>
 	<script src="/Scripts/maps.js"></script>
@@ -21,18 +18,35 @@
 
 		$(this).ready(function()
 		{
-			loadEventOpenSeats(@Model.Id);
-			@if (ViewBag.DisableRegistration)
+			@if (Model.BeginDate < DateTime.Now)
+			{
+				<text>showPastEventOptions()</text>	
+			}
+			else 
+			{
+				<text>loadEventOpenSeats(@Model.Id);</text>
+			}
+
+			@if (ViewBag.IsUserRegistered)
 			{
 				<text>disableRegistration();</text>
 			}
+			
 		});
+
+		function showPastEventOptions()
+		{
+			$('#past-event-options').show();
+			$('#coming-event-options').hide();
+			$('.open-seats').hide();
+		}
 
 		function disableRegistration()
 		{
 			$('#register-link').hide();
 			$('#unregister-link').css('display', 'inline-block');
 			$('#registered').css('display', 'inline-block');
+			$('#past-registered').css('display', 'inline-block');
 		}
 	</script>
 }
@@ -54,9 +68,14 @@
 				</div>
 			</div>
 			<div class="right">
-				<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
-				<span id="registered" class="link-button">Du bist angemeldet</span>
-				<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
+				<div id="past-event-options">
+					<span id="past-registered" class="link-button">Du warst angemeldet</span>
+				</div>
+				<div id="coming-event-options">
+					<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
+					<span id="registered" class="link-button">Du bist angemeldet</span>
+					<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
+				</div>
 				<div class="map-container" id="map-container"></div>
 				<div class="address">
 					<span class="important">Zeit und Ort</span><br/>
@@ -66,7 +85,7 @@
 					@Model.Country
 				</div>
 				<div class="time">
-					@Model.BeginDate.ToString("dddd d.M.yyyy", new CultureInfo("de"))<br/>
+					@Model.BeginDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))<br/>
 					von @Model.BeginTime bis @Model.EndTime
 				</div>
 				<div class="open-seats">

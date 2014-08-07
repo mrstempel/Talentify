@@ -22,7 +22,8 @@ namespace Talentify.ORM.DAL.Models.Notification
 		None,
 		Confirmed,
 		Cancelled,
-		Bonus
+		Bonus,
+		Badge
 	}
 
 	public class Notification : BaseEntity
@@ -48,6 +49,7 @@ namespace Talentify.ORM.DAL.Models.Notification
 		public NotificationSenderType SenderType { get; set; }
 		public NotificationIconType IconType { get; set; }
 		public string Text { get; set; }
+		public string AdditionalInfo { get; set; }
 	}
 
 	public class NotificationMap : EntityTypeConfiguration<Notification>

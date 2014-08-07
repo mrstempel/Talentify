@@ -38,6 +38,7 @@ namespace Talentify.ORM.DAL.Models.Content
 		}
 
 		public DateTime CreatedDate { get; set; }
+		public bool Confirmed { get; set; }
 	}
 
 	public class EventRegistrationMap : EntityTypeConfiguration<EventRegistration>

@@ -15,5 +15,7 @@ namespace Talentify.ORM.FrontendLogic.Models
 		public NotificationIconType IconType { get; set; }
 		public bool IsNew { get; set; }
 		public int Bonus { get; set; }
+		public string BadgeIcon { get; set; }
+		public DateTime CreatedDate { get; set; }
 	}
 }

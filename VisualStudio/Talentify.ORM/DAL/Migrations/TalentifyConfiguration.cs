@@ -22,6 +22,7 @@ namespace Talentify.ORM.DAL.Migrations
 			seeder.Add(new InitialSeeder(context));
 			seeder.Add(new AdminSeeder(context));
 			seeder.Add(new SchoolLatLngSeeder(context));
+			seeder.Add(new BadgeSeeder(context));
 
 			foreach (var baseSeeder in seeder)
 			{

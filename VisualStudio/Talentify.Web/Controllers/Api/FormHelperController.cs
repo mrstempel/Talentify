@@ -38,5 +38,20 @@ namespace Talentify.Web.Controllers.Api
 		    var message = UnitOfWork.ConversationRepository.AddMessage(conversationId, fromUserId, toUserId, targetId, text);
 			return Json(new { UserId = message.UserId, UserImage = message.UserImage, Username = message.Username, CreatedDate = message.CreatedDate.ToString("g"), Text = message.Text}, JsonRequestBehavior.AllowGet);
 	    }
+
+		[AllowAnonymous]
+	    public ActionResult SubjectCategoryTags()
+	    {
+		    var allSubjects = UnitOfWork.SubjectCategoryRepository.Get();
+			ViewBag.Results = "[";
+		    foreach (var s in allSubjects)
+		    {
+				ViewBag.Results += string.Format("[{0},\"{1}\",null,\"{1}\"],", s.Id, s.Name);
+		    }
+			ViewBag.Results = ViewBag.Results.ToString().Substring(0, ViewBag.Results.ToString().Length - 1);
+			ViewBag.Results += "]";
+
+			return View();
+	    }
     }
 }

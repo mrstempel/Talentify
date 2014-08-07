@@ -128,6 +128,7 @@
     <Compile Include="Controllers\Api\AutocompleteController.cs" />
     <Compile Include="Controllers\Api\FormHelperController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\InviteController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\CoachingCenterController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -256,12 +257,20 @@
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.browser.min.js" />
     <Content Include="Scripts\jquery.easyModal.js" />
     <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\Opentip\opentip-jquery.min.js" />
     <Content Include="Scripts\Opentip\opentip.css" />
     <Content Include="Scripts\screen.js" />
+    <Content Include="Scripts\Textboxlist\close.gif" />
+    <Content Include="Scripts\Textboxlist\GrowingInput.js" />
+    <Content Include="Scripts\Textboxlist\TextboxList.Autocomplete.css" />
+    <Content Include="Scripts\Textboxlist\TextboxList.Autocomplete.js" />
+    <Content Include="Scripts\Textboxlist\TextboxList.css" />
+    <Content Include="Scripts\Textboxlist\TextboxList.js" />
     <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="test.html" />
     <Content Include="uploads\profile\65ecab19-6584-49f3-8a7f-5aa4b8dbc8cf_large.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -311,9 +320,14 @@
     <Content Include="Views\Content\Impressum.cshtml" />
     <Content Include="Views\Content\Datenschutz.cshtml" />
     <Content Include="Views\Register\Teacher.cshtml" />
-    <Content Include="Views\Shared\Forms\_RegisterTeacher.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\Teacher\Search.cshtml" />
+    <Content Include="Views\Events\Filter.cshtml" />
+    <Content Include="Views\Login\Password.cshtml" />
+    <Content Include="Views\Login\PasswordReset.cshtml" />
+    <Content Include="Views\FormHelper\SubjectCategoryTags.cshtml" />
+    <Content Include="Views\Notification\AllNotifications.cshtml" />
+    <Content Include="Views\Invite\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -60,7 +60,8 @@ namespace Talentify.ORM.DAL.Context
 
 		// achievements
 		public DbSet<BonusPoint> BonusPoints { get; set; }
-
+		public DbSet<Badge> Badges { get; set; }
+		
 		public TalentifyContext() : base("EFConnectionString")
 		{
 			this.Configuration.LazyLoadingEnabled = true;
@@ -111,6 +112,7 @@ namespace Talentify.ORM.DAL.Context
 
 			// achievements
 			modelBuilder.Configurations.Add(new BonusPointMap());
+			modelBuilder.Configurations.Add(new BadgeMap());
 			
 			base.OnModelCreating(modelBuilder);
 		}

@@ -342,6 +342,17 @@ function searchTeachers()
 	}
 }
 
+function filterEvents()
+{
+	$('#event-overview').hide();
+	$('#search-loading').show();
+	$('#event-overview').load('/Events/Filter?filter=' + $('#filter').val(), function ()
+	{
+		$('#search-loading').hide();
+		$('#event-overview').fadeIn('medium');
+	});
+}
+
 function loadEventRegistrationForm(id)
 {
 	$('#event-register-frame').attr('src', '/Events/Register/' + id);
@@ -489,4 +500,31 @@ function loadNotifactionlist()
 		$('#notification-list-loading').hide();
 		$('#notification-list').fadeIn('medium');
 	});
+}
+
+function loadInvitePopup()
+{
+	$('#invite-frame').attr('src', '/Invite/');
+	$('#modal-invite').modal('show');
+}
+
+function shareFacebook(url)
+{
+	//alert("url: " + url);
+	window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), 'facebook-share-dialog', 'width=626,height=436');
+	return false;
+}
+
+function shareGoogle(url)
+{
+	//alert(url);
+	window.open('https://plus.google.com/share?url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+	return false;
+}
+
+function shareTwitter(url)
+{
+	//alert(url);
+	window.open('https://twitter.com/share?url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+	return false;
 }
