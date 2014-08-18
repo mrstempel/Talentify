@@ -6,12 +6,17 @@
 @section CustomJavascript 
 {
 	<script src="/Scripts/coaching-center.js"></script>
+	<script src="~/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script>
 		$(this).ready(function ()
 		{
 			filterCoachingCenter(@ViewBag.RequestId);
 		});
 	</script>
+}
+@section CustomCss
+{
+	<link href="~/Css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
 }
 
 <div id="page-container">

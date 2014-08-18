@@ -1,13 +1,14 @@
 ﻿<section>
-	<h1 class="desktop"><span>Die einzigartige & nachhaltige Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
-	<article class="msg-container visible">
-		<div class="msg success">
-			<h2>Registrierung abgeschlossen</h2>
-			<p>Deine Anmeldung wurde erfolgreich abgeschlossen.</p>
-		</div>
-	</article>
 	<article>
-		<p>@Html.ActionLink("Vervollständige jetzt deine Daten und sammle Bonuspunkte", "Index", "Profile", new {@class="link-button"})</p>
-		<p>@Html.ActionLink("Weiter zur Startseite", "Index")</p>
+			<header class="green">
+				<div class="sprite t-button desktop"></div>
+				<h2>Registrierung abgeschlossen</h2>
+				<p>Deine Anmeldung war erfolgreich!</p>
+			</header>
+		</article>
+	<article style="margin: 100px 0 0 0;">
+		<p>@Html.ActionLink("Daten vervollständigen & Bonuspunkte kassieren", "Index", "Profile", null, new {@class="link-button"})</p>
+		<p style="margin:0;padding:0;">oder</p>
+		<p style="margin:0 0 50px 0;padding:0;">@Html.ActionLink("weiter zur Startseite", "Index")</p>
 	</article>
 </section>

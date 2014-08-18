@@ -161,3 +161,17 @@ function toggleMenu(id)
 		}
 	}
 }
+
+function hoverImage(id)
+{
+	var image = $('#' + id);
+	var src = image.attr('src');
+	if (src.indexOf('hover') != -1)
+	{
+		image.attr('src', src.substring(0, src.lastIndexOf('-hover')) + '.png');
+	}
+	else
+	{
+		image.attr('src', src.substring(0, src.length - 4) + '-hover.png');
+	}
+}

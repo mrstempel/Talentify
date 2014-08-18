@@ -150,6 +150,39 @@ function disableCoachingFeedbackForm()
 	$('#new-message-form').hide();
 }
 
+function setCoachingInOutFilter(requestId)
+{
+	var filter = $('#in-out-select').val();
+	var streamId = $('.request-list').find('.item:first').attr('id');
+	if (filter == 'both')
+	{
+		$('#selected-in-out-filter').attr('src', '/Images/inandout.png');
+		$('.request-list > .item.in').show('fast');
+		$('.request-list > .item.out').show('fast');
+		console.log("both");
+	}
+
+	if (filter == "in")
+	{
+		$('#selected-in-out-filter').attr('src', '/Images/icon-links.png');
+		$('.request-list > .item.out').slideUp('fast');
+		$('.request-list > .item.in').slideDown('fast');
+		streamId = $('.request-list').find('.item.in:first').attr('id');
+		console.log("in");
+	}
+
+	if (filter == "out")
+	{
+		$('#selected-in-out-filter').attr('src', '/Images/icon-rechts.png');
+		$('.request-list > .item.in').slideUp('fast');
+		$('.request-list > .item.out').slideDown('fast');
+		streamId = $('.request-list').find('.item.out:first').attr('id');
+		console.log("out");
+	}
+
+	loadCoachingRequestTimeline(streamId.substring(13));
+}
+
 function setMyCoachingRatings(myVal1, myVal2, myVal3)
 {
 	// disable form

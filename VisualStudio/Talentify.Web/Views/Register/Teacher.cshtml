@@ -22,7 +22,7 @@
 <script>
 	$(function ()
 	{
-		var tagging = new $.TextboxList('#subjects_input', { unique: true, plugins: { autocomplete: {} } });
+		var tagging = new $.TextboxList('#subjects_input', { unique: true, plugins: { autocomplete: {onlyFromValues: true} } });
 		tagging.getContainer().addClass('textboxlist-loading');
 		$.ajax({
 			url: '/FormHelper/SubjectCategoryTags', dataType: 'json', success: function (r)
@@ -44,7 +44,10 @@
 	<section id="register">
 		<header>
 			<div class="sprite t-button desktop"></div>
-			<h2>Anmelden</h2>
+			<h2>Anmelden zum Lerncoach</h2>
+			<p>
+				Als Lerncoach stehen Sie SchülerInnen die Lernhilfe geben als AnsprechpartnerIn zur Verfügung und können diese somit aktiv unterstützen ihren jüngeren MitschülerInnen erfolgreich zu helfen.
+			</p>
 		</header>
 		<article class="msg-container" id="msg-container">
 			<div id="msg-error" class="msg error"><h2>Anmeldung fehlgeschlagen</h2><p></p></div>
@@ -61,16 +64,13 @@
 					</div>
 					<div class="field-container">
 						@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
-						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon", @class = "mandatory"})
+						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon"})
 					</div>
-					<div class="field-container">
+					<div class="field-container" style="margin:0 0 10px 0;">
 						@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
 					</div>
-					@*<div class="field-container">
-						@Html.CheckBoxList("CoachingSubjects", AllCoachingSubjectsCheckable, null)
-					</div>*@
 					<div class="field-container">
-						<label>Fächer</label>
+						<label>Fächer auswählen</label>
 						<input type="text" name="CoachingSubjects" value="" id="subjects_input" />
 					</div>
 					<div class="field-container">

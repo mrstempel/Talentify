@@ -82,6 +82,20 @@ namespace Talentify.ORM.Mvc
 			get { return ConfigurationManager.AppSettings["BaseUrl"]; }
 		}
 
+		private ActionToken inviteToken;
+		public ActionToken InviteToken
+		{
+			get
+			{
+				if (inviteToken == null)
+				{
+					inviteToken = BaseController.UnitOfWork.ActionTokenRepository.GetInviteToken(LoggedUser.Id);
+				}
+
+				return inviteToken;
+			}
+		}
+
 		public override void Execute()
 		{
 		}

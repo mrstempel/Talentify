@@ -38,7 +38,7 @@ namespace Talentify.ORM.DAL.Models.User
 		public Guid? RegisterCode { get; set; }
 		public DateTime JoinedDate { get; set; }
 		public DateTime? UpdateDate { get; set; }
-		public ICollection<Subscription> Subscriptions { get; set; }
+		public virtual ICollection<Subscription> Subscriptions { get; set; }
 		[ProfileComplete("Gender")]
 		public string Gender { get; set; }
 

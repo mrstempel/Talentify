@@ -275,6 +275,27 @@ function validateCoachingForm()
 	return isValid;
 }
 
+function validateSurvey()
+{
+	// check mandatory fields
+	if (!validateMandatoryFields())
+	{
+		return false;
+	}
+
+	if ($('#HearedOfTalentifyOption').val() == "Sonstige" && $('#HearedOfTalentifyText').val() == "")
+	{
+		$('#HearedOfTalentifyText').addClass('error');
+		return false;
+	}
+	else
+	{
+		$('#HearedOfTalentifyText').removeClass('error');
+	}
+
+	return true;
+}
+
 function validateCoachingPrice()
 {
 	var isValid = true;

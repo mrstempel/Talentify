@@ -87,6 +87,7 @@
     <Compile Include="DAL\Migrations\BaseSeeder.cs" />
     <Compile Include="DAL\Migrations\AdminSeeder.cs" />
     <Compile Include="DAL\Migrations\BadgeSeeder.cs" />
+    <Compile Include="DAL\Migrations\SettingsSeeder.cs" />
     <Compile Include="DAL\Migrations\SchoolLatLngSeeder.cs" />
     <Compile Include="DAL\Migrations\InitialSeeder.cs" />
     <Compile Include="DAL\Migrations\TalentifyConfiguration.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="DAL\UnitOfWork\TalentifyUnitOfWork.cs" />
     <Compile Include="FrontendLogic\Library\ICoachingRequestTimelineItem.cs" />
     <Compile Include="FrontendLogic\Models\AutocompleteItem.cs" />
+    <Compile Include="FrontendLogic\Models\CoachingRequestListItem.cs" />
     <Compile Include="FrontendLogic\Models\CoachingRequestStream.cs" />
     <Compile Include="FrontendLogic\Models\EventOverview.cs" />
     <Compile Include="FrontendLogic\Models\NotificationListItem.cs" />

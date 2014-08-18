@@ -33,9 +33,27 @@ var UnitOfWork = new Talentify.ORM.DAL.UnitOfWork.TalentifyUnitOfWork<Talentify.
 						group coachingRequest by coachingRequest.Id into rGrouped
 						select new { Id = rGrouped.Key, All = rGrouped};
 
-	var test2 = from schools in UnitOfWork.SchoolRepository.AsQueryable() join
-				student in UnitOfWork.SchoolRepository.AsQueryable()
-				select schools;
+	var test2 = from status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable()
+				join coachingRequest in UnitOfWork.CoachingRequestRepository.AsQueryable() on status.CoachingRequestId equals coachingRequest.Id
+				join u in UnitOfWork.BaseUserRepository.AsQueryable() on coachingRequest.FromUserId equals u.Id
+				where 
+					status.StatusType == Talentify.ORM.DAL.Models.Coaching.StatusType.Request && 
+					(coachingRequest.FromUserId == 6 || coachingRequest.ToUserId == 6)
+				orderby coachingRequest.CreatedDate descending 
+				select new 
+				{
+					RequestId = coachingRequest.Id,
+					UsernameFrom = coachingRequest.FromUser.Firstname + " " + coachingRequest.FromUser.Surname,
+					EmailFrom = coachingRequest.FromUser.Email,
+					PhoneFrom = coachingRequest.FromUser.Phone,
+					UserIdFrom = coachingRequest.FromUser.Id,
+					UsernameTo = coachingRequest.ToUser.Firstname + " " + coachingRequest.ToUser.Surname,
+					EmailFrom = coachingRequest.FromUser.Email,
+					PhoneFrom = coachingRequest.FromUser.Phone,
+					UserIdTo = coachingRequest.ToUser.Id,
+					Subject = coachingRequest.SubjectCategory.Name,
+					Class = coachingRequest.Class
+				};
 				
 	//var test3 = from test in test2 group test by test.Id into groupedTest select groupedTest.AsQueryable();
 Console.WriteLine(test2);

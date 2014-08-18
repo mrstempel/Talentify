@@ -17,6 +17,7 @@ namespace Talentify.Web.Controllers
 
 		public ActionResult Filter(string filter)
 		{
+			ViewBag.RegisteredIds = UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id);
 			return View(UnitOfWork.EventRepository.Filter(filter, LoggedUser.Id));
 		}
 

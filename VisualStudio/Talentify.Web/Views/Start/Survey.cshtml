@@ -1,0 +1,71 @@
+﻿@{
+	ViewBag.Title = "Survey";
+	Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<script>
+	$(this).ready(function()
+	{
+		$('#HearedOfTalentifyText').hide();
+		$('#HearedOfTalentifyOption').change(function()
+		{
+			if ($(this).val() == "Sonstige")
+			{
+				$('#HearedOfTalentifyText').slideDown('fast');
+			}
+			else
+			{
+				$('#HearedOfTalentifyText').slideUp('fast');
+				$('#HearedOfTalentifyText').val('');
+			}
+		});
+	});
+</script>
+
+<h3>Hilf uns kurz mit zwei Fragen<br/> und sammle deine ersten Bonuspunkte!</h3>
+
+<article style="margin: 30px 0 0 0;">
+	<div class="msg-container" id="msg-container">
+		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
+		<div id="msg-success" class="msg success"><p>Vielen Dank für die zusätzlichen Angaben, du hast 20 Bonuspunkte bekommen.</p></div>
+	</div>
+	@if (FormSuccess == null)
+	 {
+		 using (Html.BeginForm("Survey", "Start", FormMethod.Post, new { @class = "form-container" }))
+		 {
+				<div class="field-container">
+					<label>Was ist die höchste Ausbildung deiner Eltern?</label>
+					<select name="ParentEducation" id="ParentEducation" class="mandatory">
+						<option value="">Bitte auswählen</option>
+						<option value="Pflichtschule">Pflichtschule</option>
+						<option value="Lehre">Lehre</option>
+						<option value="Matura">Matura</option>
+						<option value="Studium">Studium</option>
+					</select>
+				</div>
+				<div class="field-container">
+					<label>Wie bist du auf talentify Aufmerksam geworden?</label>
+					<select name="HearedOfTalentifyOption" id="HearedOfTalentifyOption" class="mandatory">
+						<option value="">Bitte auswählen</option>
+						<option value="Schule">Schule</option>
+						<option value="Eltern">Eltern</option>
+						<option value="Lehrer">Lehrer</option>
+						<option value="Freunde">Freunde</option>
+						<option value="Internet">Internet</option>
+						<option value="Zeitung">Zeitung</option>
+						<option value="Sonstige">Sonstige</option>
+					</select>
+					<textarea name="HearedOfTalentifyText" id="HearedOfTalentifyText" maxlength="140" style="margin: 10px 0 0 0;" placeholder="Teile uns mit wie du auf talentify Aufmerksam geworden bist"></textarea>
+				</div>
+				<div class="field-container">
+					<input type="submit" value="Absenden" onclick="return validateSurvey();"/>
+				</div>
+		 }
+	 }
+	 else
+	 {
+		<script>
+			setTimeout(function () { window.parent.hideModal('modal-survey'); }, 4000);
+		</script>
+	 }
+</article>

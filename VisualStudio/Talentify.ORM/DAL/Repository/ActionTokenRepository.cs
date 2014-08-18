@@ -51,5 +51,26 @@ namespace Talentify.ORM.DAL.Repository
 
 			return token;
 		}
+
+		public ActionToken GetSurveyToken(int userId)
+		{
+			var token = AsQueryable().FirstOrDefault(t => t.UserId == userId && t.Type == ActionTokenType.Survey);
+
+			if (token == null)
+			{
+				token = new ActionToken()
+				{
+					UserId = userId,
+					Type = ActionTokenType.Survey,
+					CreatedDate = DateTime.Now,
+					ValidUntil = DateTime.MaxValue,
+					Token = Guid.NewGuid()
+				};
+				Insert(token);
+				UnitOfWork.Save();
+			}
+
+			return token;
+		}
 	}
 }

@@ -31,7 +31,7 @@ $.TextboxList.Autocomplete = function(textboxlist, _options){
 			loadPlaceholder: 'Please wait...'
     },
 		method: 'standard',
-		placeholder: 'Autovervollst&auml;ndigung'
+		placeholder: 'Bitte einfach los tippen und das gew&uuml;nschte Fach aus der Liste ausw&auml;hlen.'
 	}, _options);
 	
 	var init = function(){

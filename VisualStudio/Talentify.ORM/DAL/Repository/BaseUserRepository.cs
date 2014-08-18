@@ -40,14 +40,14 @@ namespace Talentify.ORM.DAL.Repository
 
 		#endregion
 
-		#region Register
-
 		public void AddDefaultSettings(TEntity user)
 		{
 			user.Settings = new UserSettings() { HasNewsletter = true, HasNotifications = true };
 		}
 
-		public virtual BaseUser RegisterConfirm(Guid registerCode)
+		#region Register
+
+		public virtual BaseUser RegisterConfirm(Guid registerCode, string inviteToken)
 		{
 			var user = UnitOfWork.BaseUserRepository.AsQueryable().FirstOrDefault(u => u.RegisterCode == registerCode);
 			
@@ -61,6 +61,17 @@ namespace Talentify.ORM.DAL.Repository
 
 				// add bonuspoints for registration
 				UnitOfWork.BonuspointRepository.Insert(user.Id, BonusPointsFor.Register, "Erfolgreiche Registrierung");
+
+				// check if user was invited
+				if (!string.IsNullOrEmpty(inviteToken))
+				{
+					var actionToken = UnitOfWork.ActionTokenRepository.AsQueryable().FirstOrDefault(t => t.Token.ToString() == inviteToken);
+					if (actionToken != null)
+					{
+						UnitOfWork.BonuspointRepository.Insert(actionToken.UserId, BonusPointsFor.Invite, "Erfolgreiche Einladung: " + user.Email, user.Id);
+					}
+				}
+
 				return user;
 			}
 
@@ -206,12 +217,13 @@ namespace Talentify.ORM.DAL.Repository
 				UnitOfWork.Save();
 
 				// send e-mail with instructions
-				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], user.Email);
-				mailMsg.Subject = WebConfigurationManager.AppSettings["Email.PasswordReset.Subject"];
 				var resetLink = string.Format(ConfigurationManager.AppSettings["BaseUrl"] + "/Login/PasswordReset?token={0}",
 					resetToken.Token.ToString());
-				mailMsg.Body = string.Format("Link: {0}", resetLink);
-				Email.Send(mailMsg);
+				var emailContent =
+					string.Format(
+						"Bitte klicke auf folgenden Link um dein Passwort zurückzusetzen:<br/><br/><a href='{0}' style='color:#0eb48d;'>{0}</a><br/><br/>Du bekommst dieses E-Mail weil du dein Passwort auf <a href='http://talentify.me' style='color:#0eb48d;'>talentify.me</a> zurückgesetzt hast. Solltest du das nicht gemacht haben, melde dich bitte unter <a href='mailto:hallo@talentify.at' style='color:#0eb48d;'>hallo@talentify.at</a> und gebe uns Bescheid.",
+						resetLink);
+				Email.Send(user.Email, WebConfigurationManager.AppSettings["Email.PasswordReset.Subject"], emailContent);
 			}
 		}
 
@@ -234,11 +246,14 @@ namespace Talentify.ORM.DAL.Repository
 					};
 				}
 
-				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], toEmail);
-				mailMsg.Subject = WebConfigurationManager.AppSettings["Email.Invite.Subject"];
+				var user = GetById(token.UserId);
 				var inviteUrl = string.Format("{0}/Register/Index?token={1}", ConfigurationManager.AppSettings["BaseUrl"], token.Token.ToString());
-				mailMsg.Body = inviteUrl;
-				Email.Send(mailMsg);
+				var emailContent =
+					string.Format(
+						"Du wurdest von {0} {1} eingeladen dich bei talentify zu registrieren. Folge dem Link und registriere dich:<br/><br/><a href='{2}' style='color:#0eb48d;'>{2}</a>",
+						user.Firstname, user.Surname, inviteUrl);
+				var subject = string.Format(WebConfigurationManager.AppSettings["Email.Invite.Subject"], user.Firstname);
+				Email.Send(toEmail, subject, emailContent, "Als Belohnung gibt's Bonuspunkte für dich und deinen Freund. Also gleich dem Link folgen und anmelden. Werde Teil der talentify-Community, entdecke deine Talente und hilf deinen MitschülerInnen.");
 				return new FormFeedback() { IsError = false };
 			}
 			catch (Exception)

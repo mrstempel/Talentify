@@ -34,9 +34,11 @@ namespace Talentify.Web.Controllers
 	        LastStreamItemDate = null;
 	        Session["IsFirstLogin"] = null;
 	        var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
+			var surveyToken = UnitOfWork.ActionTokenRepository.GetSurveyToken(LoggedUser.Id);
 	        ViewBag.Latitude = student.School.Latitude;
 	        ViewBag.Longitude = student.School.Longitude;
 	        ViewBag.AllSchools = UnitOfWork.SchoolRepository.GetSchoolsWithInfo();
+			ViewBag.ShowSurvey = surveyToken.ValidUntil != DateTime.MinValue;
             return View(new SearchParams());
         }
 
@@ -53,7 +55,37 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Events()
 	    {
+			ViewBag.RegisteredIds = UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id);
 		    return View(UnitOfWork.EventRepository.GetOnlineEvents().Take(3));
 	    }
+
+	    public ActionResult Survey()
+	    {
+		    var actionToken = UnitOfWork.ActionTokenRepository.GetSurveyToken(LoggedUser.Id);
+		    actionToken.ValidUntil = DateTime.MinValue;
+			UnitOfWork.ActionTokenRepository.Update(actionToken);
+		    UnitOfWork.Save();
+
+		    return View();
+	    }
+
+		[HttpPost]
+		public ActionResult Survey(string parentEducation, string hearedOfTalentifyOption, string hearedOfTalentifyText)
+		{
+			var hearedOfTalentify = (!string.IsNullOrEmpty(hearedOfTalentifyText))
+				? hearedOfTalentifyText
+				: hearedOfTalentifyOption;
+
+			if (UnitOfWork.StudentRepository.SetSurveyData(LoggedUser.Id, parentEducation, hearedOfTalentify))
+			{
+				FormSuccess = new FormFeedback();
+			}
+			else
+			{
+				FormError = new FormFeedback();
+			}
+
+			return View();
+		}
     }
 }

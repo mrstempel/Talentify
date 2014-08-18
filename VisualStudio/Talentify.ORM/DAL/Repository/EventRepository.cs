@@ -123,5 +123,12 @@ namespace Talentify.ORM.DAL.Repository
 					.FirstOrDefault(reg => reg.EventId == eventId && reg.UserId == userId);
 			return (registration != null);
 		}
+
+		public List<int> GetUserRegisteredEventIds(int userId)
+		{
+			return
+				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId)
+					select regs.EventId).ToList();
+		}
 	}
 }

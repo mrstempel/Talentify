@@ -28,6 +28,11 @@ namespace Talentify.ORM.DAL.Repository
 
 		public void Insert(int userId, int points, string message)
 		{
+			Insert(userId, points, message, 0);
+		}
+
+		public void Insert(int userId, int points, string message, int targetId)
+		{
 			// add bonus points
 			var bonusPoints = new BonusPoint()
 			{
@@ -42,7 +47,7 @@ namespace Talentify.ORM.DAL.Repository
 			{
 				ToUserId = userId,
 				SenderId = 0,
-				TargetId = 0,
+				TargetId = targetId,
 				Text = message,
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.System,

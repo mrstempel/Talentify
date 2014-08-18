@@ -32,7 +32,31 @@
 			<img src="@Model.ProfileImageLarge" alt="Neues Bild hochladen" class="profile-img"/>
 		</div>
 		<div class="right">
-			<h3>@Model.Firstname @Model.Surname</h3>
+			<h3>
+				@Model.Firstname @Model.Surname
+				<span class="social-profiles">
+					@if (!string.IsNullOrEmpty(Model.FacebookUrl))
+					{
+						<a href="@Model.FacebookUrl" title="facebook Profil" target="_blank" onmouseover="hoverImage('icon-profile-fb');" onmouseout="hoverImage('icon-profile-fb');"><img src="/Images/icon-profile-fb.png" id="icon-profile-fb" alt="facebook Profil"/></a>
+					}
+					@if (!string.IsNullOrEmpty(Model.GooglePlusUrl))
+					{
+						<a href="@Model.GooglePlusUrl" title="Google+ Profil" target="_blank" onmouseover="hoverImage('icon-profile-google');" onmouseout="hoverImage('icon-profile-google');"><img src="/Images/icon-profile-google.png" id="icon-profile-google" alt="Google+ Profil"/></a>
+					}
+					@if (!string.IsNullOrEmpty(Model.TwitterUrl))
+					{
+						<a href="@Model.TwitterUrl" title="twitter Profil" target="_blank" onmouseover="hoverImage('icon-profile-twitter');" onmouseout="hoverImage('icon-profile-twitter');"><img src="/Images/icon-profile-twitter.png" id="icon-profile-twitter" alt="twitter Profil"/></a>
+					}
+					@*@if (!string.IsNullOrEmpty(Model.InstagramUrl))
+					{
+						<a href="@Model.InstagramUrl" title="Instagram Profil" target="_blank"><img src="/Images/icon-profile-instagram.png" alt="Instagram Profil"/></a>
+					}
+					@if (!string.IsNullOrEmpty(Model.PinterestUrl))
+					{
+						<a href="@Model.PinterestUrl" title="Pinterest Profil" target="_blank"><img src="/Images/icon-profile-pinterest.png" alt="Pinterest Profil"/></a>
+					}*@
+				</span>
+			</h3>
 			<div class="content-part no-border">
 				@(@Model.School.ZipCode)-@(@Model.School.City)<br/>
 				@(@Model.School.Name)

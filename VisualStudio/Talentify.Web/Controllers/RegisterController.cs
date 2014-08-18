@@ -22,7 +22,7 @@ namespace Talentify.Web.Controllers
 		[HttpPost]
 	    public ActionResult Index(Student student)
 		{
-			var saveFeedback = UnitOfWork.StudentRepository.Register(student);
+			var saveFeedback = UnitOfWork.StudentRepository.Register(student, Request["token"]);
 
 			if (saveFeedback.IsError)
 				this.FormError = saveFeedback;
@@ -32,11 +32,11 @@ namespace Talentify.Web.Controllers
 			return View(student);
 	    }
 
-	    public ActionResult Confirm(string c)
+	    public ActionResult Confirm(string c, string t)
 	    {
 		    try
 		    {
-			    var user = UnitOfWork.StudentRepository.RegisterConfirm(new Guid(c));
+			    var user = UnitOfWork.StudentRepository.RegisterConfirm(new Guid(c), t);
 				if (user != null && WebSecurity.Login(user.Email, user.Password))
 				{
 					Session["IsFirstLogin"] = true;

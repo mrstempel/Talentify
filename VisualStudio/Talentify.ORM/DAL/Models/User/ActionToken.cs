@@ -11,7 +11,8 @@ namespace Talentify.ORM.DAL.Models.User
 	public enum ActionTokenType
 	{
 		PasswordReset,
-		Invite
+		Invite,
+		Survey
 	}
 
 	public class ActionToken : BaseEntity

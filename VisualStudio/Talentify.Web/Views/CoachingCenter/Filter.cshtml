@@ -1,49 +1,85 @@
-﻿@model IEnumerable<Talentify.ORM.DAL.Models.Coaching.CoachingRequest>
+﻿@using System.Configuration
+@model IEnumerable<Talentify.ORM.FrontendLogic.Models.CoachingRequestListItem>
 
 @{
 	var selectedIndex = 0;
 }
 
-<div class="request-list">
-	@for (int i = 0; i < Model.Count(); i++)
-	{
-		var user = Model.ElementAt(i).FromUserId == LoggedUser.Id ? Model.ElementAt(i).ToUser : Model.ElementAt(i).FromUser;
-		var detailClass = Model.ElementAt(i).FromUserId == LoggedUser.Id ? "out" : "in";
-
-		if (Model.ElementAt(i).Id == ViewBag.RequestId)
-		{
-			selectedIndex = i;
-		}
-
-		<div id="request-item-@Model.ElementAt(i).Id" class="item">
-			<a href="javascript:void(0);" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)" class="image-link" style="background: url('@user.ProfileImageMedium');"></a>
-			<h3>@user.Firstname @user.Surname</h3>
-			<div class="details @detailClass" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).Id)">
-				<span class="important">@Model.ElementAt(i).SubjectCategory.Name</span>
-				<span class="small">@(@Model.ElementAt(i).Class)te Schulstufe</span>
-			</div>
-			@if (!string.IsNullOrEmpty(user.Email) || !string.IsNullOrEmpty(user.Phone))
-			{
-			   <div class="contact">
-				@if (!string.IsNullOrEmpty(user.Email))
-				{
-					<span><a href="mailto:@(@user.Email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
-				}
-				@if (!string.IsNullOrEmpty(user.Phone))
-				{
-					<span>Tel: @user.Phone</span>
-				}
-			   </div>
-			}
+@if (Model.Count() > 0)
+{
+	<div class="request-list">
+		<div id="in-out-filter">
+			<img id="selected-in-out-filter" src="/Images/inandout.png"/>
+			<select id="in-out-select" onchange="setCoachingInOutFilter(@ViewBag.RequestId); ">
+				<option value="both">Alle Anzeigen</option>
+				<option value="in">Erhaltene Lernhilfeanfragen</option>
+				<option value="out">Gesendete Lernhilfeanfragen</option>
+			</select>
 		</div>
-	}
-</div>
-<script>
-		$(this).ready(function ()
-		{
-			loadCoachingRequestTimeline(@Model.ElementAt(selectedIndex).Id);
-		});
-</script>
+		<div class="scroll-container" style="height:380px;width:100%;overflow: auto;display: inline-block;">
+			
+	
+				@for (int i = 0; i < Model.Count(); i++)
+				{
+					var username = Model.ElementAt(i).UserIdFrom == LoggedUser.Id ? Model.ElementAt(i).UsernameTo : Model.ElementAt(i).UsernameFrom;
+					var userImage = (Model.ElementAt(i).ImageTo.HasValue) ?
+						string.Format("{0}{1}_medium.png", ConfigurationManager.AppSettings["Upload.Profile"], Model.ElementAt(i).ImageTo.ToString()) :
+						"/Images/default-profile-medium.png";
+					if (Model.ElementAt(i).UserIdFrom != LoggedUser.Id)
+					{
+						userImage = (Model.ElementAt(i).ImageFrom.HasValue) ?
+							string.Format("{0}{1}_medium.png", ConfigurationManager.AppSettings["Upload.Profile"], Model.ElementAt(i).ImageFrom.ToString()) :
+							"/Images/default-profile-medium.png";
+					}
+					var detailClass = Model.ElementAt(i).UserIdFrom == LoggedUser.Id ? "out" : "in";
+					var email = Model.ElementAt(i).UserIdFrom == LoggedUser.Id ? Model.ElementAt(i).EmailTo : Model.ElementAt(i).EmailFrom;
+					var phone = Model.ElementAt(i).UserIdFrom == LoggedUser.Id ? Model.ElementAt(i).PhoneTo : Model.ElementAt(i).PhoneFrom;
 
-<div id="request-stream-loading">Lade Stream ...</div>
-<div id="request-stream"></div>
+					if (Model.ElementAt(i).RequestId == ViewBag.RequestId)
+					{
+						selectedIndex = i;
+					}
+
+					<div id="request-item-@Model.ElementAt(i).RequestId" class="item @detailClass">
+						<a href="javascript:void(0);" onclick=" loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId) " class="image-link" style="background: url('@userImage');"></a>
+						<h3 onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId)">@username</h3>
+						<div class="details @detailClass" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId)">
+							<span class="important">@Model.ElementAt(i).Subject</span>
+							<span class="small">@(@Model.ElementAt(i).Class). Klasse</span>
+						</div>
+						@if (!string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(phone))
+						{
+							<div class="contact">
+								@if (!string.IsNullOrEmpty(email))
+								{
+									<span><a href="mailto:@(@email)"><img src="/Images/icon-mail.png" alt="E-Mail"/></a></span>
+								}
+								@if (!string.IsNullOrEmpty(phone))
+								{
+									<span>Tel: @phone</span>
+								}
+							</div>
+						}
+					</div>
+				}
+				<script>
+					$(this).ready(function()
+					{
+						$(".scroll-container").mCustomScrollbar(
+						{
+							theme: "minimal-dark"
+						});
+						loadCoachingRequestTimeline(@Model.ElementAt(selectedIndex).RequestId);
+					});
+				</script>
+			
+		</div>
+	</div>
+
+	<div id="request-stream-loading">Lade Stream ...</div>
+	<div id="request-stream"></div>
+}
+else
+{
+	<p>Keine Lernhilfe gefunden</p>
+}

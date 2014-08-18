@@ -1,5 +1,9 @@
 ﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.User.Student>
 
+@{
+	var inviteToken = Request["token"] ?? string.Empty;
+}
+
 <script>
 	function loadAgb()
 	{
@@ -10,6 +14,7 @@
 
 @using (Html.BeginForm("Index", "Register", FormMethod.Post, new {@class = "form-container register"}))
 {
+	<input type="hidden" name="token" value="@inviteToken" />
 	<article id="register-form">
 		<div class="field-container">
 			@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})

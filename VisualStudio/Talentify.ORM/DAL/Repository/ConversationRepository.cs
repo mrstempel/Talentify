@@ -50,7 +50,7 @@ namespace Talentify.ORM.DAL.Repository
 				ToUserId = toUserId,
 				SenderId = fromUser.Id,
 				TargetId = targetId,
-				Text = string.Format("Neue Nachricht von:<br/>{0} {1}", fromUser.Firstname, fromUser.Surname),
+				Text = string.Format("Neue Nachricht von: {0} {1}", fromUser.Firstname, fromUser.Surname),
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.CoachingRequest,
 				IconType = NotificationIconType.None

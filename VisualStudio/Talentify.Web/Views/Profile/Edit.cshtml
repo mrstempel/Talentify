@@ -47,6 +47,7 @@
 			using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new {@class = "form-container register"}))
 			{
 				@Html.HiddenFor(m => m.Id)
+				@Html.HiddenFor(m => m.SettingsId)
 				<article id="profile-form">
 					<div class="field-container">
 						@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})

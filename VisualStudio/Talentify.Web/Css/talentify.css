@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, #past-event-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
+﻿.box-sizing, .input-switch .option, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, #past-event-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -27,6 +27,9 @@ h1, h2, h3, h4, h5 {
 h2 {
   font-size: 32px;
   color: #ef4d69; }
+
+.green h2 {
+  color: #0eb48d; }
 
 a {
   color: #0eb48d; }
@@ -388,7 +391,7 @@ input[type="text"].mandatory, input[type="password"].mandatory {
       font-size: 14px; }
       #notification-list .item .text .system, .all-notifications .item .text .system {
         float: left;
-        margin: 10px 0 0 0; }
+        margin: 0 0 0 0; }
       #notification-list .item .text .bonus, .all-notifications .item .text .bonus {
         float: right;
         background: #ef4d69;
@@ -453,6 +456,22 @@ input[type="text"].mandatory, input[type="password"].mandatory {
   width: 100%;
   margin: auto;
   text-align: center; }
+  #page-footer .invite {
+    margin: 50px 0 0 0;
+    padding: 10px !important;
+    width: 100%;
+    background: #0eb48d;
+    color: #fff;
+    display: inline-block; }
+    #page-footer .invite .icon-list {
+      display: inline-block; }
+      #page-footer .invite .icon-list span {
+        float: left;
+        font-family: CaeciliaLTPro-85Heavy;
+        margin: 7px 20px 0 0; }
+      #page-footer .invite .icon-list a {
+        margin: 0 10px 0 0;
+        display: inline-block; }
   #page-footer .container {
     width: 100%;
     padding: 30px 0; }
@@ -535,10 +554,15 @@ input[type="text"].mandatory, input[type="password"].mandatory {
     display: inline-block;
     width: 100%; }
     #page-container.full-width .big-bg p {
-      padding-top: 10%;
+      margin: 0;
+      padding: 6% 0 30px 0;
       color: #fff;
       font-family: CaeciliaLTPro-85Heavy;
       font-size: 6vw;
+      text-shadow: 2px 2px 15px #414141; }
+    #page-container.full-width .big-bg span.small {
+      font-size: 2vw;
+      color: #fff;
       text-shadow: 2px 2px 15px #414141; }
     #page-container.full-width .big-bg .label {
       position: absolute;
@@ -597,8 +621,8 @@ input[type="text"].mandatory, input[type="password"].mandatory {
 #home-nav {
   position: fixed;
   top: 300px;
-  right: 5%;
-  width: 20px;
+  right: 70px;
+  width: 25px;
   z-index: 100;
   margin: 0 10px 0 0; }
   #home-nav ul li {
@@ -614,6 +638,13 @@ input[type="text"].mandatory, input[type="password"].mandatory {
         display: none; }
     #home-nav ul li a.selected, #home-nav ul li a:hover {
       background: #ef4d69; }
+
+@media all and (max-width: 1000px) {
+  #home-nav {
+    right: 50px; }
+    #home-nav ul li a {
+      width: 18px;
+      height: 18px; } }
 
 #search {
   margin: 0 0 30px 0; }
@@ -761,6 +792,7 @@ header.search-map-overlay {
     width: 100%; }
 
 article.event-preview {
+  position: relative;
   cursor: pointer; }
   article.event-preview h3 {
     text-align: left; }
@@ -770,6 +802,8 @@ article.event-preview {
   article.event-preview img {
     float: left;
     margin: 0 10px 0 0; }
+  article.event-preview .register-icon {
+    display: none; }
 
 article.event-preview:hover, article.event-preview.past:hover {
   background: #e6f7f3; }
@@ -777,8 +811,16 @@ article.event-preview:hover, article.event-preview.past:hover {
 article.event-preview.past {
   background: #effdfa;
   color: #999; }
-  article.event-preview.past img {
+  article.event-preview.past .prev-img {
     opacity: 0.7; }
+
+article.event-preview.registered .register-icon {
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+  opacity: 1 !important; }
 
 article.event-detail .content-container {
   -moz-box-shadow: 0 0 5px #c3c3c3;
@@ -854,6 +896,9 @@ article.event-detail .content-container {
 #past-event-options {
   width: 100%;
   min-height: 95px;
+  display: none; }
+
+#past-registered {
   display: none; }
 
 #registered {
@@ -998,6 +1043,8 @@ article.event-detail .content-container {
     .user-profile article .right h3, .user-settings article .right h3 {
       text-align: left;
       font-size: 30px; }
+      .user-profile article .right h3 .social-profiles, .user-settings article .right h3 .social-profiles {
+        float: right; }
     .user-profile article .right .content-part, .user-settings article .right .content-part {
       display: inline-block;
       width: 100%;
@@ -1046,7 +1093,7 @@ article.event-detail .content-container {
   display: inline-block;
   width: 355px; }
   .request-list .item {
-    float: left;
+    display: inline-block;
     width: 355px;
     padding: 10px 10px 5px 10px;
     border-bottom: 1px solid #e5e5e5;
@@ -1095,6 +1142,21 @@ article.event-detail .content-container {
         margin: 0 10px 0 0; }
   .request-list .item.active {
     background: #e6f7f3; }
+
+#in-out-filter {
+  display: inline-block;
+  width: 100%;
+  padding: 0 0 10px 0; }
+  #in-out-filter img {
+    display: inline-block;
+    margin: 10px 0 0 0; }
+  #in-out-filter select {
+    border: 1px solid #e3e4e8;
+    color: #555;
+    margin: 0;
+    padding: 5px 10px;
+    font-size: 16px;
+    float: right; }
 
 #request-stream {
   display: inline-block;

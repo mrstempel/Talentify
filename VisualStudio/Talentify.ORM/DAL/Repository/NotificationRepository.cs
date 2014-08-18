@@ -25,6 +25,35 @@ namespace Talentify.ORM.DAL.Repository
         {
         }
 
+		public override void Insert(Notification entity)
+		{
+			base.Insert(entity);
+
+			// check if email notifiction should be sent
+			var user = UnitOfWork.BaseUserRepository.GetById(entity.ToUserId, "Settings");
+			if (user.Settings != null && user.Settings.HasNotifications)
+			{
+				var icon = string.Empty;
+				if (entity.IconType == NotificationIconType.Confirmed)
+					icon = "icon-zusagen.png";
+				if (entity.IconType == NotificationIconType.Cancelled)
+					icon = "icon-absagen.png";
+				if (entity.IconType == NotificationIconType.Bonus)
+					icon = "icon-bonus" + entity.Bonus + ".png";
+
+				var link = entity.TargetId != 0 ? "/Profile/Index/" + entity.TargetId : "/Profile";
+				var profileImage = "/Images/sender-talentify.png";
+				if (entity.SenderType == NotificationSenderType.CoachingRequest)
+				{
+					var sender = UnitOfWork.BaseUserRepository.GetById(entity.SenderId);
+					profileImage = sender.ProfileImageSmall;
+					link = string.Format("{0}/{1}", ConfigurationManager.AppSettings["Notifications.SenderType." + (int) entity.SenderType + ".Url"], entity.TargetId);
+				}
+
+				Email.SendNotification(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"], icon, link, profileImage, entity.Text);
+			}
+		}
+
 		public int Count(int userId)
 		{
 			return Convert.ToInt32(UnitOfWork.NotificationRepository.AsQueryable().Count(n => n.ToUserId == userId && n.ReadDate == null));
@@ -63,10 +92,11 @@ namespace Talentify.ORM.DAL.Repository
 
 					if (notification.IconType == NotificationIconType.Bonus)
 					{
+						var link = notification.TargetId != 0 ? "/Profile/Index/" + notification.TargetId : "/Profile";
 						var item = new NotificationListItem
 						{
 							Image = "/Images/sender-talentify.png",
-							Link = "/Profile",
+							Link = link,
 							Text = notification.Text,
 							IconType = notification.IconType,
 							IsNew = notification.ReadDate == null,

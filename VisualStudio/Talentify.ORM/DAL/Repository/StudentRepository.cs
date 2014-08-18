@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -45,7 +46,7 @@ namespace Talentify.ORM.DAL.Repository
 
 		#region Register
 
-		public virtual FormFeedback Register(Student student)
+		public virtual FormFeedback Register(Student student, string token)
 		{
 			// check if e-mail is unique
 			if (GetByEmail(student.Email) != null)
@@ -89,10 +90,12 @@ namespace Talentify.ORM.DAL.Repository
 			if (!registerFeedback.IsError)
 			{
 				// send confirmation e-mail
-				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], student.Email);
-				mailMsg.Subject = WebConfigurationManager.AppSettings["Email.Register.Subject"];
-				mailMsg.Body = string.Format(WebConfigurationManager.AppSettings["Email.Register.Body"], student.RegisterCode);
-				Email.Send(mailMsg);
+				var confirmUrl = string.Format(ConfigurationManager.AppSettings["BaseUrl"] + "/Register/Confirm?c={0}&t={1}", student.RegisterCode, token);
+				var emailContent =
+					string.Format(
+						"Vielen Dank für die Anmeldung bei talentify. Bitte klicke auf den folgenden Link um die Registrierung abzuschließen:<br/><br/><a href='{0}' style='color:#0eb48d;'>{0}</a><br/><br/>Du bekommst dieses E-Mail weil du dich auf <a href='http://talentify.me' style='color:#0eb48d;'>talentify.me</a> mit deiner E-Mailadresse angemeldet hast. Solltest du das nicht gemacht haben, melde dich bitte unter <a href='mailto:hallo@talentify.at' style='color:#0eb48d;'>hallo@talentify.at</a> und gebe uns Bescheid.",
+						confirmUrl);
+				Email.Send(student.Email, WebConfigurationManager.AppSettings["Email.Register.Subject"], emailContent);
 			}
 
 			return registerFeedback;
@@ -106,6 +109,26 @@ namespace Talentify.ORM.DAL.Repository
 				entity = GetAttachedModel(entity);
 
 			base.Update(entity);
+		}
+
+		public bool SetSurveyData(int userId, string parentEducation, string hearedOfTalentify)
+		{
+			try
+			{
+				var user = GetById(userId);
+				user.ParentEducation = parentEducation;
+				user.HeardOfTalentify = hearedOfTalentify;
+				Update(user, false);
+				UnitOfWork.Save();
+
+				UnitOfWork.BonuspointRepository.Insert(userId, BonusPointsFor.Survey, "Teilnahme an Umfrage", user.Id);
+
+				return true;
+			}
+			catch (Exception e)
+			{
+				return false;
+			}
 		}
 
 		#region Delete
@@ -125,6 +148,7 @@ namespace Talentify.ORM.DAL.Repository
 
 			var student = GetById(userId);
 			var pictureGuid = student.PictureGuid;
+			var email = student.Email;
 			// reset user data
 			student.IsDeleted = true;
 			student.Email = null;
@@ -160,6 +184,8 @@ namespace Talentify.ORM.DAL.Repository
 				System.IO.File.Delete(Path.Combine(uploadPath, filenameMedium));
 				System.IO.File.Delete(Path.Combine(uploadPath, filenameLarge));
 			}
+
+			Email.SendDelete(email, WebConfigurationManager.AppSettings["Email.Delete.Subject"]);
 		}
 
 		#endregion

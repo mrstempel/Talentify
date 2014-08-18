@@ -73,13 +73,14 @@
 		  </div>
 		</div>
 		<footer id="page-footer" class="desktop">
-			<div class="container">
-				<div class="share">
-					<a href="https://www.facebook.com/talentify.at" target="_blank"><img src="/Images/share-fb.png"/ alt="talentify on Facebook"></a>
-					<a href="javascript:void(0);"><img src="/Images/share-google.png"/ alt="talentify on Google+"></a>
-					<a href="javascript:void(0);"><img src="/Images/share-twitter.png"/ alt="talentify on Twitter"></a>
-					<a href="javascript:void(0);" onclick="loadInvitePopup();">einladen</a>
+			@if (IsAuthenticated)
+			{
+				<div class="invite">
+					<div class="icon-list">
+						<span>Jetzt Freunde einladen & Bonuspunkte kassieren</span><a href="javascript:void(0);" onclick=" shareFacebook('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()') "><img src="/Images/invite-fb.png"/></a><a href="javascript:void(0);" onclick=" shareGoogle('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()') "><img src="/Images/invite-google.png"/></a><a href="javascript:void(0);" onclick=" shareTwitter('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()') "><img src="/Images/invite-twitter.png"/></a><a href="javascript:void(0);" onclick=" loadInvitePopup(); "><img src="/Images/invite-email.png"/></a></div>
 				</div>
+			}
+			<div class="container">
 				<nav>
 					<ul>
 						<li>&copy; 2014 talentify</li>

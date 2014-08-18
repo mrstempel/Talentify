@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -68,25 +69,25 @@ namespace Talentify.ORM.DAL.Repository
 			if (!registerFeedback.IsError)
 			{
 				// send confirmation e-mail
-				var mailMsg = new MailMessage(WebConfigurationManager.AppSettings["Email.From"], teacher.Email);
-				mailMsg.Subject = WebConfigurationManager.AppSettings["Email.Teacher.Register.Subject"];
-
 				var msgBody = new StringBuilder();
-				msgBody.Append("Registrierung erfolgreich" + Environment.NewLine);
-				msgBody.Append(string.Format("Vorname: {0}{1}", teacher.Firstname, Environment.NewLine));
-				msgBody.Append(string.Format("Nachname: {0}{1}", teacher.Surname, Environment.NewLine));
-				msgBody.Append(string.Format("E-Mail: {0}{1}", teacher.Email, Environment.NewLine));
-				msgBody.Append(string.Format("Telefon: {0}{1}", teacher.Phone, Environment.NewLine));
-				msgBody.Append(string.Format("Schule: {0}{1}", UnitOfWork.SchoolRepository.GetById(teacher.SchoolId).Name, Environment.NewLine));
+				msgBody.Append(string.Format("Vorname: {0}<br/>", teacher.Firstname));
+				msgBody.Append(string.Format("Nachname: {0}<br/>", teacher.Surname));
+				msgBody.Append(string.Format("E-Mail: {0}<br/>", teacher.Email));
+				msgBody.Append(string.Format("Telefon: {0}<br/>", teacher.Phone));
+				msgBody.Append(string.Format("Schule: {0}<br/>", UnitOfWork.SchoolRepository.GetById(teacher.SchoolId).Name));
 				msgBody.Append("Fächer: ");
 				foreach (var s in teacher.SubjectCategories)
 				{
 					msgBody.Append(s.Name + ", ");
 				}
 				var lastIndex = msgBody.ToString().LastIndexOf(",");
-				mailMsg.Body = (lastIndex > 0) ? msgBody.ToString().Substring(0, msgBody.ToString().LastIndexOf(",")) : msgBody.ToString();
+				var teacherInfo = (lastIndex > 0) ? msgBody.ToString().Substring(0, msgBody.ToString().LastIndexOf(",")) : msgBody.ToString();
 
-				Email.Send(mailMsg);
+				var emailContent =
+					string.Format(
+						"Vielen Dank für die Anmeldung als talentify Lerncoach. Sie haben sich mit folgenden Daten angemeldet:<br/><br/>{0}<br/><br/>Sie bekommen dieses E-Mail weil Sie dich auf <a href='http://talentify.me' style='color:#0eb48d;'>talentify.me</a> mit Ihrer E-Mailadresse als Lerncoach angemeldet haben. Sollten Sie das nicht gemacht haben oder sich wieder austragen lassen wollen, melden Sie sich bitte einfach unter <a href='mailto:hallo@talentify.at' style='color:#0eb48d;'>hallo@talentify.at</a>",
+						teacherInfo);
+				Email.SendToTeacher(teacher.Email, WebConfigurationManager.AppSettings["Email.Teacher.Register.Subject"], emailContent);
 			}
 
 			return registerFeedback;

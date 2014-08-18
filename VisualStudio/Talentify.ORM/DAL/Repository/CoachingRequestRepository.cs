@@ -101,7 +101,7 @@ namespace Talentify.ORM.DAL.Repository
 			return feedback;
 		}
 
-		public IEnumerable<CoachingRequest> GetByStatus(int toUserId, StatusType statusType)
+		public IEnumerable<CoachingRequestListItem> GetByStatus(int toUserId, StatusType statusType)
 		{
 			var requests = from status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable()
 				join coachingRequest in UnitOfWork.CoachingRequestRepository.AsQueryable() on status.CoachingRequestId equals coachingRequest.Id
@@ -110,14 +110,35 @@ namespace Talentify.ORM.DAL.Repository
 					status.StatusType == statusType && 
 					(coachingRequest.FromUserId == toUserId || coachingRequest.ToUserId == toUserId)
 				orderby coachingRequest.CreatedDate descending 
-				select coachingRequest;
+				select new CoachingRequestListItem()
+				{
+					RequestId = coachingRequest.Id,
+					UsernameFrom = coachingRequest.FromUser.Firstname + " " + coachingRequest.FromUser.Surname,
+					EmailFrom = coachingRequest.FromUser.Email,
+					PhoneFrom = coachingRequest.FromUser.Phone,
+					ImageFrom = coachingRequest.FromUser.PictureGuid,
+					UserIdFrom = coachingRequest.FromUser.Id,
+					UsernameTo = coachingRequest.ToUser.Firstname + " " + coachingRequest.ToUser.Surname,
+					EmailTo = coachingRequest.ToUser.Email,
+					PhoneTo = coachingRequest.ToUser.Phone,
+					ImageTo = coachingRequest.ToUser.PictureGuid,
+					UserIdTo = coachingRequest.ToUser.Id,
+					Subject = coachingRequest.SubjectCategory.Name,
+					Class = coachingRequest.Class,
+					StatusHistoryCount = coachingRequest.StatusHistory.Count()
+				};
 
-			//var groupedRequests = from g in requests
-			//	group g by g.Id
-			//	into requestGrouped
-			//	select requestGrouped.AsQueryable().ToList();
+			var results = requests;
+			if (statusType == StatusType.Request)
+			{
+				results = requests.Where(r => r.StatusHistoryCount == 1);
+			}
+			if (statusType == StatusType.Appointment)
+			{
+				results = requests.Where(r => r.StatusHistoryCount == 2);
+			}
 
-			return requests.DistinctBy(r => r.Id);
+			return results.DistinctBy(r => r.RequestId);
 		}
 
 		public CoachingRequestStream GetStream(int coachingRequestId)

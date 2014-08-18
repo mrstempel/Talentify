@@ -149,6 +149,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Css\jquery.mCustomScrollbar.min.css" />
     <Content Include="Css\MyFontsWebfontsKit.css" />
     <Content Include="Css\sprite.css">
       <DependentUpon>sprite.scss</DependentUpon>
@@ -200,10 +201,6 @@
     <None Include="Properties\PublishProfiles\talentify - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
-    <Content Include="Html\Search.html" />
-    <Content Include="Html\Index.html" />
-    <Content Include="Html\Register.html" />
-    <Content Include="Html\Home.html" />
     <Content Include="Images\bg-content-headline.png" />
     <Content Include="Images\default-profile-large-f.png" />
     <Content Include="Images\default-profile-large-m.png" />
@@ -223,14 +220,28 @@
     <Content Include="Images\icon-bonus20.png" />
     <Content Include="Images\icon-bonus5.png" />
     <Content Include="Images\icon-close.png" />
+    <Content Include="Images\icon-event-register.png" />
     <Content Include="Images\icon-links.png" />
     <Content Include="Images\icon-mail.png" />
+    <Content Include="Images\icon-profile-fb-hover.png" />
+    <Content Include="Images\icon-profile-fb.png" />
+    <Content Include="Images\icon-profile-google-hover.png" />
+    <Content Include="Images\icon-profile-google.png" />
+    <Content Include="Images\icon-profile-instagram.png" />
+    <Content Include="Images\icon-profile-pinterest.png" />
+    <Content Include="Images\icon-profile-twitter-hover.png" />
+    <Content Include="Images\icon-profile-twitter.png" />
     <Content Include="Images\icon-rechts.png" />
     <Content Include="Images\icon-star.png" />
     <Content Include="Images\icon-zusagen.png" />
     <Content Include="Images\illu.jpg" />
     <Content Include="Images\illu2.jpg" />
     <Content Include="Images\illu3.jpg" />
+    <Content Include="Images\inandout.png" />
+    <Content Include="Images\invite-email.png" />
+    <Content Include="Images\invite-fb.png" />
+    <Content Include="Images\invite-google.png" />
+    <Content Include="Images\invite-twitter.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mandatory.png" />
     <Content Include="Images\map-eumel.png" />
@@ -259,6 +270,7 @@
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\jquery.browser.min.js" />
     <Content Include="Scripts\jquery.easyModal.js" />
+    <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\Opentip\opentip-jquery.min.js" />
     <Content Include="Scripts\Opentip\opentip.css" />
@@ -270,6 +282,10 @@
     <Content Include="Scripts\Textboxlist\TextboxList.css" />
     <Content Include="Scripts\Textboxlist\TextboxList.js" />
     <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Templates\EmailNotification.html" />
+    <Content Include="Templates\EmailDelete.html" />
+    <Content Include="Templates\EmailTeacher.html" />
+    <Content Include="Templates\Email.html" />
     <Content Include="test.html" />
     <Content Include="uploads\profile\65ecab19-6584-49f3-8a7f-5aa4b8dbc8cf_large.png" />
     <Content Include="Web.config">
@@ -328,6 +344,7 @@
     <Content Include="Views\FormHelper\SubjectCategoryTags.cshtml" />
     <Content Include="Views\Notification\AllNotifications.cshtml" />
     <Content Include="Views\Invite\Index.cshtml" />
+    <Content Include="Views\Start\Survey.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

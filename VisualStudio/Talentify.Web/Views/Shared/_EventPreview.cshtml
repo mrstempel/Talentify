@@ -1,12 +1,19 @@
 ﻿@model Talentify.ORM.DAL.Models.Content.Event
 
 @{
+	var registeredEvents = ViewBag.RegisteredIds as List<int>;
+	var isUserRegistered = (registeredEvents != null) && registeredEvents.Contains(Model.Id);
 	var cssClass = Model.BeginDate < DateTime.Now ? "past" : string.Empty;
-	var linkText = Model.BeginDate < DateTime.Now ? "Details anzeigen" : "Hier geht's zur Anmeldung";
+	if (isUserRegistered)
+	{
+		cssClass += " registered";
+	}
+	var linkText = (Model.BeginDate < DateTime.Now || isUserRegistered) ? "Details anzeigen" : "Hier geht's zur Anmeldung";
 }
 
 <article class="event-preview @cssClass" onclick="location.href='/Events/Detail/@Model.Id'">
-	<a href="/Events/Detail/@Model.Id"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt=""/></a>
+	<div class="register-icon"><img src="/Images/icon-event-register.png"/></div>
+	<a href="/Events/Detail/@Model.Id"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt="" class="prev-img"/></a>
 	<h3>@Html.Raw(Model.Title)</h3>
 	@Model.BeginDate.ToString("dd.MM.yyyy") | @Model.BeginTime - @Model.EndTime
 	<p>@Html.Raw(Model.Content.Substring(0, 105))...</p>
