@@ -1,0 +1,11 @@
+﻿@model Talentify.ORM.FrontendLogic.Models.Talentometer
+
+<h3>Talentometer:</h3>
+<div class="bar">
+	<div class="left" style="width:@Model.PercentFinished%;"></div>
+	<div class="right" style="width:@Model.PercentOpen%;"></div>
+</div>
+<div class="bar-labels">
+	<div class="left">@Model.CurrentLevel.Name</div>
+	<div class="right">@Model.NextLevel.Name</div>
+</div>

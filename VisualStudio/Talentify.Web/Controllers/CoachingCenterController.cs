@@ -5,14 +5,21 @@ using System.Web;
 using System.Web.Mvc;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.Mvc;
+using Talentify.ORM.Mvc.Security;
 
 namespace Talentify.Web.Controllers
 {
+	[RequireActiveSchool]
     public class CoachingCenterController : BaseController
     {
 		public ActionResult Index(int id = 0)
 		{
 			ViewBag.RequestId = id;
+			ViewBag.CoachingRequest = -1;
+			if (id != 0)
+			{
+				ViewBag.CoachingRequestStatus = (int)UnitOfWork.CoachingRequestRepository.GetStatusType(id);
+			}
             return View();
         }
 
@@ -102,7 +109,18 @@ namespace Talentify.Web.Controllers
 	    public ActionResult CompleteCoachingRequest(int coachingRequestId, string status)
 	    {
 		    ViewBag.Status = status;
-		    return View(UnitOfWork.CoachingRequestRepository.GetById(coachingRequestId));
+		    ViewBag.IsConflicted = false;
+		    var coachingRequest = UnitOfWork.CoachingRequestRepository.GetById(coachingRequestId);
+
+			// check if status is conflicted
+		    if (coachingRequest.StatusHistory.Count == 4 && 
+				coachingRequest.StatusHistory.FirstOrDefault(s => s.StatusType == StatusType.Canceled) != null && 
+				coachingRequest.StatusHistory.FirstOrDefault(s => s.StatusType == StatusType.Completed) != null)
+		    {
+			    ViewBag.IsConflicted = true;
+		    }
+
+			return View(coachingRequest);
 	    }
 
 	    public JsonResult SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3)
@@ -110,9 +128,9 @@ namespace Talentify.Web.Controllers
 			return Json(UnitOfWork.CoachingRequestRepository.SetCoachingRequestRating(coachingRequestId, val1, val2, val3, LoggedUser), JsonRequestBehavior.AllowGet);
 	    }
 
-		public JsonResult SetCoachingRequestRatingWithDate(int coachingRequestId, int val1, int val2, int val3, DateTime date, int duration)
+		public JsonResult SetCoachingRequestRatingWithDate(int coachingRequestId, int val1, int val2, int val3, DateTime date, decimal duration, int payedPrice)
 		{
-			return Json(UnitOfWork.CoachingRequestRepository.SetCoachingRequestRating(coachingRequestId, val1, val2, val3, LoggedUser, date, duration), JsonRequestBehavior.AllowGet);
+			return Json(UnitOfWork.CoachingRequestRepository.SetCoachingRequestRating(coachingRequestId, val1, val2, val3, LoggedUser, date, duration, payedPrice), JsonRequestBehavior.AllowGet);
 		}
     }
 }

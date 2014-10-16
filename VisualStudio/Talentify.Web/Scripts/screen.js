@@ -33,7 +33,7 @@ function initSectionSizes()
 		//console.log('bg width: ' + $('.big-bg').width());
 		var aspect = 622 / 1480;
 		var bgHeight = $('.big-bg').width() * aspect;
-		$('.big-bg').css('height', bgHeight + 'px');
+		$('.big-bg').not('.events').css('height', bgHeight + 'px');
 		//console.log('.big-bg height: ' + $('.big-bg').height());
 		var labelLeft = parseInt(($('.big-bg').width() - 1105) / 2);
 		if (labelLeft < 0)

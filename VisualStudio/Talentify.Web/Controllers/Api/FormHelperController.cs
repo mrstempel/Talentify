@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
 using System.Net.NetworkInformation;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.School;
+using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Mvc;
+using Talentify.ORM.Utils;
 
 namespace Talentify.Web.Controllers.Api
 {
@@ -52,6 +57,66 @@ namespace Talentify.Web.Controllers.Api
 			ViewBag.Results += "]";
 
 			return View();
+	    }
+
+		[AllowAnonymous]
+		public ActionResult AddSchoolForm()
+		{
+			return View();
+		}
+
+		[AllowAnonymous]
+		[HttpPost]
+		public ActionResult AddSchoolForm(string name, string email, string school)
+		{
+			try
+			{
+				var mailMsg = new MailMessage(new MailAddress(email),
+					new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
+				mailMsg.Subject = "Neuer Schulvorschlag";
+				mailMsg.Body = string.Format("{0} (Email: {1}) hat eine neue Schule vorgeschlagen: {2}", name, email, school);
+				Email.Send(mailMsg);
+			}
+			catch (Exception) {}
+			FormSuccess = new FormFeedback();
+			return View();
+		}
+
+		[AllowAnonymous]
+		public ActionResult AddSubjectForm()
+		{
+			return View();
+		}
+
+		[AllowAnonymous]
+		[HttpPost]
+		public ActionResult AddSubjectForm(string name, string email, string subject)
+		{
+			try
+			{
+				var mailMsg = new MailMessage(new MailAddress(email),
+					new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
+				mailMsg.Subject = "Neuer Schulfachvorschlag";
+				mailMsg.Body = string.Format("{0} (Email: {1}) hat ein neues Schulfach vorgeschlagen: {2}", name, email, subject);
+				Email.Send(mailMsg);
+			}
+			catch (Exception) { }
+			FormSuccess = new FormFeedback();
+			return View();
+		}
+
+	    public JsonResult AddSubjectLoggedUser(string subject)
+	    {
+			try
+			{
+				var mailMsg = new MailMessage(new MailAddress(LoggedUser.Email),
+					new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
+				mailMsg.Subject = "Neuer Schulfachvorschlag";
+				mailMsg.Body = string.Format("{0} {1} (Email: {2}) hat ein neues Schulfach vorgeschlagen: {3}", LoggedUser.Firstname, LoggedUser.Surname, LoggedUser.Email, subject);
+				Email.Send(mailMsg);
+			}
+			catch (Exception) { }
+		    return Json(true, JsonRequestBehavior.AllowGet);
 	    }
     }
 }

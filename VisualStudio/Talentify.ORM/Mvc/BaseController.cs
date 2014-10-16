@@ -46,6 +46,10 @@ namespace Talentify.ORM.Mvc
 		{
 			get { return SearchSession != null; }
 		}
+		public bool IsAuthenticated
+		{
+			get { return User.Identity.IsAuthenticated; }
+		}
 
 		public BaseController()
 		{

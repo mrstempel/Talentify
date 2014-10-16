@@ -1,36 +1,39 @@
 ﻿@using Talentify.ORM.DAL.Models.Notification
 @model IEnumerable<Talentify.ORM.FrontendLogic.Models.NotificationListItem>
 
-@foreach (var item in Model)
+@if (Model != null)
 {
-	var style = string.Empty;
-	
-	if (item.IconType == NotificationIconType.Confirmed)
-	{
-		style = "background-image: url(/Images/icon-zusagen.png);";
-	}
+	foreach (var item in Model)
+	 {
+		 var style = string.Empty;
 
-	if (item.IconType == NotificationIconType.Cancelled)
-	{
-		style = "background-image: url(/Images/icon-absagen.png);";
-	}
+		 if (item.IconType == NotificationIconType.Confirmed)
+		 {
+			 style = "background-image: url(/Images/icon-zusagen.png);";
+		 }
 
-	if (item.Bonus > 0)
-	{
-		style = "background-image: url(/Images/icon-bonus" + item.Bonus + ".png);";
-	}
-	
-	<div class="item" onclick="location.href='@item.Link'" style="@style">
-		<a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>
-		<div class="text">
-			@if (item.Bonus > 0)
-			{
-				<span class="system">@Html.Raw(item.Text)</span>
-			}
-			else
-			{
-				@Html.Raw(item.Text)
-			}
-		</div>
-	</div>
+		 if (item.IconType == NotificationIconType.Cancelled)
+		 {
+			 style = "background-image: url(/Images/icon-absagen.png);";
+		 }
+
+		 if (item.Bonus > 0)
+		 {
+			 style = "background-image: url(/Images/icon-bonus" + item.Bonus + ".png);";
+		 }
+
+		 <div class="item" onclick=" location.href = '@item.Link' " style="@style">
+			 <a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>
+			 <div class="text">
+				 @if (item.Bonus > 0)
+				 {
+					 <span class="system">@Html.Raw(item.Text)</span>
+				 }
+				 else
+				 {
+					 @Html.Raw(item.Text)
+				 }
+			 </div>
+		 </div>
+	 }
 }

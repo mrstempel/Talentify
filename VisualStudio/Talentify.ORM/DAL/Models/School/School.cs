@@ -34,6 +34,7 @@ namespace Talentify.ORM.DAL.Models.School
 		public string Phone { get; set; }
 		public string Longitude { get; set; }
 		public string Latitude { get; set; }
+		public bool IsActive { get; set; }
 	}
 
 	public class SchoolMap : EntityTypeConfiguration<School>

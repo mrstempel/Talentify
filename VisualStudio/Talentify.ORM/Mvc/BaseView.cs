@@ -23,6 +23,11 @@ namespace Talentify.ORM.Mvc
 			get { return BaseController.LoggedUser; }
 		}
 
+		public bool HasSchool
+		{
+			get { return BaseController.WebContext.HasSchool; }
+		}
+
 		private BaseController _baseController;
 		/// <summary>
 		/// Reference for base controller

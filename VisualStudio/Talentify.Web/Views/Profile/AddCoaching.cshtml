@@ -5,6 +5,43 @@
     Layout = "~/Views/Shared/_LayoutModal.cshtml";
 }
 
+<script>
+	$(this).ready(function()
+	{
+		$('.add-field').find('a').each(function()
+		{
+			$(this).opentip($(this).attr('data-add-tipp'), {
+				extends: "alert",
+				color: "#000000",
+				background: "#ffffff",
+				shadow: true,
+				borderColor: "#e5e5e5",
+				tipJoint: "bottom",
+				target: true,
+				hideOn: "mouseout",
+				hideTriggers: ["target", "tip"]
+			});
+		});
+	});
+
+	function toggleAddSubject()
+	{
+		$('#new-subject').val('');
+		if ($('#add-subject').is(":visible"))
+		{
+			$('#add-subject').slideUp();
+			$('#add-subject-link').html('+');
+		} 
+		else
+		{
+			$('#add-subject-form').show();
+			$('#add-subject-msg').hide();
+			$('#add-subject').slideDown();
+			$('#add-subject-link').html('-');
+		}
+	}
+</script>
+
 <article>
 	<div class="msg-container" id="msg-container">
 		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
@@ -18,6 +55,16 @@
 			<div class="field-container">
 				<label>Ich gebe Lernhilfe in:</label>
 				@Html.DropDownListFor(m => m.SubjectCategoryId, OpenCoachingSubjects, "bitte auswählen", new {@class = "mandatory"})
+				<div class="add-field" style="top:43px;right:30px;"><a href="javascript:void(0);" id="add-subject-link" onclick="toggleAddSubject()" data-add-tipp="Du hast dein Schulfach nicht gefunden? Hilf uns weiter und gib uns Bescheid.">+</a></div>
+				<div id="add-subject">
+					<div id="add-subject-form">
+						<input type="text" id="new-subject" placeholder="Neues Schulfach"/>
+						<input type="button" value="Neues Schulfach melden" id="add-subject-button" style="width:540px;" onclick="addSubjectLogged();" />
+					</div>
+					<div id="add-subject-msg">
+						Danke. Sobald dein Schulfach freigeschalten ist bekommst du Bescheid.
+					</div>
+				</div>
 				<label>Schulstufe:</label>
 				<select style="width:252px;margin-right: 5px;" class="mandatory" name="FromClass">
 					<option value="">bitte auswählen</option>

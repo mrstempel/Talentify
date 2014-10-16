@@ -44,6 +44,22 @@ header {
       float: right;
       margin: 5px 0 0 0; }
 
+input[type="button"], input[type="submit"], .link-button {
+  background: #0eb48d;
+  color: #FFF;
+  border: 1px solid #0eb48d;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 0;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block; }
+
+li {
+  text-align: left;
+  padding: 5px; }
+
 #page-container {
   z-index: 1;
   max-width: 1105px;
@@ -53,10 +69,12 @@ header {
   padding-top: 85px; }
   #page-container table {
     margin: 30px 0; }
-    #page-container table td {
+    #page-container table td, #page-container table th {
       text-align: left;
       padding: 5px 15px; }
-  #page-container form input {
+    #page-container table th {
+      font-family: CaeciliaLTPro-85Heavy; }
+  #page-container form input[type="text"] {
     width: 400px; }
   #page-container form textarea {
     width: 700px;

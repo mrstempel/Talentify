@@ -12,7 +12,7 @@ namespace Talentify.ORM.DAL.Models.User
 	public class Student : BaseUser
 	{
 		[ProfileComplete("Schule")]
-		public int SchoolId { get; set; }
+		public int? SchoolId { get; set; }
 		private School.School _school;
 		public School.School School
 		{
@@ -31,6 +31,7 @@ namespace Talentify.ORM.DAL.Models.User
 		public string AboutMe { get; set; }
 		public bool IsCoachingEnabled { get; set; }
 		public decimal CoachingPrice { get; set; }
+		[ProfileComplete("ParentEducation")]
 		public string ParentEducation { get; set; }
 		public string HeardOfTalentify { get; set; }
 		public string FacebookUrl { get; set; }
@@ -38,6 +39,13 @@ namespace Talentify.ORM.DAL.Models.User
 		public string TwitterUrl { get; set; }
 		public string PinterestUrl { get; set; }
 		public string InstagramUrl { get; set; }
+		public bool IsParentAccount { get; set; }
+		public string FirstnameChild { get; set; }
+
+		public bool HasSchool
+		{
+			get { return SchoolId.HasValue; }
+		}
 	}
 
 	public class StudentMap : EntityTypeConfiguration<Student>

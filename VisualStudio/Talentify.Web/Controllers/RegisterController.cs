@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KwIt.Project.Pattern.DAL.Context;
 using Talentify.ORM.DAL.Models.User;
+using Talentify.ORM.FrontendLogic;
 using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Mvc;
 using WebMatrix.WebData;
@@ -22,7 +23,11 @@ namespace Talentify.Web.Controllers
 		[HttpPost]
 	    public ActionResult Index(Student student)
 		{
-			var saveFeedback = UnitOfWork.StudentRepository.Register(student, Request["token"]);
+			// no school option
+			if (student.SchoolId == 0)
+				student.SchoolId = null;
+
+			var saveFeedback = UnitOfWork.StudentRepository.Register(student, Request["token"], Request["RegisterCode"]);
 
 			if (saveFeedback.IsError)
 				this.FormError = saveFeedback;

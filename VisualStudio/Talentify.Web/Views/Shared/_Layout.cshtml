@@ -10,9 +10,9 @@
 		<script src="/Scripts/jquery-2.1.0.min.js"></script>
 		<script src="/Scripts/jquery-ui-1.10.4.custom.min.js"></script>
 		<script src="/Scripts/waypoints.min.js"></script>
-		<script src="/Scripts/forms.js"></script>
-		<script src="/Scripts/screen.js"></script>
-		<script src="/Scripts/api.js"></script>
+		<script src="/Scripts/forms.min.js"></script>
+		<script src="/Scripts/screen.min.js"></script>
+		<script src="/Scripts/api.min.js"></script>
 		<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
 		<link rel="stylesheet" href="/Css/ui-lightness/jquery-ui-1.10.4.custom.min.css" />
 		<link rel="stylesheet" href="/Css/talentify.min.css" />
@@ -22,11 +22,11 @@
 		
 		<!-- tooltip -->
 		<script src="/Scripts/Opentip/opentip-jquery.min.js"></script><!-- Change to the adapter you actually use -->
-		<link href="/Scripts/Opentip/opentip.css" rel="stylesheet" type="text/css" />
+		<link href="/Scripts/Opentip/opentip.min.css" rel="stylesheet" type="text/css" />
 		
 		<!-- bootstrap -->
 		<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
-		<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+		<link href="/Scripts/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	
 		@RenderSection("CustomJavascript", required: false)
 		@RenderSection("CustomCss", required: false)
@@ -51,6 +51,7 @@
 		</script>
 	</head>
 	<body>
+		@RenderSection("CustomAfterBody", required: false)
 		<header id="page-header">
 			<div class="content">
 				@if (IsAuthenticated)
@@ -65,19 +66,27 @@
 		</header>
 		@RenderBody()
 		<div class="modal fade" id="modal-invite" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
-		  <div class="modal-dialog">
-			<header>
-				<h1>Freunde einladen<a href="javascript:void(0);" onclick="$('#modal-invite').modal('hide');" class="close-link"></a></h1>
-			</header>
-			<iframe id="invite-frame" width="600" height="250" scrolling="no"></iframe>
-		  </div>
+			<div class="modal-dialog">
+				<header>
+					<h1>Freunde einladen<a href="javascript:void(0);" onclick="$('#modal-invite').modal('hide');" class="close-link"></a></h1>
+				</header>
+				<iframe id="invite-frame" width="600" height="250" scrolling="no"></iframe>
+			</div>
+		</div>
+		<div class="modal fade" id="modal-no-school" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+			<div class="modal-dialog">
+				<header>
+					<h1>Keine Partnerschule<a href="javascript:void(0);" onclick="$('#modal-no-school').modal('hide');" class="close-link"></a></h1>
+				</header>
+				<iframe id="no-school-frame" width="600" height="250" scrolling="no"></iframe>
+			</div>
 		</div>
 		<footer id="page-footer" class="desktop">
 			@if (IsAuthenticated)
 			{
 				<div class="invite">
 					<div class="icon-list">
-						<span>Jetzt Freunde einladen & Bonuspunkte kassieren</span><a href="javascript:void(0);" onclick=" shareFacebook('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()') "><img src="/Images/invite-fb.png"/></a><a href="javascript:void(0);" onclick=" shareGoogle('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()') "><img src="/Images/invite-google.png"/></a><a href="javascript:void(0);" onclick=" shareTwitter('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()') "><img src="/Images/invite-twitter.png"/></a><a href="javascript:void(0);" onclick=" loadInvitePopup(); "><img src="/Images/invite-email.png"/></a></div>
+						<span>Jetzt Freunde einladen & Bonuspunkte kassieren</span><a href="javascript:void(0);" onclick=" shareFacebook('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()')" onmouseover="hoverImage('invite-fb');" onmouseout="hoverImage('invite-fb');"><img src="/Images/invite-fb.png" id="invite-fb"/></a><a href="javascript:void(0);" onclick=" shareGoogle('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()')" onmouseover="hoverImage('invite-google');" onmouseout="hoverImage('invite-google');"><img src="/Images/invite-google.png" id="invite-google"/></a><a href="javascript:void(0);" onclick="shareTwitter('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()')" onmouseover="hoverImage('invite-twitter');" onmouseout="hoverImage('invite-twitter');"><img src="/Images/invite-twitter.png" id="invite-twitter"/></a><a href="javascript:void(0);" onclick="loadInvitePopup();" onmouseover="hoverImage('invite-email');" onmouseout="hoverImage('invite-email');"><img src="/Images/invite-email.png" id="invite-email"/></a></div>
 				</div>
 			}
 			<div class="container">

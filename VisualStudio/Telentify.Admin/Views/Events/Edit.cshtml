@@ -66,6 +66,17 @@
 				</td>
 			</tr>
 			<tr>
+				<td>@Html.LabelFor(m => m.HomeImage)</td>
+				<td>
+					@if (!string.IsNullOrEmpty(Model.HomeImage))
+					{
+						<img src="/uploads/pages/@Model.HomeImage"/><br/>
+						@Html.HiddenFor(m => m.HomeImage)
+					}
+					<input type="file" name="homeImage" id="HomeImage"/>
+				</td>
+			</tr>
+			<tr>
 				<td>@Html.LabelFor(m => m.BeginDate)</td>
 				<td>@Html.EditorFor(m => m.BeginDate)</td>
 			</tr>
@@ -112,6 +123,10 @@
 			<tr>
 				<td>@Html.LabelFor(m => m.Content)</td>
 				<td>@Html.TextAreaFor(m => m.Content)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.DetailUrl)</td>
+				<td>@Html.TextBoxFor(m => m.DetailUrl)</td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -35,9 +36,9 @@ namespace Talentify.Web.Controllers
 	        Session["IsFirstLogin"] = null;
 	        var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
 			var surveyToken = UnitOfWork.ActionTokenRepository.GetSurveyToken(LoggedUser.Id);
-	        ViewBag.Latitude = student.School.Latitude;
-	        ViewBag.Longitude = student.School.Longitude;
-	        ViewBag.AllSchools = UnitOfWork.SchoolRepository.GetSchoolsWithInfo();
+			ViewBag.Latitude = (student.HasSchool) ? student.School.Latitude : ConfigurationManager.AppSettings["SchoolMap.Default.Lat"];
+			ViewBag.Longitude = (student.HasSchool) ? student.School.Longitude : ConfigurationManager.AppSettings["SchoolMap.Default.Lng"];
+			ViewBag.AllSchools = UnitOfWork.SchoolRepository.GetSchoolsWithInfo();
 			ViewBag.ShowSurvey = surveyToken.ValidUntil != DateTime.MinValue;
             return View(new SearchParams());
         }

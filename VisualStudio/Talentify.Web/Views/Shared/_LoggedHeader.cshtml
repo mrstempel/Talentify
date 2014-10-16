@@ -12,8 +12,17 @@
 		<div class="nav-menu" id="nav-menu-menu">
 			<div class="arrow"></div>
 			@Html.ActionLink("Startseite", "Index", "Start")
-			@Html.ActionLink("Lernhilfecenter", "Index", "CoachingCenter")
-			@Html.ActionLink("Lerncoach finden", "Index", "Teacher")
+			@if (HasSchool)
+			{
+				@Html.ActionLink("Lernhilfecenter", "Index", "CoachingCenter")
+				@Html.ActionLink("Lerncoach finden", "Index", "Teacher")
+			}
+			else
+			{
+				<a href="javascript:void(0);" onclick="loadNoSchoolPopup();">Lernhilfecenter</a>
+				<a href="javascript:void(0);" onclick="loadNoSchoolPopup();">Lerncoach finden</a>
+			}
+			
 			@Html.ActionLink("Events", "Index", "Events")
 		</div>
 	</div>

@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="page-container">
+<div id="page-container" style="text-align: left;">
 	
 	<ul>
 		@foreach (var e in Model)
 		{
-			<li>@Html.ActionLink(e.Title, "Edit", "Events", new {id=e.Id}, null)</li>
+			<li>@Html.ActionLink(@e.Title, "Edit", "Events", new {id=e.Id}, null)  @Html.ActionLink("Anmeldungen", "Registrations", "Events", new {id=e.Id}, new {@class="link-button"})</li>
 		}
 	</ul>
 	

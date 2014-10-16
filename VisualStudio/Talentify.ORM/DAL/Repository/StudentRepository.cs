@@ -11,7 +11,9 @@ using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Membership;
+using Talentify.ORM.DAL.Models.School;
 using Talentify.ORM.DAL.Models.User;
+using Talentify.ORM.FrontendLogic;
 using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Utils;
 
@@ -46,8 +48,24 @@ namespace Talentify.ORM.DAL.Repository
 
 		#region Register
 
-		public virtual FormFeedback Register(Student student, string token)
+		public virtual FormFeedback Register(Student student, string token, string schoolRegisterCode)
 		{
+			// check if registercode is correct
+			if (student.HasSchool)
+			{
+				var registerCode = UnitOfWork.RegisterCodeRepository.AsQueryable().FirstOrDefault(c => c.Code == schoolRegisterCode);
+				if (registerCode != null && registerCode.UsedDate == null)
+				{
+					registerCode.User = student;
+					registerCode.UsedDate = DateTime.Now;
+					UnitOfWork.RegisterCodeRepository.Update(registerCode);
+				}
+				else
+				{
+					return new FormFeedback() { IsError = true, Text = "Der angegebene Registrierungscode ist nicht korrekt." };
+				}
+			}
+
 			// check if e-mail is unique
 			if (GetByEmail(student.Email) != null)
 			{
@@ -101,6 +119,20 @@ namespace Talentify.ORM.DAL.Repository
 			return registerFeedback;
 		}
 
+		public virtual new Student RegisterConfirm(Guid registerCode, string inviteToken)
+		{
+			var user = base.RegisterConfirm(registerCode, inviteToken);
+			if (user != null)
+			{
+				var student = UnitOfWork.StudentRepository.GetById(user.Id);
+				// subscribe to newsletter
+				NewsletterRegistration.Subscribe(student);
+				return student;
+			}
+
+			return null;
+		}
+
 		#endregion
 
 		public void Update(Student entity, bool doGetAttackedModel = true)
@@ -109,6 +141,13 @@ namespace Talentify.ORM.DAL.Repository
 				entity = GetAttachedModel(entity);
 
 			base.Update(entity);
+
+			// update newsletter subscription
+			//var settings = UnitOfWork.UserSettingsRepository.AsQueryable().FirstOrDefault(s => s.Id == entity.SettingsId);
+			if (entity.Settings.HasNewsletter)
+			{
+				NewsletterRegistration.Subscribe(entity);
+			}
 		}
 
 		public bool SetSurveyData(int userId, string parentEducation, string hearedOfTalentify)
@@ -184,6 +223,9 @@ namespace Talentify.ORM.DAL.Repository
 				System.IO.File.Delete(Path.Combine(uploadPath, filenameMedium));
 				System.IO.File.Delete(Path.Combine(uploadPath, filenameLarge));
 			}
+
+			// unsubscribe from newsletter
+			NewsletterRegistration.Unsubscribe(student.Email);
 
 			Email.SendDelete(email, WebConfigurationManager.AppSettings["Email.Delete.Subject"]);
 		}

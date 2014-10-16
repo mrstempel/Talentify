@@ -11,11 +11,11 @@
 	var linkText = (Model.BeginDate < DateTime.Now || isUserRegistered) ? "Details anzeigen" : "Hier geht's zur Anmeldung";
 }
 
-<article class="event-preview @cssClass" onclick="location.href='/Events/Detail/@Model.Id'">
+<article class="event-preview @cssClass" onclick="location.href='@Model.Link'">
 	<div class="register-icon"><img src="/Images/icon-event-register.png"/></div>
-	<a href="/Events/Detail/@Model.Id"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt="" class="prev-img"/></a>
+	<a href="@Model.Link"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt="" class="prev-img"/></a>
 	<h3>@Html.Raw(Model.Title)</h3>
 	@Model.BeginDate.ToString("dd.MM.yyyy") | @Model.BeginTime - @Model.EndTime
 	<p>@Html.Raw(Model.Content.Substring(0, 105))...</p>
-	<a href="/Events/Detail/@Model.Id">@linkText</a>
+	<a href="@Model.Link">@linkText</a>
 </article>	

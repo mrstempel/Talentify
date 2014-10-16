@@ -8,7 +8,14 @@
 	var myRatingValues = new List<int>();
 	var otherRatingValues = new List<int>();
 	var otherUser = Model.FromUserId == LoggedUser.Id ? Model.ToUser : Model.FromUser;
+	var payedPrice = Model.PayedPrice == 0 ? "kostenlos" : Model.PayedPrice.ToString() + " €";
+	var duration = Convert.ToInt32(Model.Duration).ToString();
+	if ((Model.Duration%1) != 0)
+	{
+		duration = Model.Duration.ToString().Substring(0, 3).Replace(".", ",");
+	}
 	
+
 	if (Model.Ratings.Any(r => r.FromUserId == LoggedUser.Id))
 	{
 		hasMyRatings = true;
@@ -24,32 +31,65 @@
 		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.OnTime).Value);
 		otherRatingValues.Add(Model.Ratings.FirstOrDefault(r => r.FromUserId == otherUser.Id && r.RatingType == RatingType.Price).Value);
 	}
-
 }
 
 <script>
 	$(this).ready(function()
 	{
 		initForms();
+		@if (ViewBag.IsConflicted)
+  {
+			<text>$('#conflicted-message').show();</text>
+  }
 		@if (hasMyRatings)
-		{
+  {
 			<text>setMyCoachingRatings(@myRatingValues[0], @myRatingValues[1], @myRatingValues[2]);</text>
-		}
+  }
 
 		@if (hasOtherRatings)
-		{
+  {
 			<text>setOtherCoachingRatings(@otherRatingValues[0], @otherRatingValues[1], @otherRatingValues[2]);</text>
-		}
+  }
+  else
+  {
+			<text>hideOtherCoachingRatings(@Model.Id);</text>
+  }
 
 		@if (ViewBag.Status == "Conflicted")
-		{
+  {
 			<text>disableCoachingFeedbackForm();</text>
-		}
+  }
 	});
+
+	function mouseoverFeedback(valuesId)
+	{
+		$('#' + valuesId).addClass('selected');
+		$('#' + valuesId).prevAll().addClass('selected');
+	}
+
+	function mouseoutFeedback(valuesId)
+	{
+		$('#' + valuesId).not('.clicked').removeClass('selected');
+		$('#' + valuesId).prevAll().not('.clicked').removeClass('selected');
+	}
+
 	function setFeedback(type, value, sender)
 	{
-		$('#' + type).find('a').each(function() {$(this).removeClass('selected');});
 		$(sender).addClass('selected');
+		$(sender).addClass('clicked');
+		$(sender).prevAll().addClass('selected');
+		$(sender).prevAll().addClass('clicked');
+		$(sender).nextAll().removeClass('selected');
+		$(sender).nextAll().removeClass('clicked');
+		$('#' + type + 'RatingValue').val(value);
+	}
+
+	function setSwitchFeedback(type)
+	{
+		var switchId = type + "-switch";
+		changeInputSwitch(switchId);
+		var isEnabled = $('#' + switchId).hasClass('on');
+		var value = (isEnabled) ? 4 : 0;
 		$('#' + type + 'RatingValue').val(value);
 	}
 </script>
@@ -70,38 +110,34 @@
 		<label>Wert:</label>
 		<div id="wert" class="values">
 			<input type="hidden" id="wertRatingValue" value=""/>
-			<a id="link-wert-0" href="javascript:void(0);" onclick="setFeedback('wert', 0, this)" class="selectable"></a>
-			<a id="link-wert-1" href="javascript:void(0);" onclick="setFeedback('wert', 1, this)" class="selectable"></a>
-			<a id="link-wert-2" href="javascript:void(0);" onclick="setFeedback('wert', 2, this)" class="selectable"></a>
-			<a id="link-wert-3" href="javascript:void(0);" onclick="setFeedback('wert', 3, this)" class="selectable"></a>
-			<a id="link-wert-4" href="javascript:void(0);" onclick="setFeedback('wert', 4, this)" class="selectable"></a>
+			<a id="link-wert-0" href="javascript:void(0);" onclick="setFeedback('wert', 0, this)" onmouseover="mouseoverFeedback('link-wert-0');" onmouseout="mouseoutFeedback('link-wert-0');" class="selectable"></a><a id="link-wert-1" href="javascript:void(0);" onclick="setFeedback('wert', 1, this)" onmouseover="mouseoverFeedback('link-wert-1');" onmouseout="mouseoutFeedback('link-wert-1');" class="selectable"></a><a id="link-wert-2" href="javascript:void(0);" onclick="setFeedback('wert', 2, this)" onmouseover="mouseoverFeedback('link-wert-2');" onmouseout="mouseoutFeedback('link-wert-2');" class="selectable"></a><a id="link-wert-3" href="javascript:void(0);" onclick="setFeedback('wert', 3, this)" onmouseover="mouseoverFeedback('link-wert-3');" onmouseout="mouseoutFeedback('link-wert-3');" class="selectable"></a><a id="link-wert-4" href="javascript:void(0);" onclick="setFeedback('wert', 4, this)" onmouseover="mouseoverFeedback('link-wert-4');" onmouseout="mouseoutFeedback('link-wert-4');" class="selectable"></a>
 		</div>
 	</div>
 	<div class="row">
 		<label>Pünktlich:</label>
-		<div id="puenktlich" class="values">
-			<input type="hidden" id="puenktlichRatingValue" value=""/>
-			<a id="link-puenktlich-0" href="javascript:void(0);" onclick="setFeedback('puenktlich', 0, this)" class="selectable"></a>
-			<a id="link-puenktlich-1" href="javascript:void(0);" onclick="setFeedback('puenktlich', 1, this)" class="selectable"></a>
-			<a id="link-puenktlich-2" href="javascript:void(0);" onclick="setFeedback('puenktlich', 2, this)" class="selectable"></a>
-			<a id="link-puenktlich-3" href="javascript:void(0);" onclick="setFeedback('puenktlich', 3, this)" class="selectable"></a>
-			<a id="link-puenktlich-4" href="javascript:void(0);" onclick="setFeedback('puenktlich', 4, this)" class="selectable"></a>
+		<div id="puenktlich" class="switch">
+			<input type="hidden" id="puenktlichRatingValue" value="4"/>
+			<div class="input-switch on" id="puenktlich-switch">
+				<a href="javascript:void(0);" onclick="setSwitchFeedback('puenktlich')" class="switch-link"></a>
+				<div class="option on">Ja</div>
+				<div class="option off">Nein</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
-		<label>Preis:</label>
-		<div id="preis" class="values">
-			<input type="hidden" id="preisRatingValue" value=""/>
-			<a id="link-preis-0" href="javascript:void(0);" onclick="setFeedback('preis', 0, this)" class="selectable"></a>
-			<a id="link-preis-1" href="javascript:void(0);" onclick="setFeedback('preis', 1, this)" class="selectable"></a>
-			<a id="link-preis-2" href="javascript:void(0);" onclick="setFeedback('preis', 2, this)" class="selectable"></a>
-			<a id="link-preis-3" href="javascript:void(0);" onclick="setFeedback('preis', 3, this)" class="selectable"></a>
-			<a id="link-preis-4" href="javascript:void(0);" onclick="setFeedback('preis', 4, this)" class="selectable"></a>
+		<label>Bezahlt:</label>
+		<div id="preis" class="switch">
+			<input type="hidden" id="preisRatingValue" value="4"/>
+			<div class="input-switch on" id="preis-switch">
+				<a href="javascript:void(0);" onclick="setSwitchFeedback('preis')" class="switch-link"></a>
+				<div class="option on">Ja</div>
+				<div class="option off">Nein</div>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="feedback-container right">
+<div id="other-rating-@Model.Id" class="feedback-container right">
 	<h3>@(@otherUser.Firstname)s Bewertung</h3>
 	<div class="subject">
 		<label>Fach:</label>
@@ -110,31 +146,26 @@
 	<div class="row">
 		<label>Wert:</label>
 		<div class="values">
-			<span id="span-wert-0"></span>
-			<span id="span-wert-1"></span>
-			<span id="span-wert-2"></span>
-			<span id="span-wert-3"></span>
-			<span id="span-wert-4"></span>
-		</div>
+			<span id="span-wert-0"></span><span id="span-wert-1"></span><span id="span-wert-2"></span><span id="span-wert-3"></span><span id="span-wert-4"></span></div>
 	</div>
 	<div class="row">
 		<label>Pünktlich:</label>
-		<div class="values">
-			<span id="span-puenktlich-0"></span>
-			<span id="span-puenktlich-1"></span>
-			<span id="span-puenktlich-2"></span>
-			<span id="span-puenktlich-3"></span>
-			<span id="span-puenktlich-4"></span>
+		<div class="switch">
+			<div class="input-switch disabled" id="puenktlich-other-switch">
+				<a href="javascript:void(0);" class="switch-link disabled"></a>
+				<div class="option on">Ja</div>
+				<div class="option off">Nein</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
-		<label>Preis:</label>
-		<div class="values">
-			<span id="span-preis-0"></span>
-			<span id="span-preis-1"></span>
-			<span id="span-preis-2"></span>
-			<span id="span-preis-3"></span>
-			<span id="span-preis-4"></span>
+		<label>Bezahlt:</label>
+		<div class="switch">
+			<div class="input-switch disabled" id="preis-other-switch">
+				<a class="switch-link disabled"></a>
+				<div class="option on">Ja</div>
+				<div class="option off">Nein</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -145,10 +176,28 @@
 		@Html.DatePicker("coachingdate", true)
 		<label>Dauer:</label>
 		<select id="duration">
+			<option value="0.5">0,5 h</option>
 			<option value="1">1 h</option>
+			<option value="1.5">1,5 h</option>
 			<option value="2">2 h</option>
+			<option value="2.5">2,5 h</option>
 			<option value="3">3 h</option>
+			<option value="3.5">3,5 h</option>
 			<option value="4">4 h</option>
+		</select>
+		<label>Gezahlter Preis pro Stunde:</label>
+		<select id="payedPrice">
+			<option value="0">kostenlos</option>
+			<option value="1">1 €</option>
+			<option value="2">2 €</option>
+			<option value="3">3 €</option>
+			<option value="4">4 €</option>
+			<option value="5">5 €</option>
+			<option value="6">6 €</option>
+			<option value="7">7 €</option>
+			<option value="8">8 €</option>
+			<option value="9">9 €</option>
+			<option value="10">10 €</option>
 		</select>
 	</div>
 }
@@ -156,9 +205,11 @@
 {
 	<div class="date-form view">
 		<label>Datum:</label>
-		@Model.Date.Value.ToString("d")
+		<span>@Model.Date.Value.ToString("dd.MM.yyyy")</span>
 		<label>Dauer:</label>
-		@Model.Duration h
+		<span>@duration h</span>
+		<label>Gezahlter Preis pro Stunde:</label>
+		<span>@payedPrice</span>
 	</div>
 }
 
@@ -176,4 +227,8 @@
 		<option value="Zum Testen">Zum Testen</option>
 	</select>
 	<a href="javascript:void(0);" onclick="cancelCoachingRequest(@Model.Id, $('#cancel-reason').val())" class="link-button">Termin nicht bestätigen</a>
+</div>
+
+<div id="conflicted-message" class="visible msg error" style="margin: 20px 0 0 0;">
+	ACHTUNG: Die Lernhilfe wurde von einer Person als abgehalten bestätigt und von der anderen nicht. Somit wird diese als abgesagt bewertet. Sollte dies nicht der Fall sein, dann melde dich bitte unter <a href="mailto:hallo@talentify.at">hallo@talentify.at</a>
 </div>

@@ -1,0 +1,337 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+   <title>talentify - Zukunft bilden</title>
+   <link rel="icon" type="image/png" href="/Images/talentify-favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta property="og:title" content="talentify - Zukunft bilden"> 
+	<meta property="og:type" content="website"> 
+	<meta property="og:url" content="http://www.talentify.co"> 
+	<meta property="og:description" content="Österreichs SchülerInnen heben ihre Talente. Gemeinsam.">
+	<meta property="og:image" content="http://www.talentify.co/Images/share-talentify.jpg" />
+	<script src="/Scripts/jquery-2.1.0.min.js"></script>
+	<script src="/Scripts/talentismus.min.js"></script>
+	<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+	<link rel="stylesheet" href="/Css/talentify.min.css" />
+	<link rel="stylesheet" href="/Css/add-on.css" />
+	<!-- fancybox -->
+	<script type="text/javascript" src="/Scripts/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/Css/jquery.fancybox.css?v=2.1.5" media="screen" />
+	<!-- mailChimp css -->
+	<link href="http://cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+	<!-- bootstrap -->
+	<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
+	<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<script>
+		$(this).ready(function()
+		{
+			initPage();
+		});
+
+		$(window).resize(function () { initSectionSizes(); });
+
+		function submitNewsletter()
+		{
+			resetNewsletterForm();
+			$('#mce-EMAIL').val($('#newsletter-email').val());
+			$('#mc-embedded-subscribe-form').submit();
+		}
+
+		function resetNewsletterForm()
+		{
+			//mce-EMAIL
+			$('#mce-EMAIL').val('');
+			//mce-FNAME
+			$('#mce-FNAME').val('');
+			//mce-LNAME
+			$('#mce-LNAME').val('');
+		}
+	</script>
+</head>
+<body>
+	<section id="s-header" class="big-bg">
+		<article>
+			<img class="logo" src="/Images/logo.png" alt="talentify Zukunft bilden."/>
+			<div class="claim">&Ouml;sterreichs Sch&uuml;lerInnen heben<br/>ihre Talente. Gemeinsam.</div>
+		</article>
+	</section>
+	<section id="s-presse">
+		<article>
+			<h2>Bekannt aus:</h2>
+			<a href="http://diepresse.com/home/bildung/3876294/Zuruck-in-die-Schule-Na-ja-nicht-ganz" target="_blank"><img class="grayscale" src="/Images/diepresse-logo.jpg" alt="DiePresse"/></a><a href="http://kurier.at/karrieren/berufsleben/nachhilfe-auf-die-gute-art/85.075.712" target="_blank"><img class="grayscale" src="/Images/kurier-logo.jpg" alt="Kurier"/></a><a href="http://www.wienerzeitung.at/themen_channel/bildung/schule/661799_Bildungs-Vorbilder.html" target="_blank"><img class="grayscale" src="/Images/wienerzeitung-logo.jpg" alt="Wiener Zeitung"/></a><a href="http://www.puls4.com/video/cafepuls/play/2591665" target="_blank"><img class="grayscale" src="/Images/puls4-logo.jpg" alt="Puls 4 - Cafe Puls"/></a><a href="/Images/2014-08-22_talentify_heute.jpg" target="_blank"><img class="grayscale" src="/Images/heute-logo.jpg" alt="HEUTE"/></a>
+		</article>
+	</section>
+	<section id="s-herausforderung">
+		<article>
+			<h1>Diesen Herausforderungen stellen wir uns:</h1>
+			<h1 class="dotted">....................................................................................................................................................................</h1>
+			<ol>
+				<li>
+					<h2>Bildung wird vererbt und Talente verschwendet!</h2>
+					<p>Nach der Volksschule werden Kinder in &Ouml;sterreich getrennt. Kinder aus bildungsfernen Schichten landen gro&szlig;teils in Hauptschulen (83%) und in Gymnasien kommen Sch&uuml;lerInnen aus Akademikerfamilien (78%). Dieser vererbte Bildungskreislauf l&auml;sst viele Potenziale ungenutzt und Talente ungef&ouml;rdert.</p>
+				</li>
+				<li>
+					<h2>Nachhilfe ist extrem teuer</h2>
+					<p>Eine Nachhilfestunde kostet im Schnitt &uuml;ber 30 Euro. F&uuml;r viele Familien ist dies kaum leistbar. Hinzu kommt, dass diese Kinder weder zuhause, noch in der Schule das n&ouml;tige Umfeld haben, um gef&ouml;rdert zu werden. Sogar die H&auml;lfte aller Familien, die ihre Kinder im letzten Jahr zur Nachhilfe geschickt haben, geben an, dass sie dies finanziell belastet hat.</p>
+				</li>
+				<li>
+					<h2>Das lernen, was ich im Leben brauche</h2>
+					<p>Die Dinge, die in &Ouml;sterreich am Lehrplan stehen und die Sch&uuml;lerInnen auswendig lernen, sind leider immer weniger jene Dinge, die sie sp&auml;ter im Leben ben&ouml;tigen. Sch&uuml;lerInnen selbst interessieren sich vor allem f&uuml;r Themen wie Social Skills und soziale Kompetenz, Kreativit&auml;t, Lebensvorbereitung, Pers&ouml;nlichkeitsentwicklung, politische Bildung, uvm.</p>
+				</li>
+			</ol>
+		</article>
+	</section>
+	<section id="s-angehen">
+		<article>
+			<h1>So gehen wir&rsquo;s an:</h1>
+			<h1 class="dotted">....................................................................................................................................................................</h1>
+			<ol>
+				<li>
+					<h2>Lernhilfe von Sch&uuml;lerInnen f&uuml;r Sch&uuml;lerInnen</h2>
+					<p>Sch&uuml;lerInnen werden dazu motiviert, ihren j&uuml;ngeren Mitsch&uuml;lerInnen, v.a. aus bildungsfernen Schichten, Lernhilfe zu geben.</p>
+				</li>
+				<li>
+					<h2>Au&szlig;erschulische Bildungs- und Karriereprogramme</h2>
+					<p>talentify bietet spannende au&szlig;erschulische Bildungs- und Karriereprogramme f&uuml;r Sch&uuml;lerInnen und schlie&szlig;t somit eine bestehende L&uuml;cke.</p>
+				</li>
+				<li>
+					<h2>St&auml;rkung von Potentialen und sozialer Kompetenz</h2>
+					<p>Durch die Lernhilfe von Sch&uuml;lerInnen f&uuml;r Sch&uuml;lerInnen profitieren beide Seiten: Potentiale, soziale Kompetenz und das Verantwortungsbewusstsein werden gest&auml;rkt. Plus: es wird eine Alternative zur klassischen und teuren Nachhilfe geboten.</p>
+				</li>
+			</ol>
+			<h1 class="dotted">....................................................................................................................................................................</h1>
+			<div class="equation">
+				<div class="text">Lernhilfe durch<br/>Sch&uuml;lerInnen</div><div class="math">+</div><div class="text">F&ouml;rderung von<br />Potentialen</div><div class="math">=</div><div class="text">Zukunft<br />bilden.</div>
+			</div>
+			<h1 class="dotted">....................................................................................................................................................................</h1>
+		</article>
+	</section>
+	<section id="s-community">
+		<article>
+			<h1><a class="fancybox" onclick="resetNewsletterForm();" href="#newsletter">Informiert werden<br/>sobald talentify.me startet!</a></h1>
+			<div id="newsletter" style="width:400px;display: none;">
+		
+			<!-- Begin MailChimp Signup Form -->
+			
+				<div id="mc_embed_signup">
+				<form action="http://talentify.us3.list-manage.com/subscribe/post?u=dd254616f40e9d7c570c70ee1&amp;id=e69e3cd6fd" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+				<strong>Melden Sie sich f&uuml;r den talentify Newsletter an</strong><br /><br />
+				<div class="indicates-required"><span class="asterisk">*</span> Pflichtfelder</div>
+				<div class="mc-field-group">
+					<label for="mce-EMAIL">E-Mailadresse  <span class="asterisk">*</span>
+				</label>
+					<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+				</div>
+				<div class="mc-field-group">
+					<label for="mce-FNAME">Vorname </label>
+					<input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+				</div>
+				<div class="mc-field-group">
+					<label for="mce-LNAME">Nachname </label>
+					<input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+				</div>
+					<div id="mce-responses" class="clear">
+						<div class="response" id="mce-error-response" style="display:none"></div>
+						<div class="response" id="mce-success-response" style="display:none"></div>
+					</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+					<div style="position: absolute; left: -5000px;"><input type="text" name="b_dd254616f40e9d7c570c70ee1_e69e3cd6fd" value=""></div>
+					<div class="clear"><input type="submit" value="Anmelden" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+				</form>
+				</div>
+		
+			<!--End mc_embed_signup-->
+		
+		</div>
+			<p>Mitte Oktober 2014 startet talentify.me, eine Online-Plattform die es Sch&uuml;lerInnen erm&ouml;glicht spannende au&szlig;erschulische Angebote in Anspruch zu nehmen und Lernhilfe anzubieten als auch einfach und schnell zu finden.</p>
+			<div class="illu"><img src="/Images/illu-community.png" alt="talentify.me"/></div>
+		</article>
+	</section>
+	<section id="s-support">
+		<article>
+			<div class="info">
+				<h1>So bist du dabei:</h1>
+				<h1 class="dotted">....................................................................................................................................................................</h1>
+				<p>Um etwas bewegen und ver&auml;ndern zu k&ouml;nnen, m&uuml;ssen alle an einem Strang ziehen. Jeder hat andere St&auml;rken, Bed&uuml;rfnisse und Talente, die er in das Projekt einbringen kann. Wir starten Mitte Oktober 2014 mit ausgew&auml;hlten Schulen in eine erweiterte Testphase und wollen kontinuierlich unser Angebot ausbauen. Nur gemeinsam k&ouml;nnen wir Zukunft bilden.</p>
+			</div>
+		</article>
+		<article class="types">
+			<div id="anmeldung" style="width:500px;display: none;">
+		
+		<!-- Begin MailChimp Signup Form -->
+			<div id="mc_embed_signup">
+			<form action="http://talentify.us3.list-manage.com/subscribe/post?u=dd254616f40e9d7c570c70ee1&amp;id=c3fa9abc22" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+				<span style="font-weight:  bold;">Anmeldung zur Pilotphase f&uuml;r Sch&uuml;lerInnen</span><br />Du bist ein/e Sch&uuml;lerIn und w&uuml;rdest gerne mehr &uuml;ber talentify erfahren bzw. aktiv teilnehmen? Dann bist du hier richtig: Trage dich ein und du bekommst ab sofort alle Neuigkeiten und Details einfach per E-Mail.<br /><br />
+			<div class="indicates-required" style="display: block;"><span class="asterisk">*</span> Pflichtfelder</div>
+			<div class="mc-field-group" style="width:50%">
+				<label for="mce-GESCHLECHT">Geschlecht  <span class="asterisk">*</span>
+			</label>
+				<select name="GESCHLECHT" class="required" id="mce-GESCHLECHT">
+				<option value=""></option>
+				<option value="Weiblich">Weiblich</option>
+			<option value="Männlich">Männlich</option>
+			
+				</select>
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-FNAME">Vorname  <span class="asterisk">*</span>
+			</label>
+				<input type="text" value="" name="FNAME" class="required" id="mce-FNAME">
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-LNAME">Nachname  <span class="asterisk">*</span>
+			</label>
+				<input type="text" value="" name="LNAME" class="required" id="mce-LNAME">
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-EMAIL">E-Mailadresse  <span class="asterisk">*</span>
+			</label>
+				<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-TELEFON">Telefon </label>
+				<input type="text" value="" name="TELEFON" class="" id="mce-TELEFON">
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-SCHULE">Schule  <span class="asterisk">*</span>
+			</label>
+				<input type="text" value="" name="SCHULE" class="required" id="mce-SCHULE">
+			</div>
+			<div class="mc-field-group">
+				<label for="mce-KLASSE">Klasse </label>
+				<input type="text" value="" name="KLASSE" class="" id="mce-KLASSE">
+			</div>
+				<div id="mce-responses" class="clear">
+					<div class="response" id="mce-error-response" style="display:none"></div>
+					<div class="response" id="mce-success-response" style="display:none"></div>
+				</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+			    <div style="position: absolute; left: -5000px;"><input type="text" name="b_dd254616f40e9d7c570c70ee1_c3fa9abc22" value=""></div>
+				<div class="clear"><input type="submit" value="Anmelden" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+			</form>
+			</div>
+			
+			<!--End mc_embed_signup-->
+		
+		</div>
+			<div class="item schueler">
+				<h2>Du bist Sch&uuml;lerIn?</h2>
+				<div>Dann melde dich gleich zu talentify an und bleib am Laufenden.</div>
+				<a class="fancybox-anmeldung" href="#anmeldung">Ja, ich will mitmachen</a>
+			</div>
+			<div class="item eltern">
+				<h2>Du bist Elternteil?</h2>
+				<div>Melde dich zum Newsletter an und werde informiert sobald talentify startet!</div>
+				<a class="fancybox" onclick="resetNewsletterForm();" href="#newsletter">Ja, ich will mein Kind anmelden</a>
+			</div>
+			<div class="item lehrer">
+				<h2>Du bist LehrerIn?</h2>
+				<div>Du willst Sch&uuml;lerInnen zus&auml;tzlich f&ouml;rdern? Werde talentify-Coach an deiner Schule!</div>
+				<a href="mailto:hallo@talentify.at">Ja, ich will Infos zum Coach-Programm</a>
+			</div>
+			<div class="item schule">
+				<h2>Du vertrittst eine Schule?</h2>
+				<div>Dann melde deine Schule f&uuml;r das talentify Partnerschulen-Programm an.</div>
+				<a href="mailto:hallo@talentify.at">Ja, ich will ein Info-Paket</a>
+			</div>
+		</article>
+	</section>
+	<section id="s-about">
+		<article>
+			<div class="team desktop" style="margin-right: 50px;">
+				<div class="item">
+					<img src="/Images/bernhard-hofer.jpg" alt="Bernhard Hofer"/>
+					<div class="info">
+						<h3>Bernhard Hofer</h3>
+						<div>Founder</div>
+						<a href="mailto:bernhard@talentify.at">bernhard@talentify.at</a>
+					</div>
+				</div>
+			</div>
+			<div class="text">
+				<h1>Wer sind wir?</h1>
+				<h1 class="dotted">....................................................................................................................................................................</h1>
+				<p>Wir sind eine Organisation mit dem Ziel, die Lernhilfe von Sch&uuml;lerInnen f&uuml;r Sch&uuml;lerInnen zu unterst&uuml;tzen und dabei die individuellen Talente von jungen Menschen zu f&ouml;rdern. Dabei stehen unsere Grunds&auml;tze ganz im Zeichen von Toleranz, religi&ouml;ser und parteipolitischer Neutralit&auml;t sowie im Sinne unserer Verantwortung f&uuml;r das Gemeinwesen. Die treibende Motivation ist einen sozialen Wandel unternehmerisch ganz nach Vorbild des &quot;Social Entrepreneurship&quot; zu bewirken. Alle etwaigen finanziellen &Uuml;bersch&uuml;sse werden dabei wieder in den sozialen Zweck, also die Vision/Mission, investiert. Denn alle (jungen) Menschen sollen ihr volles Potential entfalten k&ouml;nnen, unabh&auml;ngig von ihrem Hintergrund und der finanziellen Situation der Eltern.</p>
+			</div>
+			<div class="team desktop" style="margin-left: 50px;">
+				<div class="item">
+					<img src="/Images/doris-hofer.jpg" alt="Bernhard Hofer"/>
+					<div class="info">
+						<h3>Doris Hofer</h3>
+						<div>Co-Founder</div>
+						<a href="mailto:doris@talentify.at">doris@talentify.at</a>
+					</div>
+				</div>
+			</div>
+			<div class="team mobile">
+				<div class="item">
+					<img src="/Images/bernhard-hofer.jpg" alt="Bernhard Hofer"/>
+					<div class="info">
+						<h3>Bernhard Hofer</h3>
+						<div>Founder</div>
+						<a href="mailto:bernhard@talentify.at">bernhard@talentify.at</a>
+					</div>
+				</div>
+				<div class="item">
+					<img src="/Images/doris-hofer.jpg" alt="Bernhard Hofer"/>
+					<div class="info">
+						<h3>Doris Hofer</h3>
+						<div>Co-Founder</div>
+						<a href="mailto:doris@talentify.at">doris@talentify.at</a>
+					</div>
+				</div>
+			</div>
+		</article>
+	</section>
+	<section id="s-partner">
+		<article>
+			<h1>Ohne unsere Partner und Unterst&uuml;tzer w&uuml;rde es uns in dieser Form nicht geben. DANKE!</h1>
+			<a href="http://www.slash.co.at" target="_blank"><img src="/Images/slash.jpg" alt="SLASH Creative Studio"/></a><a href="http://braenda.com" target="_blank"><img src="/Images/braenda.jpg" alt="Branding Agentur Wien"/></a><a href="http://www.schoenborngasse.vbs.ac.at" target="_blank"><img src="/Images/vbs-schoenborngasse.jpg" alt="http://www.schoenborngasse.vbs.ac.at"/></a><a href="http://socialimpactstart.eu" target="_blank"><img src="/Images/socialimpactstart.jpg" alt="http://socialimpactstart.eu"/></a><a href="http://vienna.impacthub.net" target="_blank"><img src="/Images/impacthub-vienna.jpg" alt="http://vienna.impacthub.net"/></a><a href="http://www.conversionfox.com" target="_blank"><img src="/Images/conversionfox.jpg" alt="Online Marketing Agentur Wien"/></a><a href="http://www.youngenterprises.at" target="_blank"><img src="/Images/young-enterprises.jpg" alt="Young Enterprises Media"/></a>
+		</article>
+	</section>
+	<section id="s-newsletter">
+		<article>
+			<div class="logo"><img src="/Images/logo.png" alt="talentify Zukunft bilden."/></div>
+			<form>
+				<h3>Regelm&auml;&szlig;ig Infos zu talentify bekommen</h3>
+				<input type="text" id="newsletter-email" placeholder="E-Mail Adresse"/>
+				<a href="javascript:void(0);" onclick="submitNewsletter();">Newsletter anmelden</a>
+			</form>
+		</article>
+	</section>
+	<section id="s-contact">
+		<article>
+			<div class="imprint">
+				<div class="zukunft-logo"><img src="/Images/zukunft-bilden.png" alt="Zukunft bilden."/></div>
+				<div class="links">
+					<a href="javascript:void(0);">Impressum</a>|<a href="javascript:void(0);">Datenschutzbestimmungen</a>|<a href="javascript:void(0);">AGB</a>|<a href="javascript:void(0);">F&uuml;r Unternehmen</a>
+				</div>
+				<div class="info">
+					&copy; @DateTime.Now.Year by talentify - Zukunft bilden.<br/>Liechtensteinstra&szlig;e 25/DG, 1090 Wien
+				</div>
+			</div>
+			<div class="follow">
+				<h3>Folge und unterst&uuml;tze uns auf</h3>
+				<div class="links">
+					<a href="https://www.facebook.com/talentify.at" target="_blank"><img src="/Images/facebook.png" alt="facebook"/></a>
+				</div>
+			</div>
+		</article>
+	</section>
+	
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54475730-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

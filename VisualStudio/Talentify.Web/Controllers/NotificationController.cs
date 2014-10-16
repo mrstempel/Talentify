@@ -11,15 +11,17 @@ namespace Talentify.Web.Controllers
 {
     public class NotificationController : BaseController
     {
+		[AllowAnonymous]
 	    public JsonResult Count()
 	    {
-			var count = UnitOfWork.NotificationRepository.Count(LoggedUser.Id);
+			var count = (this.IsAuthenticated) ? UnitOfWork.NotificationRepository.Count(LoggedUser.Id) : 0;
 		    return Json(count, JsonRequestBehavior.AllowGet);
 	    }
 
+		[AllowAnonymous]
 		public ActionResult PopupList()
 		{
-			var list = UnitOfWork.NotificationRepository.GetPopupList(LoggedUser.Id);
+			var list = (this.IsAuthenticated) ? UnitOfWork.NotificationRepository.GetPopupList(LoggedUser.Id) : null;
 		    return View(list);
 	    }
 

@@ -33,6 +33,11 @@ namespace Talentify.ORM.DAL.Repository
 
 		public void Insert(int userId, int points, string message, int targetId)
 		{
+			Insert(userId, points, message, targetId, true);
+		}
+
+		public void Insert(int userId, int points, string message, int targetId, bool saveChanges)
+		{
 			// add bonus points
 			var bonusPoints = new BonusPoint()
 			{
@@ -56,7 +61,25 @@ namespace Talentify.ORM.DAL.Repository
 			};
 			UnitOfWork.NotificationRepository.Insert(notifiction);
 			// save
-			UnitOfWork.Save();
+			if (saveChanges)
+			{
+				UnitOfWork.Save();
+			}
+		}
+
+		public long GetUserBonus(int userId)
+		{
+			try
+			{
+				return (from b in UnitOfWork.BonuspointRepository.AsQueryable()
+						   where
+							   b.UserId == userId
+						   select (long)b.Points).Sum();
+			}
+			catch (Exception)
+			{
+				return 0;
+			}
 		}
 	}
 }

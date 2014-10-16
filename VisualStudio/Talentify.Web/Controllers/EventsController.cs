@@ -10,22 +10,40 @@ namespace Talentify.Web.Controllers
 {
     public class EventsController : BaseController
     {
-        public ActionResult Index()
-        {
+		public ActionResult Index()
+		{
 			return View();
-        }
+		}
 
-		public ActionResult Filter(string filter)
+		public ActionResult Filter(string filter, bool isFilter)
 		{
 			ViewBag.RegisteredIds = UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id);
 			return View(UnitOfWork.EventRepository.Filter(filter, LoggedUser.Id));
 		}
 
+		[AllowAnonymous]
 	    public ActionResult Detail(int id)
 	    {
 			ViewBag.IsUserRegistered = UnitOfWork.EventRepository.IsUserRegistered(id, LoggedUser.Id);
 		    return View(UnitOfWork.EventRepository.GetById(id));
 	    }
+
+		[AllowAnonymous]
+		public ActionResult DetailUrl(string detailUrl, bool? isFilter)
+		{
+			if (isFilter.HasValue && isFilter.Value)
+			{
+				ViewBag.RegisteredIds = UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id);
+				return View("Filter", UnitOfWork.EventRepository.Filter(detailUrl, LoggedUser.Id));
+			}
+			
+			var eventDetail = UnitOfWork.EventRepository.AsQueryable().FirstOrDefault(e => e.DetailUrl == detailUrl);
+
+			if (eventDetail != null)
+				ViewBag.IsUserRegistered = UnitOfWork.EventRepository.IsUserRegistered(eventDetail.Id, LoggedUser.Id);
+
+			return View("Detail", eventDetail);
+		}
 
 	    public ActionResult Register(int id)
 	    {
@@ -51,6 +69,7 @@ namespace Talentify.Web.Controllers
 			}
 	    }
 
+		[AllowAnonymous]
 		public JsonResult GetOpenSeats(int eventId)
 	    {
 		    return Json(UnitOfWork.EventRepository.GetOpenSeats(eventId), JsonRequestBehavior.AllowGet);

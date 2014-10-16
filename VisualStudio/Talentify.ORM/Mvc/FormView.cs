@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Web.Mvc;
 using Talentify.ORM.DAL.Library;
 using Talentify.ORM.DAL.Models.Coaching;
+using Talentify.ORM.DAL.Models.School;
 
 namespace Talentify.ORM.Mvc
 {
@@ -15,9 +16,27 @@ namespace Talentify.ORM.Mvc
 			get
 			{
 				if (_allSchools == null)
+				{
 					_allSchools = new SelectList(BaseController.UnitOfWork.SchoolRepository.Get(), "Id", "Name");
+				}
 
 				return _allSchools;
+			}
+		}
+
+		private SelectList _allSchoolsRegister;
+		public SelectList AllSchoolsRegister
+		{
+			get
+			{
+				if (_allSchoolsRegister == null)
+				{
+					var schools = BaseController.UnitOfWork.SchoolRepository.Get().ToList();
+					schools.Add(new School() { Id = 0, Name = "Meine Schule fehlt!" });
+					_allSchoolsRegister = new SelectList(schools, "Id", "Name");
+				}
+
+				return _allSchoolsRegister;
 			}
 		}
 		

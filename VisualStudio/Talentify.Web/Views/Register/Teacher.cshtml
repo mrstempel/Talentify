@@ -20,6 +20,24 @@
 }
 
 <script>
+	$(this).ready(function()
+	{
+		$('.add-field').find('a').each(function()
+		{
+			$(this).opentip($(this).attr('data-add-tipp'), {
+				extends: "alert",
+				color: "#000000",
+				background: "#ffffff",
+				shadow: true,
+				borderColor: "#e5e5e5",
+				tipJoint: "bottom",
+				target: true,
+				hideOn: "mouseout",
+				hideTriggers: ["target", "tip"]
+			});
+		});
+	});
+
 	$(function ()
 	{
 		var tagging = new $.TextboxList('#subjects_input', { unique: true, plugins: { autocomplete: {onlyFromValues: true} } });
@@ -67,13 +85,15 @@
 						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon"})
 					</div>
 					<div class="field-container" style="margin:0 0 10px 0;">
-						@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
+						@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule...", new { @class = "mandatory" })
+						<div class="add-field"><a href="javascript:void(0);" onclick="loadAddSchoolForm()" data-add-tipp="Du hast deine Schule nicht gefunden? Hilf uns weiter und gib uns Bescheid.">+</a></div>
 					</div>
 					<div class="field-container">
 						<label>Fächer auswählen</label>
 						<input type="text" name="CoachingSubjects" value="" id="subjects_input" />
+						<div class="add-field" style="top:26px;"><a href="javascript:void(0);" onclick="loadAddSubjectForm();" data-add-tipp="Du hast dein Fach nicht gefunden? Hilf uns weiter und gib uns Bescheid.">+</a></div>
 					</div>
-					<div class="field-container">
+					<div class="field-container" style="position: static;">
 						<p>Ich bestätige, die <a href="javascript:void(0);" onclick="loadAgb()">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
 					</div>
 					<div class="field-container desktop">
@@ -81,6 +101,24 @@
 					</div>
 				</article>
 			}
+			
+			<div class="modal fade" id="modal-add-school" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+			  <div class="modal-dialog">
+				<header>
+					<h1>Deine Schule nicht gefunden?<a href="javascript:void(0);" onclick="$('#modal-add-school').modal('hide');" class="close-link"></a></h1>
+				</header>
+				<iframe id="add-school-frame" width="600" height="200" scrolling="no"></iframe>
+			  </div>
+			</div>
+			
+			<div class="modal fade" id="modal-add-subject" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+			  <div class="modal-dialog">
+				<header>
+					<h1>Gewünschtes Schulfach nicht gefunden?<a href="javascript:void(0);" onclick="$('#modal-add-subject').modal('hide');" class="close-link"></a></h1>
+				</header>
+				<iframe id="add-subject-frame" width="600" height="200" scrolling="no"></iframe>
+			  </div>
+			</div>
 
 			<div class="modal fade" id="modal-agb" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
 			  <div class="modal-dialog">

@@ -1,4 +1,4 @@
-.textboxlist { font-size: 16px; cursor: text; }
+.textboxlist { font-size: 16px; cursor: text;z-index: 1000;}
 .textboxlist-bits
 {
 	 zoom: 1; 

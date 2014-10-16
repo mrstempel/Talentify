@@ -314,6 +314,15 @@ function loadRequestCoachingForm(toId, searchClass, subjectCategoryId)
 	$('#modal-request-coaching').modal('show');
 }
 
+function loadHomeEvents()
+{
+	$('#home-events').load('/Home/Events', function ()
+	{
+		$('#home-events-loading').hide();
+		$('#home-events').fadeIn('medium');
+	});
+}
+
 function searchCoaching()
 {
 	if (validateMandatoryOnlyForm())
@@ -346,7 +355,7 @@ function filterEvents()
 {
 	$('#event-overview').hide();
 	$('#search-loading').show();
-	$('#event-overview').load('/Events/Filter?filter=' + $('#filter').val(), function ()
+	$('#event-overview').load('/Events/Filter/?filter=' + $('#filter').val() + '&isFilter=true', function ()
 	{
 		$('#search-loading').hide();
 		$('#event-overview').fadeIn('medium');
@@ -508,6 +517,12 @@ function loadInvitePopup()
 	$('#modal-invite').modal('show');
 }
 
+function loadNoSchoolPopup()
+{
+	$('#no-school-frame').attr('src', '/NoSchool/');
+	$('#modal-no-school').modal('show');
+}
+
 function shareFacebook(url)
 {
 	//alert("url: " + url);
@@ -527,4 +542,59 @@ function shareTwitter(url)
 	//alert(url);
 	window.open('https://twitter.com/share?url=' + encodeURIComponent(url), '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
 	return false;
+}
+
+function loadAddSchoolForm()
+{
+	$('#add-school-frame').attr('src', '/FormHelper/AddSchoolForm');
+	$('#modal-add-school').modal('show');
+}
+
+function loadAddSubjectForm()
+{
+	$('#add-subject-frame').attr('src', '/FormHelper/AddSubjectForm');
+	$('#modal-add-subject').modal('show');
+}
+
+function addSubjectLogged()
+{
+	$('#add-subject-button').attr("disabled", "disabled");
+	$.ajax({
+		url: '/FormHelper/AddSubjectLoggedUser',
+		type: 'get',
+		async: true,
+		data: { subject: $('#new-subject').val() },
+		success: function (data)
+		{
+			$('#add-subject-form').hide();
+			$('#add-subject-msg').fadeIn();
+			$('#add-subject-button').removeAttr("disabled");
+			window.setTimeout("toggleAddSubject();", 4000);
+		},
+		error: function (request, status, error)
+		{
+		}
+	});
+}
+
+function loadTalentometer(userId)
+{
+	$('#talentometer').hide();
+	$('#talentometer-loading').show();
+	$('#talentometer').load('/Profile/Talentometer?userId=' + userId, function ()
+	{
+		$('#talentometer-loading').hide();
+		$('#talentometer').fadeIn('medium');
+	});
+}
+
+function loadBadges(userId)
+{
+	$('#badges').hide();
+	$('#badges-loading').show();
+	$('#badges').load('/Profile/Badges?userId=' + userId, function ()
+	{
+		$('#badges-loading').hide();
+		$('#badges').fadeIn('medium');
+	});
 }

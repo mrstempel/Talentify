@@ -24,6 +24,30 @@ namespace Talentify.ORM.DAL.Repository
         {
         }
 
+		public void Insert(Event entity, HttpPostedFileBase uploadPreview, HttpPostedFileBase uploadImage, HttpPostedFileBase homeImage, string uploadPath)
+		{
+			// save home image
+			if (homeImage.ContentLength > 0)
+			{
+				entity.HomeImage = Guid.NewGuid() + Path.GetExtension(homeImage.FileName);
+				homeImage.SaveAs(Path.Combine(uploadPath, entity.HomeImage));
+			}
+
+			base.Insert(entity, uploadPreview, uploadImage, uploadPath);
+		}
+
+		public void Update(Event entity, HttpPostedFileBase uploadPreview, HttpPostedFileBase uploadImage, HttpPostedFileBase homeImage, string uploadPath)
+		{
+			// save home image
+			if (homeImage != null && homeImage.ContentLength > 0)
+			{
+				entity.HomeImage = Guid.NewGuid() + Path.GetExtension(homeImage.FileName);
+				homeImage.SaveAs(Path.Combine(uploadPath, entity.HomeImage));
+			}
+
+			base.Update(entity, uploadPreview, uploadImage, uploadPath);
+		}
+
 		public IEnumerable<Event> GetOnlineEvents()
 		{
 			return UnitOfWork.EventRepository.AsQueryable().Where(e => e.IsOnline && e.BeginDate >= DateTime.Now);
@@ -129,6 +153,11 @@ namespace Talentify.ORM.DAL.Repository
 			return
 				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId)
 					select regs.EventId).ToList();
+		}
+
+		public IEnumerable<EventRegistration> GetRegistrations(int eventId)
+		{
+			return UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.EventId == eventId);
 		}
 	}
 }

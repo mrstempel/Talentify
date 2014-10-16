@@ -7,6 +7,10 @@
 {
 	<script>
 		hasWaypoints = true;
+		$(this).ready(function()
+		{
+			loadHomeEvents();
+		});
 
 		$(function ()
 		{
@@ -29,6 +33,19 @@
 	</script>
 }
 
+@section CustomAfterBody 
+{
+	<div id="fb-root"></div>
+	<script>(function (d, s, id)
+	{
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=685063364892421&version=v2.0";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+}
+
 <nav id="home-nav" class="desktop">
 	<ul>
 		<li><a id="nav-fact1" href="#fact1"><span>Lernhilfe finden</span></a></li>
@@ -41,8 +58,8 @@
 	<h1><span>Die einzigartige und nachhaltige Lernhilfe -</span><br/><span>von SchülerInnen für SchülerInnen</span></h1>
 	<section class="home" id="fact1">
 		<div class="big-bg" id="bg1">
-			<p>Schnell & einfach</p>
-			<span class="small">Beschreibung Zeile 1 lirum larum löffelstiel<br/>Beschreibung Zeile 2 wer nichts sagt, der weiss nicht viel</span>
+			<p>Schnell & Einfach</p>
+			<span class="small">Finde jetzt SchülerInnen, die dir beim Lernen für den Nachzipf,<br/>eine Schularbeit und einfach mal zwischendurch helfen.</span>
 			<div class="label">Lernhilfe finden</div>
 		</div>
 		<article>
@@ -80,7 +97,7 @@
 	<section class="home" id="fact2">
 		<div class="big-bg" id="bg2">
 			<p>Überall & Sofort</p>
-			<span class="small">Beschreibung Zeile 1 lirum larum löffelstiel<br/>Beschreibung Zeile 2 wer nichts sagt, der weiss nicht viel</span>
+			<span class="small">Deine Stärken liegen in Mathe, Deutsch oder Bio? Super! Nutze dein Talent<br/>und unterstütze deine jüngeren MitschülerInnen beim Lernen.</span>
 			<div class="label">Lernhilfe anbieten</div>
 		</div>
 		<article>
@@ -116,12 +133,28 @@
 		</article>
 	</section>
 	<section class="home" id="fact3">
-		<div class="big-bg" id="bg3">
-			<p>+</p>
-			<div class="label">Events besuchen</div>
+		<div class="big-bg events" id="bg3">
+			<p>Einen Schritt voraus</p>
+			<span class="small">Im Berufsalltag entscheidend und trotzdem nicht am Lehrplan?<br/>In diesen Workshops könnt ihr euch Skills aneignen,<br />auf die es im Leben wirklich ankommt.</span>
+			<div id="home-events-loading">Lade Events ...</div>
+			<div id="home-events"></div>
+			<div class="label" style="position: static;">Events besuchen</div>
 		</div>
 		<article>
 			<input type="button" value="Jetzt anmelden" onclick="location.href = '/Register'">
+		</article>
+	</section>
+	<section class="home teaser">
+		<article>
+			<h3>Registrierung für LehrerInnen</h3>
+			<a href="/Register/Teacher"><img src="/Images/teaser-teacher.png"/></a>
+		</article>
+		<article>
+			<h3>Zur talentify Website</h3>
+			<a href="http://www.talentify.co" target="_blank"><img src="/Images/teaser-talentify.jpg"/></a>
+		</article>
+		<article>
+			<h3>Folge talentify auf Facebook</h3><div class="fb-like-box" data-href="https://www.facebook.com/talentify.at" data-width="355" data-height="200" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
 		</article>
 	</section>
 	<footer class="mobile submit cols2">

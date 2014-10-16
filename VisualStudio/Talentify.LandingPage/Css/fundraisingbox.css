@@ -1,0 +1,56 @@
+﻿#donate-button, #donate-button:hover
+{
+	background-color: #099574 !important;
+	background-image: none;
+	box-shadow: 0px !important;
+	-o-box-shadow: 0px !important;
+	-ms-box-shadow: 0px !important;
+	-moz-box-shadow: 0px !important;
+	-webkit-box-shadow: 0px !important;
+	border: 0 !important;
+	text-shadow: 0 !important;
+}
+#project-description, #project-name, #donate-button, #donation-goal {display: none; }
+p { text-align: center;font-size: 16px !important; }
+h1{color: #223343 !important;font-size: 35px;text-align: center !important; }
+h2 {text-align: center !important; }
+.box
+{
+	background: none !important;
+}
+.box-inner
+{
+	border-width: 0 !important;
+	text-align: center !important;
+}
+.clearfix { text-align: center !important; display: inline-block !important; }
+.progressbar
+{
+	background: url(http://www.talentify.co/Images/crowd-balken.png) no-repeat !important;
+	width: auto !important;
+	height: 248px;
+}
+.progressbar-done
+{
+	background: url(http://www.talentify.co/Images/crowd-balken-fill.png) no-repeat !important;
+	/*top: 92px !important;
+	left: 55px !important;*/
+	display: inline-block !important;
+	position: inherit !important;
+	top: 0 !important;
+	left: 0 !important;
+	float: left !important;
+	margin: 92px -55px 0 54px !important;
+}
+.progressbar-text-shadow {display: none !important; }
+.progressbar-text
+{
+	color: #223343 !important;
+	color: #099574 !important; 
+	position: inherit !important;
+	top: 0 !important;
+	left: 0 !important;
+	display: inline-block !important;
+	float: left !important;
+	margin: 97px 0 0 70px !important;
+}

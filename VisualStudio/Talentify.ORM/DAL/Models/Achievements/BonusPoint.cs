@@ -18,7 +18,8 @@ namespace Talentify.ORM.DAL.Models.Achievements
 		public const int CoachingOfferCompleted = 5;
 		public const int LowPrice = 5;
 		public const int Invite = 10;
-		public const int Survey = 20;
+		public const int Survey = 10;
+		public const int EventConfirm = 10;
 	}
 
 	public class BonusPoint : BaseEntity

@@ -50,7 +50,14 @@ namespace Talentify.ORM.DAL.Repository
 					link = string.Format("{0}/{1}", ConfigurationManager.AppSettings["Notifications.SenderType." + (int) entity.SenderType + ".Url"], entity.TargetId);
 				}
 
-				Email.SendNotification(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"], icon, link, profileImage, entity.Text);
+				var notifictionText = entity.Text;
+
+				if ((entity.Text.StartsWith("Neue Nachricht von:") || entity.Text.StartsWith("Lernhilfeanfrage von:")) && !string.IsNullOrEmpty(entity.AdditionalInfo))
+				{
+					notifictionText += "<br/><br/>\"" + entity.AdditionalInfo + "\"";
+				}
+
+				Email.SendNotification(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"], icon, link, profileImage, notifictionText);
 			}
 		}
 

@@ -1,0 +1,83 @@
+﻿@using System.Web.UI.WebControls
+@model Talentify.ORM.DAL.Models.School.School
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	var schoolTypes = ViewBag.AllSchoolTypes as SelectList;
+}
+
+<script>
+	@*$(this).ready(function()
+	{
+		$('#Type').val('@Convert.ToInt32(Model.Type)');
+	});*@
+</script>
+
+<div id="page-container">
+	<h1>Schule bearbeiten</h1>
+	@using (Html.BeginForm("Edit", "School", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.HiddenFor(m => m.Id)
+		<table>
+			<tr>
+				<td>@Html.LabelFor(m => m.IsActive)</td>
+				<td>@Html.CheckBoxFor(m => m.IsActive)</td>
+			</tr>
+			<tr>
+				<td>Typ</td>
+				<td>
+					@Html.DropDownListFor(model => model.SchoolTypeId, schoolTypes, new { @class = "mandatory" })
+				</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Name)</td>
+				<td>@Html.TextBoxFor(m => m.Name)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Code)</td>
+				<td>@Html.TextBoxFor(m => m.Code)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Address)</td>
+				<td>@Html.TextBoxFor(m => m.Address)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.ZipCode)</td>
+				<td>@Html.TextBoxFor(m => m.ZipCode)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.City)</td>
+				<td>@Html.TextBoxFor(m => m.City)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Country)</td>
+				<td>@Html.TextBoxFor(m => m.Country)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Website)</td>
+				<td>@Html.TextBoxFor(m => m.Website)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Email)</td>
+				<td>@Html.TextBoxFor(m => m.Email)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Phone)</td>
+				<td>@Html.TextBoxFor(m => m.Phone)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Longitude)</td>
+				<td>@Html.TextBoxFor(m => m.Longitude)</td>
+			</tr>
+			<tr>
+				<td>@Html.LabelFor(m => m.Latitude)</td>
+				<td>@Html.TextBoxFor(m => m.Latitude)</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Speichern"/></td>
+			</tr>
+		</table>
+	}
+</div>

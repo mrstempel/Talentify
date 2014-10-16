@@ -27,7 +27,7 @@ namespace Talentify.ORM.FrontendLogic
 				lastTime = DateTime.MaxValue;
 
 			// load latest registrations
-			var lastRegistrations = unitOfWork.StudentRepository.AsQueryable().Where(s => s.JoinedDate < lastTime.Value && s.IsDeleted == false).OrderByDescending(u => u.JoinedDate);
+			var lastRegistrations = unitOfWork.StudentRepository.AsQueryable().Where(s => s.JoinedDate < lastTime.Value && s.IsDeleted == false && s.RegisterCode == null).OrderByDescending(u => u.JoinedDate);
 
 			if (lastRegistrations.Any())
 			{

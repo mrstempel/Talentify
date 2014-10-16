@@ -1,0 +1,121 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+   <title>talentify - Zukunft bilden</title>
+   <link rel="icon" type="image/png" href="/Images/talentify-favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta property="og:title" content="talentify - Zukunft bilden"> 
+	<meta property="og:type" content="website"> 
+	<meta property="og:url" content="http://www.talentify.co"> 
+	<meta property="og:description" content="Österreichs SchülerInnen heben ihre Talente. Gemeinsam.">
+	<meta property="og:image" content="http://www.talentify.co/Images/share-talentify.jpg" />
+	<script src="/Scripts/jquery-2.1.0.min.js"></script>
+	<script src="/Scripts/talentismus.min.js"></script>
+	<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+	<link rel="stylesheet" href="/Css/talentify.min.css" />
+	<link rel="stylesheet" href="/Css/add-on.css" />
+	<!-- fancybox -->
+	<script type="text/javascript" src="/Scripts/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="/Css/jquery.fancybox.css?v=2.1.5" media="screen" />
+	<!-- mailChimp css -->
+	<link href="http://cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+	<!-- bootstrap -->
+	<script src="/Scripts/Bootstrap/js/bootstrap.min.js"></script>
+	<link href="/Scripts/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<script>
+		$(this).ready(function ()
+		{
+			initPage();
+		});
+
+		$(window).resize(function () { initSectionSizes(); });
+
+		function submitNewsletter()
+		{
+			resetNewsletterForm();
+			$('#mce-EMAIL').val($('#newsletter-email').val());
+			$('#mc-embedded-subscribe-form').submit();
+		}
+
+		function resetNewsletterForm()
+		{
+			//mce-EMAIL
+			$('#mce-EMAIL').val('');
+			//mce-FNAME
+			$('#mce-FNAME').val('');
+			//mce-LNAME
+			$('#mce-LNAME').val('');
+		}
+	</script>
+</head>
+<body>
+	<section id="s-header" class="big-bg">
+		<article>
+			<img class="logo" src="/Images/logo.png" alt="talentify Zukunft bilden."/>
+			<div class="claim">&Ouml;sterreichs Sch&uuml;lerInnen heben<br/>ihre Talente. Gemeinsam.</div>
+		</article>
+	</section>
+	<section id="s-presse">
+		<article>
+			<div class="fundraising">
+				<h1>Wir zählen auf Dich! <span>Unterstütze talentify mit deiner Spende!</span></h1>
+				<script type="text/javascript" src="https://secure.fundraisingbox.com/app/paymentJS?hash=VDQKAwALiLB7eLKDNQ45OVdRSVhJQpDlPR32ii48LDZBUkpfT3Cp6TsZxocmJzg%2BHU4CDWRwoqUXSpOXKX0yNnYOXUMtaPX1RAzXzgRtOBx3VwkpLTbk9XJai5JNdW9LOQYGLx0F5OcnNN%2BaXCQ9TQ%3D%3D"></script><noscript>Bitte Javascript aktivieren</noscript>
+				<iframe src="https://secure.fundraisingbox.com/app/widget?hash=VDpPrgAHpko6fNVwNQB%2Bn1NiIfwLSO9SZi2dDSYRVZNPK2eiD0m%2FNnxzigx6G1KZFWlwol4Q5WB8JNdZZlNGmF0gfKtKFOd7OTbcCGcCH9hFamusAwLqMnR1nRw1UESDWyQt5QAU8XkvV4IKIgpOikZ4L%2BMAMfdkYl6PSjURQYQOYnu1AS38aGRenxo%2FWFnRUDZ76g0u63MvDNAAIwxL0AFuPqQVPeA6cEWUGHUBUPBGO3KjSzauKS4WxEw2XhzHFGVv%2FVpssG04GcQZJVFV30slBrZX d4J2JE2wTDFAJI0KMx65Bn%2BFbmgUp1UwEXLQCjMapBsulGQ0WeMTfkMgixstVOIaLYJ%2FdQLxD31UeoETdkHyEGyVanwN%2B0gpRXvQE2cftUd%2BwXpxROMbMVxsj0V%2BV%2FwcK5Z1PhDlT39Obd4ROgisBirHJj1Z%2FRdnW2SOXChevwd7zTVlJKRBbBJ82QgwR7AASfsoOXKGCDIEdIE%3D&target=blank&extended=1" name="fundraisingBoxWidget" frameborder="0" height="300" width="1030" scrolling="no" allowtransparency="true" title="FundraisingBox Widget"></iframe>
+			</div>
+		</article>
+	</section>
+	<section id="s-spenden">
+		<article>
+			<h1>Wofür werden die Spenden verwendet?</h1>
+			<h1 class="dotted">....................................................................................................................................................................</h1>
+			<p>Wir sind ein Sozialunternehmen mit dem Ziel, die Lernhilfe von SchülerInnen für SchülerInnen zu unterstützen und dabei die individuellen Talente von jungen Menschen zu fördern. Um dieses Ziel zu erreichen, brauchen wir Hilfe. Vor allem zum Start, um das System inkl. der online Plattform aufzubauen. Aus diesem Grund bitten wir alle Interessierten und Förderer uns auch finanziell zu unterstützen, jeder Euro hilft und fließt 1:1 in die Entwicklung von talentify. Konkret in:</p>
+			<ol>
+				<li>die laufende Weiterentwicklung und Verbesserung der online Plattform,</li>
+				<li>die technologische Infrastruktur (Hosting, SSL-Zertifikat, etc.) im Hintergrund sowie</li>
+				<li>Maßnahmen, um so viele SchülerInnen wie möglich mit unserem Angebot zu erreichen</li>
+			</ol>
+			<p>Vielen Dank für die Unterstützung, nur gemeinsam können wir Zukunft bilden.</p>
+		</article>
+	</section>
+	<section id="s-contact">
+		<article>
+			<div class="imprint">
+				<div class="zukunft-logo"><img src="/Images/zukunft-bilden.png" alt="Zukunft bilden."/></div>
+				<div class="links">
+					<a href="javascript:void(0);">Impressum</a>|<a href="javascript:void(0);">Datenschutzbestimmungen</a>|<a href="javascript:void(0);">AGB</a>|<a href="javascript:void(0);">F&uuml;r Unternehmen</a>
+				</div>
+				<div class="info">
+					&copy; @DateTime.Now.Year by talentify - Zukunft bilden.<br/>c/o Impact HUB Vienna, Lindengasse 56/18-19, 1070 Wien
+				</div>
+			</div>
+			<div class="follow">
+				<h3>Folge und unterst&uuml;tze uns auf</h3>
+				<div class="links">
+					<a href="https://www.facebook.com/talentify.at" target="_blank"><img src="/Images/facebook.png" alt="facebook"/></a>
+				</div>
+			</div>
+		</article>
+	</section>
+	
+<script>
+	(function (i, s, o, g, r, a, m)
+	{
+		i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function ()
+		{
+			(i[r].q = i[r].q || []).push(arguments)
+		}, i[r].l = 1 * new Date(); a = s.createElement(o),
+		m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+	})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+	ga('create', 'UA-54475730-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>

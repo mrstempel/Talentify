@@ -74,6 +74,9 @@ namespace Talentify.ORM.DAL.Repository
 				conversation.Messages.Add(initialMessage);
 
 				coachingRequest.Conversation = conversation;
+				// add price
+				var toUser = UnitOfWork.StudentRepository.GetById(coachingRequest.ToUserId);
+				coachingRequest.Price = toUser.CoachingPrice;
 				UnitOfWork.CoachingRequestRepository.Insert(coachingRequest);
 				UnitOfWork.Save();
 
@@ -88,7 +91,8 @@ namespace Talentify.ORM.DAL.Repository
 					Text = string.Format("Lernhilfeanfrage von: {0} {1}", fromUser.Firstname, fromUser.Surname),
 					CreatedDate = DateTime.Now,
 					SenderType = NotificationSenderType.CoachingRequest,
-					IconType = NotificationIconType.None
+					IconType = NotificationIconType.None,
+					AdditionalInfo = message
 				};
 				UnitOfWork.NotificationRepository.Insert(notifiction);
 				UnitOfWork.Save();
@@ -139,6 +143,29 @@ namespace Talentify.ORM.DAL.Repository
 			}
 
 			return results.DistinctBy(r => r.RequestId);
+		}
+
+		public StatusType GetStatusType(int coachingRequestId)
+		{
+
+			var statusHistory = (from r in AsQueryable() where r.Id == coachingRequestId select r.StatusHistory).FirstOrDefault();
+
+			// 1 statustype == request
+			if (statusHistory.Count == 1)
+				return StatusType.Request;
+
+			// 2 statustypes = appointment || rejected
+			if (statusHistory.Count == 2)
+			{
+				return (statusHistory.FirstOrDefault(s => s.StatusType == StatusType.Rejected) != null)
+					? StatusType.Rejected
+					: StatusType.Appointment;
+			}
+
+			// > 3 = completed || Canceled
+			return (statusHistory.FirstOrDefault(s => s.StatusType == StatusType.Canceled) != null)
+				? StatusType.Canceled
+				: StatusType.Completed;
 		}
 
 		public CoachingRequestStream GetStream(int coachingRequestId)
@@ -288,7 +315,7 @@ namespace Talentify.ORM.DAL.Repository
 			return true;
 		}
 
-		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser, DateTime date, int duration)
+		public bool SetCoachingRequestRating(int coachingRequestId, int val1, int val2, int val3, BaseUser fromUser, DateTime date, decimal duration, int payedPrice)
 		{
 			var isRatingOkay = SetCoachingRequestRating(coachingRequestId, val1, val2, val3, fromUser, false);
 			if (isRatingOkay)
@@ -296,6 +323,7 @@ namespace Talentify.ORM.DAL.Repository
 				var coachingRequest = GetById(coachingRequestId);
 				coachingRequest.Date = date;
 				coachingRequest.Duration = duration;
+				coachingRequest.PayedPrice = payedPrice;
 				Update(coachingRequest);
 				UnitOfWork.Save();
 

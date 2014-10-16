@@ -56,7 +56,14 @@
 				<textarea name="Message" maxlength="140"></textarea>
 			</div>
 			<div class="field-container">
-				<input type="submit" value="Anfrage senden" onclick="return validateMandatoryOnlyForm();"/>
+				@if (HasSchool)
+				{
+					<input type="submit" value="Anfrage senden" onclick=" return validateMandatoryOnlyForm(); "/>
+				}
+				else
+				{
+					<span style="display:inline-block;font-size: 14px;padding: 10px 20px 0 20px;">Du hast dich leider ohne Registrierungscode angemeldet und kannst daher noch nicht alle Funktionen von talentify.me nutzen. Wenn du auf eine talentify Partnerschule gehst die bereits an der Testphase teilnimmt, dann frag im Sekretariat deiner Schule nach einem Registrierungscode. Ansonsten lass uns bitte wissen auf welche Schule du gehst. Wir bemühen uns laufend neue Schulen freizuschalten.</span>
+				}
 			</div>
 		}
 	}

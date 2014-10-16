@@ -10,6 +10,8 @@
 	{
 		loadMyProfileCoachings(false, @Model.Id);
 		setProfileCoachingPrice(@Model.CoachingPrice);
+		loadTalentometer(@Model.Id);
+		loadBadges(@Model.Id);
 	});
 
 	function setProfileCoachingPrice(price)
@@ -47,19 +49,22 @@
 					{
 						<a href="@Model.TwitterUrl" title="twitter Profil" target="_blank" onmouseover="hoverImage('icon-profile-twitter');" onmouseout="hoverImage('icon-profile-twitter');"><img src="/Images/icon-profile-twitter.png" id="icon-profile-twitter" alt="twitter Profil"/></a>
 					}
-					@*@if (!string.IsNullOrEmpty(Model.InstagramUrl))
+					@if (!string.IsNullOrEmpty(Model.InstagramUrl))
 					{
-						<a href="@Model.InstagramUrl" title="Instagram Profil" target="_blank"><img src="/Images/icon-profile-instagram.png" alt="Instagram Profil"/></a>
+						<a href="@Model.InstagramUrl" title="Instagram Profil" target="_blank" onmouseover="hoverImage('icon-profile-instagram');" onmouseout="hoverImage('icon-profile-instagram');"><img src="/Images/icon-profile-instagram.png" id="icon-profile-instagram" alt="Instagram Profil"/></a>
 					}
 					@if (!string.IsNullOrEmpty(Model.PinterestUrl))
 					{
-						<a href="@Model.PinterestUrl" title="Pinterest Profil" target="_blank"><img src="/Images/icon-profile-pinterest.png" alt="Pinterest Profil"/></a>
-					}*@
+						<a href="@Model.PinterestUrl" title="Pinterest Profil" target="_blank" onmouseover="hoverImage('icon-profile-pinterest');" onmouseout="hoverImage('icon-profile-pinterest');"><img src="/Images/icon-profile-pinterest.png" id="icon-profile-pinterest" alt="Pinterest Profil"/></a>
+					}
 				</span>
 			</h3>
 			<div class="content-part no-border">
-				@(@Model.School.ZipCode)-@(@Model.School.City)<br/>
-				@(@Model.School.Name)
+				@if (Model.SchoolId.HasValue)
+				{
+					@Html.Raw(Model.School.ZipCode + " - " + Model.School.City + "<br/>");
+					@(@Model.School.Name)
+				}
 				@if (!string.IsNullOrEmpty(Model.AboutMe))
 				{
 					<p class="important">"@(@Model.AboutMe)"</p>
@@ -81,8 +86,18 @@
 			}
 		</div>
 	</article>
-	<input type="button" value="Lernhilfe anfragen" onclick="loadRequestCoachingForm('@Model.Id', '@searchClass', '@searchSubjectCategoryId');" id="choaching-request-btn"/>
 </section>
+<section class="achievements">
+	<article class="talentometer-container">
+		<div id="talentometer"></div>
+		<div id="talentometer-loading">Lade Talentometer ...</div>
+	</article>
+	<article class="badges-container">
+		<div id="badges"></div>
+		<div id="badges-loading">Lade Badges ...</div>
+	</article>
+</section>
+<input type="button" value="Lernhilfe anfragen" onclick="loadRequestCoachingForm('@Model.Id	', '@searchClass	', '@searchSubjectCategoryId	');" id="choaching-request-btn"/>
 
 <div class="modal fade" id="modal-request-coaching" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
   <div class="modal-dialog" id="request-coaching-form">

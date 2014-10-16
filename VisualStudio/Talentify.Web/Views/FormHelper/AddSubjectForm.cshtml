@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "AddSubjectForm";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-success" class="msg success"><p>Deine Nachricht wurde erfolgreich übermittelt</p></div>
+	</div>
+	@if (FormSuccess == null)
+	{
+		using (Html.BeginForm("AddSubjectForm", "FormHelper", FormMethod.Post, new { @class = "form-container" }))
+		{
+			<p style="margin: 0 0 10px 0;padding: 0;">Bitte gib uns kurz Bescheid wer du bist und welches Schulfach du nicht<br/> gefunden hast. Sobald dein Schulfach freigeschalten ist bekommst du Bescheid.</p>
+			<div class="field-container">
+				<input type="text" name="name" placeholder="Dein Name" class="mandatory" style="border-bottom: 0px !important;"/>
+				<input type="text" name="email" placeholder="Deine E-Mail Adresse" class="mandatory"  style="border-bottom: 0px !important;"/>
+				<input type="text" name="subject" placeholder="Schulfach" class="mandatory"/>
+			</div>
+			<div class="field-container">
+				<input type="submit" value="Senden" onclick="return validateMandatoryFields();"/>
+			</div>
+		}
+	}
+ else
+ {
+		<script>
+			setTimeout(function () { window.parent.hideModal('modal-add-subject'); }, 3000);
+		</script>
+	}
+</article>

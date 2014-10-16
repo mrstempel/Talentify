@@ -146,7 +146,7 @@ function loadSchoolMarkers()
 	{
 		var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(schoolLatLngs[i].lat, schoolLatLngs[i].lng),
-			title: "SCHULE",
+			title: "Details anzeigen",
 			map: map
 		});
 

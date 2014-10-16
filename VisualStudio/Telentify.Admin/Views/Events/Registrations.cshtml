@@ -1,0 +1,27 @@
+﻿@using System.Web.UI.WebControls
+@model IEnumerable<Talentify.ORM.DAL.Models.Content.EventRegistration>
+
+@{
+    ViewBag.Title = "Registrations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<h2>@ViewBag.EventTitle</h2>
+	@using (Html.BeginForm("Registrations", "Events", FormMethod.Post, new {enctype = "multipart/form-data"}))
+	{
+		<input type="hidden" name="id" value="@ViewBag.Id"/>
+		<ul>
+			@for (int i = 0; i < Model.Count(); i++)
+			{
+				var isChecked = Model.ElementAt(i).Confirmed ? "checked" : "";
+				<li>
+					<label for="confirmed_@(@Model.ElementAt(i).Id)">@Model.ElementAt(i).User.Firstname @Model.ElementAt(i).User.Surname</label>
+					<input type="checkbox" name="confirmed" id="confirmed_@(@Model.ElementAt(i).Id)" value="@Model.ElementAt(i).Id" @isChecked/>
+				</li>
+			}
+		</ul>
+		<input type="submit" value="Teilnahme Bestätigen"/><br/><br/>
+		@Html.ActionLink("Zurück zur Eventliste", "Index", "Events")
+	}
+</div>

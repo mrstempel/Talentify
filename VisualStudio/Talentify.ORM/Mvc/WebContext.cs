@@ -48,6 +48,23 @@ namespace Talentify.ORM.Mvc
 			}
 		}
 
+		public bool HasSchool
+		{
+			get
+			{
+				if (HttpContext.Current.Session["WebContext.HasSchool"] == null)
+				{
+					var student = unitOfWork.StudentRepository.GetById(this.User.Id);
+					HttpContext.Current.Session["WebContext.HasSchool"] = (student != null && student.HasSchool);
+				}
+				return (bool)HttpContext.Current.Session["WebContext.HasSchool"];
+			}
+			set
+			{
+				HttpContext.Current.Session["WebContext.HasSchool"] = value;
+			}
+		}
+
 		public SearchSession SearchSession
 		{
 			get
@@ -63,6 +80,7 @@ namespace Talentify.ORM.Mvc
 		{
 			this.User = null;
 			this.SearchSession = null;
+			HttpContext.Current.Session["WebContext.HasSchool"] = null;
 		}
 
 		public WebContext(TalentifyUnitOfWork<TalentifyContext> unitOfWork)

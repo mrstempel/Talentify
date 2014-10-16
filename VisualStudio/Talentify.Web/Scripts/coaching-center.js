@@ -78,7 +78,6 @@ function submitCoachingConfirmForm(coachingRequestId, validateDate)
 	{
 		if (validateDate)
 		{
-			
 			var day = $('#coachingdate_day').val();
 			var month = $('#coachingdate_month').val();
 			var year = $('#coachingdate_year').val();
@@ -88,7 +87,7 @@ function submitCoachingConfirmForm(coachingRequestId, validateDate)
 				url: '/CoachingCenter/SetCoachingRequestRatingWithDate',
 				type: 'get',
 				async: true,
-				data: { coachingRequestId: coachingRequestId, val1: $('#wertRatingValue').val(), val2: $('#puenktlichRatingValue').val(), val3: $('#preisRatingValue').val(), date: date, duration: $('#duration').val() },
+				data: { coachingRequestId: coachingRequestId, val1: $('#wertRatingValue').val(), val2: $('#puenktlichRatingValue').val(), val3: $('#preisRatingValue').val(), date: date, duration: $('#duration').val(), payedPrice: $('#payedPrice').val() },
 				success: function (data)
 				{
 					if (data)
@@ -137,6 +136,17 @@ function disableCoachingFeedbackForm()
 		$(this).removeClass('selectable');
 		$(this).addClass('disabled');
 		$(this).removeAttr('onclick');
+		$(this).removeAttr('onmouseover');
+		$(this).removeAttr('onmouseout');
+	});
+
+	$('.switch').find('a').each(function ()
+	{
+		$(this).removeClass('selectable');
+		$(this).addClass('disabled');
+		$(this).removeAttr('onclick');
+		$(this).removeAttr('onmouseover');
+		$(this).removeAttr('onmouseout');
 	});
 
 	// hide date form
@@ -157,16 +167,16 @@ function setCoachingInOutFilter(requestId)
 	if (filter == 'both')
 	{
 		$('#selected-in-out-filter').attr('src', '/Images/inandout.png');
-		$('.request-list > .item.in').show('fast');
-		$('.request-list > .item.out').show('fast');
+		$('.request-list').find('.item.in').show('fast');
+		$('.request-list').find('.item.out').show('fast');
 		console.log("both");
 	}
 
 	if (filter == "in")
 	{
 		$('#selected-in-out-filter').attr('src', '/Images/icon-links.png');
-		$('.request-list > .item.out').slideUp('fast');
-		$('.request-list > .item.in').slideDown('fast');
+		$('.request-list').find('.item.out').slideUp('fast');
+		$('.request-list').find('.item.in').slideDown('fast');
 		streamId = $('.request-list').find('.item.in:first').attr('id');
 		console.log("in");
 	}
@@ -174,8 +184,8 @@ function setCoachingInOutFilter(requestId)
 	if (filter == "out")
 	{
 		$('#selected-in-out-filter').attr('src', '/Images/icon-rechts.png');
-		$('.request-list > .item.in').slideUp('fast');
-		$('.request-list > .item.out').slideDown('fast');
+		$('.request-list').find('.item.in').slideUp('fast');
+		$('.request-list').find('.item.out').slideDown('fast');
 		streamId = $('.request-list').find('.item.out:first').attr('id');
 		console.log("out");
 	}
@@ -188,17 +198,34 @@ function setMyCoachingRatings(myVal1, myVal2, myVal3)
 	// disable form
 	disableCoachingFeedbackForm();
 	// show my values
+	$('#link-wert-' + myVal1).prevAll().addClass('selected');
 	$('#link-wert-' + myVal1).addClass('selected');
-	$('#link-puenktlich-' + myVal2).addClass('selected');
-	$('#link-preis-' + myVal3).addClass('selected');
+
+	$('#puenktlich-switch').removeClass('on');
+	var puenktlichStatus = myVal2 != 0 ? "on" : "off";
+	$('#puenktlich-switch').addClass(puenktlichStatus);
+
+	$('#preis-switch').removeClass('on');
+	var preisStatus = myVal3 != 0 ? "on" : "off";
+	$('#preis-switch').addClass(preisStatus);
 }
 
 function setOtherCoachingRatings(myVal1, myVal2, myVal3)
 {
 	// show other values
+	$('#span-wert-' + myVal1).prevAll().addClass('selected');
 	$('#span-wert-' + myVal1).addClass('selected');
-	$('#span-puenktlich-' + myVal2).addClass('selected');
-	$('#span-preis-' + myVal3).addClass('selected');
+	
+	var puenktlichStatus = myVal2 != 0 ? "on" : "off";
+	$('#puenktlich-other-switch').addClass(puenktlichStatus);
+
+	var preisStatus = myVal3 != 0 ? "on" : "off";
+	$('#preis-other-switch').addClass(preisStatus);
+}
+
+function hideOtherCoachingRatings(requestId)
+{
+	$('#other-rating-' + requestId).hide();
 }
 
 function rejectCoachingRequest(coachingRequestId)

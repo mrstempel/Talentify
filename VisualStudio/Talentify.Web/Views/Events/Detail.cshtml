@@ -15,19 +15,25 @@
 		latitude = @Model.Latitude;
 		longitude = @Model.Longitude;
 		google.maps.event.addDomListener(window, 'load', initEventMap);
-
 		$(this).ready(function()
 		{
-			@if (Model.BeginDate < DateTime.Now)
+			@if (Model.BeginDate < DateTime.Now && IsAuthenticated)
 			{
 				<text>showPastEventOptions()</text>	
 			}
-			else 
+			else
 			{
 				<text>loadEventOpenSeats(@Model.Id);</text>
 			}
+			
+			@if (!IsAuthenticated)
+			{
+				<text>$('#coming-event-options').hide();</text>
+				<text>$('#past-event-options').hide();</text>
+				<text>$('#not-logged-options').show();</text>
+			}
 
-			@if (ViewBag.IsUserRegistered)
+			@if (IsAuthenticated && ViewBag.IsUserRegistered)
 			{
 				<text>disableRegistration();</text>
 			}
@@ -49,13 +55,18 @@
 			$('#past-registered').css('display', 'inline-block');
 		}
 	</script>
+	<script type="text/javascript">var switchTo5x=true;</script>
+	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">stLight.options(
+	{publisher: "f4ea43f1-2aa5-4a89-8ba7-6ef106fcec8a", doNotHash: true, doNotCopy: true, hashAddressBar: false}
+	);</script>
 }
 
 <div id="page-container">
 	<section>
 		<article class="event-detail">
 			<header>
-				<div class="sprite t-button desktop"></div>
+				<div class="bubble t-button desktop" id="bubble-events"></div>
 				<h2>Events</h2>
 			</header>
 			<div class="content-container">
@@ -76,6 +87,9 @@
 					<span id="registered" class="link-button">Du bist angemeldet</span>
 					<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
 				</div>
+				<div id="not-logged-options">
+					<a href="/Register"class="link-button">Jetzt anmelden</a>
+				</div>
 				<div class="map-container" id="map-container"></div>
 				<div class="address">
 					<span class="important">Zeit und Ort</span><br/>
@@ -90,6 +104,14 @@
 				</div>
 				<div class="open-seats">
 					<span id="event-open-seats"></span>
+				</div>
+				<div class="sharing-options">
+					<span class='st_facebook_large' displayText='Facebook'></span>
+					<span class='st_twitter_large' displayText='Tweet'></span>
+					<span class='st_linkedin_large' displayText='LinkedIn'></span>
+					<span class='st_xing_large' displayText='Xing'></span>
+					<span class='st_pinterest_large' displayText='Pinterest'></span>
+					<span class='st_email_large' displayText='Email'></span>
 				</div>
 			</div>
 		</article>

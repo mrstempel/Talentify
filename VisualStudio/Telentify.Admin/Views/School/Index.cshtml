@@ -1,0 +1,21 @@
+﻿@using System.Web.UI.WebControls
+@using Talentify.ORM.DAL.Models.School
+@model IEnumerable<Talentify.ORM.DAL.Models.School.School>
+
+@{
+	ViewBag.Title = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	
+	<ul>
+		@foreach (var e in Model)
+		{
+			<li>@Html.ActionLink(@e.Name, "Edit", "School", new {id=e.Id}, null) | @Html.ActionLink("Codeverwaltung", "CodeVerwaltung", "School", new {id=e.Id}, null)</li>
+		}
+	</ul>
+	
+
+	@Html.ActionLink("Neue Schule erstellen", "Create")
+</div>

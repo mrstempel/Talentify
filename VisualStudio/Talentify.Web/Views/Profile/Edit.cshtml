@@ -9,6 +9,7 @@
 	$(this).ready(function ()
 	{
 		setClassDropdown('SchoolId', 'Class', @Model.Class);
+		$('#ParentEducation').val('@Model.ParentEducation');
 
 		$('#SchoolId').change(function()
 		{
@@ -23,6 +24,11 @@
 		@if (!string.IsNullOrEmpty(Model.Country) && Model.Country.Length == 2)
 		{
 			<text>$('#Country').val('@Model.Country');</text>
+		}
+
+		@if (!HasSchool)
+		{
+			<text>$('#SchoolId').val('0');</text>
 		}
 	});
 </script>
@@ -48,11 +54,38 @@
 			{
 				@Html.HiddenFor(m => m.Id)
 				@Html.HiddenFor(m => m.SettingsId)
+				@Html.HiddenFor(m => m.HeardOfTalentify)
+				@Html.HiddenFor(m => m.IsParentAccount)
 				<article id="profile-form">
 					<div class="field-container">
+						<span>
+							@if (Model.IsParentAccount)
+							{
+								<text>Ich bin ein Elternteil</text>
+							}
+							else
+							{
+								<text>Ich bin SchülerIn (ab 13 Jahre)</text>
+							}
+						</span>
+					</div>
+					<div class="field-container">
+						<h4>Kontaktinfos</h4>
 						@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})
 						@Html.TextBoxFor(m => m.Surname, new {@placeholder = "Nachname", @class = "mandatory"})
 						@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
+						@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse"})
+						@Html.TextBoxFor(m => m.ZipCode, new {@placeholder = "PLZ"})
+						@Html.TextBoxFor(m => m.City, new {@placeholder = "Ort"})
+						<select name="Country" id="Country">
+							<option value="">Land auswählen</option>
+							<option value="AT">Österreich</option>
+						</select>
+						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon (Mobilnummer)"})
+						@Html.TextBoxFor(m => m.FirstnameChild, new {@placeholder = "Vorname des Kindes"})
+					</div>
+					<div class="field-container">
+						<h4>Schulinfos </h4>
 						<select name="Gender" id="Gender" class="border-bottom">
 							<option>Geschlecht wählen</option>
 							<option value="F">Weiblich</option>
@@ -62,20 +95,7 @@
 							<label>Geburtsdatum</label>
 							@Html.DatePicker("birthday", false, Model.BirthDate)
 						</div>
-						
-					</div>
-					<div class="field-container">
-						@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse"})
-						@Html.TextBoxFor(m => m.ZipCode, new {@placeholder = "PLZ"})
-						@Html.TextBoxFor(m => m.City, new {@placeholder = "Ort"})
-						<select name="Country" id="Country">
-							<option value="">Land auswählen</option>
-							<option value="AT">Österreich</option>
-						</select>
-						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon (Mobilnummer)"})
-					</div>
-					<div class="field-container">
-						@Html.DropDownListFor(model => model.SchoolId, AllSchools, "wähle deine Schule", new { @class = "mandatory" })
+						@Html.DropDownListFor(model => model.SchoolId, AllSchoolsRegister, "wähle deine Schule...", new { @class = "mandatory" })
 						<select id="Class" name="Class">
 							<option value="0">wähle deine Klasse</option>
 						</select>
@@ -83,12 +103,34 @@
 					<div class="field-container">
 						@Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "Dein Lernmotto", @maxlength = "140", @class="border-bottom"})
 					</div>
+					@if (!Model.IsParentAccount)
+					{
+						<div class="field-container">
+							@Html.TextBoxFor(m => m.FacebookUrl, new {@placeholder = "Url zu deinem Facebook Profil"})
+							@Html.TextBoxFor(m => m.GooglePlusUrl, new {@placeholder = "Url zu deinem Google+ Profil"})
+							@Html.TextBoxFor(m => m.TwitterUrl, new {@placeholder = "Url zu deinem Twitter Profil"})
+							@Html.TextBoxFor(m => m.InstagramUrl, new {@placeholder = "Url zu deinem Instagram Profil"})
+							@Html.TextBoxFor(m => m.PinterestUrl, new {@placeholder = "Url zu deinem Pinterest Profil"})
+						</div>
+					}
 					<div class="field-container">
-						@Html.TextBoxFor(m => m.FacebookUrl, new {@placeholder = "Url zu deinem Facebook Profil"})
-						@Html.TextBoxFor(m => m.GooglePlusUrl, new {@placeholder = "Url zu deinem Google+ Profil"})
-						@Html.TextBoxFor(m => m.TwitterUrl, new {@placeholder = "Url zu deinem Twitter Profil"})
-						@Html.TextBoxFor(m => m.InstagramUrl, new {@placeholder = "Url zu deinem Instagram Profil"})
-						@Html.TextBoxFor(m => m.PinterestUrl, new {@placeholder = "Url zu deinem Pinterest Profil"})
+						<label style="font-size: 16px;">
+							@if (Model.IsParentAccount)
+							{
+								<text>Was ist die höchste Ausbildung der Eltern?</text>
+							}
+							else
+							{
+								<text>Was ist die höchste Ausbildung deiner Eltern?</text>
+							}
+						</label>
+						<select name="ParentEducation" id="ParentEducation" class="mandatory" style="margin: 10px 0 0 0;">
+							<option value="">Bitte auswählen</option>
+							<option value="Pflichtschule">Pflichtschule</option>
+							<option value="Lehre">Lehre</option>
+							<option value="Matura">Matura</option>
+							<option value="Studium">Studium</option>
+						</select>
 					</div>
 					<div class="field-container desktop">
 						<input type="submit" value="Absenden" onclick=" return validateProfileForm(); " style="margin-bottom: 15px;"/><br/>

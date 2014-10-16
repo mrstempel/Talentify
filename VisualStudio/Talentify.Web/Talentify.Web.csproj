@@ -45,6 +45,18 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MailChimp.Net.Api, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MailChimp.Net.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="MailChimp.Net.Settings, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MailChimp.Net.Settings.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -129,6 +141,7 @@
     <Compile Include="Controllers\Api\FormHelperController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
     <Compile Include="Controllers\InviteController.cs" />
+    <Compile Include="Controllers\NoSchoolController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\CoachingCenterController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -200,7 +213,44 @@
     <Content Include="Css\webfonts\2AA7EA_2_0.woff" />
     <None Include="Properties\PublishProfiles\talentify - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify - Web Deploy.pubxml" />
+    <Content Include="Images\badge-eistmc2.png" />
+    <Content Include="Images\badge-genius.png" />
+    <Content Include="Images\badge-h2g2.png" />
+    <Content Include="Images\badge-infinity.png" />
+    <Content Include="Images\badge-lerntiger.png" />
+    <Content Include="Images\badge-may4th.png" />
+    <Content Include="Images\badge-peermeister.png" />
+    <Content Include="Images\bubble-anmelden.png" />
+    <Content Include="Images\bubble-events.png" />
+    <Content Include="Images\bubble-notifications.png" />
+    <Content Include="Images\bubble-reg-abgeschlossen.png" />
+    <Content Include="Images\bubble-search.png" />
+    <Content Include="Images\bubble-settings.png" />
+    <Content Include="Scripts\api.min.js">
+      <DependentUpon>api.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\api.min.js.map">
+      <DependentUpon>api.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Bootstrap\css\bootstrap.min.css">
+      <DependentUpon>bootstrap.css</DependentUpon>
+    </Content>
+    <Content Include="Scripts\coaching-center.min.js">
+      <DependentUpon>coaching-center.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\coaching-center.min.js.map">
+      <DependentUpon>coaching-center.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\forms.min.js">
+      <DependentUpon>forms.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\forms.min.js.map">
+      <DependentUpon>forms.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Images\badge-empty.png" />
+    <Content Include="Images\badge-greenhorn.png" />
+    <Content Include="Images\badge-heisenberg.png" />
     <Content Include="Images\bg-content-headline.png" />
     <Content Include="Images\default-profile-large-f.png" />
     <Content Include="Images\default-profile-large-m.png" />
@@ -227,7 +277,9 @@
     <Content Include="Images\icon-profile-fb.png" />
     <Content Include="Images\icon-profile-google-hover.png" />
     <Content Include="Images\icon-profile-google.png" />
+    <Content Include="Images\icon-profile-instagram-hover.png" />
     <Content Include="Images\icon-profile-instagram.png" />
+    <Content Include="Images\icon-profile-pinterest-hover.png" />
     <Content Include="Images\icon-profile-pinterest.png" />
     <Content Include="Images\icon-profile-twitter-hover.png" />
     <Content Include="Images\icon-profile-twitter.png" />
@@ -238,9 +290,13 @@
     <Content Include="Images\illu2.jpg" />
     <Content Include="Images\illu3.jpg" />
     <Content Include="Images\inandout.png" />
+    <Content Include="Images\invite-email-hover.png" />
     <Content Include="Images\invite-email.png" />
+    <Content Include="Images\invite-fb-hover.png" />
     <Content Include="Images\invite-fb.png" />
+    <Content Include="Images\invite-google-hover.png" />
     <Content Include="Images\invite-google.png" />
+    <Content Include="Images\invite-twitter-hover.png" />
     <Content Include="Images\invite-twitter.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mandatory.png" />
@@ -252,6 +308,9 @@
     <Content Include="Images\share-google.png" />
     <Content Include="Images\share-twitter.png" />
     <Content Include="Images\sprite.png" />
+    <Content Include="Images\teaser-talentify.jpg" />
+    <Content Include="Images\teaser-talentify.png" />
+    <Content Include="Images\teaser-teacher.png" />
     <Content Include="Images\tmp-event.png" />
     <Content Include="Images\default-profile-small.png" />
     <Content Include="Images\default-profile-medium.png" />
@@ -260,7 +319,6 @@
     <Content Include="Scripts\Bootstrap\css\bootstrap-theme.css" />
     <Content Include="Scripts\Bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="Scripts\Bootstrap\css\bootstrap.css" />
-    <Content Include="Scripts\Bootstrap\css\bootstrap.min.css" />
     <Content Include="Scripts\Bootstrap\js\bootstrap.js" />
     <Content Include="Scripts\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\coaching-center.js" />
@@ -272,9 +330,18 @@
     <Content Include="Scripts\jquery.easyModal.js" />
     <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="Scripts\maps.js" />
+    <Content Include="Scripts\maps.min.js">
+      <DependentUpon>maps.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Opentip\opentip-jquery.min.js" />
     <Content Include="Scripts\Opentip\opentip.css" />
+    <Content Include="Scripts\Opentip\opentip.min.css">
+      <DependentUpon>opentip.css</DependentUpon>
+    </Content>
     <Content Include="Scripts\screen.js" />
+    <Content Include="Scripts\screen.min.js">
+      <DependentUpon>screen.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Textboxlist\close.gif" />
     <Content Include="Scripts\Textboxlist\GrowingInput.js" />
     <Content Include="Scripts\Textboxlist\TextboxList.Autocomplete.css" />
@@ -345,6 +412,20 @@
     <Content Include="Views\Notification\AllNotifications.cshtml" />
     <Content Include="Views\Invite\Index.cshtml" />
     <Content Include="Views\Start\Survey.cshtml" />
+    <Content Include="Views\Home\Events.cshtml" />
+    <Content Include="Views\FormHelper\AddSchoolForm.cshtml" />
+    <Content Include="Views\FormHelper\AddSubjectForm.cshtml" />
+    <Content Include="Views\Profile\Talentometer.cshtml" />
+    <Content Include="Views\Profile\Badges.cshtml" />
+    <Content Include="Views\Home\MailChimpTest.cshtml" />
+    <Content Include="Views\Home\MailChimpTest2.cshtml" />
+    <Content Include="Scripts\maps.min.js.map">
+      <DependentUpon>maps.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\screen.min.js.map">
+      <DependentUpon>screen.js</DependentUpon>
+    </Content>
+    <Content Include="Views\NoSchool\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

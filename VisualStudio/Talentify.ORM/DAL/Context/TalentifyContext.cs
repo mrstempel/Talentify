@@ -40,6 +40,7 @@ namespace Talentify.ORM.DAL.Context
 		public DbSet<Admin> Admins { get; set; }
 		public DbSet<ActionToken> ActionToken { get; set; }
 		public DbSet<UserSettings> UserSettings { get; set; }
+		public DbSet<RegisterCode> RegisterCodes { get; set; }
 
 		// memberships
 		public DbSet<Talentify.ORM.DAL.Models.Membership.Membership> Memberships { get; set; }
@@ -61,6 +62,7 @@ namespace Talentify.ORM.DAL.Context
 		// achievements
 		public DbSet<BonusPoint> BonusPoints { get; set; }
 		public DbSet<Badge> Badges { get; set; }
+		public DbSet<TalentometerLevel> TalentometerLevel { get; set; }
 		
 		public TalentifyContext() : base("EFConnectionString")
 		{
@@ -92,6 +94,7 @@ namespace Talentify.ORM.DAL.Context
 			modelBuilder.Configurations.Add(new AdminMap());
 			modelBuilder.Configurations.Add(new ActionTokenMap());
 			modelBuilder.Configurations.Add(new UserSettingsMap());
+			modelBuilder.Configurations.Add(new RegisterCodeMap());
 
 			// memberships
 			modelBuilder.Configurations.Add(new MembershipMap());
@@ -113,6 +116,7 @@ namespace Talentify.ORM.DAL.Context
 			// achievements
 			modelBuilder.Configurations.Add(new BonusPointMap());
 			modelBuilder.Configurations.Add(new BadgeMap());
+			modelBuilder.Configurations.Add(new TalentometerLevelMap());
 			
 			base.OnModelCreating(modelBuilder);
 		}

@@ -14,6 +14,7 @@ using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
+using Talentify.ORM.FrontendLogic;
 using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Utils;
 

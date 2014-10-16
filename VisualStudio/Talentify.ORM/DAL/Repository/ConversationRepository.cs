@@ -53,7 +53,8 @@ namespace Talentify.ORM.DAL.Repository
 				Text = string.Format("Neue Nachricht von: {0} {1}", fromUser.Firstname, fromUser.Surname),
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.CoachingRequest,
-				IconType = NotificationIconType.None
+				IconType = NotificationIconType.None,
+				AdditionalInfo = text
 			};
 			UnitOfWork.NotificationRepository.Insert(notifiction);
 			UnitOfWork.Save();

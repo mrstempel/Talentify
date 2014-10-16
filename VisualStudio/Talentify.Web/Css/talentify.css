@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, #past-event-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header {
+﻿.box-sizing, .input-switch .option, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -39,6 +39,9 @@ a {
 a:hover {
   color: #167e64; }
 
+textarea, select, input, .link-button {
+  font-family: Lucida Grande, Tahoma; }
+
 textarea:focus, input:focus {
   outline: 0; }
 
@@ -50,7 +53,7 @@ input[type="button"], input[type="submit"], .link-button {
   background: #0eb48d;
   color: #FFF;
   border: 1px solid #0eb48d;
-  font-family: CaeciliaLTPro-85Heavy;
+  font-weight: bold;
   font-size: 20px;
   padding: 8px 90px;
   border-radius: 0;
@@ -120,6 +123,9 @@ iframe {
   display: inline-block;
   cursor: default; }
 
+.input-switch.disabled {
+  cursor: default; }
+
 .input-switch-feedback {
   display: inline-block;
   background: #f1f1f1;
@@ -129,6 +135,22 @@ iframe {
   font-size: 14px;
   margin: 0 0 0 10px;
   display: none; }
+
+#add-subject {
+  display: inline-block;
+  margin: 10px 0 10px 0;
+  display: none; }
+
+#add-subject-msg {
+  font-size: 15px;
+  display: none; }
+
+#add-subject-link {
+  width: 15px; }
+
+#add-subject-button:disabled {
+  cursor: default;
+  background: #CCC; }
 
 .password-form {
   margin: 20px 0 20px 0; }
@@ -163,11 +185,31 @@ iframe {
     color: #FFF; }
   .form-container .field-container {
     text-align: center;
-    margin-bottom: 30px; }
-    .form-container .field-container input:last-child, .form-container .field-container select:last-child {
+    margin-bottom: 30px;
+    position: relative; }
+    .form-container .field-container input:last-of-type, .form-container .field-container select:last-of-type {
       border-bottom: 1px solid #e3e4e8; }
+    .form-container .field-container .add-field {
+      position: absolute;
+      top: 0;
+      right: -45px; }
+      .form-container .field-container .add-field a {
+        font-family: Lucida Grande, Tahoma;
+        font-weight: bold;
+        color: #fff;
+        background: #0eb48d;
+        padding: 4px 10px;
+        text-decoration: none;
+        display: inline-block; }
+      .form-container .field-container .add-field a:hover {
+        background: #167e64; }
+    .form-container .field-container h4 {
+      margin: 0 0 10px 0; }
   .form-container .border-bottom {
     border-bottom: 1px solid #e3e4e8 !important; }
+
+#no-school-info {
+  font-size: 14px; }
 
 input.error, select.error, textarea.error {
   background: #f7a6b4;
@@ -194,20 +236,31 @@ input[type="text"].mandatory, input[type="password"].mandatory {
 
 .form-container.register header {
   margin-bottom: 10px !important; }
-.form-container.register .datepicker label {
+.form-container.register .datepicker {
+  text-align: right; }
+  .form-container.register .datepicker label {
+    font-size: 16px;
+    margin: 0 22px 0 12px;
+    padding: 0;
+    color: #555; }
+  .form-container.register .datepicker select {
+    width: 129px;
+    margin: 0 0px 0 0;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 1px solid #e3e4e8; }
+  .form-container.register .datepicker select:last-of-type {
+    margin: 0;
+    border-right: 1px solid #e3e4e8; }
+
+#register-form label {
   font-size: 16px;
-  margin: 0 20px 0 12px;
-  padding: 0;
-  color: #555; }
-.form-container.register .datepicker select {
-  width: 130px;
-  margin: 0 0px 0 0;
-  border-right: 0px;
-  border-top: 0px;
-  border-bottom: 1px solid #e3e4e8; }
-.form-container.register .datepicker select:last-of-type {
-  margin: 0;
-  border-right: 1px solid #e3e4e8; }
+  display: inline-block;
+  width: auto; }
+#register-form input[type="radio"] {
+  width: auto;
+  display: inline-block;
+  margin: 0 10px 0 10px; }
 
 .form-container.search, .form-container.coaching-center-filter {
   margin-top: 20px;
@@ -526,6 +579,30 @@ input[type="text"].mandatory, input[type="password"].mandatory {
       #page-container section article footer {
         text-align: center; }
 
+header .bubble {
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 95px;
+  width: 101px; }
+
+#bubble-register {
+  background: url(../Images/bubble-anmelden.png); }
+
+#bubble-events {
+  background: url(../Images/bubble-events.png); }
+
+#bubble-notifications {
+  background: url(../Images/bubble-notifications.png); }
+
+#bubble-first-login {
+  background: url(../Images/bubble-reg-abgeschlossen.png); }
+
+#bubble-search {
+  background: url(../Images/bubble-search.png); }
+
+#bubble-settings {
+  background: url(../Images/bubble-settings.png); }
+
 #page-container.full-width {
   max-width: 100% !important; }
   #page-container.full-width h1 {
@@ -547,24 +624,24 @@ input[type="text"].mandatory, input[type="password"].mandatory {
       width: 100%;
       display: inline-block;
       height: 200px; }
-  #page-container.full-width .big-bg {
+  #page-container.full-width .big-bg, #page-container.full-width .big-bg-events {
     text-align: center;
     margin: auto;
     position: relative;
     display: inline-block;
     width: 100%; }
-    #page-container.full-width .big-bg p {
+    #page-container.full-width .big-bg p, #page-container.full-width .big-bg-events p {
       margin: 0;
       padding: 6% 0 30px 0;
       color: #fff;
       font-family: CaeciliaLTPro-85Heavy;
       font-size: 6vw;
       text-shadow: 2px 2px 15px #414141; }
-    #page-container.full-width .big-bg span.small {
+    #page-container.full-width .big-bg span.small, #page-container.full-width .big-bg-events span.small {
       font-size: 2vw;
       color: #fff;
       text-shadow: 2px 2px 15px #414141; }
-    #page-container.full-width .big-bg .label {
+    #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label {
       position: absolute;
       left: 0;
       bottom: 0;
@@ -593,15 +670,41 @@ input[type="text"].mandatory, input[type="password"].mandatory {
   background-size: 100% auto; }
 
 #bg3 {
-  background: url(../Images/illu3.jpg);
+  background: #0eb48d;
   background-repeat: no-repeat;
   background-size: 100% auto; }
-  #bg3 p {
-    padding-top: 0px !important;
-    margin-top: -1.5%; }
 
 #fact3 article {
-  margin: 20px 0 0 0; }
+  margin: 20px 0 0 0;
+  height: 100px !important;
+  min-height: 100px !important; }
+
+#home-events {
+  display: inline-block;
+  width: 100%;
+  margin: 20px 0 20px 0; }
+  #home-events .item {
+    display: inline-block;
+    margin: 10px;
+    position: relative; }
+    #home-events .item .details {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 200px;
+      width: 355px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      cursor: pointer;
+      display: none; }
+      #home-events .item .details p {
+        text-shadow: none;
+        color: #555;
+        font-family: CaeciliaLTPro-55Roman;
+        font-size: 14px; }
+      #home-events .item .details .date {
+        margin: 10px 0;
+        padding: 0; }
 
 .home h1 {
   margin: 0 0 160px 0; }
@@ -617,6 +720,20 @@ input[type="text"].mandatory, input[type="password"].mandatory {
     margin: 160px 0 0 0; }
     .home article footer input[type="button"], .home article footer input[type="submit"], .home article footer .link-button {
       width: 60%; }
+
+.home.teaser article {
+  display: inline-block;
+  width: auto !important;
+  height: auto;
+  margin: 10px 10px 50px 10px;
+  padding: 0;
+  vertical-align: top; }
+  .home.teaser article h3 {
+    font-family: CaeciliaLTPro-55Roman;
+    font-size: 18px;
+    margin: 0 0 5px 0; }
+.home.teaser article:last-of-type {
+  margin-right: 0 !important; }
 
 #home-nav {
   position: fixed;
@@ -678,6 +795,7 @@ header.search-map-overlay {
   z-index: 0; }
 
 .map-school-info {
+  min-width: 500px;
   padding: 10px; }
   .map-school-info h2 {
     font-size: 20px;
@@ -819,7 +937,7 @@ article.event-preview.registered .register-icon {
   display: inline-block;
   top: 10px;
   left: 10px;
-  z-index: 100;
+  z-index: 10;
   opacity: 1 !important; }
 
 article.event-detail .content-container {
@@ -892,8 +1010,12 @@ article.event-detail .content-container {
         text-align: center;
         padding: 8px 0;
         font-family: CaeciliaLTPro-85Heavy; }
+    article.event-detail .content-container .right .sharing-options {
+      display: inline-block;
+      width: 100%;
+      margin: 20px 0 0 0; }
 
-#past-event-options {
+#past-event-options, #not-logged-options {
   width: 100%;
   min-height: 95px;
   display: none; }
@@ -1064,7 +1186,8 @@ article.event-detail .content-container {
       margin: 0 10px 10px 0;
       font-size: 14px;
       text-align: center;
-      font-family: CaeciliaLTPro-85Heavy; }
+      font-family: Lucida Grande, Tahoma;
+      font-weight: bold; }
 .user-profile article.my-profile, .user-settings article.my-profile {
   font-size: 16px; }
 .user-profile article.user-profile .left, .user-settings article.user-profile .left {
@@ -1087,6 +1210,65 @@ article.event-detail .content-container {
   margin: 0 0 20px 0; }
   .user-settings article {
     margin-top: 20px; }
+
+.achievements {
+  text-align: left;
+  margin: 0 0 30px 0;
+  vertical-align: top; }
+  .achievements .talentometer-container {
+    display: inline-block;
+    width: 30%;
+    text-align: left;
+    vertical-align: top;
+    padding: 0 20px 0 0; }
+    .achievements .talentometer-container h3 {
+      color: #ef4d69;
+      font-size: 18px;
+      margin: 0 0 40px 0; }
+    .achievements .talentometer-container .bar {
+      margin: 10px 0 5px 0;
+      width: 100%;
+      float: left; }
+      .achievements .talentometer-container .bar .left {
+        background: #ef4d69;
+        height: 15px;
+        float: left; }
+      .achievements .talentometer-container .bar .right {
+        background: #e1e4e9;
+        height: 15px;
+        float: left; }
+    .achievements .talentometer-container .bar-labels {
+      width: 100%;
+      float: left;
+      font-size: 14px; }
+      .achievements .talentometer-container .bar-labels .left {
+        float: left; }
+      .achievements .talentometer-container .bar-labels .right {
+        float: right; }
+  .achievements .badges-container {
+    display: inline-block;
+    width: 69%;
+    text-align: left;
+    padding: 0 0 0 20px;
+    border-left: 1px solid #e5e5e5; }
+    .achievements .badges-container h3 {
+      color: #ef4d69;
+      font-size: 18px;
+      margin: 0 0 15px 0; }
+    .achievements .badges-container .badge-item {
+      display: inline-block;
+      width: 75px;
+      margin: 0 10px 0 0;
+      text-align: center; }
+      .achievements .badges-container .badge-item img {
+        width: 75px;
+        height: 75px; }
+      .achievements .badges-container .badge-item span {
+        display: inline-block;
+        text-align: center;
+        font-size: 12px; }
+    .achievements .badges-container .badge-item:last-of-type {
+      margin: 0 !important; }
 
 .request-list {
   float: left;
@@ -1300,14 +1482,30 @@ article.event-detail .content-container {
         display: inline-block; }
         #status-update-complete .feedback-container .row .values a, #status-update-complete .feedback-container .row .values span {
           display: inline-block;
-          margin: 10px 5px 0 0;
+          margin: 10px 0px 0 0;
+          border-right: 7px solid #fff;
           width: 40px;
           height: 40px;
           background: #e6f7f3; }
-        #status-update-complete .feedback-container .row .values a.selectable:hover, #status-update-complete .feedback-container .row .values a.selected, #status-update-complete .feedback-container .row .values span.selected {
+        #status-update-complete .feedback-container .row .values a.selected, #status-update-complete .feedback-container .row .values span.selected {
           background: url(../Images/icon-star.png);
           background-repeat: no-repeat; }
         #status-update-complete .feedback-container .row .values a.disabled {
+          cursor: default; }
+      #status-update-complete .feedback-container .row .switch {
+        display: inline-block;
+        margin: 10px 0 0 0; }
+        #status-update-complete .feedback-container .row .switch span {
+          display: inline-block;
+          margin: 10px 0px 0 0;
+          border-right: 7px solid #fff;
+          width: 40px;
+          height: 40px;
+          background: #e6f7f3; }
+        #status-update-complete .feedback-container .row .switch span.selected {
+          background: url(../Images/icon-star.png);
+          background-repeat: no-repeat; }
+        #status-update-complete .feedback-container .row .switch a.disabled {
           cursor: default; }
   #status-update-complete .feedback-container.right {
     border: 0;
@@ -1320,13 +1518,17 @@ article.event-detail .content-container {
     display: inline-block;
     width: 100%; }
     #status-update-complete .date-form label {
-      margin: 10px 0 0 0; }
-    #status-update-complete .date-form label:last-of-type {
-      margin: 10px 0 0 33px; }
+      margin: 10px 8px 0 0;
+      width: auto; }
+    #status-update-complete .date-form select {
+      font-size: 13px;
+      padding: 5px 0 5px 5px; }
   #status-update-complete .date-form.view label {
-    margin: 0; }
-  #status-update-complete .date-form.view label:last-of-type {
-    margin: 0 0 0 33px; }
+    margin: 0 5px 0 10px; }
+  #status-update-complete .date-form.view label:first-of-type {
+    margin: 0 5px 0 0; }
+  #status-update-complete .date-form.view span {
+    font-family: CaeciliaLTPro-85Heavy; }
   #status-update-complete .confirm-btn-container {
     display: inline-block;
     width: 100%;
@@ -1385,6 +1587,8 @@ article.event-detail .content-container {
       display: inline-block; }
     .form-view .row .input-switch {
       font-size: 14px; }
+    .form-view .row .input-switch.disabled {
+      cursor: default; }
 
 #my-offers {
   display: inline; }
@@ -1480,6 +1684,27 @@ article.event-detail .content-container {
       height: 23px;
       margin: 10px 0 0 0; }
 
+.agb-container {
+  width: 100%;
+  display: inline-block;
+  padding: 0 20px 20px 20px;
+  max-height: 350px;
+  overflow: auto;
+  margin: 0 0 20px 0; }
+  .agb-container h4 {
+    text-align: left; }
+  .agb-container p, .agb-container li {
+    font-size: 13px; }
+
+.datenschutzbestimmungen h2 {
+  margin: 0 0 50px 0; }
+.datenschutzbestimmungen h4, .datenschutzbestimmungen p, .datenschutzbestimmungen li {
+  text-align: left; }
+.datenschutzbestimmungen p, .datenschutzbestimmungen li {
+  font-size: 16px; }
+.datenschutzbestimmungen p {
+  margin: 5px 0 20px 0; }
+
 .important {
   font-family: CaeciliaLTPro-85Heavy; }
 
@@ -1488,6 +1713,12 @@ article.event-detail .content-container {
 
 .no-border {
   border: 0 !important; }
+
+.no-border-bottom {
+  border-bottom: 0 !important; }
+
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5 !important; }
 
 .mobile {
   display: none; }

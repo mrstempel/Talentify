@@ -13,6 +13,17 @@ namespace Talentify.Web
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			// Event Route
+			routes.MapRoute(
+				name: "Event",
+				url: "Event/{detailUrl}",
+				defaults: new
+				{
+					controller = "Events",
+					action = "DetailUrl"
+				}
+			);
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",

@@ -1,0 +1,56 @@
+﻿@using Talentify.ORM.DAL.Models.School
+@model IEnumerable<Talentify.ORM.DAL.Models.User.RegisterCode>
+
+@{
+    ViewBag.Title = "CodeVerwaltung";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	var school = ViewBag.School as School;
+}
+
+<div id="page-container" style="text-align: left;">
+	<h1 style="text-align: left;">@school.Name</h1>
+	@if (Model.Any())
+	{
+		<table>
+			<tr>
+				<th>Code</th>
+				<th>Used Date</th>
+				<th>User</th>
+			</tr>
+			@foreach (var code in Model)
+			{
+				<tr>
+					<td>@code.Code</td>
+					<td>
+						@if (code.UsedDate.HasValue)
+						{
+							@code.UsedDate.Value.ToString("dd.MM.yyyy")
+						}
+						else
+						{
+							<text>-</text>
+						}
+					</td>
+					<td>
+						@if (code.UserId.HasValue)
+						{
+							<a href="http://prototype.talentify.at/Profile/Index/@code.UserId.Value" target="_blank">Open User Profile</a>
+						}
+						else
+						{
+							<text>-</text>
+						}
+					</td>
+				</tr>
+			}
+		</table>
+	}
+	else
+	{
+		<p>Noch keine Codes vorhanden</p>
+	}
+
+
+	<p>@Html.ActionLink("Neue Codes für diese Schule erstellen", "CreateNewCodes", "School", new {id=school.Id}, null)</p>
+	
+</div>

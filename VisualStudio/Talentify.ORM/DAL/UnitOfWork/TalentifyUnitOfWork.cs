@@ -166,6 +166,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
+		private RegisterCodeRepository _registerCodeRepository;
+		public RegisterCodeRepository RegisterCodeRepository
+		{
+			get
+			{
+				if (_registerCodeRepository == null)
+					_registerCodeRepository = new RegisterCodeRepository(this.Context);
+
+				return _registerCodeRepository;
+			}
+		}
+
 		private IRepository<Talentify.ORM.DAL.Models.Membership.Membership> _membershipRepository;
 		public IRepository<Talentify.ORM.DAL.Models.Membership.Membership> MembershipRepository
 		{
@@ -214,13 +226,13 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private IRepository<EventRegistration> _eventRegistrationRepository;
-		public IRepository<EventRegistration> EventRegistrationRepository
+		private EventRegistrationRepository _eventRegistrationRepository;
+		public EventRegistrationRepository EventRegistrationRepository
 		{
 			get
 			{
 				if (_eventRegistrationRepository == null)
-					_eventRegistrationRepository = new TalentifyRepository<EventRegistration>(this.Context);
+					_eventRegistrationRepository = new EventRegistrationRepository(this.Context);
 
 				return _eventRegistrationRepository;
 			}
@@ -295,6 +307,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 					_badgeRepository = new BadgeRepository(this.Context);
 
 				return _badgeRepository;
+			}
+		}
+
+		private TalentometerLevelRepository _talentometerLevelRepository;
+		public TalentometerLevelRepository TalentometerLevelRepository
+		{
+			get
+			{
+				if (_talentometerLevelRepository == null)
+					_talentometerLevelRepository = new TalentometerLevelRepository(this.Context);
+
+				return _talentometerLevelRepository;
 			}
 		}
 

@@ -1,19 +1,25 @@
-﻿@{
+﻿@using System.Web.UI.WebControls
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section CustomJavascript 
 {
-	<script src="/Scripts/coaching-center.js"></script>
+	<script src="/Scripts/coaching-center.min.js"></script>
 	<script src="~/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script>
 		$(this).ready(function ()
 		{
+			@if (ViewBag.CoachingRequestStatus != null && Convert.ToInt32(ViewBag.CoachingRequestStatus) != -1)
+			{
+				<text>$('#StatusType').val('@ViewBag.CoachingRequestStatus');</text>
+			}
 			filterCoachingCenter(@ViewBag.RequestId);
 		});
 	</script>
 }
+
 @section CustomCss
 {
 	<link href="~/Css/jquery.mCustomScrollbar.min.css" rel="stylesheet" />
@@ -23,7 +29,6 @@
 	<section id="coaching-center-filter">
 		<article>
 			<header>
-				<div class="sprite t-button desktop"></div>
 				<h2>Lernhilfecenter</h2>
 			</header>
 			@using (Html.BeginForm("Index", "CoachingCenter", FormMethod.Post, new { @class = "form-container coaching-center-filter" }))

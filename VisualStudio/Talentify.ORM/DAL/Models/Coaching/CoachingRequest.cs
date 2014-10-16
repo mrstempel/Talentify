@@ -60,6 +60,7 @@ namespace Talentify.ORM.DAL.Models.Coaching
 
 		public DateTime? Date { get; set; }
 		public decimal Duration { get; set; }
+		public decimal PayedPrice { get; set; }
 	}
 
 	public class CoachingRequestMap : EntityTypeConfiguration<CoachingRequest>

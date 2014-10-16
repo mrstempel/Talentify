@@ -20,7 +20,7 @@ function checkMandatoryField(field)
 		$(field).removeClass('error');
 	} else
 	{
-		if ($(field).nodeName.toLowerCase() === 'input')
+		if ($(field).nodeName && $(field).nodeName.toLowerCase() === 'input')
 			$(field).css('background-image', 'url(/Images/mandatory.png)');
 
 		if (showErrorMarkers)
@@ -179,12 +179,12 @@ function validateRegisterForm()
 	}
 
 	// check if correct school was selected
-	if ($('#SchoolId').val() == "0" || $('#SchoolSelectName').val() == "")
+	if ($('#SchoolSelectName').val() == "")
 	{
 		$('#SchoolSelect').addClass('error');
 		if (errorText.length > 0)
 			errorText += "<br/>";
-		errorText += "Bitte wähle eine vorgeschlagene Schule aus.";
+		errorText += "Bitte wähle eine Schule aus.";
 		isValid = false;
 	}
 
@@ -245,7 +245,7 @@ function validateProfileForm()
 	}
 
 	// check if correct school was selected
-	if ($('#SchoolId').val() == "0" || $('#SchoolSelectName').val() == "")
+	if ($('#SchoolSelectName').val() == "")
 	{
 		$('#SchoolSelect').addClass('error');
 		if (errorText.length > 0)

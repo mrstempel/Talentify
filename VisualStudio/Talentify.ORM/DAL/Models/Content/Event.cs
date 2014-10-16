@@ -29,6 +29,20 @@ namespace Talentify.ORM.DAL.Models.Content
 		public string Longitude { get; set; }
 		public int MaxParticipant { get; set; }
 		public EventType Type { get; set; }
+		public string HomeImage { get; set; }
+		public string DetailUrl { get; set; }
+
+		#region Frontend Properties
+
+		public string Link
+		{
+			get
+			{
+				return (!string.IsNullOrEmpty(DetailUrl)) ? string.Format("/Event/{0}", DetailUrl) : string.Format("/Events/Detail/{0}", Id);
+			}
+		}
+
+		#endregion
 	}
 
 	public class EventMap : EntityTypeConfiguration<Event>

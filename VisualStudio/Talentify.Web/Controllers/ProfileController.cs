@@ -8,6 +8,7 @@ using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Mvc;
+using Talentify.ORM.Mvc.Security;
 
 namespace Talentify.Web.Controllers
 {
@@ -86,6 +87,8 @@ namespace Talentify.Web.Controllers
 				}
 				catch (Exception){}
 
+				if (student.SchoolId.HasValue && student.SchoolId.Value == 0)
+					student.SchoolId = null;
 
 				UnitOfWork.StudentRepository.Update(student);
 				UnitOfWork.Save();
@@ -98,11 +101,13 @@ namespace Talentify.Web.Controllers
 			}
 		}
 
+		[RequireActiveSchool]
 	    public ActionResult AddCoaching()
 	    {
 			return View(new CoachingOffer() { UserId = LoggedUser.Id });
 	    }
 
+		[RequireActiveSchool]
 		[HttpPost]
 		public ActionResult AddCoaching(CoachingOffer coachingOffer)
 		{
@@ -121,11 +126,13 @@ namespace Talentify.Web.Controllers
 			return View(coachingOffer);
 		}
 
+		[RequireActiveSchool]
 	    public ActionResult EditCoaching(int id)
 	    {
 		    return View(UnitOfWork.CoachingOfferRepository.GetById(id));
 	    }
 
+		[RequireActiveSchool]
 		[HttpPost]
 		public ActionResult EditCoaching(CoachingOffer coachingOffer, bool deleteOffer)
 		{
@@ -154,6 +161,7 @@ namespace Talentify.Web.Controllers
 			return View(coachingOffer);
 		}
 
+		[RequireActiveSchool]
 	    public ActionResult EditCoachingPrice()
 	    {
 		    var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
@@ -161,6 +169,7 @@ namespace Talentify.Web.Controllers
 			return View();
 	    }
 
+		[RequireActiveSchool]
 		[HttpPost]
 		public ActionResult EditCoachingPrice(decimal? price)
 		{
@@ -186,13 +195,14 @@ namespace Talentify.Web.Controllers
 			return View();
 		}
 
-	    public ActionResult CoachingRequest(int toUserId, int searchClass, int subjectCategoryId)
+		public ActionResult CoachingRequest(int toUserId, int searchClass, int subjectCategoryId)
 	    {
 			// create available subjects
 			ViewBag.UserSubjects = new SelectList(UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == toUserId, null, "SubjectCategory"), "SubjectCategoryId", "SubjectCategory.Name");
 		    return View(new CoachingRequest() { FromUserId = LoggedUser.Id, ToUserId = toUserId, Class = searchClass, SubjectCategoryId = subjectCategoryId });
 	    }
 
+		[RequireActiveSchool]
 		[HttpPost]
 		public ActionResult CoachingRequest(CoachingRequest coachingRequest, string message)
 		{
@@ -215,5 +225,16 @@ namespace Talentify.Web.Controllers
 			}
 			return View(coachingRequest);
 		}
+
+	    public ActionResult Talentometer(int userId)
+	    {
+		    var talentometer = UnitOfWork.TalentometerLevelRepository.GetTalentometer(userId);
+		    return View(talentometer);
+	    }
+
+	    public ActionResult Badges(int userId)
+	    {
+		    return View();
+	    }
     }
 }
