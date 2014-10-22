@@ -275,9 +275,10 @@ iframe
 		border-bottom: 1px solid #e3e4e8 !important;
 	}
 }
-#no-school-info
+#no-school-info, #register-code-info
 {
 	font-size: 14px;
+	display: inline-block;
 }
 input.error, select.error, textarea.error
 {
@@ -2291,19 +2292,29 @@ article.event-detail
 	width: 100%;
 	display: inline-block;
 	padding: 0 20px 20px 20px;
-	max-height: 350px;
+	max-height: 480px;
 	overflow: auto;
 	margin: 0 0 20px 0;
 	h4 { text-align: left; }
 	p, li { font-size: 13px; }
 }
 
-.datenschutzbestimmungen
+.datenschutzbestimmungen, .impressum
 {
 	h2 { margin: 0 0 50px 0; }
 	h4, p, li { text-align: left; }
 	p, li { font-size: 16px; }
 	p { margin: 5px 0 20px 0; }
+}
+.impressum
+{
+	text-align: center;
+	margin: auto;
+	.text
+	{
+		margin: auto;
+		max-width: 400px;
+	}
 }
 
 // helper

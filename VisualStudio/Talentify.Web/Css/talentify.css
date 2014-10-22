@@ -208,8 +208,9 @@ iframe {
   .form-container .border-bottom {
     border-bottom: 1px solid #e3e4e8 !important; }
 
-#no-school-info {
-  font-size: 14px; }
+#no-school-info, #register-code-info {
+  font-size: 14px;
+  display: inline-block; }
 
 input.error, select.error, textarea.error {
   background: #f7a6b4;
@@ -1688,7 +1689,7 @@ article.event-detail .content-container {
   width: 100%;
   display: inline-block;
   padding: 0 20px 20px 20px;
-  max-height: 350px;
+  max-height: 480px;
   overflow: auto;
   margin: 0 0 20px 0; }
   .agb-container h4 {
@@ -1696,14 +1697,21 @@ article.event-detail .content-container {
   .agb-container p, .agb-container li {
     font-size: 13px; }
 
-.datenschutzbestimmungen h2 {
+.datenschutzbestimmungen h2, .impressum h2 {
   margin: 0 0 50px 0; }
-.datenschutzbestimmungen h4, .datenschutzbestimmungen p, .datenschutzbestimmungen li {
+.datenschutzbestimmungen h4, .datenschutzbestimmungen p, .datenschutzbestimmungen li, .impressum h4, .impressum p, .impressum li {
   text-align: left; }
-.datenschutzbestimmungen p, .datenschutzbestimmungen li {
+.datenschutzbestimmungen p, .datenschutzbestimmungen li, .impressum p, .impressum li {
   font-size: 16px; }
-.datenschutzbestimmungen p {
+.datenschutzbestimmungen p, .impressum p {
   margin: 5px 0 20px 0; }
+
+.impressum {
+  text-align: center;
+  margin: auto; }
+  .impressum .text {
+    margin: auto;
+    max-width: 400px; }
 
 .important {
   font-family: CaeciliaLTPro-85Heavy; }

@@ -39,6 +39,11 @@ namespace Talentify.ORM.Mvc
 				return _allSchoolsRegister;
 			}
 		}
+
+		public SelectList AllSchoolsEdit
+		{
+			get { return (HasSchool) ? AllSchools : AllSchoolsRegister; }
+		}
 		
 		private SelectList _allCoachingSubjects;
 		public SelectList AllCoachingSubjects

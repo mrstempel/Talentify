@@ -21,5 +21,11 @@ namespace Talentify.Web.Controllers
 	    {
 		    return View();
 	    }
+
+		[AllowAnonymous]
+		public ActionResult Agb()
+		{
+			return View();
+		}
     }
 }

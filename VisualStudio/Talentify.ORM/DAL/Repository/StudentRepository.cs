@@ -46,24 +46,38 @@ namespace Talentify.ORM.DAL.Repository
 			return entity;
 		}
 
-		#region Register
-
-		public virtual FormFeedback Register(Student student, string token, string schoolRegisterCode)
+		public bool SetRegisterCode(Student student, string code)
 		{
-			// check if registercode is correct
-			if (student.HasSchool)
+			var registerCode = UnitOfWork.RegisterCodeRepository.AsQueryable().FirstOrDefault(c => c.Code == code);
+			if (registerCode != null && registerCode.UsedDate == null)
 			{
-				var registerCode = UnitOfWork.RegisterCodeRepository.AsQueryable().FirstOrDefault(c => c.Code == schoolRegisterCode);
-				if (registerCode != null && registerCode.UsedDate == null)
+				if (student.Id != 0)
 				{
-					registerCode.User = student;
-					registerCode.UsedDate = DateTime.Now;
-					UnitOfWork.RegisterCodeRepository.Update(registerCode);
+					registerCode.UserId = student.Id;
 				}
 				else
 				{
-					return new FormFeedback() { IsError = true, Text = "Der angegebene Registrierungscode ist nicht korrekt." };
+					registerCode.User = student;	
 				}
+				registerCode.UsedDate = DateTime.Now;
+				UnitOfWork.RegisterCodeRepository.Update(registerCode);
+				return true;
+			}
+
+			return false;
+		}
+
+		#region Register
+
+		public virtual FormFeedback Register(Student student, string token, string schoolRegisterCode, string newSchool)
+		{
+			if (newSchool == null)
+				newSchool = string.Empty;
+
+			// check if registercode is correct
+			if (student.HasSchool && !SetRegisterCode(student, schoolRegisterCode))
+			{
+				return new FormFeedback() {IsError = true, Text = "Der angegebene Registrierungscode ist nicht korrekt."};
 			}
 
 			// check if e-mail is unique
@@ -113,6 +127,15 @@ namespace Talentify.ORM.DAL.Repository
 					string.Format(
 						"Vielen Dank für die Anmeldung bei talentify. Bitte klicke auf den folgenden Link um die Registrierung abzuschließen:<br/><br/><a href='{0}' style='color:#0eb48d;'>{0}</a><br/><br/>Du bekommst dieses E-Mail weil du dich auf <a href='http://talentify.me' style='color:#0eb48d;'>talentify.me</a> mit deiner E-Mailadresse angemeldet hast. Solltest du das nicht gemacht haben, melde dich bitte unter <a href='mailto:hallo@talentify.at' style='color:#0eb48d;'>hallo@talentify.at</a> und gebe uns Bescheid.",
 						confirmUrl);
+				
+				// different mail text for user with no school
+				if (!student.HasSchool)
+				{
+					emailContent = string.Format(
+						"Vielen Dank für die Anmeldung bei talentify. Deine Schule {0} ist noch nicht freigeschalten? Kein Problem, sobald wir mind. 10 Anmeldung von deiner Schule haben schalten wir diese frei und geben dir Bescheid. In der Zwischenzeit hast du eingeschränkten Zugriff und kannst Workshops besuchen.<br/><br/>Dazu klicke bitte auf den folgenden Link um die Registrierung abzuschließen:<br/><br/><a href='{1}' style='color:#0eb48d;'>{1}</a><br/><br/>Du bekommst dieses E-Mail weil du dich auf <a href='http://talentify.me' style='color:#0eb48d;'>talentify.me</a> mit deiner E-Mailadresse angemeldet hast. Solltest du das nicht gemacht haben, melde dich bitte unter <a href='mailto:hallo@talentify.at' style='color:#0eb48d;'>hallo@talentify.at</a> und gebe uns Bescheid.",
+						newSchool, confirmUrl);
+				}
+
 				Email.Send(student.Email, WebConfigurationManager.AppSettings["Email.Register.Subject"], emailContent);
 			}
 

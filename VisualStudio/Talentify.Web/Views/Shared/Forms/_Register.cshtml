@@ -26,19 +26,24 @@
 		$('#FirstnameChild').hide();
 		$('#RegisterCode').hide();
 		$('#no-school-info').hide();
+		$('#register-code-info').hide();
 		$('#SchoolId').change(function ()
 		{
 			if ($(this).val().length > 0 && $(this).val() != "0")
 			{
 				$('#RegisterCode').addClass('mandatory');
+				$('#NewSchool').removeClass('mandatory');
 				$('#RegisterCode').show();
 				$('#no-school-info').hide();
+				$('#register-code-info').show();
 			}
 			else
 			{
 				$('#RegisterCode').removeClass('mandatory');
+				$('#NewSchool').addClass('mandatory');
 				$('#RegisterCode').hide();
 				$('#no-school-info').show();
+				$('#register-code-info').hide();
 			}
 		});
 
@@ -92,9 +97,13 @@
 		</div>
 		<div class="field-container">
 			@Html.DropDownListFor(model => model.SchoolId, AllSchoolsRegister, "wähle deine Schule...", new { @class = "mandatory" })<br/>
-			<div class="add-field"><a href="javascript:void(0);" onclick="loadAddSchoolForm()" data-add-tipp="Du hast deine Schule nicht gefunden? Hilf uns weiter und gib uns Bescheid.">+</a></div>
+			<!--<div class="add-field"><a href="javascript:void(0);" onclick="loadAddSchoolForm()" data-add-tipp="Du hast deine Schule nicht gefunden? Hilf uns weiter und gib uns Bescheid.">+</a></div>-->
 			<input type="text" id="RegisterCode" name="RegisterCode" placeholder="Registrierungscode eingeben" style="border-top: 0px;"/>
-			<span id="no-school-info">Du findest deine Schule nicht in der Liste? Kein Problem. Lass uns bitte mit Klick auf das grüne Plus-Symbol neben der Liste wissen auf welche Schule du gehst. Du kannst dich in der Zwischenzeit trotzdem anmelden und Workshops besuchen.</span>
+			<span id="no-school-info">
+				<input type="text" name="NewSchool" id="NewSchool" placeholder="Auf welche Schule gehst du?"/>
+				Du findest deine Schule nicht in der Liste? Kein Problem. Sag uns einfach auf welche Schule du gehst. Sobald wir mind. 10 Anmeldungen von deiner Schule haben, schalten wir diese frei. Du kannst dich in der Zwischenzeit trotzdem anmelden und Workshops besuchen ;)
+			</span>
+			<span id="register-code-info">Du hast noch keinen Registrierungscode und gehst auf eine der aufgelisteten Schulen? Dann schicke uns bitte einfach ein E-Mail mit einem Foto deines Schülerausweis an <a href="mailto:hallo@talentify.at">hallo@talentify.at</a> oder frage direkt an deiner Schule nach.</span>
 		</div>
 		<div class="field-container">
 			<p>Ich bestätige, die <a href="javascript:void(0);" onclick="loadAgb()">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
@@ -122,6 +131,6 @@
 	<header>
 		<h1>AGB<a href="javascript:void(0);" onclick="$('#modal-agb').modal('hide');" class="close-link"></a></h1>
 	</header>
-	<iframe id="agb-frame" width="600" height="400" scrolling="no"></iframe>
+	<iframe id="agb-frame" width="600" height="500" scrolling="no"></iframe>
   </div>
 </div>

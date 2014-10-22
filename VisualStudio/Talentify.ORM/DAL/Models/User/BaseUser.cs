@@ -22,7 +22,7 @@ namespace Talentify.ORM.DAL.Models.User
 		[ProfileComplete("Vorname")]
 		public string Firstname { get; set; }
 		[ProfileComplete("Nachname")]
-		public string Surname { get; set; }
+		public virtual string Surname { get; set; }
 		[ProfileComplete("BirthDate")]
 		public DateTime? BirthDate { get; set; }
 		[ProfileComplete("Adressse")]

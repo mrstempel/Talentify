@@ -42,6 +42,12 @@ namespace Talentify.ORM.DAL.Models.User
 		public bool IsParentAccount { get; set; }
 		public string FirstnameChild { get; set; }
 
+		public override string Surname
+		{
+			get { return IsParentAccount ? base.Surname + " (Eltern)" : base.Surname; }
+			set { base.Surname = value; }
+		}
+
 		public bool HasSchool
 		{
 			get { return SchoolId.HasValue; }

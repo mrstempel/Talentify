@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Talentify.ORM.DAL.Models.Coaching;
@@ -9,6 +10,7 @@ using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Mvc;
 using Talentify.ORM.Mvc.Security;
+using Talentify.ORM.Utils;
 
 namespace Talentify.Web.Controllers
 {
@@ -68,8 +70,10 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Edit()
 	    {
+		    var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
+		    ViewBag.OldSchoolId = student.HasSchool ? student.SchoolId.Value : 0;
 			ViewBag.AllSchools = new SelectList(UnitOfWork.SchoolRepository.Get(), "Id", "Name");
-			return View(UnitOfWork.StudentRepository.GetById(LoggedUser.Id));
+			return View(student);
 	    }
 
 		[HttpPost]
@@ -90,8 +94,39 @@ namespace Talentify.Web.Controllers
 				if (student.SchoolId.HasValue && student.SchoolId.Value == 0)
 					student.SchoolId = null;
 
+				if (student.SchoolId.HasValue && 
+					student.SchoolId.Value != Convert.ToInt32(Request["OldSchoolId"]) && 
+					!UnitOfWork.StudentRepository.SetRegisterCode(student, Request["RegisterCode"]))
+				{
+					if (Request["OldSchoolId"] == "0")
+					{
+						ViewBag.OldSchoolId = 0;
+						student.SchoolId = null;
+					}
+					else
+					{
+						ViewBag.OldSchoolId = Convert.ToInt32(Request["OldSchoolId"]);
+						student.SchoolId = Convert.ToInt32(Request["OldSchoolId"]);
+					}
+
+					FormError = new FormFeedback() { Text = "Der angegebene Registrierungscode ist nicht korrekt." };
+					return View(student);
+				}
+
 				UnitOfWork.StudentRepository.Update(student);
 				UnitOfWork.Save();
+
+				//if (!student.SchoolId.HasValue)
+				//{
+				//	this.WebContext.HasSchool = false;
+				//	// send mail with school suggestion
+				//	var mailMsg = new MailMessage(new MailAddress(student.Email),
+				//		new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
+				//	mailMsg.Subject = "Neuer Schulvorschlag";
+				//	mailMsg.Body = string.Format("{0} {1} (Email: {2}) hat eine neue Schule vorgeschlagen: {3}", student.Firstname, student.Surname, student.Email, Request["NewSchool"]);
+				//	Email.Send(mailMsg);
+				//}
+
 				return RedirectToAction("Index", new { id = 0, f = true });
 			}
 			catch (Exception ex)

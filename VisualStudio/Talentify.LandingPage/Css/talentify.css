@@ -102,6 +102,11 @@ section {
         color: #223343; }
     #s-presse article .fundraising .crowd-btn a.button:hover {
       background: #13a983; }
+  #s-presse article .fundraising .crowd-target {
+    position: absolute;
+    top: 185px;
+    right: 95px;
+    font-family: CaeciliaLTPro-85Heavy; }
 
 #s-herausforderung {
   background-color: #099574;

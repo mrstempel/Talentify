@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -103,6 +104,14 @@ namespace Talentify.ORM.Mvc
 
 		public override void Execute()
 		{
+		}
+
+		public string StripHtmlTags(string text)
+		{
+			var noHtml = Regex.Replace(text, @"<[^>]+>|&nbsp;", "").Trim();
+			var noHtmlNormalised = Regex.Replace(noHtml, @"\s{2,}", " ");
+
+			return noHtmlNormalised;
 		}
 	}
 }

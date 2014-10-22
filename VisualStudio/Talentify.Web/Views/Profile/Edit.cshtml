@@ -6,6 +6,7 @@
 }
 
 <script>
+	var mySchoolId = 0;
 	$(this).ready(function ()
 	{
 		setClassDropdown('SchoolId', 'Class', @Model.Class);
@@ -30,14 +31,58 @@
 		{
 			<text>$('#SchoolId').val('0');</text>
 		}
+		else 
+		{
+			<text>mySchoolId = </text>@(@Model.SchoolId)<text>;</text>
+		}
+
+		$('#RegisterCode').hide();
+		$('#no-school-info').hide();
+		$('#register-code-info').hide();
+		setSchoolFields();
+
+		$('#SchoolId').change(function ()
+		{
+			setSchoolFields();
+		});
 	});
+
+	function setSchoolFields()
+	{
+		var schoolField = $('#SchoolId');
+		if ($(schoolField).val().length == 0 || $(schoolField).val() == mySchoolId)
+		{
+			$('#RegisterCode').removeClass('mandatory');
+			$('#NewSchool').removeClass('mandatory');
+			$('#RegisterCode').hide();
+			$('#no-school-info').hide();
+			$('#register-code-info').hide();
+
+		}
+		else if ($(schoolField).val().length > 0 && $(schoolField).val() != "0")
+		{
+			$('#RegisterCode').addClass('mandatory');
+			$('#NewSchool').removeClass('mandatory');
+			$('#RegisterCode').show();
+			$('#no-school-info').hide();
+			$('#register-code-info').show();
+		}
+		else
+		{
+			$('#RegisterCode').removeClass('mandatory');
+			$('#NewSchool').addClass('mandatory');
+			$('#RegisterCode').hide();
+			$('#no-school-info').show();
+			$('#register-code-info').hide();
+		}
+	}
 </script>
 
 <div id="page-container" class="form">
 	<section>
 		<article>
 			<header>
-				<div class="sprite t-button desktop"></div>
+				<div class="bubble t-button desktop" id="bubble-register"></div>
 				<h2>Deine Daten</h2>
 			</header>
 		</article>
@@ -56,6 +101,7 @@
 				@Html.HiddenFor(m => m.SettingsId)
 				@Html.HiddenFor(m => m.HeardOfTalentify)
 				@Html.HiddenFor(m => m.IsParentAccount)
+				<input type="hidden" name="OldSchoolId" value="@ViewBag.OldSchoolId"/>
 				<article id="profile-form">
 					<div class="field-container">
 						<span>
@@ -95,7 +141,13 @@
 							<label>Geburtsdatum</label>
 							@Html.DatePicker("birthday", false, Model.BirthDate)
 						</div>
-						@Html.DropDownListFor(model => model.SchoolId, AllSchoolsRegister, "wähle deine Schule...", new { @class = "mandatory" })
+						@Html.DropDownListFor(model => model.SchoolId, AllSchoolsEdit, "wähle deine Schule...", new { @class = "mandatory" })
+						<input type="text" id="RegisterCode" name="RegisterCode" placeholder="Registrierungscode eingeben" style="margin-bottom: 5px;"/>
+						<span id="no-school-info" style="margin: 0 0 10px 0;">
+							<input type="text" name="NewSchool" id="NewSchool" placeholder="Auf welche Schule gehst du?" style="margin-bottom: 5px;"/>
+							Du findest deine Schule nicht in der Liste? Kein Problem. Sag uns einfach auf welche Schule du gehst. Sobald wir mind. 10 Anmeldungen von deiner Schule haben, schalten wir diese frei. Du kannst dich in der Zwischenzeit trotzdem anmelden und Workshops besuchen ;)
+						</span>
+						<span id="register-code-info" style="margin: 0 0 10px 0;">Du hast noch keinen Registrierungscode und gehst auf eine der aufgelisteten Schulen? Dann schicke uns bitte einfach ein E-Mail mit einem Foto deines Schülerausweis an <a href="mailto:hallo@talentify.at">hallo@talentify.at</a> oder frage direkt an deiner Schule nach.</span>
 						<select id="Class" name="Class">
 							<option value="0">wähle deine Klasse</option>
 						</select>
