@@ -29,19 +29,22 @@ namespace Talentify.ORM.DAL.Repository
 		{
 			var talentometer = new Talentometer();
 
-			var userBonus = UnitOfWork.BonuspointRepository.GetUserBonus(userId);
+			// get user points
+			talentometer.Points = UnitOfWork.BonuspointRepository.GetUserBonus(userId);
 
 			// get current level
 			talentometer.CurrentLevel = (from tal in UnitOfWork.TalentometerLevelRepository.AsQueryable()
-				where tal.MinPoints <= userBonus
+				where tal.MinPoints <= talentometer.Points
 				orderby tal.Level descending
 				select tal).FirstOrDefault();
 			// get next level
 			talentometer.NextLevel =
 				UnitOfWork.TalentometerLevelRepository.AsQueryable().FirstOrDefault(t => t.Level > talentometer.CurrentLevel.Level);
+			// set points to next level
+			talentometer.PointsToNextLevel = talentometer.NextLevel.MinPoints - talentometer.Points;
 
 			// calculate finished percent
-			talentometer.PercentFinished = (int)(((double)userBonus / talentometer.NextLevel.MinPoints) * 100);
+			talentometer.PercentFinished = (int)(((double)talentometer.Points / talentometer.NextLevel.MinPoints) * 100);
 			talentometer.PercentOpen = 100 - talentometer.PercentFinished;
 
 			return talentometer;

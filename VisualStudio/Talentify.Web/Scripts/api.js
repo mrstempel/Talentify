@@ -598,3 +598,9 @@ function loadBadges(userId)
 		$('#badges').fadeIn('medium');
 	});
 }
+
+function loadFeedbackForm()
+{
+	$('#feedback-frame').attr('src', '/FormHelper/FeedbackForm');
+	$('#modal-feedback').modal('show');
+}

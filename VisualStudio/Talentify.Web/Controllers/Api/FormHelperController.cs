@@ -29,7 +29,12 @@ namespace Talentify.Web.Controllers.Api
 
 	    public JsonResult MyCoachingOffers(int userId)
 	    {
-			var myOffers = UnitOfWork.CoachingOfferRepository.Get(c => c.UserId == userId, null, "SubjectCategory");
+			var myOffers = (from allSubjects in UnitOfWork.SubjectCategoryRepository.AsQueryable()
+							  join offers in UnitOfWork.CoachingOfferRepository.AsQueryable() on allSubjects.Id equals offers.SubjectCategoryId
+							where allSubjects.IsActive && offers.UserId == userId
+							  orderby allSubjects.Sorter
+							  select offers).Distinct();
+			//var myOffers = UnitOfWork.CoachingOfferRepository.Get(c => c.UserId == userId, null, "SubjectCategory");
 		    var myOffersWithCategory = new List<CoachingOffer>();
 		    foreach (var offer in myOffers)
 		    {
@@ -47,7 +52,7 @@ namespace Talentify.Web.Controllers.Api
 		[AllowAnonymous]
 	    public ActionResult SubjectCategoryTags()
 	    {
-		    var allSubjects = UnitOfWork.SubjectCategoryRepository.Get();
+		    var allSubjects = UnitOfWork.SubjectCategoryRepository.Get(s => s.IsActive);
 			ViewBag.Results = "[";
 		    foreach (var s in allSubjects)
 		    {
@@ -118,5 +123,30 @@ namespace Talentify.Web.Controllers.Api
 			catch (Exception) { }
 		    return Json(true, JsonRequestBehavior.AllowGet);
 	    }
+
+	    public ActionResult FeedbackForm()
+	    {
+		    return View();
+	    }
+
+		[HttpPost]
+		public ActionResult FeedbackForm(string type, string feedback)
+		{
+			try
+			{
+				var mailMsg = new MailMessage(new MailAddress(LoggedUser.Email),
+					new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
+				mailMsg.Subject = "talentify.me Feedbackformular";
+				mailMsg.Body = string.Format("Benutzer: {0} {1}, {2}", LoggedUser.Firstname, LoggedUser.Surname, LoggedUser.Email);
+				mailMsg.Body += Environment.NewLine + Environment.NewLine;
+				mailMsg.Body += string.Format("Feedback Typ: {0}", type);
+				mailMsg.Body += Environment.NewLine;
+				mailMsg.Body += string.Format("Feedback Nachricht: {0}", feedback);
+				Email.Send(mailMsg);
+			}
+			catch (Exception ex) { }
+			FormSuccess = new FormFeedback();
+			return View();
+		}
     }
 }

@@ -47,6 +47,7 @@ function changeInputSwitch(switchId)
 function initForms()
 {
 	console.log("init form");
+	$('input, textarea').placeholder();
 	$("textarea[maxlength]").bind('input propertychange', function ()
 	{
 		var maxLength = $(this).attr('maxlength');

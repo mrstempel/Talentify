@@ -44,7 +44,7 @@ namespace Talentify.Web.Controllers
 					var mailMsg = new MailMessage(new MailAddress(student.Email),
 						new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
 					mailMsg.Subject = "Neuer Schulvorschlag";
-					mailMsg.Body = string.Format("{0} {1} (Email: {2}) hat eine neue Schule vorgeschlagen: {3}", student.Firstname, student.Surname, student.Email, Request["NewSchool"]);
+					mailMsg.Body = string.Format("{0} {1} (Email: {2}) hat eine neue Schule vorgeschlagen: {3}", student.Firstname, student.SurnameFormatted, student.Email, Request["NewSchool"]);
 					Email.Send(mailMsg);
 				}
 

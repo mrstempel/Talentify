@@ -16,6 +16,6 @@
 	<a href="@Model.Link"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt="" class="prev-img"/></a>
 	<h3>@Html.Raw(Model.Title)</h3>
 	@Model.BeginDate.ToString("dd.MM.yyyy") | @Model.BeginTime - @Model.EndTime
-	<p>@Html.Raw(Model.Content.Substring(0, 105))...</p>
+	<p>@Html.Raw(Model.Content.Substring(0, 95))...</p>
 	<a href="@Model.Link">@linkText</a>
 </article>	

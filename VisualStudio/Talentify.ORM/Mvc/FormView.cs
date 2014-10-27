@@ -17,7 +17,7 @@ namespace Talentify.ORM.Mvc
 			{
 				if (_allSchools == null)
 				{
-					_allSchools = new SelectList(BaseController.UnitOfWork.SchoolRepository.Get(), "Id", "Name");
+					_allSchools = new SelectList(BaseController.UnitOfWork.SchoolRepository.AsQueryable().Where(s => s.IsActive), "Id", "Name");
 				}
 
 				return _allSchools;
@@ -31,7 +31,7 @@ namespace Talentify.ORM.Mvc
 			{
 				if (_allSchoolsRegister == null)
 				{
-					var schools = BaseController.UnitOfWork.SchoolRepository.Get().ToList();
+					var schools = BaseController.UnitOfWork.SchoolRepository.AsQueryable().Where(s => s.IsActive).ToList();
 					schools.Add(new School() { Id = 0, Name = "Meine Schule fehlt!" });
 					_allSchoolsRegister = new SelectList(schools, "Id", "Name");
 				}
@@ -51,7 +51,7 @@ namespace Talentify.ORM.Mvc
 			get
 			{
 				if (_allCoachingSubjects == null)
-					_allCoachingSubjects = new SelectList(BaseController.UnitOfWork.SubjectCategoryRepository.Get(), "Id", "Name");
+					_allCoachingSubjects = new SelectList(BaseController.UnitOfWork.SubjectCategoryRepository.Get(s => s.IsActive).OrderBy(s => s.Sorter), "Id", "Name");
 
 				return _allCoachingSubjects;
 			}
@@ -63,7 +63,7 @@ namespace Talentify.ORM.Mvc
 			get
 			{
 				if (_allCoachingSubjectsCheckable == null)
-					_allCoachingSubjectsCheckable = BaseController.UnitOfWork.SubjectCategoryRepository.Get();
+					_allCoachingSubjectsCheckable = BaseController.UnitOfWork.SubjectCategoryRepository.Get(s => s.IsActive).OrderBy(s => s.Sorter);
 
 				return _allCoachingSubjectsCheckable;
 			}
@@ -76,7 +76,7 @@ namespace Talentify.ORM.Mvc
 			{
 				if (_openCoachingSubjects == null)
 				{
-					var allSubjects = BaseController.UnitOfWork.SubjectCategoryRepository.Get();
+					var allSubjects = BaseController.UnitOfWork.SubjectCategoryRepository.Get(s => s.IsActive).OrderBy(s => s.Sorter);
 					var myUsedSubjects = BaseController.UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == LoggedUser.Id);
 					var myOpenSubjects = new List<SubjectCategory>();
 					foreach (var s in allSubjects)
@@ -110,7 +110,7 @@ namespace Talentify.ORM.Mvc
 
 		public SelectList GetEditSubjects(int selectedSubjectId)
 		{
-			var allSubjects = BaseController.UnitOfWork.SubjectCategoryRepository.Get();
+			var allSubjects = BaseController.UnitOfWork.SubjectCategoryRepository.Get(s => s.IsActive).OrderBy(s => s.Sorter);
 			var myUsedSubjects = BaseController.UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == LoggedUser.Id);
 			var myOpenSubjects = new List<SubjectCategory>();
 			foreach (var s in allSubjects)

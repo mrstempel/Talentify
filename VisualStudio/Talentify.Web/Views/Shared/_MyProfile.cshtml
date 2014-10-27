@@ -31,14 +31,14 @@
 	{
 		if (price > 0)
 		{
-			$('#link-edit-price').html(price.toFixed(0) + " €");
+			$('#link-edit-price').html(price.toFixed(0) + " € pro Std.");
 			$('#link-edit-price').css('padding', '8px 0');
 			$('#link-edit-price').css('width', 113);
 			$('#link-edit-price').css('text-align', 'center');
 		}
 		else
 		{
-			$('#link-edit-price').html('kostenlos');
+			$('#link-edit-price').html('ohne');
 		}
 	}
 </script>
@@ -72,7 +72,7 @@
 		</div>
 		<div class="right">
 			<h3>
-				@Model.Firstname @Model.Surname
+				@Model.Firstname @Model.SurnameFormatted
 				<span class="social-profiles">
 					@if (!string.IsNullOrEmpty(Model.FacebookUrl))
 					{
@@ -161,7 +161,7 @@
 						</div>
 					</div>
 					<div class="row lernhilfe-enabled">
-						<label class="for-input">Preis/h:</label>
+						<label class="for-input">Freiwilliger Unkostenbeitrag:</label>
 						<a href="javascript:void(0);" onclick="loadEditPriceForm();" class="link-button" id="link-edit-price"></a>
 					</div>
 				</div>
@@ -203,8 +203,8 @@
 <div class="modal fade" id="modal-edit-price" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
   <div class="modal-dialog" id="edit-price-form">
 	<header>
-		<h1>Preis/h bearbeiten<a href="javascript:void(0);" onclick="$('#modal-edit-price').modal('hide');" class="close-link"></a></h1>
+		<h1>Freiwilliger Unkostenbeitrag<a href="javascript:void(0);" onclick="$('#modal-edit-price').modal('hide');" class="close-link"></a></h1>
 	</header>
-	<iframe id="edit-price-frame" width="600" height="150" scrolling="no"></iframe>
+	<iframe id="edit-price-frame" width="600" height="250" scrolling="no"></iframe>
   </div>
 </div>

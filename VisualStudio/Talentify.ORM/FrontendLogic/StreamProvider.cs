@@ -39,7 +39,7 @@ namespace Talentify.ORM.FrontendLogic
 							user.HasProfilePicture
 								? string.Format("{0}{1}_small.png", ConfigurationManager.AppSettings["Upload.Profile"], user.PictureGuid.ToString())
 								: "/Images/default-profile-small.png",
-						Text = string.Format("{0} {1} ist talentify beigetreten", user.Firstname, user.Surname),
+						Text = string.Format("{0} {1} ist talentify beigetreten", user.Firstname, user.SurnameFormatted),
 						Link = string.Format("/Profile/Index/{0}", user.Id),
 						Time = user.JoinedDate
 					};
@@ -59,7 +59,7 @@ namespace Talentify.ORM.FrontendLogic
 							offer.User.HasProfilePicture
 								? string.Format("{0}{1}_small.png", ConfigurationManager.AppSettings["Upload.Profile"], offer.User.PictureGuid.ToString())
 								: "/Images/default-profile-small.png",
-						Text = string.Format("{0} {1} bietet jetzt Lernhilfe in {2} an", offer.User.Firstname, offer.User.Surname, offer.SubjectCategory.Name),
+						Text = string.Format("{0} {1} bietet jetzt Lernhilfe in {2} an", offer.User.Firstname, offer.User.SurnameFormatted, offer.SubjectCategory.Name),
 						Link = string.Format("/Profile/Index/{0}", offer.User.Id),
 						Time = offer.CreatedDate
 					};

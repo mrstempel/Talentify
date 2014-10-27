@@ -50,7 +50,7 @@ namespace Talentify.ORM.DAL.Repository
 
 		public IEnumerable<Event> GetOnlineEvents()
 		{
-			return UnitOfWork.EventRepository.AsQueryable().Where(e => e.IsOnline && e.BeginDate >= DateTime.Now);
+			return UnitOfWork.EventRepository.AsQueryable().Where(e => e.IsOnline && e.BeginDate >= DateTime.Now).OrderBy(e => e.BeginDate);
 		}
 
 		public EventOverview GetEventOverview(int userId)
@@ -79,7 +79,7 @@ namespace Talentify.ORM.DAL.Repository
 
 			if (filter == "future")
 			{
-				return events.Where(e => e.BeginDate >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0));
+				return events.Where(e => e.BeginDate >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0)).OrderBy( e => e.BeginDate);
 			}
 			
 			// my events
@@ -87,6 +87,7 @@ namespace Talentify.ORM.DAL.Repository
 			{
 				return from e in events join
 						myRegistrations in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.UserId == userId) on e.Id equals myRegistrations.EventId
+						orderby e.BeginDate
 					select e;
 			}
 			
@@ -100,7 +101,7 @@ namespace Talentify.ORM.DAL.Repository
 
 			if (filter == "past")
 			{
-				return events.Where(e => e.BeginDate < DateTime.Now);
+				return events.Where(e => e.BeginDate < DateTime.Now).OrderBy(e => e.BeginDate);
 			}
 
 			return events;

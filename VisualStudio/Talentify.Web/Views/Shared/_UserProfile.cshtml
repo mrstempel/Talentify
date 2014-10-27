@@ -18,11 +18,11 @@
 	{
 		if (price > 0)
 		{
-			$('#price-tag').html(price.toFixed(0) + " €");
+			$('#price-tag').html(price.toFixed(0) + " € pro Std.");
 		}
 		else
 		{
-			$('#price-tag').html('kostenlos');
+			$('#price-tag').html('ohne');
 		}
 	}
 </script>
@@ -35,7 +35,7 @@
 		</div>
 		<div class="right">
 			<h3>
-				@Model.Firstname @Model.Surname
+				@Model.Firstname @Model.SurnameFormatted
 				<span class="social-profiles">
 					@if (!string.IsNullOrEmpty(Model.FacebookUrl))
 					{
@@ -80,7 +80,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<label class="for-input">Preis/h:</label><span class="tag" id="price-tag"></span>
+						<label class="for-input">Unkostenbeitrag:</label><span class="tag" id="price-tag"></span>
 					</div>
 				</div>
 			}

@@ -167,7 +167,7 @@ namespace Talentify.ORM.DAL.Repository
 
 			// update newsletter subscription
 			//var settings = UnitOfWork.UserSettingsRepository.AsQueryable().FirstOrDefault(s => s.Id == entity.SettingsId);
-			if (entity.Settings.HasNewsletter)
+			if (entity.Email != null && entity.Settings.HasNewsletter)
 			{
 				NewsletterRegistration.Subscribe(entity);
 			}
@@ -248,9 +248,60 @@ namespace Talentify.ORM.DAL.Repository
 			}
 
 			// unsubscribe from newsletter
-			NewsletterRegistration.Unsubscribe(student.Email);
+			NewsletterRegistration.Unsubscribe(email);
 
 			Email.SendDelete(email, WebConfigurationManager.AppSettings["Email.Delete.Subject"]);
+		}
+
+		#endregion
+
+		#region Get
+
+		public IEnumerable<Student> GetFullRegisteredList()
+		{
+			return AsQueryable().Where(s => s.RegisterCode == null && s.IsDeleted == false);
+		}
+
+		public IEnumerable<Student> GetNotRegisterConfirmedList()
+		{
+			return AsQueryable().Where(s => s.RegisterCode != null && s.IsDeleted == false);
+		}
+
+		public IEnumerable<Student> GetCoachList()
+		{
+			return (from s in AsQueryable()
+				join coaching in UnitOfWork.CoachingOfferRepository.AsQueryable() on s.Id equals coaching.UserId
+					where s.IsCoachingEnabled && s.IsDeleted == false
+				select s).Distinct();
+		}
+
+		#endregion
+
+		#region Statistics
+
+		public int GetFullRegisteredCount()
+		{
+			return AsQueryable().Count(s => s.RegisterCode == null && s.IsDeleted == false);
+		}
+
+		public int GetNotRegisterConfirmedCount()
+		{
+			return AsQueryable().Count(s => s.RegisterCode != null && s.IsDeleted == false);
+		}
+
+		public int GetDeletedCount()
+		{
+			return AsQueryable().Count(s => s.IsDeleted);
+		}
+
+		public int GetCoachCount()
+		{
+			var coaches = (from s in AsQueryable()
+				join coaching in UnitOfWork.CoachingOfferRepository.AsQueryable() on s.Id equals coaching.UserId
+				where s.IsCoachingEnabled && s.IsDeleted == false
+				select s).Distinct();
+
+			return coaches.Count();
 		}
 
 		#endregion

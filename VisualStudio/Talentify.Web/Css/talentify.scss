@@ -1079,6 +1079,7 @@ header.search-map-overlay
 {
 	width: 98% !important;
 	margin: 0px 0 0 0;
+	text-align: left;
 	header
 	{
 		width: 100%;
@@ -1091,12 +1092,14 @@ header.search-map-overlay
 	{
 		@extend .box-sizing;
 		@include shadow($color-shadow, 5px);
-		float: left;
-		min-width: 49%;
-		margin: 0 0 20px 0;
+		//float: left;
+		display: inline-block;
+		width: 49%;
+		margin: 0px 0 20px 0;
 		padding: 10px;
 		img { float: left; margin-right: 10px; }
 		cursor: pointer;
+		vertical-align: top;
 		.image-link
 		{
 			background-repeat: no-repeat;
@@ -1111,7 +1114,7 @@ header.search-map-overlay
 			margin: 0; 
 			padding: 0; 
 			text-align: left !important; 
-			font-size: 16px;
+			font-size: 14px;
 		}
 		.comments
 		{
@@ -1619,19 +1622,47 @@ article.event-detail
 		text-align: left;
 		vertical-align: top;
 		padding: 0 20px 0 0;
+		border-right: 1px solid $color-border;
 		h3
 		{
 			color: $color-red;
 			font-size: 18px;
-			margin: 0 0 40px 0;
+			margin: 0;
+		}
+		.points
+		{
+			display: inline-block;
+			width: 100%;
+			margin: 10px 0; 
+			h4 { font-size: 30px; margin: 0; }
+			p
+			{
+				margin: 0;
+				font-size: 14px;
+			}
 		}
 		.bar
 		{
 			margin: 10px 0 5px 0;
 			width: 100%;
 			float: left;
-			.left { background: #ef4d69; height: 15px; float: left;}
-			.right { background: #e1e4e9; height: 15px;  float: left; }
+			.left 
+			{ 
+				background: #ef4d69; height: 19px; float: left;
+				span
+				{
+					font-size: 14px;
+					float: right;
+					margin: 1px 10px 0 0;
+					color: #fff;
+				}
+			}
+			.right 
+			{ 
+				background: #e1e4e9; 
+				height: 19px;  
+				float: left; 
+			}
 		}
 		.bar-labels
 		{
@@ -1639,8 +1670,23 @@ article.event-detail
 			width: 100%;
 			float: left;
 			font-size: 14px;
-			.left { float: left; }
-			.right { float: right; }
+			padding: 7px 0 0 0;
+			.left 
+			{ 
+				float: left; 
+				background: url(../Images/talentometer-left.gif);
+				background-repeat: no-repeat;
+				padding: 0 0 0 15px;
+				font-family: $font-bold;
+			}
+			.right 
+			{ 
+				float: right; 
+				background: url(../Images/talentometer-right.gif);
+				background-repeat: no-repeat;
+				background-position: right;
+				padding: 0 15px 0 0;
+			}
 		}
 	}
 	.badges-container
@@ -1650,7 +1696,6 @@ article.event-detail
 		width:69%;
 		text-align: left;
 		padding: 0 0 0 20px;
-		border-left: 1px solid $color-border;
 		h3
 		{
 			color: $color-red;
@@ -2315,6 +2360,11 @@ article.event-detail
 		margin: auto;
 		max-width: 400px;
 	}
+}
+
+.feedback-form-container
+{
+	p { text-align: center; }
 }
 
 // helper

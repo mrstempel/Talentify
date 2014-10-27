@@ -38,6 +38,11 @@ namespace Talentify.ORM.DAL.Repository
 
 		public void Insert(int userId, int points, string message, int targetId, bool saveChanges)
 		{
+			Insert(userId, points, message, targetId, saveChanges, null);
+		}
+
+		public void Insert(int userId, int points, string message, int targetId, bool saveChanges, string additionalInfo)
+		{
 			// add bonus points
 			var bonusPoints = new BonusPoint()
 			{
@@ -57,7 +62,8 @@ namespace Talentify.ORM.DAL.Repository
 				CreatedDate = DateTime.Now,
 				SenderType = NotificationSenderType.System,
 				IconType = NotificationIconType.Bonus,
-				Bonus = points
+				Bonus = points,
+				AdditionalInfo = additionalInfo
 			};
 			UnitOfWork.NotificationRepository.Insert(notifiction);
 			// save

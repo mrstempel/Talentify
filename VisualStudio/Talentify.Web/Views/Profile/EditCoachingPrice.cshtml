@@ -34,16 +34,19 @@
 <article>
 	<div class="msg-container" id="msg-container">
 		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
-		<div id="msg-success" class="msg success"><h2>Preis/h gspeichert.</h2><p>Dein Lernhilfepreis/h wurde erfolgreich gespeichert.</p></div>
+		<div id="msg-success" class="msg success"><h2>Die Änderung wurde gespeichert.</h2><p>Dein Lernhilfepreis/h wurde erfolgreich gespeichert.</p></div>
 	</div>
 	@if (FormSuccess == null)
 	{
+		
 		using (Html.BeginForm("EditCoachingPrice", "Profile", FormMethod.Post, new { @class = "form-container price" }))
 		{
 			<div class="field-container">
-				<label>Kostenlos</label><input type="checkbox" value="true" name="isFree" id="isFree" onclick="setSelectBox();"/> <label>oder Preis pro Stunde:</label>
+				<p style="display:inline-block;padding:0 5px;">Wir stellen mit talentify.me nur den Kontakt zu anderen SchülerInnen her, alles Weitere liegt bei dir. Es steht dir frei für die aufgewendete Zeit einen freiwilligen Unkostenbeitrag zu verlangen. Unsere einzige Bitte an dich: wenn, dann nicht mehr als 10 € pro Stunde.</p>
+			</div>
+			<div class="field-container">
+				<label>Kein Unkostenbeitrag</label><input type="checkbox" value="true" name="isFree" id="isFree" onclick="setSelectBox();"/> <label>oder ein Richtwert von:</label>
 				<select name="price" id="price">
-					<option value="1">1€</option>
 					<option value="2">2€</option>
 					<option value="3">3€</option>
 					<option value="4">4€</option>
@@ -54,14 +57,15 @@
 					<option value="9">9€</option>
 					<option value="10">10€</option>
 				</select>
+				<label>pro Std</label>
 			</div>
 			<div class="field-container">
-				<input type="submit" value="Speichern" onclick="return validateCoachingPrice();"/>
+				<input type="submit" value="Speichern" onclick="return validateCoachingPrice();" style="width:86%;"/>
 			</div>
 		}
 	}
-	else
-	{
+ else
+ {
 		<script>
 			window.parent.setProfileCoachingPrice(@ViewBag.Price);
 			setTimeout(function () { window.parent.hideModal('modal-edit-price'); }, 3000);

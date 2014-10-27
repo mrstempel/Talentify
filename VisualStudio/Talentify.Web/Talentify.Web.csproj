@@ -226,6 +226,8 @@
     <Content Include="Images\bubble-reg-abgeschlossen.png" />
     <Content Include="Images\bubble-search.png" />
     <Content Include="Images\bubble-settings.png" />
+    <Content Include="Images\talentometer-left.gif" />
+    <Content Include="Images\talentometer-right.gif" />
     <Content Include="Scripts\api.min.js">
       <DependentUpon>api.js</DependentUpon>
     </Content>
@@ -329,6 +331,10 @@
     <Content Include="Scripts\jquery.browser.min.js" />
     <Content Include="Scripts\jquery.easyModal.js" />
     <Content Include="Scripts\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Scripts\jquery.placeholder.js" />
+    <Content Include="Scripts\jquery.placeholder.min.js">
+      <DependentUpon>jquery.placeholder.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\maps.js" />
     <Content Include="Scripts\maps.min.js">
       <DependentUpon>maps.js</DependentUpon>
@@ -427,6 +433,10 @@
     </Content>
     <Content Include="Views\NoSchool\Index.cshtml" />
     <Content Include="Views\Content\Agb.cshtml" />
+    <Content Include="Views\FormHelper\FeedbackForm.cshtml" />
+    <Content Include="Scripts\jquery.placeholder.min.js.map">
+      <DependentUpon>jquery.placeholder.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

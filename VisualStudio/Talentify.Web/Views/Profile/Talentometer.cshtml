@@ -1,8 +1,17 @@
 ﻿@model Talentify.ORM.FrontendLogic.Models.Talentometer
 
-<h3>Talentometer:</h3>
+@{
+	var percentageString = Model.PercentFinished > 14 ? Model.PercentFinished.ToString() + "%" : string.Empty;
+	var headline = (LoggedUser.Id == Convert.ToInt32(ViewBag.UserId)) ? "Mein Talentometer Level:" : "Talentometer Level:";
+}
+
+<h3>@headline</h3>
+<div class="points">
+	<h4>@Model.Points</h4>
+	<p>Bonuspunkte<br/>(@Model.PointsToNextLevel Punkte bis zum nächsten Level)</p>
+</div>
 <div class="bar">
-	<div class="left" style="width:@Model.PercentFinished%;"></div>
+	<div class="left" style="width:@Model.PercentFinished%;"><span>@(@percentageString)</span></div>
 	<div class="right" style="width:@Model.PercentOpen%;"></div>
 </div>
 <div class="bar-labels">

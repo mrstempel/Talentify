@@ -29,6 +29,11 @@ namespace Talentify.ORM.Mvc
 			get { return BaseController.WebContext.HasSchool; }
 		}
 
+		public bool IsCoachingEnabled
+		{
+			get { return BaseController.WebContext.IsCoachingEnabled; }
+		}
+
 		private BaseController _baseController;
 		/// <summary>
 		/// Reference for base controller

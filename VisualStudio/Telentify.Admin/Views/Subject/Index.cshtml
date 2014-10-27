@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.Coaching.SubjectCategory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<h2>Fächer</h2>
+	
+	@using (Html.BeginForm("Update", "Subject", FormMethod.Post, new {enctype = "multipart/form-data"}))
+	{
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Aktiv</th>
+				<th>Sortierung</th>
+			</tr>
+			@foreach (var s in Model)
+			{
+				var isChecked = s.IsActive ? "checked" : "";
+				<tr>
+					<td style="padding: 0;">@s.Name</td>
+					<td><input type="hidden" name="ids" value="@s.Id" /><input type="checkbox" name="isActive" value="@s.Id" @isChecked/></td>
+					<td><input type="number" name="sorter" value="@s.Sorter" /></td>
+				</tr>
+			}
+			<tr>
+				<td colspan="2">&nbsp;</td>
+				<td><input type="submit" value="Speichern"/></td>
+			</tr>
+		</table>
+	}
+	
+	<h2>Neues Fach anlegen</h2>
+	@using (Html.BeginForm("Create", "Subject", FormMethod.Post, new {enctype = "multipart/form-data"}))
+	{
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td><input type="text" name="name" id="name"/></td>
+			</tr>
+			<tr>
+				<td>Sortierung:</td>
+				<td><input type="number" name="sorter" id="sorter"/></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Speichern"/></td>
+			</tr>
+		</table>
+	}
+</div>

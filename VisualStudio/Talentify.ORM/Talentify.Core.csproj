@@ -272,6 +272,10 @@
     <Compile Include="Migrations\201410071227044_codeUseDateNullable.Designer.cs">
       <DependentUpon>201410071227044_codeUseDateNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410271722508_subject-category-update.cs" />
+    <Compile Include="Migrations\201410271722508_subject-category-update.Designer.cs">
+      <DependentUpon>201410271722508_subject-category-update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\BaseView.cs" />
     <Compile Include="FrontendLogic\Models\FormFeedback.cs" />
@@ -368,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410071227044_codeUseDateNullable.resx">
       <DependentUpon>201410071227044_codeUseDateNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410271722508_subject-category-update.resx">
+      <DependentUpon>201410271722508_subject-category-update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

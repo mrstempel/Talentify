@@ -65,6 +65,23 @@ namespace Talentify.ORM.Mvc
 			}
 		}
 
+		public bool IsCoachingEnabled
+		{
+			get
+			{
+				if (HttpContext.Current.Session["WebContext.IsCoachingEnabled"] == null)
+				{
+					var student = unitOfWork.StudentRepository.GetById(this.User.Id);
+					HttpContext.Current.Session["WebContext.IsCoachingEnabled"] = (student != null && student.IsCoachingEnabled);
+				}
+				return (bool)HttpContext.Current.Session["WebContext.IsCoachingEnabled"];
+			}
+			set
+			{
+				HttpContext.Current.Session["WebContext.IsCoachingEnabled"] = value;
+			}
+		}
+
 		public SearchSession SearchSession
 		{
 			get

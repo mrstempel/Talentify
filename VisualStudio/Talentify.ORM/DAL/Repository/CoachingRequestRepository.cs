@@ -117,12 +117,12 @@ namespace Talentify.ORM.DAL.Repository
 				select new CoachingRequestListItem()
 				{
 					RequestId = coachingRequest.Id,
-					UsernameFrom = coachingRequest.FromUser.Firstname + " " + coachingRequest.FromUser.Surname,
+					UsernameFrom = (coachingRequest.FromUser.IsParentAccount) ? coachingRequest.FromUser.Firstname + " " + coachingRequest.FromUser.Surname + " (Eltern)" :  coachingRequest.FromUser.Firstname + " " + coachingRequest.FromUser.Surname,
 					EmailFrom = coachingRequest.FromUser.Email,
 					PhoneFrom = coachingRequest.FromUser.Phone,
 					ImageFrom = coachingRequest.FromUser.PictureGuid,
 					UserIdFrom = coachingRequest.FromUser.Id,
-					UsernameTo = coachingRequest.ToUser.Firstname + " " + coachingRequest.ToUser.Surname,
+					UsernameTo = (coachingRequest.ToUser.IsParentAccount) ? coachingRequest.ToUser.Firstname + " " + coachingRequest.ToUser.Surname + " (Eltern)" : coachingRequest.ToUser.Firstname + " " + coachingRequest.ToUser.Surname,
 					EmailTo = coachingRequest.ToUser.Email,
 					PhoneTo = coachingRequest.ToUser.Phone,
 					ImageTo = coachingRequest.ToUser.PictureGuid,

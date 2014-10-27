@@ -31,8 +31,20 @@ namespace Talentify.ORM.DAL.Repository
 				? BonusPointsFor.CoachingOffer
 				: BonusPointsFor.InitialCoachingOffer;
 
-			// add bonuspoints
-			UnitOfWork.BonuspointRepository.Insert(entity.UserId, bonuspoints, "Lernhilfe hinzugefügt");
+			// check if bonuspoints where already given for this subject
+			var notifactionWithSubject =
+				UnitOfWork.NotificationRepository.AsQueryable()
+					.FirstOrDefault(
+						n =>
+							n.ToUserId == entity.UserId && n.Text == "Lernhilfe hinzugefügt" &&
+							n.AdditionalInfo == entity.SubjectCategoryId.ToString());
+			
+			if (notifactionWithSubject == null)
+			{
+				// add bonuspoints
+				UnitOfWork.BonuspointRepository.Insert(entity.UserId, bonuspoints, "Lernhilfe hinzugefügt",0, true, entity.SubjectCategoryId.ToString());
+			}
+
 			base.Insert(entity);
 		}
 
@@ -43,6 +55,7 @@ namespace Talentify.ORM.DAL.Repository
 						join student in UnitOfWork.StudentRepository.AsQueryable() on offer.UserId equals student.Id
 						join school in UnitOfWork.SchoolRepository.AsQueryable() on student.SchoolId equals school.Id
 						where 
+							student.IsCoachingEnabled &&
 							offer.FromClass <= searchParams.Class &&
 							offer.ToClass >= searchParams.Class &&
 							offer.SubjectCategoryId == searchParams.SubjectCategoryId &&
@@ -52,7 +65,7 @@ namespace Talentify.ORM.DAL.Repository
 					Id = student.Id,
 					Image = student.PictureGuid.HasValue
 								? uploadDir + student.PictureGuid.ToString() + "_medium.png"
-								: "/Images/tmp-profile-medium.png",
+								: "/Images/default-profile-medium.png",
 					Name = student.Firstname + " " + student.Surname,
 					Address = school.ZipCode + "-" + school.City,
 					School = school.Name,

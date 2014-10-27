@@ -15,7 +15,10 @@
 			@if (HasSchool)
 			{
 				@Html.ActionLink("Lernhilfecenter", "Index", "CoachingCenter")
-				@Html.ActionLink("Lerncoach finden", "Index", "Teacher")
+				if (IsCoachingEnabled)
+				{
+					@Html.ActionLink("Lerncoach finden", "Index", "Teacher")
+				}
 			}
 			else
 			{
@@ -30,6 +33,7 @@
 </div>
 <div class="logged-container">
 	<ul>
+		<li><a href="javascript:void(0);" onclick="loadFeedbackForm();" class="link-button desktop" style="font-size: 14px;padding: 8px 20px;display:inline-block;">Feedback...</a></li>
 		<li class="profile-img"><a href="/Profile" title="@LoggedUser.Firstname @LoggedUser.Surname" style="background:url('@LoggedUser.ProfileImageSmall')"></a></li>
 		<li class="notifications">
 			<span id="notification-count"></span>

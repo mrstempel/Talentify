@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<h2>Userverwaltung</h2>
+	
+	<div style="text-align: left;display: inline-block;margin: 30px 0;">
+		<h3 style="text-align: left;">Statistik:</h3>
+		<p>Bestätigte Registrierungen: <span class="important">@ViewBag.FullCount.ToString()</span> (@Html.ActionLink("Liste", "ConfirmedList", "User"))</p>
+		<p>Nicht bestätigte Registrierungen: <span class="important">@ViewBag.NotConfirmed.ToString()</span> (@Html.ActionLink("Liste", "NotConfirmedList", "User"))</p>
+		<p>User mit Lernhilfeangebot: <span class="important">@ViewBag.CoachCount.ToString()</span> (@Html.ActionLink("Liste", "CoachList", "User"))</p>
+		<p>Gelöschte Accounts: <span class="important">@ViewBag.DeletedCount.ToString()</span></p>
+	</div>
+</div>

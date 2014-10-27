@@ -13,5 +13,7 @@ namespace Talentify.ORM.FrontendLogic.Models
 		public TalentometerLevel NextLevel { get; set; }
 		public int PercentFinished { get; set; }
 		public int PercentOpen { get; set; }
+		public long Points { get; set; }
+		public long PointsToNextLevel { get; set; }
 	}
 }

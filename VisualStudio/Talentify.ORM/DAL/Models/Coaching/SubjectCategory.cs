@@ -13,7 +13,9 @@ namespace Talentify.ORM.DAL.Models.Coaching
 	public class SubjectCategory : BaseEntity, IFormCheckable
 	{
 		public string Name { get; set; }
-		public ICollection<Teacher> Teachers { get; set; } 
+		public bool IsActive { get; set; }
+		public int Sorter { get; set; }
+		public ICollection<Teacher> Teachers { get; set; }
 
 		#region Implement IFormCheckable
 

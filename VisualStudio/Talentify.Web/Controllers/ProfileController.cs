@@ -60,6 +60,7 @@ namespace Talentify.Web.Controllers
 				user.IsCoachingEnabled = isEnabled;
 				UnitOfWork.StudentRepository.Update(user);
 				UnitOfWork.Save();
+			    this.WebContext.IsCoachingEnabled = isEnabled;
 				return Json(true, JsonRequestBehavior.AllowGet);
 		    }
 		    catch (Exception ex)
@@ -111,6 +112,12 @@ namespace Talentify.Web.Controllers
 
 					FormError = new FormFeedback() { Text = "Der angegebene Registrierungscode ist nicht korrekt." };
 					return View(student);
+				}
+
+				if (student.SchoolId.HasValue && 
+					Convert.ToInt32(Request["OldSchoolId"]) == 0)
+				{
+					this.WebContext.HasSchool = true;
 				}
 
 				UnitOfWork.StudentRepository.Update(student);
@@ -220,7 +227,14 @@ namespace Talentify.Web.Controllers
 				student.CoachingPrice = price.Value;
 				UnitOfWork.StudentRepository.Update(student, false);
 				UnitOfWork.Save();
-				FormSuccess = new FormFeedback();
+				if (price.Value > 0)
+				{
+					FormSuccess = new FormFeedback() {Headline = "Die Änderung wurde gespeichert.", Text = string.Format("Du hast einen Unkostenbeitrag von € {0} pro Stunde ausgewählt.", price)};
+				}
+				else
+				{
+					FormSuccess = new FormFeedback() { Headline = "Die Änderung wurde gespeichert.", Text = "Du hast keinen Unkostenbeitrag ausgewählt." };
+				}
 			}
 			catch (Exception)
 			{
@@ -233,7 +247,12 @@ namespace Talentify.Web.Controllers
 		public ActionResult CoachingRequest(int toUserId, int searchClass, int subjectCategoryId)
 	    {
 			// create available subjects
-			ViewBag.UserSubjects = new SelectList(UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == toUserId, null, "SubjectCategory"), "SubjectCategoryId", "SubjectCategory.Name");
+			var userOffers = (from allSubjects in UnitOfWork.SubjectCategoryRepository.AsQueryable()
+				join offers in UnitOfWork.CoachingOfferRepository.AsQueryable() on allSubjects.Id equals offers.SubjectCategoryId
+				where allSubjects.IsActive && offers.UserId == toUserId
+				orderby allSubjects.Sorter  select offers).Distinct();
+			//ViewBag.UserSubjects = new SelectList(UnitOfWork.CoachingOfferRepository.Get(o => o.UserId == toUserId, null, "SubjectCategory"), "SubjectCategoryId", "SubjectCategory.Name");
+			ViewBag.UserSubjects = new SelectList(userOffers, "SubjectCategoryId", "SubjectCategory.Name");
 		    return View(new CoachingRequest() { FromUserId = LoggedUser.Id, ToUserId = toUserId, Class = searchClass, SubjectCategoryId = subjectCategoryId });
 	    }
 
@@ -263,6 +282,7 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Talentometer(int userId)
 	    {
+		    ViewBag.UserId = userId;
 		    var talentometer = UnitOfWork.TalentometerLevelRepository.GetTalentometer(userId);
 		    return View(talentometer);
 	    }

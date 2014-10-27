@@ -44,7 +44,7 @@ namespace Talentify.ORM.DAL.Repository
 		public IEnumerable<SchoolInfo> GetSchoolsWithInfo()
 		{
 			var schoolInfos = new List<SchoolInfo>();
-			var allSchools = Get();
+			var allSchools = AsQueryable().Where(s => s.IsActive);
 			
 			foreach (var school in allSchools)
 			{

@@ -1,11 +1,21 @@
 ﻿@model IEnumerable<Talentify.ORM.FrontendLogic.Models.SearchResultItem>
 
-@foreach (var i in Model)
+@if (Model.Any())
 {
-	<article onclick="location.href='/Profile/Index/@i.Id'">
-		<a href="/Profile/Index/@i.Id" class="image-link" style="background: url('@i.Image');"></a>
-		<h3><a href="/Profile/Index/@i.Id">@i.Name</a></h3>
-		<p>@i.Address<br/>@i.School</p>
-		<p class="comments">"@(@i.Comments)"</p>
-	</article>
+	foreach (var i in Model)
+	{
+		<article onclick="location.href='/Profile/Index/@i.Id'">
+			<a href="/Profile/Index/@i.Id" class="image-link" style="background: url('@i.Image');"></a>
+			<h3><a href="/Profile/Index/@i.Id">@i.Name</a></h3>
+			<p>@i.Address<br/>@i.School</p>
+			@if (!string.IsNullOrEmpty(i.Comments))
+			{
+				<p class="comments">"@(@i.Comments)"</p>
+			}
+		</article>
+	}
+}
+else
+{
+	<p style="text-align: center;">Leider gibt es derzeit keine passenden Treffer zu deiner Suche.</p>
 }
