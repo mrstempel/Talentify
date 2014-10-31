@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Talentify.ORM.Mvc;
+using Telentify.Admin.Models;
 
 namespace Telentify.Admin.Controllers
 {
@@ -30,7 +31,16 @@ namespace Telentify.Admin.Controllers
 
 		public ActionResult CoachList()
 		{
-			return View(UnitOfWork.StudentRepository.GetCoachList());
+			var studentsWithOffers = new List<StudentWithCoachingOffers>();
+			var students = UnitOfWork.StudentRepository.GetCoachList();
+			foreach (var s in students)
+			{
+				var offers = UnitOfWork.CoachingOfferRepository.AsQueryable().Where(o => o.UserId == s.Id);
+				var studentWithOffer = new StudentWithCoachingOffers() {Student = s, CoachingOffers = offers};
+				studentsWithOffers.Add(studentWithOffer);
+			}
+
+			return View(studentsWithOffers);
 		}
     }
 }

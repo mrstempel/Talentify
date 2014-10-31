@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data.Entity.Core;
 using System.Linq;
 using System.Net.Mail;
+using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -349,5 +350,48 @@ namespace Talentify.ORM.DAL.Repository
 				UnitOfWork.BonuspointRepository.Insert(bonusUserId, bonuspoints, "Bestätigte Lernhilfe");
 			}
 		}
+
+		#region Statistics
+
+		public int GetCoachingRequestCount()
+		{
+			return AsQueryable().Count();
+		}
+
+		public int GetCompletedCount()
+		{
+			var rated = (from cr in AsQueryable()
+				join
+					status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable() on cr.Id equals status.CoachingRequestId
+				where status.StatusType == StatusType.Completed
+				select cr).Distinct();
+
+			var completed = rated.Count(r => r.StatusHistory.Count() == 4 && r.StatusHistory.Where(s => s.StatusType == StatusType.Canceled).Count() == 0);
+			
+			
+			return completed;
+		}
+
+		public int GetRejectedCount()
+		{
+			var cancled = (from cr in AsQueryable()
+						 join
+							 status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable() on cr.Id equals status.CoachingRequestId
+						 where status.StatusType == StatusType.Rejected
+						   select cr).Distinct().Count();
+			return cancled;
+		}
+
+		public int GetCancledCount()
+		{
+			var cancled = (from cr in AsQueryable()
+						   join
+							   status in UnitOfWork.CoachingRequestStatusRepository.AsQueryable() on cr.Id equals status.CoachingRequestId
+						   where status.StatusType == StatusType.Canceled
+						   select cr).Distinct().Count();
+			return cancled;
+		}
+
+		#endregion
 	}
 }

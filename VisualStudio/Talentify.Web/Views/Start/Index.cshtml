@@ -89,6 +89,7 @@
 						</select>
 						@Html.DropDownListFor(m => m.SubjectCategoryId, AllCoachingSubjects, "Schulfach", new {@class = "mandatory"})
 						<input type="submit" value="Lernhilfe Finden" onclick="return validateMandatoryOnlyForm();"/>
+						<!--<div class="checkbox-container"><input type="checkbox" name="mySchoolOnly" id="mySchoolOnly"/><label for="mySchoolOnly">Nur nach Lernhilfeangeboten an meiner Schule suchen</label></div>-->
 					</div>
 				}
 				<p>oder<br/><a href="/Profile" class="important">Lernhilfe anbieten</a></p>

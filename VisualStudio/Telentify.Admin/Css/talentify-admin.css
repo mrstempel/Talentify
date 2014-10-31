@@ -60,6 +60,9 @@ li {
   text-align: left;
   padding: 5px; }
 
+td {
+  vertical-align: top; }
+
 #page-container {
   z-index: 1;
   max-width: 1105px;

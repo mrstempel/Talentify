@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Talentify.ORM.DAL.Models.User.Student>
+﻿@using System.Globalization
+@model IEnumerable<Talentify.ORM.DAL.Models.User.Student>
 
 @{
     ViewBag.Title = "NotConfirmedList";
@@ -12,16 +13,16 @@
 		<tr>
 			<th>Name</th>
 			<th>E-Mail</th>
-			<th>Bietet Lernhilfe an</th>
-			<th>&nbsp;</th>
+			<th>Registriert am</th>
+			<th>Bestätigungslink</th>
 		</tr>
 		@foreach (var student in Model)
 		{
 			<tr>
 				<td>@student.Firstname @student.Surname</td>
 				<td><a href="mailto:@student.Email">@student.Email</a></td>
-				<td>@student.IsCoachingEnabled</td>
-				<td><a href="http://www.talentify.me/Profile/Index/@student.Id" target="_blank">Profil</a></td>
+				<td>@student.JoinedDate.ToString("g", new CultureInfo("de"))</td>
+				<td style="font-size: 16px;">http://www.talentify.me/Register/Confirm?c=@student.RegisterCode.ToString()</td>
 			</tr>
 		}
 	</table>

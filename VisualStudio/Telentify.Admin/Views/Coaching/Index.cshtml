@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<p>Anzahl Lernhilfeanfragen: <span class="important">@ViewBag.CoachingCount</span></p>
+	<p>Abgeschlossene Lernhilfen: <span class="important">@ViewBag.CompletedCount</span></p>
+	<p>Angelehnte Lernhilfen: <span class="important">@ViewBag.RejectedCount</span></p>
+	<p>Abgesagte Lernhilfen: <span class="important">@ViewBag.CancledCount</span></p>
+	<p>@Html.ActionLink("Details ansehen", "Details", "Coaching")</p>
+</div>

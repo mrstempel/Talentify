@@ -11,8 +11,9 @@ namespace Talentify.Web.Controllers
     public class ContentController : BaseController
     {
 		[AllowAnonymous]
-        public ActionResult Impressum()
-        {
+		public ActionResult Impressum()
+		{
+			ViewBag.Phone = "+43 676 9035413";
             return View();
         }
 

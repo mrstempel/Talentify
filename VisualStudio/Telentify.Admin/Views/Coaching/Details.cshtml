@@ -1,0 +1,41 @@
+﻿@using System.Globalization
+@model IEnumerable<Telentify.Admin.Models.CoachingSummary>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<table style="font-size:14px;">
+		<tr>
+			<th>Fach</th>
+			<th>Klasse</th>
+			<th>Anfrage von</th>
+			<th>Anfrage an</th>
+			<th>Anfrage erstellt am</th>
+			<th>Dauer</th>
+			<th>Kosten</th>
+			<th>Status History</th>
+		</tr>
+		@foreach (var c in Model)
+		{
+			<tr>
+				<td>@c.Subject</td>
+				<td>@c.Request.Class</td>
+				<td><a href="http://www.talentify.me/Profile/Index/@c.Request.FromUserId" target="_blank">@c.FromUserName</a></td>
+				<td><a href="http://www.talentify.me/Profile/Index/@c.Request.ToUserId" target="_blank">@c.ToUserName</a></td>
+				<td>@c.Request.CreatedDate.ToString("g", new CultureInfo("de"))</td>
+				<td>@c.Request.Duration</td>
+				<td>@c.Request.PayedPrice</td>
+				<td style="font-size:14px;">
+					@foreach (var status in c.Request.StatusHistory)
+					{
+						var username = status.CreatedById == c.Request.FromUserId ? c.FromUserName : c.ToUserName;
+						@username<text>&nbsp;-&nbsp;</text>@status.Text <text>(</text>@status.CreatedDate.ToString("g", new CultureInfo("de"))<text>)</text><br/>
+					}
+				</td>
+			</tr>
+		}
+	</table>
+</div>

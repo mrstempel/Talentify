@@ -338,6 +338,20 @@ input[type="text"].mandatory, input[type="password"].mandatory
 	border: 1px solid #c3c3c3;
 	@include shadow($color-shadow, 5px);
 	input, select { width: 31%; border: 1px solid #e3e4e8; }
+	.checkbox-container
+	{
+		@extend .box-sizing;
+		display: inline-block;
+		width: 94%;
+		padding: 7px 0 0 3px;
+		text-align: left;
+		
+		input[type="checkbox"]
+		{
+			width: auto;
+		}
+		label { font-size: 16px; margin-left: 5px; }
+	}
 	.field-container { margin: 10px; }
 	background: #fff;
 }
