@@ -17,7 +17,7 @@ namespace Talentify.ORM.Mvc
 			{
 				if (_allSchools == null)
 				{
-					_allSchools = new SelectList(BaseController.UnitOfWork.SchoolRepository.AsQueryable().Where(s => s.IsActive), "Id", "Name");
+					_allSchools = new SelectList(BaseController.UnitOfWork.SchoolRepository.AsQueryable().Where(s => s.IsActive).OrderBy(s => s.Name), "Id", "Name");
 				}
 
 				return _allSchools;
@@ -31,7 +31,7 @@ namespace Talentify.ORM.Mvc
 			{
 				if (_allSchoolsRegister == null)
 				{
-					var schools = BaseController.UnitOfWork.SchoolRepository.AsQueryable().Where(s => s.IsActive).ToList();
+					var schools = BaseController.UnitOfWork.SchoolRepository.AsQueryable().Where(s => s.IsActive).OrderBy(s => s.Name).ToList();
 					schools.Add(new School() { Id = 0, Name = "Meine Schule fehlt!" });
 					_allSchoolsRegister = new SelectList(schools, "Id", "Name");
 				}

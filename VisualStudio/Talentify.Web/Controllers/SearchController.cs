@@ -19,9 +19,11 @@ namespace Talentify.Web.Controllers
 	    {
 		    searchParams.SearchBy = LoggedUser;
 		    var results = UnitOfWork.CoachingOfferRepository.Search(searchParams);
+			var random = new Random();
+			var randomResultList = results.OrderBy(i => random.Next()).ToList();
 		    searchParams.SubjectCategory = UnitOfWork.SubjectCategoryRepository.GetById(searchParams.SubjectCategoryId);
 		    this.WebContext.SearchSession = new SearchSession() {SearchParams = searchParams};
-		    return View(results);
+			return View(randomResultList);
 	    }
     }
 }

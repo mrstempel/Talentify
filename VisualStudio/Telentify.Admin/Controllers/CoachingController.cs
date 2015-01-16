@@ -8,7 +8,7 @@ using Telentify.Admin.Models;
 
 namespace Telentify.Admin.Controllers
 {
-    public class CoachingController : BaseController
+    public class CoachingController : AdminController
     {
 		public ActionResult Index()
 		{

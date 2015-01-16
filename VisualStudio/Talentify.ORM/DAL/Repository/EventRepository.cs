@@ -132,9 +132,15 @@ namespace Talentify.ORM.DAL.Repository
 		{
 			if (GetOpenSeats(eventId) > 0)
 			{
-				var registration = new EventRegistration() {UserId = userId, EventId = eventId, CreatedDate = DateTime.Now};
-				UnitOfWork.EventRegistrationRepository.Insert(registration);
-				UnitOfWork.Save();
+				var isRegistered = UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.UserId == userId && r.EventId == eventId) != null;
+
+				if (!isRegistered)
+				{
+					var registration = new EventRegistration() {UserId = userId, EventId = eventId, CreatedDate = DateTime.Now};
+					UnitOfWork.EventRegistrationRepository.Insert(registration);
+					UnitOfWork.Save();
+				}
+
 				return true;
 			}
 

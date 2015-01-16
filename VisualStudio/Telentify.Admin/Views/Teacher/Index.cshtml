@@ -1,0 +1,47 @@
+﻿@using System.Globalization
+@using Talentify.ORM.DAL.Models.User
+@model IEnumerable<Talentify.ORM.DAL.Models.User.Teacher>
+
+@{
+    ViewBag.Title = "ConfirmedList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<h2>Lehrer Registrierungen</h2>
+	
+	@using (Html.BeginForm("Update", "Teacher", FormMethod.Post, new {enctype = "multipart/form-data"}))
+	{
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Schule</th>
+				<th>Fächer</th>
+				<th>E-Mail</th>
+				<th>Telefon</th>
+				<th>Registriert am</th>
+				<th>Ist Aktiv</th>
+			</tr>
+			@foreach (var teacher in Model)
+			{
+				var isChecked = teacher.IsActive ? "checked" : "";
+				<tr>
+					<td>@teacher.Firstname @teacher.Surname</td>
+					<td>@teacher.School.Name</td>
+					<td>
+						@foreach (var subject in teacher.SubjectCategories)
+						{
+							@subject.Name<br/>
+						}
+					</td>
+					<td><a href="mailto:@teacher.Email">@teacher.Email</a></td>
+					<td>@teacher.Phone</td>
+					<td>@teacher.JoinedDate.ToString("g", new CultureInfo("de"))</td>
+					<td><input type="hidden" name="ids" value="@teacher.Id" /><input type="checkbox" name="isActive" value="@teacher.Id" @isChecked/></td>
+				</tr>
+			}
+		</table>
+		<input type="submit" value="Speichern" style="display: inline-block;margin: 10px;"/>
+	}
+
+</div>

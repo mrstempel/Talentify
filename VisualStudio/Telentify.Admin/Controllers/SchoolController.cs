@@ -11,7 +11,7 @@ using Talentify.ORM.Mvc;
 
 namespace Telentify.Admin.Controllers
 {
-	public class SchoolController : BaseController
+	public class SchoolController : AdminController
     {
 		private SelectList _allSchoolTypes;
 		public SelectList AllSchoolTypes

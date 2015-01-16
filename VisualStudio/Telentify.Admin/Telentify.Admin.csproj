@@ -83,6 +83,7 @@
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
     </Reference>
@@ -92,9 +93,11 @@
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -121,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CoachingController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -154,29 +158,101 @@
     <Content Include="Css\webfonts\2AA7EA_2_0.eot" />
     <Content Include="Css\webfonts\2AA7EA_2_0.ttf" />
     <Content Include="Css\webfonts\2AA7EA_2_0.woff" />
-    <None Include="Properties\PublishProfiles\talentify-admin - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\talentify-admin - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\talentify-me-admin - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\talentify-me-admin - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\talentify-me-admin-dev - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\talentify-me-admin-dev - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\logo.png" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <Content Include="Templates\EmailBlocked.html" />
     <Content Include="Templates\Email.html" />
     <Content Include="Templates\EmailDelete.html" />
     <Content Include="Templates\EmailNotification.html" />
     <Content Include="Templates\EmailTeacher.html" />
+    <Content Include="uploads\pages\03729679-0a0d-40cd-b03c-cacb4a7d9bb7.jpg" />
+    <Content Include="uploads\pages\0434038a-4f49-4e7d-9fdb-9776a5bed7d7.jpg" />
+    <Content Include="uploads\pages\05830d2f-d2a3-493c-aa3b-9181b11bfab6.jpg" />
+    <Content Include="uploads\pages\08fc38ea-bc23-44e4-ad76-a1161a39966d.jpg" />
+    <Content Include="uploads\pages\0d1f862f-1359-4280-9f6f-b033c8e508d6.png" />
     <Content Include="uploads\pages\198a6bb0-2a02-40ae-9c3a-59e7043989b4.png" />
+    <Content Include="uploads\pages\1b865177-f755-4b06-882a-ed042289cc61.jpg" />
+    <Content Include="uploads\pages\1c65d4b5-3dfb-438f-ab19-60488130c40f.jpg" />
+    <Content Include="uploads\pages\22bc390a-59a8-409d-b666-e779e8b6641b.png" />
     <Content Include="uploads\pages\23d4e600-4ddf-4ece-8c1c-b045912f20b9.png" />
+    <Content Include="uploads\pages\24d0173e-fd31-4483-a4f6-2ac938d6ce8e.jpg" />
+    <Content Include="uploads\pages\25f5beac-c629-4f70-ab57-97b76c32fd83.jpg" />
+    <Content Include="uploads\pages\26e2b446-8eac-401d-b8d1-19d13b11b4f5.jpg" />
+    <Content Include="uploads\pages\283b8e51-120f-4baa-acd1-08581104aa77.jpg" />
+    <Content Include="uploads\pages\2889b6b6-5371-45cf-9e6f-c65be842d716.jpg" />
+    <Content Include="uploads\pages\2bac6ef3-538c-4a99-9637-a921e8a83beb.jpg" />
+    <Content Include="uploads\pages\2bb85026-3d38-4816-b1dc-04bb94b68e59.jpg" />
+    <Content Include="uploads\pages\2e672605-2902-4e81-912f-fec21bb26661.jpg" />
+    <Content Include="uploads\pages\2eea670c-da44-4a7b-a415-ce7aa37af287.jpg" />
+    <Content Include="uploads\pages\322dfd53-2ab9-45ca-a1ad-21f420684ec6.jpg" />
+    <Content Include="uploads\pages\38e0394f-b92a-4186-a6c5-ca3725945cf7.jpg" />
+    <Content Include="uploads\pages\3a978348-4b45-4959-a79b-f587cf5809a8.jpg" />
+    <Content Include="uploads\pages\3e23608b-a8f0-4c48-997c-dc0443f80c68.jpg" />
     <Content Include="uploads\pages\3e73059f-86d8-40d6-b104-cc5910de7b8a.png" />
     <Content Include="uploads\pages\4212c0a1-1594-44aa-9a36-63b7e09489d7.png" />
+    <Content Include="uploads\pages\475c11e7-665f-436f-bfd0-49f3702b5709.jpg" />
+    <Content Include="uploads\pages\486e6115-5812-4f33-b68e-18a0a1360f26.png" />
+    <Content Include="uploads\pages\49b4f27a-4474-4924-87ff-e2a919fa8e23.png" />
+    <Content Include="uploads\pages\529dfcb8-f93c-4ebb-a72f-7d16e3e46a5d.png" />
+    <Content Include="uploads\pages\53d86032-0280-480f-b656-1e0e915d83f2.jpg" />
+    <Content Include="uploads\pages\59cc3b54-8751-4673-822b-b700756c2439.jpg" />
+    <Content Include="uploads\pages\5c3a3c71-c400-4b5d-9817-c25c7fcbc46b.jpg" />
+    <Content Include="uploads\pages\621bb04b-6793-4e65-a560-957c6f1ded68.jpg" />
     <Content Include="uploads\pages\63338e86-aead-4af7-8db6-719de450264b.png" />
+    <Content Include="uploads\pages\6354af78-9ff1-4475-a582-090692a35a2e.jpg" />
+    <Content Include="uploads\pages\63641892-7e50-41f3-b387-b8a35def49be.jpg" />
     <Content Include="uploads\pages\656758cd-58ad-4c2f-a383-c988a82027be.png" />
+    <Content Include="uploads\pages\667dee2d-a126-4c3c-87e9-6fe744cb250f.jpg" />
+    <Content Include="uploads\pages\67898768-6903-425a-b5de-8ffba9f6cf89.jpg" />
+    <Content Include="uploads\pages\69f8fbe8-9fdb-47e9-9b6f-f425ea2ca91f.jpg" />
+    <Content Include="uploads\pages\702217aa-3bf9-4fcf-963e-1161952d2c8e.jpg" />
+    <Content Include="uploads\pages\7076867b-c51e-4e6c-8b98-61c7da75ee0c.jpg" />
     <Content Include="uploads\pages\780813e2-2fe0-450f-ad7d-6eb9f919d001.png" />
     <Content Include="uploads\pages\78aab5e6-efb1-4132-b9c2-d542a1769439.png" />
+    <Content Include="uploads\pages\78d5e646-f83a-4bcd-a4d9-c6c038a8e105.jpg" />
+    <Content Include="uploads\pages\7f034058-c9ab-42f7-bde7-cfc70a81ff23.png" />
+    <Content Include="uploads\pages\83ca28d5-ae3e-4004-952e-1f50275f96d1.jpg" />
+    <Content Include="uploads\pages\85395fa2-f1b5-4e80-baeb-5b7ed86315e0.jpg" />
+    <Content Include="uploads\pages\896933e8-38d8-49fe-89b6-6f36054a274e.png" />
+    <Content Include="uploads\pages\8b94ac03-c558-46ad-9135-ef429a1e675d.jpg" />
+    <Content Include="uploads\pages\8f1a7bfa-d10a-4f96-a031-39c655fb8e33.jpg" />
+    <Content Include="uploads\pages\8f628d00-5d85-4faf-92ed-31f6231e3a14.png" />
+    <Content Include="uploads\pages\91cc91f3-0fe3-4a18-8313-7e3c093a203f.jpg" />
+    <Content Include="uploads\pages\958eb64e-1978-4020-8625-0fdd90c61502.png" />
+    <Content Include="uploads\pages\99b8cc83-768d-40cd-bf5d-495dc0c10aa5.jpg" />
+    <Content Include="uploads\pages\9a6bc1e9-dd8b-432c-a581-b5574a539740.png" />
+    <Content Include="uploads\pages\9b9db2d6-57ed-4afd-86b0-1b93eb54d7b0.png" />
+    <Content Include="uploads\pages\9c50974c-b36e-4515-807f-e43800368a3b.jpg" />
+    <Content Include="uploads\pages\a1b36098-0650-4ce4-bb55-810a488d20e5.jpg" />
+    <Content Include="uploads\pages\a4db646e-0a91-46c2-bd74-e628f88c6393.jpg" />
+    <Content Include="uploads\pages\a5ccb6af-8ed4-4fa9-afd4-8fd1f72fc066.png" />
+    <Content Include="uploads\pages\a6613245-2967-41f1-8f9b-138966429b2d.png" />
+    <Content Include="uploads\pages\a69a5f89-e93b-4d03-9d30-f8fec0d3350a.jpg" />
+    <Content Include="uploads\pages\a7d8743f-bc29-4cc9-b236-4c6bed3cdfd4.jpg" />
+    <Content Include="uploads\pages\ac82f970-6fe9-4e90-949a-394717547902.jpg" />
+    <Content Include="uploads\pages\ad6c8da4-3592-4d7e-98e8-19f75078d8db.jpg" />
     <Content Include="uploads\pages\b1612fa7-b26e-4423-a07e-36556b0edb1e.png" />
+    <Content Include="uploads\pages\c08dc6da-28cc-4a6a-ab25-f9277a79f0ef.jpg" />
+    <Content Include="uploads\pages\c41e2861-3622-4059-96d2-91c401ee95c7.jpg" />
     <Content Include="uploads\pages\c734ffc1-d34f-43e6-828a-f97c8765e900.png" />
+    <Content Include="uploads\pages\c8be463e-e3ed-4011-a73b-33c8da952092.jpg" />
+    <Content Include="uploads\pages\cb62c028-1810-49ac-addc-68f04659ba4a.png" />
+    <Content Include="uploads\pages\d14a3a2f-b249-49e7-b08f-f51ed7fa4eb4.png" />
     <Content Include="uploads\pages\db50af7f-47b2-4964-b17d-1ffcdf69a9b4.png" />
     <Content Include="uploads\pages\e5fe0e94-c80a-49ca-9a49-4b55815fa372.png" />
+    <Content Include="uploads\pages\e80713c4-d44f-4782-9126-eb0ed9d10cdb.jpg" />
     <Content Include="uploads\pages\ef210547-9437-4229-a86a-dece758a8879.png" />
+    <Content Include="uploads\pages\f199917b-c30d-42ae-a7ae-8e8c28fa585e.jpg" />
+    <Content Include="uploads\pages\f610f6cd-a5f2-463c-8f12-e0ac6a1dfb64.jpg" />
+    <Content Include="uploads\pages\f8a6748c-eb4c-4d3e-9e3b-9c73156b1067.jpg" />
+    <Content Include="uploads\pages\f8e7e742-e46d-478a-8846-19aa05fcca87.jpg" />
+    <Content Include="uploads\pages\f9610f16-3a90-40ab-9cf9-a86d98c87c84.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -208,6 +284,7 @@
     <Content Include="Views\Subject\Index.cshtml" />
     <Content Include="Views\Coaching\Index.cshtml" />
     <Content Include="Views\Coaching\Details.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

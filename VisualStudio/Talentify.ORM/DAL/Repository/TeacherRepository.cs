@@ -99,7 +99,7 @@ namespace Talentify.ORM.DAL.Repository
 
 		public IEnumerable<SearchResultItem> Search(SearchParams searchParams)
 		{
-			var teachers = Get();
+			var teachers = Get(t => t.IsActive);
 			if (searchParams.SchoolId != 0)
 				teachers = teachers.Where(t => t.SchoolId == searchParams.SchoolId);
 			if (searchParams.SubjectCategoryId != 0)

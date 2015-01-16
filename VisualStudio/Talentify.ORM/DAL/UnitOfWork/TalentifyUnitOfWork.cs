@@ -14,6 +14,7 @@ using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.School;
+using Talentify.ORM.DAL.Models.Tracking;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.DAL.Repository;
 
@@ -27,10 +28,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_schoolTypeRepository == null)
-					_schoolTypeRepository = new TalentifyRepository<SchoolType>(this.Context);
-
-				return _schoolTypeRepository;
+				return _schoolTypeRepository ?? 
+					(_schoolTypeRepository = new TalentifyRepository<SchoolType>(this.Context));
 			}
 		}
 
@@ -39,22 +38,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_schoolRepository == null)
-					_schoolRepository = new SchoolRepository(this.Context);
-
-				return _schoolRepository;
+				return _schoolRepository ?? 
+					(_schoolRepository = new SchoolRepository(this.Context));
 			}
 		}
 
 		private IRepository<SubjectCategory> _subjectCategoryRepository;
 		public IRepository<SubjectCategory> SubjectCategoryRepository
 		{
-			get
+			get 
 			{
-				if (_subjectCategoryRepository == null)
-					_subjectCategoryRepository = new TalentifyRepository<SubjectCategory>(this.Context);
-
-				return _subjectCategoryRepository;
+				return _subjectCategoryRepository ??
+				       (_subjectCategoryRepository = new TalentifyRepository<SubjectCategory>(this.Context));
 			}
 		}
 
@@ -63,34 +58,38 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_coachingOfferRepository == null)
-					_coachingOfferRepository = new CoachingOfferRepository(this.Context);
-
-				return _coachingOfferRepository;
+				return _coachingOfferRepository ?? 
+					(_coachingOfferRepository = new CoachingOfferRepository(this.Context));
 			}
 		}
 
 		private CoachingRequestRepository _coachingRequestRepository;
 		public CoachingRequestRepository CoachingRequestRepository
 		{
-			get
+			get 
 			{
-				if (_coachingRequestRepository == null)
-					_coachingRequestRepository = new CoachingRequestRepository(this.Context);
-
-				return _coachingRequestRepository;
+				return _coachingRequestRepository ?? 
+					(_coachingRequestRepository = new CoachingRequestRepository(this.Context));
 			}
 		}
 
 		private IRepository<CoachingRequestStatus> _coachingRequestStatusRepository;
 		public IRepository<CoachingRequestStatus> CoachingRequestStatusRepository
 		{
+			get 
+			{
+				return _coachingRequestStatusRepository ??
+				       (_coachingRequestStatusRepository = new TalentifyRepository<CoachingRequestStatus>(this.Context));
+			}
+		}
+
+		private CoachingTimeRepository _coachingTimeRepository;
+		public CoachingTimeRepository CoachingTimeRepository
+		{
 			get
 			{
-				if (_coachingRequestStatusRepository == null)
-					_coachingRequestStatusRepository = new TalentifyRepository<CoachingRequestStatus>(this.Context);
-
-				return _coachingRequestStatusRepository;
+				return _coachingTimeRepository ??
+					(_coachingTimeRepository = new CoachingTimeRepository(this.Context));
 			}
 		}
 
@@ -99,10 +98,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_baseUserRepository == null)
-					_baseUserRepository = new BaseUserRepository<BaseUser>(this.Context);
-
-				return _baseUserRepository;
+				return _baseUserRepository ?? 
+					(_baseUserRepository = new BaseUserRepository<BaseUser>(this.Context));
 			}
 		}
 
@@ -111,10 +108,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_studentRepository == null)
-					_studentRepository = new StudentRepository(this.Context);
-
-				return _studentRepository;
+				return _studentRepository ?? 
+					(_studentRepository = new StudentRepository(this.Context));
 			}
 		}
 
@@ -123,10 +118,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_teacherRepository == null)
-					_teacherRepository = new TeacherRepository(this.Context);
-
-				return _teacherRepository;
+				return _teacherRepository ?? 
+					(_teacherRepository = new TeacherRepository(this.Context));
 			}
 		}
 
@@ -135,10 +128,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_adminRepository == null)
-					_adminRepository = new BaseUserRepository<Admin>(this.Context);
-
-				return _adminRepository;
+				return _adminRepository ?? 
+					(_adminRepository = new BaseUserRepository<Admin>(this.Context));
 			}
 		}
 
@@ -147,22 +138,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_actionTokenRepository == null)
-					_actionTokenRepository = new ActionTokenRepository(this.Context);
-
-				return _actionTokenRepository;
+				return _actionTokenRepository ?? 
+					(_actionTokenRepository = new ActionTokenRepository(this.Context));
 			}
 		}
 
 		private IRepository<UserSettings> _userSettingsRepository;
 		public IRepository<UserSettings> UserSettingsRepository
 		{
-			get
+			get 
 			{
-				if (_userSettingsRepository == null)
-					_userSettingsRepository = new TalentifyRepository<UserSettings>(this.Context);
-
-				return _userSettingsRepository;
+				return _userSettingsRepository ?? 
+					(_userSettingsRepository = new TalentifyRepository<UserSettings>(this.Context));
 			}
 		}
 
@@ -171,34 +158,29 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_registerCodeRepository == null)
-					_registerCodeRepository = new RegisterCodeRepository(this.Context);
-
-				return _registerCodeRepository;
+				return _registerCodeRepository ?? 
+					(_registerCodeRepository = new RegisterCodeRepository(this.Context));
 			}
 		}
 
 		private IRepository<Talentify.ORM.DAL.Models.Membership.Membership> _membershipRepository;
 		public IRepository<Talentify.ORM.DAL.Models.Membership.Membership> MembershipRepository
 		{
-			get
+			get 
 			{
-				if (_membershipRepository == null)
-					_membershipRepository = new TalentifyRepository<Talentify.ORM.DAL.Models.Membership.Membership>(this.Context);
-
-				return _membershipRepository;
+				return _membershipRepository ??
+				       (_membershipRepository =
+					       new TalentifyRepository<Talentify.ORM.DAL.Models.Membership.Membership>(this.Context));
 			}
 		}
 
 		private IRepository<Subscription> _subscriptionRepository;
 		public IRepository<Subscription> SubscriptionRepository
 		{
-			get
+			get 
 			{
-				if (_subscriptionRepository == null)
-					_subscriptionRepository = new TalentifyRepository<Subscription>(this.Context);
-
-				return _subscriptionRepository;
+				return _subscriptionRepository ?? 
+					(_subscriptionRepository = new TalentifyRepository<Subscription>(this.Context));
 			}
 		}
 
@@ -207,10 +189,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_basePageRepository == null)
-					_basePageRepository = new BasePageRepository<BasePage>(this.Context);
-
-				return _basePageRepository;
+				return _basePageRepository ?? 
+					(_basePageRepository = new BasePageRepository<BasePage>(this.Context));
 			}
 		}
 
@@ -219,22 +199,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_eventRepository == null)
-					_eventRepository = new EventRepository(this.Context);
-
-				return _eventRepository;
+				return _eventRepository ?? 
+					(_eventRepository = new EventRepository(this.Context));
 			}
 		}
 
 		private EventRegistrationRepository _eventRegistrationRepository;
 		public EventRegistrationRepository EventRegistrationRepository
 		{
-			get
+			get 
 			{
-				if (_eventRegistrationRepository == null)
-					_eventRegistrationRepository = new EventRegistrationRepository(this.Context);
-
-				return _eventRegistrationRepository;
+				return _eventRegistrationRepository ??
+					(_eventRegistrationRepository = new EventRegistrationRepository(this.Context));
 			}
 		}
 
@@ -243,10 +219,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_conversationRepository == null)
-					_conversationRepository = new ConversationRepository(this.Context);
-
-				return _conversationRepository;
+				return _conversationRepository ?? 
+					(_conversationRepository = new ConversationRepository(this.Context));
 			}
 		}
 
@@ -255,22 +229,18 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_messageRepository == null)
-					_messageRepository = new TalentifyRepository<Message>(this.Context);
-
-				return _messageRepository;
+				return _messageRepository ?? 
+					(_messageRepository = new TalentifyRepository<Message>(this.Context));
 			}
 		}
 
 		private IRepository<MessageRecipient> _messageRecipientRepository;
 		public IRepository<MessageRecipient> MessageRecipientRepository
 		{
-			get
+			get 
 			{
-				if (_messageRecipientRepository == null)
-					_messageRecipientRepository = new TalentifyRepository<MessageRecipient>(this.Context);
-
-				return _messageRecipientRepository;
+				return _messageRecipientRepository ??
+					(_messageRecipientRepository = new TalentifyRepository<MessageRecipient>(this.Context));
 			}
 		}
 
@@ -279,10 +249,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_notificationRepository == null)
-					_notificationRepository = new NotificationRepository(this.Context);
-
-				return _notificationRepository;
+				return _notificationRepository ?? 
+					(_notificationRepository = new NotificationRepository(this.Context));
 			}
 		}
 
@@ -291,10 +259,8 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_bonuspointRepository == null)
-					_bonuspointRepository = new BonusPointRepository(this.Context);
-
-				return _bonuspointRepository;
+				return _bonuspointRepository ?? 
+					(_bonuspointRepository = new BonusPointRepository(this.Context));
 			}
 		}
 
@@ -303,22 +269,28 @@ namespace Talentify.ORM.DAL.UnitOfWork
 		{
 			get
 			{
-				if (_badgeRepository == null)
-					_badgeRepository = new BadgeRepository(this.Context);
-
-				return _badgeRepository;
+				return _badgeRepository ?? 
+					(_badgeRepository = new BadgeRepository(this.Context));
 			}
 		}
 
 		private TalentometerLevelRepository _talentometerLevelRepository;
 		public TalentometerLevelRepository TalentometerLevelRepository
 		{
-			get
+			get 
 			{
-				if (_talentometerLevelRepository == null)
-					_talentometerLevelRepository = new TalentometerLevelRepository(this.Context);
+				return _talentometerLevelRepository ??
+					(_talentometerLevelRepository = new TalentometerLevelRepository(this.Context));
+			}
+		}
 
-				return _talentometerLevelRepository;
+		private IRepository<TrackingClick> _trackingClickRepository;
+		public IRepository<TrackingClick> TrackingClickRepository
+		{
+			get 
+			{
+				return _trackingClickRepository ?? 
+					(_trackingClickRepository = new TalentifyRepository<TrackingClick>(this.Context));
 			}
 		}
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Talentify.ORM.DAL.Models.User;
 
 namespace Talentify.ORM.Mvc.Security
 {
@@ -12,8 +13,8 @@ namespace Talentify.ORM.Mvc.Security
 		public override void OnActionExecuting(ActionExecutingContext filterContext)
 		{
 			if (filterContext.HttpContext.Session == null || 
-				(filterContext.HttpContext.Session["WebContext.HasSchool"] == null || 
-				(bool)filterContext.HttpContext.Session["WebContext.HasSchool"] == false))
+				(filterContext.HttpContext.Session["WebContext.Student"] == null ||
+				((Student)filterContext.HttpContext.Session["WebContext.Student"]).HasSchool == false))
 			{
 				var res = filterContext.HttpContext.Response;
 				res.Redirect("/Start");

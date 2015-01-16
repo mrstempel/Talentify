@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, .form-container.search .checkbox-container, .form-container.coaching-center-filter .checkbox-container, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
+﻿.box-sizing, .input-switch .option, .filter-container, .form-container.search .checkbox-container, .form-container.coaching-center-filter .checkbox-container, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, div.timetable, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -59,6 +59,10 @@ input[type="button"], input[type="submit"], .link-button {
   border-radius: 0;
   text-decoration: none;
   cursor: pointer; }
+
+input[type="button"]:disabled, input[type="submit"]:disabled, .link-button:disabled, input[type="button"].disabled, input[type="submit"].disabled, .link-button.disabled {
+  background: #ccc !important;
+  cursor: wait !important; }
 
 input[type="button"].red, input[type="submit"].red, .link-button.red {
   background: #fef3f5;
@@ -207,6 +211,33 @@ iframe {
       margin: 0 0 10px 0; }
   .form-container .border-bottom {
     border-bottom: 1px solid #e3e4e8 !important; }
+
+.filter-container {
+  display: inline-block;
+  width: 100%;
+  padding: 20px 20px 0 20px;
+  text-align: left !important; }
+  .filter-container label {
+    font-size: 14px;
+    display: inline-block;
+    margin: 0 10px 0 0;
+    font-family: CaeciliaLTPro-85Heavy;
+    color: #999; }
+  .filter-container a {
+    font-size: 16px;
+    display: inline-block;
+    margin: 0 5px 0 0;
+    padding: 3px 10px;
+    text-decoration: none;
+    border: 1px solid #fff; }
+  .filter-container a:hover {
+    border: 1px solid #0eb48d; }
+  .filter-container a.on {
+    background: #0eb48d;
+    color: #fff; }
+
+#no-filter-results {
+  display: none; }
 
 #no-school-info, #register-code-info {
   font-size: 14px;
@@ -859,8 +890,6 @@ header.search-map-overlay {
       font-size: 14px; }
     #search-results article .comments {
       margin: 10px 0 0 0; }
-  #search-results article:nth-child(2n) {
-    float: right !important; }
   #search-results article:hover {
     background: #e6f7f3; }
 
@@ -1203,16 +1232,18 @@ article.event-detail .content-container {
       font-weight: bold; }
 .user-profile article.my-profile, .user-settings article.my-profile {
   font-size: 16px; }
-.user-profile article.user-profile .left, .user-settings article.user-profile .left {
-  max-height: 334px;
-  overflow: hidden; }
-  .user-profile article.user-profile .left .profile-img, .user-settings article.user-profile .left .profile-img {
-    margin: 0;
-    width: 334px; }
-.user-profile article.user-profile .right p, .user-settings article.user-profile .right p {
-  text-align: left !important; }
-.user-profile article.user-profile .right .row .right, .user-settings article.user-profile .right .row .right {
-  padding: 0; }
+.user-profile article.user-profile, .user-settings article.user-profile {
+  font-size: 16px; }
+  .user-profile article.user-profile .left, .user-settings article.user-profile .left {
+    max-height: 334px;
+    overflow: hidden; }
+    .user-profile article.user-profile .left .profile-img, .user-settings article.user-profile .left .profile-img {
+      margin: 0;
+      width: 334px; }
+  .user-profile article.user-profile .right p, .user-settings article.user-profile .right p {
+    text-align: left !important; }
+  .user-profile article.user-profile .right .row .right, .user-settings article.user-profile .right .row .right {
+    padding: 0; }
 .user-profile input[type="button"], .user-settings input[type="button"] {
   cursor: pointer; }
 
@@ -1631,6 +1662,31 @@ article.event-detail .content-container {
   display: inline; }
   #my-offers .link-button:last-child {
     margin: 0 5px 0 0 !important; }
+
+#my-times {
+  display: inline; }
+  #my-times .link-button:last-child {
+    margin: 0 5px 0 0 !important; }
+
+a.timetable, div.timetable {
+  font-size: 14px !important;
+  background: #fff;
+  color: #0eb48d; }
+  a.timetable .day, div.timetable .day {
+    font-family: CaeciliaLTPro-85Heavy; }
+  a.timetable .time, div.timetable .time {
+    width: auto; }
+
+div.timetable {
+  margin: 0 10px 10px 0;
+  display: inline-block;
+  border: 1px solid #0eb48d;
+  font-size: 16px;
+  padding: 5px 10px !important;
+  min-width: 113px !important;
+  text-align: center !important;
+  border-radius: 0;
+  text-decoration: none; }
 
 .msg-container {
   display: none; }

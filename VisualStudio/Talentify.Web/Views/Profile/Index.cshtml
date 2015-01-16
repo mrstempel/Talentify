@@ -12,28 +12,6 @@
 			<div id="msg-success" class="msg success"><h2>Dein Profil wurde erfolgreich aktualisiert.</h2></div>
 		</article>
 	</section>
-	@*@if (HasSearchSession)
-	{
-		<section id="search-session-view">
-			<article>
-				<div class="prev-item">
-					<a href="/Profile/Index/@SearchSession.PrevItem.Id" class="image-link" style="background: url('@SearchSession.PrevItem.Image');"></a>
-					<h3>@SearchSession.PrevItem.Name</h3>
-					<p>@SearchSession.PrevItem.Address<br/>@SearchSession.PrevItem.School</p>
-				</div>
-				<div class="search-params">
-					Treffer: @SearchSession.Items.Count<br/>
-					Klasse: @SearchSession.SearchParams.Class<br/>
-					Fach: @SearchSession.SearchParams.SubjectCategory.Name
-				</div>
-				<div class="next-item">
-					<a href="/Profile/Index/@SearchSession.NextItem.Id" class="image-link" style="background: url('@SearchSession.NextItem.Image');"></a>
-					<h3>@SearchSession.NextItem.Name</h3>
-					<p>@SearchSession.NextItem.Address<br/>@SearchSession.NextItem.School</p>
-				</div>
-			</article>
-		</section>
-	}*@
 	@if (Model.Id == LoggedUser.Id)
 	{
 		@Html.Partial("_MyProfile")

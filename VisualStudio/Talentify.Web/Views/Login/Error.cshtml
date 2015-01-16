@@ -29,11 +29,18 @@
 		<div class="msg-container visible">
 			<div id="msg-error" class="msg error">
 				<h2>Login fehlgeschlagen</h2>
-				<p>Falsche Login Daten!</p>
+				@if (@ViewBag.BlockedReason != null && !string.IsNullOrEmpty(@ViewBag.BlockedReason.ToString()))
+				{
+					<p>Dein Account wurde vorübergehend von uns aus folgendem Grund deaktiviert: @ViewBag.BlockedReason. Bitte melde dich unter <a href="mailto:hallo@talentify.me">hallo@talentify.me</a> für weitere Informationen.</p>	
+				}
+				else
+				{
+					<p>Falsche Login Daten!</p>	
+				}
 			</div>
 		</div>
-		@using (Html.BeginForm("Login", "Login", FormMethod.Post, new {@class = "form-container register"}))
-		{
+		@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-container register" }))
+  {
 			<article class="password-form">
 				
 				<div class="field-container">

@@ -56,6 +56,7 @@ namespace Talentify.ORM.DAL.Repository
 						join school in UnitOfWork.SchoolRepository.AsQueryable() on student.SchoolId equals school.Id
 						where 
 							student.IsCoachingEnabled &&
+							student.IsActive && 
 							offer.FromClass <= searchParams.Class &&
 							offer.ToClass >= searchParams.Class &&
 							offer.SubjectCategoryId == searchParams.SubjectCategoryId &&
@@ -68,7 +69,9 @@ namespace Talentify.ORM.DAL.Repository
 								: "/Images/default-profile-medium.png",
 					Name = student.Firstname + " " + student.Surname,
 					Address = school.ZipCode + "-" + school.City,
+					City = school.City,
 					School = school.Name,
+					SchoolId = school.Id,
 					Comments = offer.Comments
 				};
 

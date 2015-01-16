@@ -1,0 +1,76 @@
+﻿@model Talentify.ORM.DAL.Models.Coaching.CoachingTime
+
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+}
+
+<script>
+	$(document).ready(function()
+	{
+		// set day
+		$('#Day').val('@(Convert.ToInt16(@Model.Day))');
+		// set from
+		$('#From').val('@Model.From');
+		// set to
+		$('#To').val('@Model.To');
+	});
+</script>
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-error" class="msg error"><h2>Speicherfehler</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
+		<div id="msg-success" class="msg success"><p>Deine Lernhilfezeit wurde gespeichert.</p></div>
+	</div>
+	@if (FormSuccess == null)
+	{
+		using (Html.BeginForm("EditCoachingTime", "Profile", FormMethod.Post, new {@class = "form-container", @id = "add-coaching-time-form"}))
+		{
+			@Html.HiddenFor(m => m.UserId)
+			@Html.HiddenFor(m => m.Id)
+			<input type="hidden" name="deleteTime" id="deleteTime" value="false"/>
+			<div class="field-container">
+				<label>Zeitangabe:</label>
+				<select style="width:25%" class="mandatory" name="Day" id="Day">
+					<option value="">Tag</option>
+					<option value="0">Mo</option>
+					<option value="1">Di</option>
+					<option value="2">Mi</option>
+					<option value="3">Do</option>
+					<option value="4">Fr</option>
+					<option value="5">Sa</option>
+					<option value="6">So</option>
+				</select>
+				<select style="width:25%;margin-left: 5px;" class="mandatory" name="From" id="From">
+					<option value="">von</option>
+					@for (int i = 8; i <= 20; i++)
+					{
+						var val = (i < 10) ? "0" + i : i.ToString();
+						<option value="@(@val):00">@(@val):00</option>
+						<option value="@(@val):30">@(@val):30</option>
+					}
+				</select>
+				<select style="width:25%;margin-left: 5px;" class="mandatory" name="To" id="To">
+					<option value="">bis</option>
+					@for (int i = 8; i <= 20; i++)
+					{
+						var val = (i < 10) ? "0" + i : i.ToString();
+						<option value="@(@val):00">@(@val):00</option>
+						<option value="@(@val):30">@(@val):30</option>
+					}
+				</select>
+			</div>
+			<div class="field-container" style="margin:10px 0 0 0;">
+				<input type="submit" id="add-coaching-time-btn" value="Speichern" onclick="return validateCoachingTimeForm(); "/>
+				<input type="submit" value="Lernhilfezeit löschen" onclick="return checkDeleteCoachingTime();" class="red" style="border-bottom: 1px solid #ef4d69 !important;"/>
+			</div>
+		}
+	}
+	else
+	{
+		<script>
+			window.parent.loadMyCoachingTimes(true, @LoggedUser.Id);
+			setTimeout(function () { window.parent.hideModal('modal-edit-coaching-time'); }, 3000);
+		</script>
+	}
+</article>

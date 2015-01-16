@@ -60,6 +60,18 @@ function initForms()
 	initMandatoryFields();
 }
 
+function validateMandatoryFieldsWithLock(lockInputId)
+{
+	$('#' + lockInputId).addClass('disabled');
+	if (!validateMandatoryFields())
+	{
+		$('#' + lockInputId).removeClass('disabled');
+		return false;
+	}
+
+	return true;
+}
+
 function validateMandatoryFields()
 {
 	showErrorMarkers = true;
@@ -265,15 +277,35 @@ function validateProfileForm()
 
 function validateCoachingForm()
 {
+	$('#add-coaching-subject-btn').attr('disabled', 'disabled');
 	var isValid = true;
 
 	// check mandatory fields
 	if (!validateMandatoryFields())
 	{
+		$('#add-coaching-subject-btn').removeAttr('disabled');
 		return false;
 	}
 
+	$('#add-coaching-form').submit();
+
 	return isValid;
+}
+
+function validateCoachingTimeForm()
+{
+	$('#add-coaching-time-btn').attr('disabled', 'disabled');
+
+	// check mandatory fields
+	if (!validateMandatoryFields())
+	{
+		$('#add-coaching-time-btn').removeAttr('disabled');
+		return false;
+	}
+
+	$('#add-coaching-time-form').submit();
+
+	return true;
 }
 
 function validateSurvey()
@@ -322,6 +354,17 @@ function checkDeleteCoachingOffer()
 	if (confirm('Willst du diese Lernhilfe wirklich löschen?'))
 	{
 		$('#deleteOffer').val('true');
+		return true;
+	}
+
+	return false;
+}
+
+function checkDeleteCoachingTime()
+{
+	if (confirm('Willst du diese Lernhilfezeit wirklich löschen?'))
+	{
+		$('#deleteTime').val('true');
 		return true;
 	}
 

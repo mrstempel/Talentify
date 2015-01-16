@@ -60,6 +60,8 @@ namespace Talentify.ORM.DAL.Models.User
 		public bool IsPictureLandscape { get; set; }
 
 		public bool IsDeleted { get; set; }
+		public bool IsActive { get; set; }
+		public string BlockedReason { get; set; }
 
 		public ICollection<BonusPoint> BonusPoints { get; set; }
 		public virtual ICollection<Badge> Badges { get; set; } 

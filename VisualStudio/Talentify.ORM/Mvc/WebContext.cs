@@ -48,21 +48,49 @@ namespace Talentify.ORM.Mvc
 			}
 		}
 
+		private bool StudentCheck
+		{
+			get
+			{
+				return (HttpContext.Current.Session["WebContext.StudentCheck"] != null) && Convert.ToBoolean(HttpContext.Current.Session["WebContext.StudentCheck"]);
+			}
+			set { HttpContext.Current.Session["WebContext.StudentCheck"] = value; }
+		}
+
+		public Student Student
+		{
+			get
+			{
+				if (!StudentCheck)
+				{
+					HttpContext.Current.Session["WebContext.Student"] = unitOfWork.StudentRepository.GetById(this.User.Id);
+					StudentCheck = true;
+				}
+
+				return (Student)HttpContext.Current.Session["WebContext.Student"];
+			}
+			set
+			{
+				HttpContext.Current.Session["WebContext.Student"] = value;
+			}
+		}
+
 		public bool HasSchool
 		{
 			get
 			{
-				if (HttpContext.Current.Session["WebContext.HasSchool"] == null)
-				{
-					var student = unitOfWork.StudentRepository.GetById(this.User.Id);
-					HttpContext.Current.Session["WebContext.HasSchool"] = (student != null && student.HasSchool);
-				}
-				return (bool)HttpContext.Current.Session["WebContext.HasSchool"];
+				return (Student != null && Student.HasSchool);
+				//if (HttpContext.Current.Session["WebContext.HasSchool"] == null)
+				//{
+				//	var student = unitOfWork.StudentRepository.GetById(this.User.Id);
+				//	HttpContext.Current.Session["WebContext.HasSchool"] = (student != null && student.HasSchool);
+				//}
+				//return (bool)HttpContext.Current.Session["WebContext.HasSchool"];
 			}
-			set
-			{
-				HttpContext.Current.Session["WebContext.HasSchool"] = value;
-			}
+			//set
+			//{
+			//	HttpContext.Current.Session["WebContext.HasSchool"] = value;
+			//}
 		}
 
 		public bool IsCoachingEnabled
@@ -98,6 +126,7 @@ namespace Talentify.ORM.Mvc
 			this.User = null;
 			this.SearchSession = null;
 			HttpContext.Current.Session["WebContext.HasSchool"] = null;
+			HttpContext.Current.Session["WebContext.StudentCheck"] = null;
 		}
 
 		public WebContext(TalentifyUnitOfWork<TalentifyContext> unitOfWork)

@@ -246,10 +246,12 @@ namespace Talentify.ORM.Mvc.Security
 			unitOfWork.ProxyCreationEnabled = false;
 			var webContext = new WebContext(unitOfWork);
 			var user = unitOfWork.BaseUserRepository.GetUserFromLogin(email);
+			HttpContext.Current.Session["BlockedReason"] = null;
 			
 			// system login
 			if (user != null &&
 				user.RegisterCode == null &&
+				user.IsActive &&
 				user.Password == password)
 			{
 				setuserSettings(user, unitOfWork);
@@ -260,11 +262,17 @@ namespace Talentify.ORM.Mvc.Security
 			// user login
 			if (user != null &&
 				user.RegisterCode == null &&
+				user.IsActive &&
 				PasswordHashing.ValidatePassword(password, user.Password))
 			{
 				setuserSettings(user, unitOfWork);
 				webContext.User = user;
 				return true;
+			}
+
+			if (user != null && !user.IsActive)
+			{
+				HttpContext.Current.Session["BlockedReason"] = user.BlockedReason;
 			}
 
 			// no valid user

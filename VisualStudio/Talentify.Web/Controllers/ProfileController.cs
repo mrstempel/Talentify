@@ -114,25 +114,16 @@ namespace Talentify.Web.Controllers
 					return View(student);
 				}
 
-				if (student.SchoolId.HasValue && 
-					Convert.ToInt32(Request["OldSchoolId"]) == 0)
-				{
-					this.WebContext.HasSchool = true;
-				}
+				this.WebContext.Student = student;
+
+				//if (student.SchoolId.HasValue && 
+				//	Convert.ToInt32(Request["OldSchoolId"]) == 0)
+				//{
+				//	this.WebContext.HasSchool = true;
+				//}
 
 				UnitOfWork.StudentRepository.Update(student);
 				UnitOfWork.Save();
-
-				//if (!student.SchoolId.HasValue)
-				//{
-				//	this.WebContext.HasSchool = false;
-				//	// send mail with school suggestion
-				//	var mailMsg = new MailMessage(new MailAddress(student.Email),
-				//		new MailAddress(ConfigurationManager.AppSettings["Email.Feedback.To"]));
-				//	mailMsg.Subject = "Neuer Schulvorschlag";
-				//	mailMsg.Body = string.Format("{0} {1} (Email: {2}) hat eine neue Schule vorgeschlagen: {3}", student.Firstname, student.Surname, student.Email, Request["NewSchool"]);
-				//	Email.Send(mailMsg);
-				//}
 
 				return RedirectToAction("Index", new { id = 0, f = true });
 			}
@@ -242,6 +233,62 @@ namespace Talentify.Web.Controllers
 			}
 			
 			return View();
+		}
+
+		[RequireActiveSchool]
+		public ActionResult AddCoachingTime()
+		{
+			return View(new CoachingTime() { UserId = LoggedUser.Id });
+		}
+
+		[RequireActiveSchool]
+		[HttpPost]
+		public ActionResult AddCoachingTime(CoachingTime coachingTime)
+		{
+			try
+			{
+				UnitOfWork.CoachingTimeRepository.Set(coachingTime);
+				UnitOfWork.Save();
+				FormSuccess = new FormFeedback();
+			}
+			catch (Exception ex)
+			{
+				FormError = new FormFeedback();
+			}
+
+			return View(coachingTime);
+		}
+
+		public ActionResult EditCoachingTime(CoachingTimeDay day)
+		{
+			return View(UnitOfWork.CoachingTimeRepository.GetByDay(LoggedUser.Id, day));
+		}
+
+		[RequireActiveSchool]
+		[HttpPost]
+		public ActionResult EditCoachingTime(CoachingTime coachingTime, bool deleteTime)
+		{
+			try
+			{
+				if (deleteTime)
+				{
+					UnitOfWork.CoachingTimeRepository.Delete(coachingTime);
+					UnitOfWork.Save();
+					FormSuccess = new FormFeedback() { Headline = "Lernhilfezeit gelöscht", Text = "Die Lernhilfezeit wurde von deinem Profil entfernt." };
+				}
+				else
+				{
+					UnitOfWork.CoachingTimeRepository.Set(coachingTime);
+					UnitOfWork.Save();
+					FormSuccess = new FormFeedback();
+				}
+			}
+			catch (Exception ex)
+			{
+				FormError = new FormFeedback();
+			}
+
+			return View(coachingTime);
 		}
 
 		public ActionResult CoachingRequest(int toUserId, int searchClass, int subjectCategoryId)

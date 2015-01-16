@@ -25,6 +25,9 @@ namespace Talentify.ORM.DAL.Migrations
 			seeder.Add(new BadgeSeeder(context));
 			seeder.Add(new TalentometerLevelSeeder(context));
 			seeder.Add(new NewSchoolSeeder1(context));
+			seeder.Add(new NewSchoolTypeSeeder1(context));
+			seeder.Add(new AdminSeeder2(context));
+			seeder.Add(new IsActiveSeeder(context));
 
 			foreach (var baseSeeder in seeder)
 			{

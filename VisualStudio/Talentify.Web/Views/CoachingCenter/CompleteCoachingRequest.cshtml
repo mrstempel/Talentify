@@ -14,7 +14,6 @@
 	{
 		duration = Model.Duration.ToString().Substring(0, 3).Replace(".", ",");
 	}
-	
 
 	if (Model.Ratings.Any(r => r.FromUserId == LoggedUser.Id))
 	{
@@ -221,10 +220,12 @@
 	<span>Oder Lernhilfe hat nicht stattgefunden</span>
 	<select id="cancel-reason" class="mandatory">
 		<option value="">Grund auswählen</option>
-		<option value="Abstehende Ohren">Abstehende Ohren</option>
-		<option value="Das Wetter war zu schön">Das Wetter war zu schön</option>
-		<option value="Turnsackerl vergessen">Turnsackerl vergessen</option>
-		<option value="Zum Testen">Zum Testen</option>
+		<option value="Habe den Termin vergessen">Habe den Termin vergessen</option>
+		<option value="Bin krank geworden">Bin krank geworden</option>
+		<option value="Konnte nicht kommen">Konnte nicht kommen</option>
+		<option value="Termin wurde vom anderen abgesagt">Termin wurde vom anderen abgesagt</option>
+		<option value="Der/Die andere SchülerIn ist nicht gekommen">Der/Die andere SchülerIn ist nicht gekommen</option>
+		<option value="Anderer wichtiger Grund">Anderer wichtiger Grund</option>
 	</select>
 	<a href="javascript:void(0);" onclick="cancelCoachingRequest(@Model.Id, $('#cancel-reason').val())" class="link-button">Termin nicht bestätigen</a>
 </div>

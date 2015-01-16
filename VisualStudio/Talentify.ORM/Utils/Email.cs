@@ -77,6 +77,24 @@ namespace Talentify.ORM.Utils
 			Send(msg);
 		}
 
+		public static void SendBlocked(string to, string subject, string reason)
+		{
+			var reader = new StreamReader(HttpContext.Current.Server.MapPath("~/Templates/EmailBlocked.html"));
+			string templateContent = reader.ReadToEnd();
+			reader.Close();
+
+			templateContent = templateContent.Replace("{BaseUrl}", ConfigurationManager.AppSettings["BaseUrl"]);
+			templateContent = templateContent.Replace("{BlockedReason}", reason);
+
+			var msg = new MailMessage(ConfigurationManager.AppSettings["Email.From"], to)
+			{
+				Subject = subject,
+				Body = templateContent,
+				IsBodyHtml = true
+			};
+			Send(msg);
+		}
+
 		public static void SendNotification(string to, string subject, string icon, string link, string profileImage, string text)
 		{
 			var reader = new StreamReader(HttpContext.Current.Server.MapPath("~/Templates/EmailNotification.html"));

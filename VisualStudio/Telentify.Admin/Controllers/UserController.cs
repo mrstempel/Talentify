@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Talentify.ORM.Mvc;
+using Talentify.ORM.Utils;
 using Telentify.Admin.Models;
 
 namespace Telentify.Admin.Controllers
 {
-    public class UserController : BaseController
+    public class UserController : AdminController
     {
         public ActionResult Index()
         {
@@ -23,6 +24,33 @@ namespace Telentify.Admin.Controllers
 	    {
 		    return View(UnitOfWork.StudentRepository.GetFullRegisteredList());
 	    }
+
+		[HttpPost]
+		public ActionResult Update(string[] ids, string[] blockedReasons)
+		{
+			var users = UnitOfWork.BaseUserRepository.Get().ToList();
+
+			for (int i = 0; i < ids.Count(); i++)
+			{
+				var student = users.FirstOrDefault(s => s.Id == Convert.ToInt32(ids[i]));
+				if (student != null)
+				{
+					var prevIsActive = student.IsActive;
+					student.IsActive = (blockedReasons != null && string.IsNullOrEmpty(blockedReasons[i]));
+					student.BlockedReason = (blockedReasons != null) ? blockedReasons[i] : null;
+					UnitOfWork.BaseUserRepository.Update(student);
+
+					if (!student.IsActive && prevIsActive)
+					{
+						Email.SendBlocked(student.Email, "Dein talentify.me Account wurde deaktiviert", student.BlockedReason);
+						//Email.SendBlocked("dstempel@gmail.com", "Dein talentify.me Account wurde deaktiviert", student.BlockedReason);
+					}
+				}
+			}
+
+			UnitOfWork.Save();
+			return RedirectToAction("ConfirmedList");
+		}
 
 		public ActionResult NotConfirmedList()
 		{

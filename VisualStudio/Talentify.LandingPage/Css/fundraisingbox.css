@@ -26,13 +26,13 @@ h2 {text-align: center !important; }
 .clearfix { text-align: center !important; display: inline-block !important; }
 .progressbar
 {
-	background: url(http://www.talentify.co/Images/crowd-balken.png) no-repeat !important;
+	background: url(https://talentify-co.azurewebsites.net/Images/crowd-balken.png) no-repeat !important;
 	width: auto !important;
 	height: 248px;
 }
 .progressbar-done
 {
-	background: url(http://www.talentify.co/Images/crowd-balken-fill.png) no-repeat !important;
+	background: url(https://talentify-co.azurewebsites.net/Images/crowd-balken-fill.png) no-repeat !important;
 	/*top: 92px !important;
 	left: 55px !important;*/
 	display: inline-block !important;

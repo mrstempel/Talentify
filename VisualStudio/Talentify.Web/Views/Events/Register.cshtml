@@ -23,7 +23,7 @@
 				<p class="important">@Model.BeginDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))<br/>von @Model.BeginTime bis @Model.EndTime</p>
 			</div>
 			<div class="field-container">
-				<input type="submit" value="Anmelden"/>
+				<input type="submit" value="Anmelden" onclick="$(this).addClass('disabled');"/>
 			</div>
 		}
 	}

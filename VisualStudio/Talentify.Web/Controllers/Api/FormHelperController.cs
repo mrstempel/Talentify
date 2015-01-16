@@ -43,6 +43,12 @@ namespace Talentify.Web.Controllers.Api
 			return Json(myOffersWithCategory, JsonRequestBehavior.AllowGet);
 	    }
 
+		public JsonResult MyCoachingTimes(int userId)
+		{
+			var myTimes = UnitOfWork.CoachingTimeRepository.Get(i => i.UserId == userId).OrderBy(i => i.Day);
+			return Json(myTimes, JsonRequestBehavior.AllowGet);
+		}
+
 	    public JsonResult SendMessage(int conversationId, int fromUserId, int toUserId, int targetId, string text)
 	    {
 		    var message = UnitOfWork.ConversationRepository.AddMessage(conversationId, fromUserId, toUserId, targetId, text);

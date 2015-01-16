@@ -55,6 +55,7 @@ namespace Talentify.ORM.DAL.Repository
 			if (user != null)
 			{
 				user.RegisterCode = null;
+				user.IsActive = true;
 				UnitOfWork.Save();
 
 				// add greenhorn badge

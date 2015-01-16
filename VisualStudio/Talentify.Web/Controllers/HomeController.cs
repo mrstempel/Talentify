@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MailChimp.Net.Api;
 using MailChimp.Net.Api.Domain;
 using MailChimp.Net.Settings;
+using Talentify.ORM.DAL.Models.Tracking;
 using Talentify.ORM.Mvc;
 
 namespace Talentify.Web.Controllers

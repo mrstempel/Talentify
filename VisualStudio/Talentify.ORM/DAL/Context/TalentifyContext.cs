@@ -14,6 +14,7 @@ using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.Notification;
 using Talentify.ORM.DAL.Models.School;
+using Talentify.ORM.DAL.Models.Tracking;
 using Talentify.ORM.DAL.Models.User;
 using Membership = System.Web.Security.Membership;
 
@@ -32,6 +33,7 @@ namespace Talentify.ORM.DAL.Context
 		public DbSet<SubjectCategory> SubjectCategories { get; set; }
 		public DbSet<CoachingOffer> CoachingOffers { get; set; }
 		public DbSet<CoachingRequest> CoachingRequests { get; set; }
+		public DbSet<CoachingTime> CoachingTimes { get; set; }
 
 		// users
 		public DbSet<BaseUser> BasUsers { get; set; }
@@ -63,6 +65,9 @@ namespace Talentify.ORM.DAL.Context
 		public DbSet<BonusPoint> BonusPoints { get; set; }
 		public DbSet<Badge> Badges { get; set; }
 		public DbSet<TalentometerLevel> TalentometerLevel { get; set; }
+
+		// tracking
+		public DbSet<TrackingClick> TrackingClicks { get; set; }
 		
 		public TalentifyContext() : base("EFConnectionString")
 		{
@@ -86,6 +91,7 @@ namespace Talentify.ORM.DAL.Context
 			modelBuilder.Configurations.Add(new CoachingOfferMap());
 			modelBuilder.Configurations.Add(new CoachingRequestMap());
 			modelBuilder.Configurations.Add(new CoachingRequestStatusMap());
+			modelBuilder.Configurations.Add(new CoachingTimeMap());
 
 			// users
 			modelBuilder.Configurations.Add(new BaseUserMap());
@@ -117,6 +123,9 @@ namespace Talentify.ORM.DAL.Context
 			modelBuilder.Configurations.Add(new BonusPointMap());
 			modelBuilder.Configurations.Add(new BadgeMap());
 			modelBuilder.Configurations.Add(new TalentometerLevelMap());
+
+			// tracking
+			modelBuilder.Configurations.Add(new TrackingClickMap());
 			
 			base.OnModelCreating(modelBuilder);
 		}

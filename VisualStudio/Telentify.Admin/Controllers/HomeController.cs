@@ -7,7 +7,7 @@ using Talentify.ORM.Mvc;
 
 namespace Telentify.Admin.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : AdminController
     {
         public ActionResult Index()
         {

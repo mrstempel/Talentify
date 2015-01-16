@@ -4,7 +4,7 @@
 {
 	foreach (var i in Model)
 	{
-		<article onclick="location.href='/Profile/Index/@i.Id'">
+		<article class="filterable-search-result" onclick="location.href='/Profile/Index/@i.Id'" data-school-value="@i.SchoolId" data-city-value="@i.City.ToLower()">
 			<a href="/Profile/Index/@i.Id" class="image-link" style="background: url('@i.Image');"></a>
 			<h3><a href="/Profile/Index/@i.Id">@i.Name</a></h3>
 			<p>@i.Address<br/>@i.School</p>
@@ -14,6 +14,8 @@
 			}
 		</article>
 	}
+	
+	<p style="text-align: center;" id="no-filter-results">Leider gibt es zu deiner Schnell-Filter Einstellung keine passenden Treffer.</p>
 }
 else
 {

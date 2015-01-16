@@ -1,4 +1,19 @@
-﻿function login()
+﻿var sendSemaphore = false;
+var weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
+function lockApiCall(lockElementId)
+{
+	sendSemaphore = true;
+	$('#' + lockElementId).addClass('disabled');
+}
+
+function unlockApiCall(lockElementId)
+{
+	sendSemaphore = false;
+	$('#' + lockElementId).removeClass('disabled');
+}
+
+function login()
 {
 	$.ajax({
 		url: '/Auth/Login',
@@ -289,6 +304,46 @@ function loadMyProfileCoachings(isMyProfile, id)
 	});
 }
 
+function loadMyCoachingTimes(isMyProfile, id)
+{
+	$('#my-times').html('lade Lernhilfenzeiten ...');
+	$.ajax({
+		url: '/FormHelper/MyCoachingTimes',
+		type: 'get',
+		async: true,
+		data: { userId: id },
+		success: function (data)
+		{
+			if (data && data.length > 0)
+			{
+				$('#my-times').html('');
+				jQuery.each(data, function (key, val)
+				{
+					if (isMyProfile)
+					{
+						$('#my-times').html($('#my-times').html() + '<a href="javascript:void(0);" class="link-button timetable" onclick="loadEditCoachingTimeForm(' + val['Day'] + ')"><span class="day">' + weekdays[val['Day']] + '</span><br/><span class="time">' + val['From'] + '</span> - <span class="time">' + val['To'] + '</span></a>');
+					}
+					else
+					{
+
+						$('#my-times').html($('#my-times').html() + '<div class="timetable"><span class="day">' + weekdays[val['Day']] + '</span><br/><span class="time">' + val['From'] + '</span> - <span class="time">' + val['To'] + '</span></div>');
+					}
+				});
+				$('#my-times').show();
+				$('#choaching-request-btn').show();
+			}
+			else
+			{
+				$('#my-times').hide();
+			}
+		},
+		error: function (request, status, error)
+		{
+			$('#my-times').hide();
+		}
+	});
+}
+
 function loadAddCoachingForm()
 {
 	$('#add-coaching-frame').attr('src', '/Profile/AddCoaching');
@@ -299,6 +354,18 @@ function loadEditCoachingForm(id)
 {
 	$('#edit-coaching-frame').attr('src', '/Profile/EditCoaching?id=' + id);
 	$('#modal-edit-coaching').modal('show');
+}
+
+function loadAddCoachingTimeForm()
+{
+	$('#add-coaching-time-frame').attr('src', '/Profile/AddCoachingTime');
+	$('#modal-add-coaching-time').modal('show');
+}
+
+function loadEditCoachingTimeForm(day)
+{
+	$('#edit-coaching-time-frame').attr('src', '/Profile/EditCoachingTime?day=' + day);
+	$('#modal-edit-coaching-time').modal('show');
 }
 
 function loadEditPriceForm()
@@ -332,8 +399,52 @@ function searchCoaching()
 		$('#search-results').load('/Search/Search?Class=' + $('#Class').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function()
 		{
 			$('#search-loading').hide();
-			$('#search-results').fadeIn('medium');
+			$('#search-results').fadeIn('medium', function () { applySearchFilter(); });
+
+			$('#search-results > article:visible:odd').css('float', 'right');
 		});
+	}
+}
+
+function applySearchFilter()
+{
+	if (!$('#filter-school').hasClass('on') && !$('#filter-school').hasClass('on'))
+	{
+		$(".filterable-search-result").show();
+	}
+	else
+	{
+		var filterValueCity = $('#filter-city').attr('data-filter-value');
+		var filterAttributeCity = 'data-city-value';
+
+		// city
+		if ($('#filter-city').hasClass('on'))
+		{
+			$(".filterable-search-result[" + filterAttributeCity + "!='" + filterValueCity + "']").hide();
+			$(".filterable-search-result[" + filterAttributeCity + "='" + filterValueCity + "']").show();
+		}
+		else
+		{
+			// school
+			var filterValueSchool = $('#filter-school').attr('data-filter-value');
+			var filterAttributeSchool = 'data-school-value';
+
+			if ($('#filter-school').hasClass('on'))
+			{
+				$(".filterable-search-result[" + filterAttributeSchool + "!='" + filterValueSchool + "']").hide();
+				$(".filterable-search-result[" + filterAttributeSchool + "='" + filterValueSchool + "']").show();
+			}
+		}
+	}
+
+	$('#search-results > article:visible:even').css('float', 'left');
+	$('#search-results > article:visible:odd').css('float', 'right');
+	if ($('#search-results > article:visible').length == 0)
+	{
+		$('#no-filter-results').show();
+	} else
+	{
+		$('#no-filter-results').hide();
 	}
 }
 
@@ -422,27 +533,34 @@ function cancelEventRegistration(id)
 
 function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
 {
-	$.ajax({
-		url: '/FormHelper/SendMessage',
-		type: 'get',
-		async: true,
-		data: { conversationId: conversationId, fromUserId: fromUserId, toUserId: toUserId, targetId: targetId, text: text },
-		success: function (data)
-		{
-			if (data)
+	if (!sendSemaphore)
+	{
+		lockApiCall('coaching-new-message-btn');
+		$.ajax({
+			url: '/FormHelper/SendMessage',
+			type: 'get',
+			async: true,
+			data: { conversationId: conversationId, fromUserId: fromUserId, toUserId: toUserId, targetId: targetId, text: text },
+			success: function(data)
 			{
-				var item = document.createElement('div');
-				$(item).addClass('item');
-				$(item).html('<div class="profile-img"><a href="/Profile/Index/' + data['UserId'] + '" class="image-link" style="background: url(\'' + data['UserImage'] + '\');"></a></div><div class="content"><h3>' + data['Username'] + '<span>' + data['CreatedDate'] + '</span></h3><p>' + data['Text'] + '</p></div></div>');
-				$(item).appendTo($('#timeline-container'));
-				$('#coaching-new-message').val('');
-				$('#coaching-new-message-btn').hide();
+				if (data)
+				{
+					var item = document.createElement('div');
+					$(item).addClass('item');
+					$(item).html('<div class="profile-img"><a href="/Profile/Index/' + data['UserId'] + '" class="image-link" style="background: url(\'' + data['UserImage'] + '\');"></a></div><div class="content"><h3>' + data['Username'] + '<span>' + data['CreatedDate'] + '</span></h3><p>' + data['Text'] + '</p></div></div>');
+					$(item).appendTo($('#timeline-container'));
+					$('#coaching-new-message').val('');
+					$('#coaching-new-message-btn').hide();
+				}
+
+				unlockApiCall('coaching-new-message-btn');
+			},
+			error: function(request, status, error)
+			{
+				unlockApiCall('coaching-new-message-btn');
 			}
-		},
-		error: function (request, status, error)
-		{
-		}
-	});
+		});
+	}
 }
 
 function checkNotifications()
@@ -558,23 +676,31 @@ function loadAddSubjectForm()
 
 function addSubjectLogged()
 {
-	$('#add-subject-button').attr("disabled", "disabled");
-	$.ajax({
-		url: '/FormHelper/AddSubjectLoggedUser',
-		type: 'get',
-		async: true,
-		data: { subject: $('#new-subject').val() },
-		success: function (data)
-		{
-			$('#add-subject-form').hide();
-			$('#add-subject-msg').fadeIn();
-			$('#add-subject-button').removeAttr("disabled");
-			window.setTimeout("toggleAddSubject();", 4000);
-		},
-		error: function (request, status, error)
-		{
-		}
-	});
+	if ($('#new-subject').val().length == 0)
+	{
+		$('#new-subject').addClass('error');
+	}
+	else
+	{
+		$('#new-subject').removeClass('error');
+		$('#add-subject-button').attr("disabled", "disabled");
+		$.ajax({
+			url: '/FormHelper/AddSubjectLoggedUser',
+			type: 'get',
+			async: true,
+			data: { subject: $('#new-subject').val() },
+			success: function (data)
+			{
+				$('#add-subject-form').hide();
+				$('#add-subject-msg').fadeIn();
+				$('#add-subject-button').removeAttr("disabled");
+				window.setTimeout("toggleAddSubject();", 4000);
+			},
+			error: function (request, status, error)
+			{
+			}
+		});
+	}
 }
 
 function loadTalentometer(userId)

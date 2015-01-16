@@ -49,7 +49,7 @@
 	</div>
 	@if (FormSuccess == null)
 	{
-		using (Html.BeginForm("AddCoaching", "Profile", FormMethod.Post, new {@class = "form-container"}))
+		using (Html.BeginForm("AddCoaching", "Profile", FormMethod.Post, new {@class = "form-container", @id = "add-coaching-form"}))
 		{
 			@Html.HiddenFor(m => m.UserId)
 			<div class="field-container">
@@ -115,7 +115,7 @@
 				@Html.TextAreaFor(m => m.Comments, new {@maxlength = "140"})
 			</div>
 			<div class="field-container">
-				<input type="submit" value="Speichern" onclick=" return validateCoachingForm(); "/>
+				<input type="submit" id="add-coaching-subject-btn" value="Speichern" onclick="return validateCoachingForm(); "/>
 			</div>
 		}
 	}

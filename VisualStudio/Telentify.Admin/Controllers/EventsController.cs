@@ -10,7 +10,7 @@ using Talentify.ORM.Mvc;
 
 namespace Telentify.Admin.Controllers
 {
-    public class EventsController : BaseController
+    public class EventsController : AdminController
     {
         public ActionResult Index()
         {

@@ -14,6 +14,7 @@ namespace Talentify.Web.Controllers
     {
         public ActionResult Error()
         {
+	        ViewBag.BlockedReason = (Session["BlockedReason"] != null) ? Session["BlockedReason"].ToString() : null;
             return View();
         }
 

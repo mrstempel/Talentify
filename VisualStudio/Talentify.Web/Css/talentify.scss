@@ -100,6 +100,11 @@ input[type="button"], input[type="submit"], .link-button
 	text-decoration: none;
 	cursor: pointer;
 }
+input[type="button"]:disabled, input[type="submit"]:disabled, .link-button:disabled, input[type="button"].disabled, input[type="submit"].disabled, .link-button.disabled
+{
+	background: #ccc !important;
+	cursor: wait !important;
+}
 input[type="button"].red, input[type="submit"].red, .link-button.red
 {
 	background: #fef3f5;
@@ -275,6 +280,31 @@ iframe
 		border-bottom: 1px solid #e3e4e8 !important;
 	}
 }
+.filter-container
+{
+	display: inline-block;
+	width: 100%;
+	padding: 20px 20px 0 20px;
+	@extend .box-sizing;
+	text-align: left !important;
+	label { font-size: 14px; display: inline-block; margin: 0 10px 0 0; font-family: $font-bold; color: #999; }
+	a
+	{
+		font-size: 16px;
+		display: inline-block;
+		margin: 0 5px 0 0;
+		padding: 3px 10px;
+		text-decoration: none;
+		border: 1px solid #fff;
+	}
+	a:hover { border: 1px solid $color-green; }
+	a.on
+	{
+		background: $color-green;
+		color: #fff;
+	}
+}
+#no-filter-results { display: none; }
 #no-school-info, #register-code-info
 {
 	font-size: 14px;
@@ -1135,9 +1165,9 @@ header.search-map-overlay
 			margin: 10px 0 0 0;
 		}
 	}
-	article:nth-child(2n)
+	article:nth-child(odd)
 	{
-		float: right !important;
+		//float: right !important;
 	}
 	article:hover
 	{
@@ -1587,6 +1617,7 @@ article.event-detail
 	}
 	article.user-profile
 	{
+		font-size: 16px;
 		.left
 		{
 			max-height: 334px;
@@ -2210,6 +2241,36 @@ article.event-detail
 	{
 		margin: 0 5px 0 0 !important;
 	}
+}
+
+#my-times
+{
+	display: inline;
+	.link-button:last-child
+	{
+		margin: 0 5px 0 0 !important;
+	}
+}
+a.timetable, div.timetable
+{
+	font-size: 14px !important;
+	background: #fff;
+	color: $color-green;
+	.day { font-family: $font-bold; }
+	.time { width: auto; }
+}
+div.timetable
+{
+	@extend .box-sizing;
+	margin: 0 10px 10px 0;
+	display: inline-block;
+	border: 1px solid #0eb48d;
+	font-size: 16px;
+	padding: 5px 10px!important;
+	min-width: 113px!important;
+	text-align: center !important;
+	border-radius: 0;
+	text-decoration: none;
 }
 
 .msg-container 

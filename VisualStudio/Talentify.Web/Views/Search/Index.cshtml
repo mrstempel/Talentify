@@ -12,6 +12,11 @@
 		{
 			$('#Class').val('@Model.Class');
 			searchCoaching();
+			$('.filter-container').find('a').click(function()
+			{
+				$(this).toggleClass('on');
+				applySearchFilter();
+			});
 		});
 	</script>
 }
@@ -53,6 +58,14 @@
 				</div>
 			}
 		</article>
+		@if (HasSchool)
+		{
+			<div class="filter-container">
+				<label>Schnell-Filter:</label>
+				<a href="javascript:void(0);" id="filter-city" data-filter-value="@BaseController.WebContext.Student.School.City.ToLower()" class="filter on">@BaseController.WebContext.Student.School.City</a>
+				<a href="javascript:void(0);" id="filter-school" data-filter-value="@BaseController.WebContext.Student.School.Id" class="filter">@BaseController.WebContext.Student.School.Name</a>
+			</div>
+		}
 	</section>
 	<div id="search-loading">Lade Suchergebnisse ...</div>
 	<section id="search-results"></section>
