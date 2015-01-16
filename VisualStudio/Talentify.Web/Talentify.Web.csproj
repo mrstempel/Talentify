@@ -232,9 +232,6 @@
     <Content Include="Scripts\api.min.js">
       <DependentUpon>api.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\api.min.js.map">
-      <DependentUpon>api.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\Bootstrap\css\bootstrap.min.css">
       <DependentUpon>bootstrap.css</DependentUpon>
     </Content>
@@ -254,6 +251,9 @@
     <None Include="Properties\PublishProfiles\talentify-me - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me-dev - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me-dev - Web Deploy.pubxml" />
+    <Content Include="Scripts\api.min.js.map">
+      <DependentUpon>api.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Images\badge-empty.png" />
     <Content Include="Images\badge-greenhorn.png" />

@@ -399,8 +399,10 @@ function searchCoaching()
 		$('#search-results').load('/Search/Search?Class=' + $('#Class').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function()
 		{
 			$('#search-loading').hide();
-			$('#search-results').fadeIn('medium', function () { applySearchFilter(); });
-
+			$('#search-results').css('opacity', 0);
+			$('#search-results').show();
+			applySearchFilter();
+			$('#search-results').css('opacity', 1);
 			$('#search-results > article:visible:odd').css('float', 'right');
 		});
 	}
