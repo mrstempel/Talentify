@@ -5,6 +5,7 @@
 }
 
 <script>
+	var schoolSelect;
 	$(this).ready(function ()
 	{
 		$('.add-field').find('a').each(function ()
@@ -22,11 +23,24 @@
 			});
 		});
 
+		$('#confirm-info').opentip("Wenn du dich mit deiner Schüler E-Mailadresse registriert, bist du automatisch verifiziert und dein Account ist freigeschalten.", {
+			extends: "alert",
+			color: "#000000",
+			background: "#ffffff",
+			shadow: true,
+			borderColor: "#e5e5e5",
+			tipJoint: "bottom",
+			target: true,
+			hideOn: "mouseout",
+			hideTriggers: ["target", "tip"]
+		});
+
 		$("#SchoolId").val($("#SchoolId option:first").val());
 		$('#FirstnameChild').hide();
 		$('#RegisterCode').hide();
 		$('#no-school-info').hide();
 		$('#register-code-info').hide();
+		$('#my-school-email').hide();
 		$('#SchoolId').change(function ()
 		{
 			if ($(this).val().length > 0 && $(this).val() != "0")
@@ -47,10 +61,42 @@
 			}
 		});
 
+		$('#add-school').click(function()
+		{
+			$('#no-school-info').toggle();
+		});
+
 		@if (Model.IsParentAccount)
 		{
 			<text>setFields(true);$('#IsParentAccountTrue').attr('checked', 'checked');</text>
 		}
+	});
+
+	$(function ()
+	{
+		schoolSelect = new $.TextboxList('#school-textbox', { unique: true, max: 1, plugins: { autocomplete: { onlyFromValues: true, placeholder: "Einfach los tippen und deine Schule finden" } } });
+		schoolSelect.getContainer().addClass('textboxlist-loading');
+		schoolSelect.addEvent('bitBoxAdd', function (bit)
+		{
+			$('#no-school-info').hide();
+			$('#SchoolId').val(bit.value[0]);
+			setEmailField(bit.value[0]);
+		});
+		schoolSelect.addEvent('bitBoxRemove', function (bit)
+		{
+			$('#SchoolId').val('');
+			$('#my-school-email').val('').hide();
+			$('#my-private-email').show();
+			$('#schoolEmail').removeClass('mandatory');
+			$('#Email').addClass('mandatory');
+		});
+		$.ajax({
+			url: '/FormHelper/SchoolSelect?plzStart=1', dataType: 'json', success: function (r)
+			{
+				schoolSelect.plugins['autocomplete'].setValues(r);
+				schoolSelect.getContainer().removeClass('textboxlist-loading');
+			}
+		});
 	});
 
 	function loadAgb()
@@ -64,19 +110,67 @@
 		if (isParentRegistration)
 		{
 			$('#FirstnameChild').show();
-			$("#SchoolId").val($("#SchoolId option:first").text('wähle die Schule deines Kindes'));
-			$("#SchoolId").val($("#SchoolId option:first").val());
+			$("#school-label").text('Wähle die Schule deines Kindes');
 		}
 		else
 		{
 			$('#FirstnameChild').hide();
-			$("#SchoolId").val($("#SchoolId option:first").text('Wähle deine Schule...'));
-			$("#SchoolId").val($("#SchoolId option:first").val());
+			$("#school-label").text('Wähle deine Schule');
 		}
+	}
+
+	function setSchool(id, name)
+	{
+		//schoolSelect.clear();
+		resetSchool();
+		schoolSelect.forecedAdd(name, id, name, '');
+		$('#SchoolId').val(id);
+		setEmailField(id);
+	}
+
+	function resetSchool()
+	{
+		$("#school-textbox").parent().find(".textboxlist-bit-box-deletebutton").each(function(){
+			$(this).click();
+		});
+		$('#SchoolId').val(0);
+	}
+
+	function setEmailField(schoolId)
+	{
+		$.ajax({
+			url: '/FormHelper/GetSchoolEmailSuffix',
+			type: 'get',
+			async: true,
+			data: { schoolId: schoolId },
+			success: function (data)
+			{
+				if (data != null && data.length > 0)
+				{
+					$('#my-private-email').hide();
+					$('#school-email-suffix').html('@Html.Raw("@")' + data);
+					$('#my-school-email').val('').show();
+					$('#schoolEmail').addClass('mandatory');
+					$('#Email').removeClass('mandatory');
+				}
+				else
+				{
+					$('#my-school-email').val('').hide();
+					$('#my-private-email').show();
+					$('#schoolEmail').removeClass('mandatory');
+					$('#Email').addClass('mandatory');
+				}
+			},
+			error: function (request, status, error)
+			{
+				$('#my-school-email').val('').hide();
+				$('#my-private-email').show();
+			}
+		});
 	}
 </script>
 
-<p style="font-size: 16px;margin-bottom: 40px;">Die Anmeldung dauert nur wenige Sekunden und ist ab 13 Jahren direkt als SchülerIn oder sonst als Elternteil möglich. talentify.me befindet sich gerade in einer Testphase, sollte deine Schule nicht dabei sein - kein Problem: gib uns einfach kurz Bescheid. Du kannst dich auf jeden Fall registrieren und Workshops besuchen.</p>
+<p style="font-size: 16px;width:80%;margin: 0 auto 40px auto;">Die Anmeldung dauert nur wenige Sekunden und ist ab 13 Jahren direkt als SchülerIn oder sonst als Elternteil möglich. talentify.me befindet sich gerade in einer öffentlichen Testphase in Wien, Niederösterreich und dem Burgenland. Sollte deine Schule/Bundesland nicht dabei sein - kein Problem: gib uns einfach kurz Bescheid. Du kannst dich auf jeden Fall registrieren und alles ansehen.</p>
 
 @using (Html.BeginForm("Index", "Register", FormMethod.Post, new {@class = "form-container register"}))
 {
@@ -92,18 +186,32 @@
 			<input type="text" name="FirstnameChild" id="FirstnameChild" placeholder="Vorname des Kindes" style="border-top:0;" value="@Model.FirstnameChild"/>
 		</div>
 		<div class="field-container">
-			@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
-			@Html.PasswordFor(m => m.Password, new {@placeholder = "Passwort (mind. 6 Zeichen)", @class = "mandatory"})
-		</div>
-		<div class="field-container">
-			@Html.DropDownListFor(model => model.SchoolId, AllSchoolsRegister, "wähle deine Schule...", new { @class = "mandatory" })<br/>
-			<!--<div class="add-field"><a href="javascript:void(0);" onclick="loadAddSchoolForm()" data-add-tipp="Du hast deine Schule nicht gefunden? Hilf uns weiter und gib uns Bescheid.">+</a></div>-->
+			<!--<select id="bundesland" class="bundesland">
+				    <option value="">Bundesland</option>
+				    <option value="">Wien</option>
+				    <option value="">Niederösterreich</option>
+				    <option value="">Oberösterreich</option>
+				    <option value="">Tirol</option>
+			    </select>-->
+			<span class="header-label" id="school-label">Wähle deine Schule</span>
+			@Html.HiddenFor(m => m.SchoolId)
+			<input type="text" id="school-textbox" class="schule" placeholder="wähle deine Schule..."/>
+			<div class="add-field" style="top:36px;"><a href="javascript:void(0);" onclick="loadSearchSchoolForm()" data-add-tipp="Schule finden"><i class="fa fa-search"></i></a></div>
+			<a href="javascript:void(0);" id="add-school">Fehlt deine Schule oder findest du sie nicht?</a>
+			@*@Html.DropDownListFor(model => model.SchoolId, AllSchoolsRegister, "wähle deine Schule...", new { @class = "mandatory" })*@
 			<input type="text" id="RegisterCode" name="RegisterCode" placeholder="Registrierungscode eingeben" style="border-top: 0px;"/>
 			<span id="no-school-info">
-				<input type="text" name="NewSchool" id="NewSchool" placeholder="Auf welche Schule gehst du?"/>
-				Du findest deine Schule nicht in der Liste? Kein Problem. Sag uns einfach auf welche Schule du gehst. Sobald wir mind. 10 Anmeldungen von deiner Schule haben, schalten wir diese frei. Du kannst dich in der Zwischenzeit trotzdem anmelden und Workshops besuchen ;)
+				<input type="text" name="NewSchool" id="NewSchool" placeholder="Auf welche Schule gehst du?" style="margin-bottom: 10px;"/>
+				talentify.me ist in deinem Bundesland noch nicht aktiv? Du findest deine Schule nicht? Kein Problem. Sag uns einfach auf welche Schule du gehst. Du kannst dich in der Zwischenzeit trotzdem anmelden und wir melden uns sobald deine Schule bzw. Bundesland aktiv ist ;)
 			</span>
 			<span id="register-code-info">Du hast noch keinen Registrierungscode und gehst auf eine der aufgelisteten Schulen? Dann schicke uns bitte einfach ein E-Mail mit einem Foto deines Schülerausweis an <a href="mailto:hallo@talentify.at">hallo@talentify.at</a> oder frage direkt an deiner Schule nach.</span>
+		</div>
+		<div class="field-container">
+			<div id="my-private-email">@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})</div>
+			<div id="my-school-email">
+				<input type="text" name="schoolEmail" id="schoolEmail" style="width:300px;margin-right: 5px;" placeholder="E-Mail Adresse"/>
+				<div style="width:200px;display:inline-block;text-align: left;position: relative;"><span id="school-email-suffix" style="display:inline-block;text-align: left;font-size:16px;"></span><i id="confirm-info" class="fa fa-info-circle" style="margin: 0 0 0 10px;color:#0eb48d;"></i></div>
+			</div>
 		</div>
 		<div class="field-container">
 			<p>Ich bestätige, die <a href="javascript:void(0);" onclick="loadAgb()">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
@@ -119,10 +227,19 @@
 
 <div class="modal fade" id="modal-add-school" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
 	<div class="modal-dialog">
+		<header>
+			<h1>Deine Schule nicht gefunden?<a href="javascript:void(0);" onclick="$('#modal-add-school').modal('hide');" class="close-link"></a></h1>
+		</header>
+		<iframe id="add-school-frame" width="600" height="200" scrolling="no"></iframe>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-search-school" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+	<div class="modal-dialog">
 	<header>
-		<h1>Deine Schule nicht gefunden?<a href="javascript:void(0);" onclick="$('#modal-add-school').modal('hide');" class="close-link"></a></h1>
+		<h1>Schule finden<a href="javascript:void(0);" onclick="$('#modal-search-school').modal('hide');" class="close-link"></a></h1>
 	</header>
-	<iframe id="add-school-frame" width="600" height="200" scrolling="no"></iframe>
+	<iframe id="search-school-frame" width="600" height="500" scrolling="no"></iframe>
 	</div>
 </div>
 

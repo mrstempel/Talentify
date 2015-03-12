@@ -32,7 +32,7 @@ namespace Talentify.Web.Controllers
 				student.SchoolId = null;
 			}
 
-			var saveFeedback = UnitOfWork.StudentRepository.Register(student, Request["token"], Request["RegisterCode"], Request["NewSchool"]);
+			var saveFeedback = UnitOfWork.StudentRepository.Register(student, Request["token"], Request["RegisterCode"], Request["NewSchool"], Request["schoolEmail"]);
 
 			if (saveFeedback.IsError)
 				this.FormError = saveFeedback;
@@ -56,20 +56,56 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Confirm(string c, string t)
 	    {
+		    Student user = null;
 		    try
 		    {
-			    var user = UnitOfWork.StudentRepository.RegisterConfirm(new Guid(c), t);
-				if (user != null && WebSecurity.Login(user.Email, user.Password))
-				{
-					Session["IsFirstLogin"] = true;
-					return RedirectToAction("Index", "Start");
-				}
+			    user = UnitOfWork.StudentRepository.AsQueryable().FirstOrDefault(u => u.RegisterCode == new Guid(c));
+			    if (user.SchoolId.HasValue)
+			    {
+				    user.School = UnitOfWork.SchoolRepository.GetById(user.SchoolId.Value);
+			    }
 		    }
 		    catch (Exception ex) { }
 
-			this.FormError = new FormFeedback();
-			return View(new Login());
+			if (user == null)
+			{
+				this.FormError = new FormFeedback();
+			}
+
+			return View(user);
 	    }
+
+		[HttpPost]
+		public ActionResult Confirm(int userId, string c, string t, HttpPostedFileBase ausweisUpload)
+		{
+			var student = UnitOfWork.StudentRepository.GetById(userId);
+			try
+			{
+				var feedback = UnitOfWork.StudentRepository.RegisterConfirm(student, new Guid(c), t, Request["Password"],
+					Request["confirmOption"], ausweisUpload,
+					Server.MapPath("~" + ConfigurationManager.AppSettings["Upload.Ausweis"]), Request["SchoolRegisterCode"]);
+
+				if (feedback.IsError)
+				{
+					this.FormError = feedback;
+					this.FormError.AutoClose = false;
+				}
+				else
+				{
+					if (WebSecurity.Login(student.Email, student.Password))
+					{
+						Session["IsFirstLogin"] = true;
+						return RedirectToAction("Index", "Start");
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				this.FormError = new FormFeedback() { AutoClose = false };
+			}
+
+			return View(student);
+		}
 
 		public ActionResult Agb()
 		{

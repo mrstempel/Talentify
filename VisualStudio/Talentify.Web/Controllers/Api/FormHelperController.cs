@@ -71,6 +71,43 @@ namespace Talentify.Web.Controllers.Api
 	    }
 
 		[AllowAnonymous]
+		public ActionResult SchoolSelect(string plzStart)
+		{
+			var allSchools = UnitOfWork.SchoolRepository.Get(s => s.IsActive && s.ZipCode.StartsWith(plzStart));
+			ViewBag.Results = "[";
+			foreach (var s in allSchools)
+			{
+				ViewBag.Results += string.Format("[{0},\"{1}\",null,\"{1}\"],", s.Id, s.Name.Replace("\"", ""));
+			}
+			ViewBag.Results = ViewBag.Results.ToString().Substring(0, ViewBag.Results.ToString().Length - 1);
+			ViewBag.Results += "]";
+
+			return View();
+		}
+
+		[AllowAnonymous]
+		public ActionResult SearchSchoolForm()
+		{
+
+			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
+			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Code = "Schultyp"});
+			ViewBag.AllSchoolTypes = new SelectList(allSchholTypes, "Id", "Code");
+			return View(new School());
+		}
+
+		[AllowAnonymous]
+	    public ActionResult SearchSchools(string bundesland, int schoolTypeId, string name, string address)
+	    {
+		    return View(UnitOfWork.SchoolRepository.SearchSchools(bundesland, schoolTypeId, name, address));
+	    }
+
+		[AllowAnonymous]
+	    public JsonResult GetSchoolEmailSuffix(int schoolId)
+	    {
+			return Json(UnitOfWork.SchoolRepository.GetById(schoolId).EmailSuffix, JsonRequestBehavior.AllowGet);
+	    }
+
+		[AllowAnonymous]
 		public ActionResult AddSchoolForm()
 		{
 			return View();

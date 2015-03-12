@@ -11,6 +11,7 @@ using Talentify.ORM.DAL.Models;
 using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Content;
+using Talentify.ORM.DAL.Models.Feedback;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.School;
@@ -284,6 +285,7 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
+		// tracking
 		private IRepository<TrackingClick> _trackingClickRepository;
 		public IRepository<TrackingClick> TrackingClickRepository
 		{
@@ -291,6 +293,17 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			{
 				return _trackingClickRepository ?? 
 					(_trackingClickRepository = new TalentifyRepository<TrackingClick>(this.Context));
+			}
+		}
+
+		// feedback
+		private EventFeedbackRepository _eventFeedbackRepository;
+		public EventFeedbackRepository EventFeedbackRepository
+		{
+			get
+			{
+				return _eventFeedbackRepository ??
+					(_eventFeedbackRepository = new EventFeedbackRepository(this.Context));
 			}
 		}
 

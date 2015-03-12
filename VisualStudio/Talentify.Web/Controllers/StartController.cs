@@ -29,6 +29,7 @@ namespace Talentify.Web.Controllers
 
 		public ActionResult Index()
         {
+			ViewBag.IsFirstLogin = true;
 			if (Session["IsFirstLogin"] != null && Convert.ToBoolean(Session["IsFirstLogin"]))
 				ViewBag.IsFirstLogin = true;
 

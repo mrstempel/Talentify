@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Configuration;
 using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
@@ -69,25 +70,27 @@ namespace Talentify.ORM.DAL.Repository
 
 		#region Register
 
-		public virtual FormFeedback Register(Student student, string token, string schoolRegisterCode, string newSchool)
+		public virtual FormFeedback Register(Student student, string token, string schoolRegisterCode, string newSchool, string schoolEmail)
 		{
 			if (newSchool == null)
 				newSchool = string.Empty;
 
-			// check if registercode is correct
-			if (student.HasSchool && !SetRegisterCode(student, schoolRegisterCode))
+			// check if school e-mail is provided, if so - set email
+			if (!string.IsNullOrEmpty(schoolEmail) && student.SchoolId.HasValue)
 			{
-				return new FormFeedback() {IsError = true, Text = "Der angegebene Registrierungscode ist nicht korrekt."};
+				student.Email = schoolEmail + "@" + UnitOfWork.SchoolRepository.GetById(student.SchoolId.Value).EmailSuffix;
+			}
+			else
+			{
+				student.BlockedReason = BlockedReasons.NoSchoolConfirmation.ToString();
 			}
 
 			// check if e-mail is unique
-			if (GetByEmail(student.Email) != null)
+			if (string.IsNullOrEmpty(student.Email) || GetByEmail(student.Email) != null)
 			{
 				return new FormFeedback() { IsError = true, Text = "Diese E-Mail Adresse ist bereits vergeben."};
 			}
 
-			// set password hash
-			student.Password = PasswordHashing.CalculateSha1(student.Password);
 			var registerFeedback = new FormFeedback() { IsError = false };
 			try
 			{
@@ -129,7 +132,7 @@ namespace Talentify.ORM.DAL.Repository
 						confirmUrl);
 				
 				// different mail text for user with no school
-				if (!student.HasSchool)
+				if (!student.SchoolId.HasValue)
 				{
 					emailContent = string.Format(
 						"Vielen Dank für die Anmeldung bei talentify. Deine Schule {0} ist noch nicht freigeschalten? Kein Problem, sobald wir mind. 10 Anmeldung von deiner Schule haben schalten wir diese frei und geben dir Bescheid. In der Zwischenzeit hast du eingeschränkten Zugriff und kannst Workshops besuchen.<br/><br/>Dazu klicke bitte auf den folgenden Link um die Registrierung abzuschließen:<br/><br/><a href='{1}' style='color:#0eb48d;'>{1}</a><br/><br/>Du bekommst dieses E-Mail weil du dich auf <a href='http://talentify.me' style='color:#0eb48d;'>talentify.me</a> mit deiner E-Mailadresse angemeldet hast. Solltest du das nicht gemacht haben, melde dich bitte unter <a href='mailto:hallo@talentify.at' style='color:#0eb48d;'>hallo@talentify.at</a> und gebe uns Bescheid.",
@@ -142,18 +145,69 @@ namespace Talentify.ORM.DAL.Repository
 			return registerFeedback;
 		}
 
-		public virtual new Student RegisterConfirm(Guid registerCode, string inviteToken)
+		public virtual FormFeedback RegisterConfirm(Student student, Guid registerCode, string inviteToken, string password, string confirmOption,
+			HttpPostedFileBase upload, string basePath, string schoolRegisterCode)
 		{
-			var user = base.RegisterConfirm(registerCode, inviteToken);
-			if (user != null)
+			// confirm with code
+			if (confirmOption == "opt-code")
 			{
-				var student = UnitOfWork.StudentRepository.GetById(user.Id);
-				// subscribe to newsletter
-				NewsletterRegistration.Subscribe(student);
-				return student;
+				if (student.SchoolId.HasValue && !SetRegisterCode(student, schoolRegisterCode))
+				{
+					return new FormFeedback() {IsError = true, Text = "Der angegebene Registrierungscode ist nicht korrekt."};
+				}
+				
+				student.BlockedReason = null;
 			}
 
-			return null;
+			// confirm with upload
+			if (confirmOption == "opt-ausweis")
+			{
+				if (upload.ContentLength > 0)
+				{
+					// check upload properties
+					// filesize < 2mb
+					if (upload.ContentLength > 2100000)
+					{
+						return new FormFeedback() { IsError = true, Text = "Das File ist zu groß. Die maximale Dateigröe beträgt 2 MB." };
+					}
+
+					// only png, jpg, jpeg and pdf allowed
+					var fileExtension = Path.GetExtension(upload.FileName).ToLower();
+
+					if (fileExtension != ".png" && fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".pdf")
+					{
+						return new FormFeedback() { IsError = true, Text = "Es sind nur PNG, JPG, JPEG und PDF Dateien erlaubt." };
+					}
+
+					student.AusweisGuid = Guid.NewGuid();
+					// save original file
+					var fileName = student.AusweisGuid.ToString() + fileExtension;
+					var originalPath = Path.Combine(basePath, fileName);
+					upload.SaveAs(originalPath);
+					student.AusweisExtension = fileExtension;
+
+					// save large file
+					var filenameLarge = student.AusweisGuid.ToString() + "_optimiert" + fileExtension;
+					var pathLarge = Path.Combine(basePath, filenameLarge);
+					KwIt.Project.Pattern.Utils.Image.SaveResize(originalPath, pathLarge, 334);
+
+					// delete original file
+					File.Delete(originalPath);
+				}
+				else
+				{
+					return new FormFeedback() { IsError = true, Text = "Kein gültiger Schülerausweis gefunden." };
+				}
+			}
+			
+			// this will be done in the confirmation step
+			// set password hash
+			student.Password = PasswordHashing.CalculateSha1(password);
+
+			RegisterConfirm(registerCode, inviteToken);
+			NewsletterRegistration.Subscribe(student);
+
+			return new FormFeedback() { IsError = false };
 		}
 
 		#endregion
@@ -267,6 +321,11 @@ namespace Talentify.ORM.DAL.Repository
 			return AsQueryable().Where(s => s.RegisterCode != null && s.IsDeleted == false);
 		}
 
+		public IEnumerable<Student> GetAusweisList()
+		{
+			return AsQueryable().Where(s => s.RegisterCode == null && s.IsDeleted == false && s.BlockedReason == BlockedReasons.NoSchoolConfirmation.ToString() && s.AusweisGuid != null);
+		}
+
 		public IEnumerable<Student> GetCoachList()
 		{
 			return (from s in AsQueryable()
@@ -281,7 +340,12 @@ namespace Talentify.ORM.DAL.Repository
 
 		public int GetFullRegisteredCount()
 		{
-			return AsQueryable().Count(s => s.RegisterCode == null && s.IsDeleted == false);
+			return AsQueryable().Count(s => s.RegisterCode == null && s.IsDeleted == false && s.BlockedReason != BlockedReasons.NoSchoolConfirmation.ToString());
+		}
+
+		public int GetSchuelerausweisCount()
+		{
+			return AsQueryable().Count(s => s.RegisterCode == null && s.IsDeleted == false && s.BlockedReason == BlockedReasons.NoSchoolConfirmation.ToString() && s.AusweisGuid != null);
 		}
 
 		public int GetNotRegisterConfirmedCount()

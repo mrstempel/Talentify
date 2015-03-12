@@ -166,6 +166,10 @@
     <Content Include="Images\logo.png" />
     <Content Include="Scripts\jquery-2.1.0.js" />
     <Content Include="Scripts\jquery-2.1.0.min.js" />
+    <Content Include="Templates\EmailAccountConfirmed.html" />
+    <Content Include="Templates\EmailEventNotConfirmed2.html" />
+    <Content Include="Templates\EmailEventNotConfirmed1.html" />
+    <Content Include="Templates\EmailEventConfirmed.html" />
     <Content Include="Templates\EmailBlocked.html" />
     <Content Include="Templates\Email.html" />
     <Content Include="Templates\EmailDelete.html" />
@@ -285,6 +289,8 @@
     <Content Include="Views\Coaching\Index.cshtml" />
     <Content Include="Views\Coaching\Details.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Events\SignedOff.cshtml" />
+    <Content Include="Views\User\AusweisList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

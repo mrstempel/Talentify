@@ -1,0 +1,716 @@
+/*
+Written for talentify.me
+by Anuar Suarez
+anuar.suarez@hotmail.com
+*/
+
+@media (max-width: 768px) {
+    body {
+        font-size: 11px;
+    }
+    
+    h2 {
+        font-size: 26px;
+    }
+    
+    .btn-umfrage {
+        font-size: 0.9em;
+    }
+    
+    .glyph-umfrage-weiter {
+        padding-left: 0.5em;
+        margin-right: -0.5em!important;
+    }
+    
+    .glyph-umfrage-zurueck {
+
+        margin-left: -0.5em!important;
+    }
+    
+    .topspacing {
+        display: block;
+        height: 1.8em;
+    }
+    
+    .progress-element {
+        height: 1.6em;
+        height: 5vw;
+        margin-left: -4px;
+        width: 10%;
+    }
+    
+    .quiz {
+        font-size: 1.4em;
+    }
+    
+    .btn-talentify-tq, .btn-talentify-red {
+        margin: 1em -1em;
+        padding: 15px 25px 15px 25px;
+    }
+    
+    .figur {
+        height: 18em;
+        margin-bottom: 1em;
+    }
+    
+    .figur h3 {
+        padding: 10px 0;
+        font-size: 36px;
+    }
+    
+    .tafel-block {
+        font-size: 0.9em;
+    }
+    
+}
+
+@media (min-width: 769px) {
+    body {
+        font-size: 14px;
+    }
+    
+    h2 {
+        font-size: 35px;
+    }
+    
+    .tafel-block {
+        font-size: 15px;
+    }
+    
+    .btn-primary {
+        font-size: 1.1em;
+    }
+    
+    .topspacing {
+        display: block;
+        height: 7em;
+    }
+    
+    .bonuspunkte {
+        font-size: 24px;
+        padding-right: 0;
+    }
+    
+    .bonus {
+        padding-bottom: 1em;
+    }
+    
+    .progress-element {
+        height: 27px;
+        height: 3.2vw;
+        margin-left: -7px;
+        width: 10%;
+    }
+    
+    .quiz {
+        font-size: 22px;
+    }
+    
+    .btn-talentify-tq, .btn-talentify-red {
+        margin: 1em 0em;
+        padding: 15px 5px 15px 5px;
+    }
+    
+    .btn-smaller-font {
+        font-size: 13px;
+        margin-left: -1em;
+        margin-right: -1em;
+    }
+    
+    .figur {
+        height: 30em;
+    }
+    
+    .figur h3 {
+        padding: 1em 1.5em;
+        font-size: 27px;
+    }
+    
+    .call-to-action {
+        font-size:1.5em;
+    }
+    
+}
+
+@media (min-width: 1200px) { 
+    .progress-element {
+        height: 27px;
+    }
+}
+
+body {
+    line-height: 1.3;
+}
+
+body, h3, h5 {
+    font-family: CaeciliaLTPro-55Roman;
+    font-weight: normal;
+    font-style: normal; 
+}
+
+strong, h1, h2, h4 {
+    font-family: CaeciliaLTPro-85Heavy;
+    font-weight: normal;
+    font-style: normal; 
+}
+
+i {
+    font-family: CaeciliaLTPro-56Italic;
+    font-weight: normal;
+    font-style: normal; 
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+label {
+    font-weight: 400;
+}
+
+
+
+.yellow-block-head {
+    padding-top: 3em;
+}
+
+.yellow-block {
+    background: #ffc800;
+}
+
+.yellow-block h2, .yellow-block h3, .yellow-block a {
+    color:#c54261;
+}
+
+.turquoise-block {
+    background: #008b80;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.turquoise-block h2,.turquoise-block h3 {
+    color: #ffc800;
+}
+
+.happy_people {
+    min-height: 376px;
+    width: 100%;
+    display: block;
+    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/happy_people.png);
+    background-size: auto, cover;
+    background-position: 80px -45px,center ;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.happy_people_sm {
+    height: 180px;
+    width: 100%;
+    display: block;
+    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/happy_people.png);
+    background-size: 200px 170px, cover;
+    background-position: 5px -35px, -20px 0px;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.icon_cluster {
+    height: 100%;
+    margin-top: -48px;
+    margin-bottom: -110px;
+    overflow: visible;
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+}
+
+
+.arrow_down {
+    position: absolute;
+    top: 280px;
+    z-index: 999;
+}
+
+.contact-img {
+    width: 3em;
+}
+
+.bonus {
+    border-top: 0.2em dotted black;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+.presse-block {
+    margin-top: 2.5em;
+    margin-bottom: 3em;
+}
+
+.logo-cluster {
+    text-align: center;
+}
+
+.logo-cluster img {
+    margin-left: 3%;
+}
+
+.btn-primary {
+    background: #008b80;
+    border-radius: 3em;
+    color: #fff;
+    height: 3.5em;
+}
+
+.btn-primary-glyph {
+    margin: -0.2em 0.5em 0 0;
+    height: 1.3em;
+}
+
+.tafel-block {
+    background-image: url("../Images/talente-check/tafel.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #fff;
+    padding-bottom: 2em;
+    padding-top: 1em;
+}
+
+.tafel-block .img-responsive {
+    margin: 0 auto;
+}
+
+.presse-block h2 {
+    color:#008b80;
+    padding-bottom: 1.5em;
+}
+
+.fb-ico {
+    background-image: url("../Images/talente-check/fb-thumb.png");
+}
+
+.share-icon {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-left: -0.2em;
+}
+
+.yellow-block-quiz .share-icon {
+    margin-top: -0.5em;
+}
+
+.display-box {
+    display: inline-block;
+    height: 3em;
+    width: 100%;
+}
+
+.mail-ico {
+    background-image: url("../Images/talente-check/mail.png");
+}
+
+.twit-ico {
+    background-image: url("../Images/talente-check/twitter.png");
+}
+
+.gp-ico {
+    background-image: url("../Images/talente-check/googleplus.png");
+}
+
+.sport-icon {
+    margin-bottom: -4.3em;
+}
+
+
+
+.vulcan-icon {
+    margin-bottom: -1em;
+}
+
+.peace-icon {
+    display: block;
+    height: 8em;
+    margin-bottom: -4.5em;
+    padding-left: 15em;
+}
+
+.icon-cluster-2 {
+    margin-top: -2.3em;
+}
+
+.vulcan-icon-sm {
+    margin-bottom: -3em;
+    margin-left: 70%;
+}
+
+
+/* Umfrage */
+
+.talent-header {
+    height: 306px;
+    width: 100%;
+    display: block;
+    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/header-cluster.png);
+    background-size: auto, 500px 300px;
+    background-position: 80px -45px, 400px -35px;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.talent-header-sm {
+    height: 180px;
+    width: 100%;
+    display: block;
+    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/icon_cluster03.png);
+    background-size: 200px 170px, auto;
+    background-position: 5px -35px, 105% -15px;
+    background-repeat: no-repeat, no-repeat;
+}
+
+.progress-element {
+    background-position: left;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: inline-block;
+}
+
+.progress-empty {
+    /*background-image: url("../Images/talente-check/progresselement.png");*/
+    border-style: solid;
+    border-width: 2px 2px 3px 2px;
+}
+
+.progress-filled {
+    background-image: url("../Images/talente-check/progressfill.png");
+    border-style: solid;
+    border-width: 2px 2px 3px 2px;
+}
+.counter {
+    margin-right: 4em;
+    font-size: 10px;
+}
+
+.quiz-progress {
+    overflow: visible;
+}
+
+.antwort {
+    background-image: url("../Images/talente-check/o.png");
+    background-size: 1em, 1em;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.ticked {
+    background-image: url("../Images/talente-check/x.png"), url("../Images/talente-check/o.png");
+}
+
+.quiz {
+    margin-bottom: 2em;
+}
+
+.quiz h2 {
+    color: #c54261;
+}
+
+.antwort-auswahl {
+    margin-bottom: 0.7em;
+}
+
+.quiz .btn-primary {
+    height: 2.8em;
+}
+
+.yellow-block-quiz {
+    padding-bottom: 3em;
+}
+
+.ergebnis h2 {
+    color:#c54261;
+}
+
+.ergebnis h3 {
+    color: #008b80;
+}
+
+.figur-top {
+    margin-top: -3em;
+}
+
+.figur {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+}
+
+
+
+.figur h3 {
+    font-family: CaeciliaLTPro-85Heavy;
+    font-weight: normal;
+    font-style: normal; 
+}
+
+.figur p {
+    color:  #008b80;
+    padding: 2.5em 0em;
+    font-size: 27px;
+    font-family: CaeciliaLTPro-85Heavy;
+    font-weight: normal;
+    font-style: normal; 
+}
+
+.gesamtwertung .row {
+    margin-bottom: 0.6em
+}
+
+.rating-10,.rating-9, .rating-8, .rating-7, .rating-6, .rating-5, .rating-4, .rating-3, .rating-2, .rating-1 {
+    border: 2px solid black;
+    margin-top: 0.5em; 
+    height: 1em;
+}
+
+.rating-10 {
+    width: 100%;
+}
+
+.rating-9 {
+    width: 90%;
+}
+
+.rating-8 {
+    width: 80%;
+}
+
+.rating-7 {
+    width: 70%;
+}
+
+.rating-6 {
+    width: 60%;
+}
+
+.rating-5 {
+    width: 50%;
+}
+
+.rating-4 {
+    width: 40%;
+}
+
+.rating-3 {
+    width: 30%;
+}
+
+.rating-2 {
+    width: 20%;
+}
+
+.rating-1 {
+    width: 10%;
+}
+
+.highscore-all .row {
+    height: 2.5em;
+    padding-top: 0.5em;
+}
+
+.highscore-all .rating-10, .highscore-all .rating-9, .highscore-all .rating-8, .highscore-all .rating-7, .highscore-all .rating-6, .highscore-all .rating-5, .highscore-all .rating-4, .highscore-all .rating-3, .highscore-all .rating-2, .highscore-all .rating-1 {
+    margin-top: 0.25em;
+}
+
+.rating-active, .highscore-active {
+    background-repeat: repeat-x;
+    background-size: contain;
+}
+
+.rating-active {
+    background-image: url("../Images/talente-check/gesamt-fill.png");
+    border-color: #008b80;
+}
+
+.highscore-active {
+    background-image: url("../Images/talente-check/highscore-fill.png");
+    border-color: #c54261;
+}
+.highscore {
+    color: #c54261;
+}
+
+.tshirt {
+    margin-top: 1.5em; 
+}
+
+.btn-talentify-tq, .btn-talentify-red  {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    font-family: CaeciliaLTPro-85Heavy;
+    border-radius: 28px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btn-talentify-tq {
+    background: #008b80;
+}
+
+.btn-talentify-red {
+    background: #c54261;
+}
+
+
+.btn-talentify-tq:hover, .btn-talentify-red:hover {
+    text-decoration: none;
+}
+
+.btn-talentify-tq:hover {
+    background: #00a898;
+}
+
+.btn-talentify-red:hover {
+    background: #e04f78;
+}
+
+.flip {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+.du-bist {
+    margin: 2em 0 -1.4em 0;
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input.talentify-radio[type="radio"] + label span   {
+    display:inline-block;
+    width:1em;
+    height:1em;
+    /*margin:-1px 2em 0 3.6em;*/
+    vertical-align:middle;
+    cursor:pointer;
+    background-repeat: no-repeat;
+}
+
+
+input.talentify-radio[type="radio"] + label span {
+    background-image: url("../Images/talente-check/o.png");
+    background-size: contain;
+}
+
+input.talentify-radio[type="radio"]:checked + label span {
+     background-image: url("../Images/talente-check/x.png"), url("../Images/talente-check/o.png");
+    background-size: contain;
+}
+
+.call-to-action {
+    font-size:1.5em;
+}
+.gesamtwertung-andere h4 {
+    color: #008b80;
+}
+
+.highscore-all h4{
+    color: #c54261;
+}
+
+.ergebnis {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.turquoise-block-ergebnis {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.ranking {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.antwort-h2 {
+    margin-bottom: 1.4em;
+}
+
+.bilden {
+    margin-left: -0.4em;
+}
+
+.ergebnis-arrow {
+    float:left;
+    position: relative;
+    top: 6em;
+    height: 20em;
+}
+
+.ergebnis-arrow-2 {
+    float:left;
+    position: relative;
+    top: 3em;
+    height: 18em;
+}
+
+.arrow-left {
+    display: block;
+    height:  30em;
+    width: 100%;
+    background-image: url("../Images/talente-check/arrow_down_big.png");
+    background-repeat: no-repeat;
+    background-size: 8em 70%;
+    background-position: right 4em;
+}
+
+.zum-superhelden {
+    font-weight: 800;
+    position: absolute;
+    bottom: 6em;
+    width: 6.5em;
+    right: 5em;
+}
+
+.arrow-left-bottom {
+    margin-top: -3em
+}
+
+.waerst-gerne {
+    font-weight: 800;
+    position: absolute;
+    top: 0.8em;
+    width: 6em;
+    right: 6em;
+}
+
+/*************************** Figuren ******************************/
+.figur-peace {
+    background-image: url("../Images/talente-check/figur_peace.png");
+}
+
+.figur-sport {
+    background-image: url("../Images/talente-check/figur_sport.png");
+}
+
+.call-to-action-container {
+    padding-bottom: 1.8em;
+}
+
+.peace-icon-img {
+    position: absolute;
+    z-index: 999;
+}
+
+
+
+.container {
+    
+}

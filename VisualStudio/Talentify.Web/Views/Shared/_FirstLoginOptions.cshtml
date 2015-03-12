@@ -1,13 +1,41 @@
-﻿<section>
+﻿<script>
+	$(document).ready(function()
+	{
+		@if (LoggedUser.AusweisGuid != null)
+		{
+			<text>$('#ausweis-info').show();</text>
+		}
+		else 
+		{
+			<text>$('#ausweis-info').hide();</text>
+		}
+	});
+</script>
+
+<section class="first-login">
+	<div id="first-login-info-left">
+		<img src="/Images/pfeil-links.png"/><br/>
+		<span>Menü: Hier findest du die Navigation und weitere Informationen</span>
+	</div>
+	<div id="first-login-info-right">
+		<img src="/Images/pfeil-rechts.png"/><br/>
+		<span>Notifications: Du hast deine ersten Bonuspunkte bekommen!</span>
+	</div>
 	<article>
-			<header class="green">
-				<div class="bubble t-button desktop" id="bubble-first-login"></div>
-				<h2>Registrierung abgeschlossen</h2>
-				<p>Deine Anmeldung war erfolgreich!</p>
-			</header>
-		</article>
+		<header class="green">
+			<div class="bubble t-button desktop" id="bubble-first-login"></div>
+			<h2>Registrierung abgeschlossen</h2>
+			<p>Nochmals ein herzliches Willkommen bei talentify.me!</p>
+			<p id="ausweis-info" style="width:80%;margin: 15px auto;">Dein Schülerausweis wird von unserem Team so schnell wie möglich kontrolliert. Sobald dies passiert und alles OK ist, wird dein Account freigeschalten. Du erhältst dazu ein kurzes E-Mail. In der Zwischenzeit kannst du dir talentify.me mit eingeschränktem Funktionsumfang ansehen.</p>
+			<p style="width:80%;margin: 30px auto 30px auto;">Die Nutzung ist und wird immer kostenlos bleiben. Wir bieten ganz neu auch eine Premium Mitgliedschaft an. Damit genießt du nicht nur weitere Vorteile, sondern unterstützt auch ein innovates Sozialprojekt mit einem Beitrag.</p>
+			<div class="premium-container">
+				<img src="/Images/premium1.png"/>
+				<a href="javascript:void(0);">Mehr Informationen und<br/>Premium-Mitglied werden</a>
+			</div>
+		</header>
+	</article>
 	<article style="margin: 100px 0 0 0;">
-		<p>@Html.ActionLink("Daten vervollständigen & Bonuspunkte kassieren", "Index", "Profile", null, new {@class="link-button"})</p>
+		<p>@Html.ActionLink("Daten vervollständigen & Bonuspunkte kassieren", "Index", "Profile", null, new { @class = "link-button" })</p>
 		<p style="margin:0;padding:0;">oder</p>
 		<p style="margin:0 0 50px 0;padding:0;">@Html.ActionLink("weiter zur Startseite", "Index")</p>
 	</article>

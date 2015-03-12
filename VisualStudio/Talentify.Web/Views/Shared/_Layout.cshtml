@@ -16,6 +16,8 @@
 		<script src="/Scripts/screen.min.js"></script>
 		<script src="/Scripts/api.min.js"></script>
 		<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css" />
+		<link href="/Css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="/Css/ui-lightness/jquery-ui-1.10.4.custom.min.css" />
 		<link rel="stylesheet" href="/Css/talentify.min.css" />
 		@*<link rel="stylesheet" href="/Css/talentify-mobile.min.css" media="screen and (max-width: 767px)" />*@
@@ -104,7 +106,7 @@
 			@if (IsAuthenticated)
 			{
 				<div class="invite">
-					<div class="icon-list">
+					<div class="social-list">
 						<span>Jetzt Freunde einladen & Bonuspunkte kassieren</span><a href="javascript:void(0);" onclick=" shareFacebook('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()')" onmouseover="hoverImage('invite-fb');" onmouseout="hoverImage('invite-fb');"><img src="/Images/invite-fb.png" id="invite-fb"/></a><a href="javascript:void(0);" onclick=" shareGoogle('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()')" onmouseover="hoverImage('invite-google');" onmouseout="hoverImage('invite-google');"><img src="/Images/invite-google.png" id="invite-google"/></a><a href="javascript:void(0);" onclick="shareTwitter('@(@BaseUrl)/Register/Index?token=@InviteToken.Token.ToString()')" onmouseover="hoverImage('invite-twitter');" onmouseout="hoverImage('invite-twitter');"><img src="/Images/invite-twitter.png" id="invite-twitter"/></a><a href="javascript:void(0);" onclick="loadInvitePopup();" onmouseover="hoverImage('invite-email');" onmouseout="hoverImage('invite-email');"><img src="/Images/invite-email.png" id="invite-email"/></a></div>
 				</div>
 			}

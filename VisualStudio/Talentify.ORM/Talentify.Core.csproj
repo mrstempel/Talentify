@@ -103,6 +103,8 @@
     <Compile Include="DAL\Migrations\AdminSeeder.cs" />
     <Compile Include="DAL\Migrations\BadgeSeeder.cs" />
     <Compile Include="DAL\Migrations\AdminSeeder2.cs" />
+    <Compile Include="DAL\Migrations\EventTimeSeeder.cs" />
+    <Compile Include="DAL\Migrations\SchoolStateSeeder.cs" />
     <Compile Include="DAL\Migrations\IsActiveSeeder.cs" />
     <Compile Include="DAL\Migrations\NewSchoolTypeSeeder1.cs" />
     <Compile Include="DAL\Migrations\NewSchoolSeeder1.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="DAL\Models\Content\Event.cs" />
     <Compile Include="DAL\Models\Content\EventRegistration.cs" />
     <Compile Include="DAL\Models\DBMigrationHistory.cs" />
+    <Compile Include="DAL\Models\Feedback\EventFeedback.cs" />
     <Compile Include="DAL\Models\Membership\Membership.cs" />
     <Compile Include="DAL\Models\Membership\Subscription.cs" />
     <Compile Include="DAL\Models\Messaging\Conversation.cs" />
@@ -132,6 +135,7 @@
     <Compile Include="DAL\Models\Notification\Notification.cs" />
     <Compile Include="DAL\Models\School\School.cs" />
     <Compile Include="DAL\Models\School\SchoolType.cs" />
+    <Compile Include="DAL\Models\Talentecheck\TalentecheckSession.cs" />
     <Compile Include="DAL\Models\Tracking\TrackingClick.cs" />
     <Compile Include="DAL\Models\User\ActionToken.cs" />
     <Compile Include="DAL\Models\User\Admin.cs" />
@@ -149,6 +153,7 @@
     <Compile Include="DAL\Repository\BadgeRepository.cs" />
     <Compile Include="DAL\Repository\ActionTokenRepository.cs" />
     <Compile Include="DAL\Repository\CoachingTimeRepository.cs" />
+    <Compile Include="DAL\Repository\EventFeedbackRepository.cs" />
     <Compile Include="DAL\Repository\RegisterCodeRepository.cs" />
     <Compile Include="DAL\Repository\TalentometerLevelRepository.cs" />
     <Compile Include="DAL\Repository\EventRegistrationRepository.cs" />
@@ -290,6 +295,50 @@
     <Compile Include="Migrations\201501161045580_add-blocked-reason.Designer.cs">
       <DependentUpon>201501161045580_add-blocked-reason.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503051524292_add-ausweisguid.cs" />
+    <Compile Include="Migrations\201503051524292_add-ausweisguid.Designer.cs">
+      <DependentUpon>201503051524292_add-ausweisguid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503060959323_add-bonus-and-price-to-events.cs" />
+    <Compile Include="Migrations\201503060959323_add-bonus-and-price-to-events.Designer.cs">
+      <DependentUpon>201503060959323_add-bonus-and-price-to-events.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503061437393_add-bonus-and-price-to-eventregistration.cs" />
+    <Compile Include="Migrations\201503061437393_add-bonus-and-price-to-eventregistration.Designer.cs">
+      <DependentUpon>201503061437393_add-bonus-and-price-to-eventregistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503090835586_add-event-sign-off-flag.cs" />
+    <Compile Include="Migrations\201503090835586_add-event-sign-off-flag.Designer.cs">
+      <DependentUpon>201503090835586_add-event-sign-off-flag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503090907547_add-event-feedback.cs" />
+    <Compile Include="Migrations\201503090907547_add-event-feedback.Designer.cs">
+      <DependentUpon>201503090907547_add-event-feedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503091231078_add-event-id-to-event-feedback.cs" />
+    <Compile Include="Migrations\201503091231078_add-event-id-to-event-feedback.Designer.cs">
+      <DependentUpon>201503091231078_add-event-id-to-event-feedback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503091310363_add-email-flags-to-event-registrations.cs" />
+    <Compile Include="Migrations\201503091310363_add-email-flags-to-event-registrations.Designer.cs">
+      <DependentUpon>201503091310363_add-email-flags-to-event-registrations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503091626589_add-followup-flag-to-event.cs" />
+    <Compile Include="Migrations\201503091626589_add-followup-flag-to-event.Designer.cs">
+      <DependentUpon>201503091626589_add-followup-flag-to-event.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503100936406_add-comments-to-event-registration.cs" />
+    <Compile Include="Migrations\201503100936406_add-comments-to-event-registration.Designer.cs">
+      <DependentUpon>201503100936406_add-comments-to-event-registration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503101003081_add-workshop-blocked-flag.cs" />
+    <Compile Include="Migrations\201503101003081_add-workshop-blocked-flag.Designer.cs">
+      <DependentUpon>201503101003081_add-workshop-blocked-flag.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503120848415_add-ausweis-extension.cs" />
+    <Compile Include="Migrations\201503120848415_add-ausweis-extension.Designer.cs">
+      <DependentUpon>201503120848415_add-ausweis-extension.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\AdminController.cs" />
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\BaseView.cs" />
@@ -303,12 +352,22 @@
     <Compile Include="Mvc\TrackClickActionFilter.cs" />
     <Compile Include="Mvc\WebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TalentifySettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>TalentifySettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Timers\EventEmailTimer.cs" />
     <Compile Include="Utils\Email.cs" />
     <Compile Include="Utils\ProfileCompleteAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="TalentifySettings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>TalentifySettings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201406121551325_registercode_nullify.resx">
@@ -397,6 +456,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501161045580_add-blocked-reason.resx">
       <DependentUpon>201501161045580_add-blocked-reason.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503051524292_add-ausweisguid.resx">
+      <DependentUpon>201503051524292_add-ausweisguid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503060959323_add-bonus-and-price-to-events.resx">
+      <DependentUpon>201503060959323_add-bonus-and-price-to-events.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503061437393_add-bonus-and-price-to-eventregistration.resx">
+      <DependentUpon>201503061437393_add-bonus-and-price-to-eventregistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503090835586_add-event-sign-off-flag.resx">
+      <DependentUpon>201503090835586_add-event-sign-off-flag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503090907547_add-event-feedback.resx">
+      <DependentUpon>201503090907547_add-event-feedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503091231078_add-event-id-to-event-feedback.resx">
+      <DependentUpon>201503091231078_add-event-id-to-event-feedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503091310363_add-email-flags-to-event-registrations.resx">
+      <DependentUpon>201503091310363_add-email-flags-to-event-registrations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503091626589_add-followup-flag-to-event.resx">
+      <DependentUpon>201503091626589_add-followup-flag-to-event.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503100936406_add-comments-to-event-registration.resx">
+      <DependentUpon>201503100936406_add-comments-to-event-registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503101003081_add-workshop-blocked-flag.resx">
+      <DependentUpon>201503101003081_add-workshop-blocked-flag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503120848415_add-ausweis-extension.resx">
+      <DependentUpon>201503120848415_add-ausweis-extension.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

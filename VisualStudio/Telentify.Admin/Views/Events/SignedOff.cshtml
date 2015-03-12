@@ -1,0 +1,20 @@
+﻿@using System.Globalization
+@using System.Web.UI.WebControls
+@model IEnumerable<Talentify.ORM.DAL.Models.Content.EventRegistration>
+
+@{
+    ViewBag.Title = "SignedOff";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<h2>@ViewBag.EventTitle</h2>
+	<ul>
+			@for (int i = 0; i < Model.Count(); i++)
+			{
+				var isChecked = Model.ElementAt(i).Confirmed ? "checked" : "";
+				<li>@Model.ElementAt(i).User.Firstname @Model.ElementAt(i).User.Surname (@Model.ElementAt(i).CreatedDate.ToString(new CultureInfo("de")))</li>
+			}
+		</ul>
+		@Html.ActionLink("Zurück zur Eventliste", "Index", "Events")
+</div>

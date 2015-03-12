@@ -1,4 +1,5 @@
-﻿@using System.Web.UI.WebControls
+﻿@using System.Globalization
+@using System.Web.UI.WebControls
 @model IEnumerable<Talentify.ORM.DAL.Models.Content.EventRegistration>
 
 @{
@@ -16,12 +17,21 @@
 			{
 				var isChecked = Model.ElementAt(i).Confirmed ? "checked" : "";
 				<li>
-					<label for="confirmed_@(@Model.ElementAt(i).Id)">@Model.ElementAt(i).User.Firstname @Model.ElementAt(i).User.Surname</label>
+					<label for="confirmed_@(@Model.ElementAt(i).Id)">@Model.ElementAt(i).User.Firstname @Model.ElementAt(i).User.Surname (@Model.ElementAt(i).CreatedDate.ToString(new CultureInfo("de")))</label>
 					<input type="checkbox" name="confirmed" id="confirmed_@(@Model.ElementAt(i).Id)" value="@Model.ElementAt(i).Id" @isChecked/>
+					@if (Model.ElementAt(i).HasFollowUpEmail)
+					{
+						<span style="font-size:14px;background:#ef4d69;color:#fff;display:inline-block;padding: 2px 5px;">Follow Up erhalten</span>
+					}
+					@if (!string.IsNullOrEmpty(Model.ElementAt(i).Comments))
+					{
+						<p style="margin: 2px 0 10px 0;font-size:16px;"><span class="important">Grund der Abwesenheit:</span><br/>"@Model.ElementAt(i).Comments"</p>
+					}
 				</li>
 			}
 		</ul>
 		<input type="submit" value="Teilnahme Bestätigen"/><br/><br/>
+		<input type="button" value="Follow Up E-Mail versenden" onclick="location.href='/Events/SendFollowUpEmail/@ViewBag.Id'"/><br/><br/>
 		@Html.ActionLink("Zurück zur Eventliste", "Index", "Events")
 	}
 </div>

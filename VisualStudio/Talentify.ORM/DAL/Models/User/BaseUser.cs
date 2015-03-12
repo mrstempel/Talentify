@@ -14,6 +14,11 @@ using Talentify.ORM.Utils;
 
 namespace Talentify.ORM.DAL.Models.User
 {
+	public enum BlockedReasons
+	{
+		NoSchoolConfirmation	
+	}
+
 	public class BaseUser : BaseEntity
 	{
 		[ProfileComplete("E-Mail")]
@@ -59,8 +64,12 @@ namespace Talentify.ORM.DAL.Models.User
 		public Guid? PictureGuid { get; set; }
 		public bool IsPictureLandscape { get; set; }
 
+		public Guid? AusweisGuid { get; set; }
+		public string AusweisExtension { get; set; }
+
 		public bool IsDeleted { get; set; }
 		public bool IsActive { get; set; }
+		public bool IsWorkshopBlocked { get; set; }
 		public string BlockedReason { get; set; }
 
 		public ICollection<BonusPoint> BonusPoints { get; set; }

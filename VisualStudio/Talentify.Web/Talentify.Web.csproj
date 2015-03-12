@@ -155,6 +155,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
     <Compile Include="Controllers\StartController.cs" />
+    <Compile Include="Controllers\TalenteCheckController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -165,18 +166,57 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Css\bootstrap.min.css" />
+    <Content Include="Css\font-awesome\css\font-awesome.css" />
+    <Content Include="Css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Css\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Css\jquery.mCustomScrollbar.min.css" />
     <Content Include="Css\MyFontsWebfontsKit.css" />
+    <Content Include="Css\rangeslider.css" />
+    <Content Include="Css\rangeslider.min.css">
+      <DependentUpon>rangeslider.css</DependentUpon>
+    </Content>
     <Content Include="Css\sprite.css">
       <DependentUpon>sprite.scss</DependentUpon>
     </Content>
     <Content Include="Css\sprite.min.css" />
     <Content Include="Css\sprite.scss" />
+    <Content Include="Css\talente-check.css" />
     <Content Include="Css\talentify-jq-ui.css">
       <DependentUpon>talentify-jq-ui.scss</DependentUpon>
     </Content>
     <Content Include="Css\talentify-jq-ui.min.css" />
     <Content Include="Css\talentify-jq-ui.scss" />
+    <Content Include="Css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Css\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Css\font-awesome\less\core.less" />
+    <Content Include="Css\font-awesome\less\fixed-width.less" />
+    <Content Include="Css\font-awesome\less\font-awesome.less" />
+    <Content Include="Css\font-awesome\less\icons.less" />
+    <Content Include="Css\font-awesome\less\larger.less" />
+    <Content Include="Css\font-awesome\less\list.less" />
+    <Content Include="Css\font-awesome\less\mixins.less" />
+    <Content Include="Css\font-awesome\less\path.less" />
+    <Content Include="Css\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Css\font-awesome\less\spinning.less" />
+    <Content Include="Css\font-awesome\less\stacked.less" />
+    <Content Include="Css\font-awesome\less\variables.less" />
+    <Content Include="Css\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Css\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Css\font-awesome\scss\_core.scss" />
+    <Content Include="Css\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Css\font-awesome\scss\_icons.scss" />
+    <Content Include="Css\font-awesome\scss\_larger.scss" />
+    <Content Include="Css\font-awesome\scss\_list.scss" />
+    <Content Include="Css\font-awesome\scss\_mixins.scss" />
+    <Content Include="Css\font-awesome\scss\_path.scss" />
+    <Content Include="Css\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Css\font-awesome\scss\_spinning.scss" />
+    <Content Include="Css\font-awesome\scss\_stacked.scss" />
+    <Content Include="Css\font-awesome\scss\_variables.scss" />
     <None Include="Css\talentify-mobile.scss" />
     <Content Include="Css\talentify-mobile.css">
       <DependentUpon>talentify-mobile.scss</DependentUpon>
@@ -227,6 +267,65 @@
     <Content Include="Images\bubble-reg-abgeschlossen.png" />
     <Content Include="Images\bubble-search.png" />
     <Content Include="Images\bubble-settings.png" />
+    <Content Include="Images\pfeil-links.png" />
+    <Content Include="Images\pfeil-rechts.png" />
+    <Content Include="Images\premium1.png" />
+    <Content Include="Images\premium2.png" />
+    <Content Include="Images\reg-code-on.png" />
+    <Content Include="Images\reg-code.png" />
+    <Content Include="Images\reg-nicht-on.png" />
+    <Content Include="Images\reg-nicht.png" />
+    <Content Include="Images\reg-schuelerausweis-on.png" />
+    <Content Include="Images\reg-schuelerausweis.png" />
+    <Content Include="Images\talente-check\arrow_down.png" />
+    <Content Include="Images\talente-check\arrow_down_big.png" />
+    <Content Include="Images\talente-check\button-glyph.png" />
+    <Content Include="Images\talente-check\facebook.png" />
+    <Content Include="Images\talente-check\fb-thumb.png" />
+    <Content Include="Images\talente-check\figur_peace.png" />
+    <Content Include="Images\talente-check\figur_sport.png" />
+    <Content Include="Images\talente-check\gesamt-fill.png" />
+    <Content Include="Images\talente-check\googleplus.png" />
+    <Content Include="Images\talente-check\happy_people.png" />
+    <Content Include="Images\talente-check\header-cluster.png" />
+    <Content Include="Images\talente-check\highscore-fill.png" />
+    <Content Include="Images\talente-check\home_peace.png" />
+    <Content Include="Images\talente-check\home_sport.png" />
+    <Content Include="Images\talente-check\home_vulcan.png" />
+    <Content Include="Images\talente-check\icon-brain.png" />
+    <Content Include="Images\talente-check\icon-cool.png" />
+    <Content Include="Images\talente-check\icon-loud.png" />
+    <Content Include="Images\talente-check\icon-music.png" />
+    <Content Include="Images\talente-check\icon-peace.png" />
+    <Content Include="Images\talente-check\icon-smart.png" />
+    <Content Include="Images\talente-check\icon-smart2.png" />
+    <Content Include="Images\talente-check\icon-sport.png" />
+    <Content Include="Images\talente-check\icon-vulcan.png" />
+    <Content Include="Images\talente-check\icon_cluster01.png" />
+    <Content Include="Images\talente-check\icon_cluster02.png" />
+    <Content Include="Images\talente-check\icon_cluster03.png" />
+    <Content Include="Images\talente-check\mail.png" />
+    <Content Include="Images\talente-check\o.png" />
+    <Content Include="Images\talente-check\press\diePresse.png" />
+    <Content Include="Images\talente-check\press\heute.png" />
+    <Content Include="Images\talente-check\press\inventures.png" />
+    <Content Include="Images\talente-check\press\kurier.png" />
+    <Content Include="Images\talente-check\press\neuwal.png" />
+    <Content Include="Images\talente-check\press\puls4.png" />
+    <Content Include="Images\talente-check\press\wz.png" />
+    <Content Include="Images\talente-check\progressbar.png" />
+    <Content Include="Images\talente-check\progresselement.png" />
+    <Content Include="Images\talente-check\progressfill.png" />
+    <Content Include="Images\talente-check\progressfilled.png" />
+    <Content Include="Images\talente-check\superhelden.png" />
+    <Content Include="Images\talente-check\tafel.png" />
+    <Content Include="Images\talente-check\talentify.png" />
+    <Content Include="Images\talente-check\top_logo.png" />
+    <Content Include="Images\talente-check\tshirt.png" />
+    <Content Include="Images\talente-check\twitter.png" />
+    <Content Include="Images\talente-check\Untitled-1.png" />
+    <Content Include="Images\talente-check\x.png" />
+    <Content Include="Images\talente-check\zukunft-bilden.png" />
     <Content Include="Images\talentometer-left.gif" />
     <Content Include="Images\talentometer-right.gif" />
     <Content Include="Scripts\api.min.js">
@@ -247,6 +346,7 @@
     <Content Include="Scripts\forms.min.js.map">
       <DependentUpon>forms.js</DependentUpon>
     </Content>
+    <Content Include="Images\talente-check\press\Icon_" />
     <None Include="Properties\PublishProfiles\talentify-me - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me-dev - FTP.pubxml" />
@@ -349,6 +449,7 @@
     <Content Include="Scripts\Opentip\opentip.min.css">
       <DependentUpon>opentip.css</DependentUpon>
     </Content>
+    <Content Include="Scripts\rangeslider.min.js" />
     <Content Include="Scripts\screen.js" />
     <Content Include="Scripts\screen.min.js">
       <DependentUpon>screen.js</DependentUpon>
@@ -360,11 +461,13 @@
     <Content Include="Scripts\Textboxlist\TextboxList.css" />
     <Content Include="Scripts\Textboxlist\TextboxList.js" />
     <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Templates\EmailWorkshopReminder.html" />
     <Content Include="Templates\EmailNotification.html" />
     <Content Include="Templates\EmailDelete.html" />
     <Content Include="Templates\EmailTeacher.html" />
     <Content Include="Templates\Email.html" />
     <Content Include="test.html" />
+    <Content Include="uploads\ausweis\03c6db12-b9db-44c6-8c4e-ba562080f699_optimiert.png" />
     <Content Include="uploads\profile\f8252312-4e7a-485f-8aaa-2b4da50739a7_small.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -444,6 +547,13 @@
     </Content>
     <Content Include="Views\Profile\AddCoachingTime.cshtml" />
     <Content Include="Views\Profile\EditCoachingTime.cshtml" />
+    <Content Include="Views\FormHelper\SchoolSelect.cshtml" />
+    <Content Include="Views\FormHelper\SearchSchoolForm.cshtml" />
+    <Content Include="Views\FormHelper\SearchSchools.cshtml" />
+    <Content Include="Views\Events\FeedbackForm.cshtml" />
+    <Content Include="Views\Events\AttendanceForm.cshtml" />
+    <Content Include="Views\Events\Blocked.cshtml" />
+    <Content Include="Views\TalenteCheck\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

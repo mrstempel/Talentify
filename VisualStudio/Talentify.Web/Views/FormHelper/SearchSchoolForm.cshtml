@@ -1,0 +1,46 @@
+﻿@model Talentify.ORM.DAL.Models.School.School
+
+@{
+	ViewBag.Title = "SearchSchoolForm";
+    Layout = "~/Views/Shared/_LayoutModal.cshtml";
+	var schoolTypes = ViewBag.AllSchoolTypes as SelectList;
+}
+
+<script>
+	function selectSchool(id, name)
+	{
+		window.parent.setSchool(id, name);
+		window.parent.hideModal('modal-search-school');
+	}
+</script>
+
+<article>
+	<div class="msg-container" id="msg-container">
+		<div id="msg-success" class="msg success"><p>Deine Nachricht wurde erfolgreich übermittelt</p></div>
+	</div>
+	@using (Html.BeginForm("SearchSchoolForm", "FormHelper", FormMethod.Post, new { @class = "form-container search-school" }))
+	{
+		<div class="field-container" style="margin-bottom: 10px;">
+			<select id="bundesland" class="bundesland">
+				<option value="">Bundesland</option>
+				<option value="WIE">Wien</option>
+				<option value="NOE">Niederösterreich</option>
+				<option value="BGL">Burgenland</option>
+			</select>
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			@Html.DropDownListFor(model => model.SchoolTypeId, schoolTypes)
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			@Html.TextBoxFor(m => m.Name, new {@placeholder = "Schulname"})
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse (Straße)"})
+		</div>
+		<div class="field-container">
+			<input type="button" value="Suchen" onclick="searchSchools();"/>
+		</div>
+		<div id="search-loading" class="loading-message">Lade Suchergebnisse ...</div>
+		<div id="search-results"></div>
+	}
+</article>

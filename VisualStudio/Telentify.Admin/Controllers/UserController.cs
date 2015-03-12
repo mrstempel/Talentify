@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +16,7 @@ namespace Telentify.Admin.Controllers
         {
 	        ViewBag.FullCount = UnitOfWork.StudentRepository.GetFullRegisteredCount();
 	        ViewBag.NotConfirmed = UnitOfWork.StudentRepository.GetNotRegisterConfirmedCount();
+			ViewBag.AusweisCount = UnitOfWork.StudentRepository.GetSchuelerausweisCount();
 	        ViewBag.CoachCount = UnitOfWork.StudentRepository.GetCoachCount();
 	        ViewBag.DeletedCount = UnitOfWork.StudentRepository.GetDeletedCount();
             return View();
@@ -26,7 +28,7 @@ namespace Telentify.Admin.Controllers
 	    }
 
 		[HttpPost]
-		public ActionResult Update(string[] ids, string[] blockedReasons)
+		public ActionResult Update(string[] ids, string[] blockedReasons, bool[] isWorkshopBlocked)
 		{
 			var users = UnitOfWork.BaseUserRepository.Get().ToList();
 
@@ -38,6 +40,7 @@ namespace Telentify.Admin.Controllers
 					var prevIsActive = student.IsActive;
 					student.IsActive = (blockedReasons != null && string.IsNullOrEmpty(blockedReasons[i]));
 					student.BlockedReason = (blockedReasons != null) ? blockedReasons[i] : null;
+					student.IsWorkshopBlocked = (isWorkshopBlocked != null) && isWorkshopBlocked[i];
 					UnitOfWork.BaseUserRepository.Update(student);
 
 					if (!student.IsActive && prevIsActive)
@@ -55,6 +58,35 @@ namespace Telentify.Admin.Controllers
 		public ActionResult NotConfirmedList()
 		{
 			return View(UnitOfWork.StudentRepository.GetNotRegisterConfirmedList());
+		}
+
+		public ActionResult AusweisList()
+		{
+			return View(UnitOfWork.StudentRepository.GetAusweisList());
+		}
+
+		[HttpPost]
+	    public ActionResult AusweisList(string[] ids, bool[] unblock)
+		{
+			var users = UnitOfWork.BaseUserRepository.Get().ToList();
+
+			for (int i = 0; i < ids.Count(); i++)
+			{
+				var student = users.FirstOrDefault(s => s.Id == Convert.ToInt32(ids[i]));
+				if (student != null)
+				{
+					if (unblock != null && unblock[i])
+					{
+						student.BlockedReason = null;
+						UnitOfWork.BaseUserRepository.Update(student);
+						Email.SendAccountConfirmed(student.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"]);
+					}
+				}
+			}
+
+			UnitOfWork.Save();
+
+			return RedirectToAction("AusweisList");
 		}
 
 		public ActionResult CoachList()

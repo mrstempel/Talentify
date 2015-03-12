@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, .filter-container, .form-container.search .checkbox-container, .form-container.coaching-center-filter .checkbox-container, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, div.timetable, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
+﻿.box-sizing, .input-switch .option, .filter-container, .form-container.search .checkbox-container, .form-container.coaching-center-filter .checkbox-container, .form-container.search-school, .form-container.search-school input[type="button"], .form-container.search-school .loading-message, #confirm-option-container, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, #notification-list .item .bonus, .all-notifications .item .bonus, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, .event-registration-popup .location-time-container, .event-registration-popup .location-time-container .item, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .form-container.feedback .field-container textarea, .slider-container, .slider-container .label-left, .slider-container .label-right, div.timetable, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -268,6 +268,14 @@ input[type="text"].mandatory, input[type="password"].mandatory {
 
 .form-container.register header {
   margin-bottom: 10px !important; }
+.form-container.register .header-label {
+  font-size: 16px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin: 0 0 10px 0; }
+.form-container.register .textboxlist-autocomplete {
+  z-index: 999999; }
 .form-container.register .datepicker {
   text-align: right; }
   .form-container.register .datepicker label {
@@ -284,6 +292,17 @@ input[type="text"].mandatory, input[type="password"].mandatory {
   .form-container.register .datepicker select:last-of-type {
     margin: 0;
     border-right: 1px solid #e3e4e8; }
+.form-container.register .bundesland {
+  width: 140px;
+  float: left;
+  margin-right: 10px;
+  height: 35px; }
+
+#add-school {
+  font-size: 16px;
+  display: inline-block;
+  width: 100%;
+  margin: 10px 0; }
 
 #register-form label {
   font-size: 16px;
@@ -331,6 +350,26 @@ input[type="text"].mandatory, input[type="password"].mandatory {
 .form-container.price select.disabled {
   background: #e6e6e6; }
 
+.form-container.search-school input[type="button"] {
+  width: 540px; }
+.form-container.search-school .loading-message {
+  width: auto;
+  display: none; }
+
+.school-search-item-container {
+  display: inline-block;
+  margin: 20px auto;
+  width: 70%;
+  padding: 0 85px;
+  max-height: 250px;
+  overflow: auto; }
+  .school-search-item-container .item {
+    display: block;
+    margin: 0 0 5px 0; }
+    .school-search-item-container .item .fa {
+      margin: 0 10px 0 0;
+      display: inline-block; }
+
 .checkbox-list {
   text-align: left; }
   .checkbox-list ul {
@@ -354,6 +393,35 @@ input[type="text"].mandatory, input[type="password"].mandatory {
 
 #register header {
   margin-bottom: 20px; }
+
+#confirm-option-container {
+  display: inline-block;
+  width: 100%;
+  padding: 0 0 50px 0; }
+  #confirm-option-container h3 {
+    margin: 0 0 50px 0; }
+  #confirm-option-container .option {
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    width: 33%;
+    text-align: center; }
+    #confirm-option-container .option img {
+      display: block;
+      margin: 0 auto 10px auto; }
+    #confirm-option-container .option a {
+      text-decoration: none; }
+  #confirm-option-container .option.on a, #confirm-option-container .option:hover a {
+    color: #1e7d64; }
+
+.opt-form {
+  display: none; }
+  .opt-form span.info {
+    font-size: 16px;
+    display: inline-block;
+    margin: 5px 0 0 0; }
+  .opt-form span.info.large {
+    font-size: 16px; }
 
 #page-header {
   width: 100%;
@@ -487,11 +555,14 @@ input[type="text"].mandatory, input[type="password"].mandatory {
       #notification-list .item .text .system, .all-notifications .item .text .system {
         float: left;
         margin: 0 0 0 0; }
-      #notification-list .item .text .bonus, .all-notifications .item .text .bonus {
-        float: right;
-        background: #ef4d69;
-        color: #fff;
-        padding: 10px; }
+    #notification-list .item .bonus, .all-notifications .item .bonus {
+      float: right;
+      background: #ef4d69;
+      color: #fff;
+      padding: 8px 4px;
+      width: 35px;
+      text-align: center;
+      font-size: 15px; }
   #notification-list .item:hover, .all-notifications .item:hover {
     color: #fff;
     background-color: #0eb48d;
@@ -558,13 +629,13 @@ input[type="text"].mandatory, input[type="password"].mandatory {
     background: #0eb48d;
     color: #fff;
     display: inline-block; }
-    #page-footer .invite .icon-list {
+    #page-footer .invite .social-list {
       display: inline-block; }
-      #page-footer .invite .icon-list span {
+      #page-footer .invite .social-list span {
         float: left;
         font-family: CaeciliaLTPro-85Heavy;
         margin: 7px 20px 0 0; }
-      #page-footer .invite .icon-list a {
+      #page-footer .invite .social-list a {
         margin: 0 10px 0 0;
         display: inline-block; }
   #page-footer .container {
@@ -644,6 +715,57 @@ header .bubble {
 
 #bubble-settings {
   background: url(../Images/bubble-settings.png); }
+
+#first-login-info-left {
+  position: absolute;
+  top: -60px;
+  left: -45px;
+  width: 200px;
+  font-size: 14px; }
+  #first-login-info-left img {
+    display: inline-block;
+    margin: 0 10px 0 0; }
+  #first-login-info-left span {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0 0 0; }
+
+#first-login-info-right {
+  position: absolute;
+  top: -60px;
+  right: -15px;
+  width: 200px;
+  font-size: 14px; }
+  #first-login-info-right img {
+    display: inline-block;
+    margin: 0 10px 0 0; }
+  #first-login-info-right span {
+    display: inline-block;
+    width: 100%;
+    margin: 10px 0 0 0; }
+
+.first-login {
+  margin: 50px 0 0 0; }
+
+.premium-container {
+  display: inline-block;
+  margin: 0 auto; }
+  .premium-container img {
+    float: left;
+    margin: 0 20px 0 0; }
+  .premium-container a {
+    text-align: left;
+    display: inline-block;
+    margin: 15px 0 0 0; }
+
+section.premium-link {
+  margin: 20px 0 0 0; }
+  section.premium-link article {
+    text-align: center; }
+  section.premium-link .premium-container {
+    margin: 20px 0 0 0; }
+    section.premium-link .premium-container a {
+      margin: 30px 0 0 0; }
 
 #page-container.full-width {
   max-width: 100% !important; }
@@ -803,7 +925,8 @@ header .bubble {
     right: 50px; }
     #home-nav ul li a {
       width: 18px;
-      height: 18px; } }
+      height: 18px; }
+ }
 
 #search {
   margin: 0 0 30px 0; }
@@ -1027,6 +1150,26 @@ article.event-detail .content-container {
       margin: 5px 0 11px 0; }
     article.event-detail .content-container .right span.link-button {
       cursor: default !important; }
+    article.event-detail .content-container .right .cost-info-container {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      font-size: 16px;
+      margin: 6px 0 7px 0; }
+      article.event-detail .content-container .right .cost-info-container i {
+        margin-right: 5px;
+        color: #0eb48d; }
+      article.event-detail .content-container .right .cost-info-container .bonus-cost {
+        display: inline-block;
+        margin: 0 auto;
+        text-align: center; }
+      article.event-detail .content-container .right .cost-info-container .divider {
+        display: inline-block;
+        margin: 0 auto;
+        text-align: center;
+        color: #ef4d69; }
+      article.event-detail .content-container .right .cost-info-container .money-cost {
+        float: right; }
     article.event-detail .content-container .right .map-container {
       margin: 0px 0 20px 0;
       display: inline-block;
@@ -1034,9 +1177,23 @@ article.event-detail .content-container {
       height: 334px; }
     article.event-detail .content-container .right .address, article.event-detail .content-container .right .time {
       line-height: 30px;
-      color: #999; }
+      color: #999;
+      display: inline-block;
+      width: 100%; }
       article.event-detail .content-container .right .address span.important, article.event-detail .content-container .right .time span.important {
         color: #555; }
+      article.event-detail .content-container .right .address .left, article.event-detail .content-container .right .time .left {
+        float: left;
+        width: 10%;
+        margin: 3px 0 0 0; }
+        article.event-detail .content-container .right .address .left i, article.event-detail .content-container .right .time .left i {
+          font-size: 30px;
+          color: #0eb48d; }
+      article.event-detail .content-container .right .address .right, article.event-detail .content-container .right .time .right {
+        float: right;
+        width: 90%;
+        color: #183343;
+        padding: 0 0 0 10px; }
     article.event-detail .content-container .right .time {
       margin: 30px 0 0 0; }
     article.event-detail .content-container .right .open-seats {
@@ -1070,11 +1227,54 @@ article.event-detail .content-container {
   display: none; }
 
 #register-link {
-  margin: 0 0 52px 0;
+  margin: 0 0 0 0;
   font-size: 20px; }
 
 #unregister-link {
   display: none; }
+
+.event-registration-popup .location-time-container {
+  display: inline-block;
+  width: 100%;
+  vertical-align: top;
+  margin: 20px 0 20px 0; }
+  .event-registration-popup .location-time-container .item {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    vertical-align: top;
+    color: #183343; }
+    .event-registration-popup .location-time-container .item i {
+      font-size: 30px;
+      color: #0eb48d; }
+    .event-registration-popup .location-time-container .item p {
+      padding: 0;
+      margin: 5px 0 10px 0; }
+
+.pay-opt {
+  margin: 0 0 20px 0;
+  display: inline-block;
+  text-align: center;
+  max-width: 500px; }
+  .pay-opt p {
+    margin: 0 auto; }
+
+#pay-opt-pay-or-set p {
+  max-width: 500px;
+  margin: 0 auto; }
+#pay-opt-pay-or-set .field-container {
+  display: inline-block;
+  text-align: left;
+  margin: 20px 0 0 0; }
+  #pay-opt-pay-or-set .field-container input[type="radio"] {
+    width: auto;
+    display: inline-block;
+    margin: 0 10px 0 0; }
+  #pay-opt-pay-or-set .field-container label {
+    font-family: CaeciliaLTPro-55Roman;
+    width: auto;
+    display: inline-block;
+    margin: 0 0 5px 0; }
 
 #event-overview {
   margin: 20px 0 0 0;
@@ -1506,9 +1706,9 @@ article.event-detail .content-container {
     padding: 3px;
     display: none;
     border-top: 0;
-    border-left: 1px solid darkgrey;
-    border-right: 1px solid darkgrey;
-    border-bottom: 1px solid darkgrey; }
+    border-left: 1px solid darkgray;
+    border-right: 1px solid darkgray;
+    border-bottom: 1px solid darkgray; }
 
 #status-update-complete-loading {
   display: none; }
@@ -1619,6 +1819,52 @@ article.event-detail .content-container {
     #status-update-complete .cancel-btn-container select {
       width: 244px;
       margin: 0 20px 0 0; }
+
+#page-container.feedback-form p {
+  font-size: 18px; }
+
+.form-container.feedback {
+  width: 100%;
+  margin: 30px 0 0 0; }
+  .form-container.feedback .field-container {
+    width: 80%;
+    margin: 20px auto; }
+    .form-container.feedback .field-container span {
+      font-size: 16px; }
+    .form-container.feedback .field-container textarea, .form-container.feedback .field-container select {
+      margin: 15px 0 0 0; }
+    .form-container.feedback .field-container textarea {
+      border-bottom: 1px solid #e5e5e5;
+      height: 150px;
+      width: 100%; }
+    .form-container.feedback .field-container input[type="submit"] {
+      width: 100%; }
+
+.slider-container {
+  display: inline-block;
+  width: 100%; }
+  .slider-container .label-left {
+    float: left;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0 10px 0 0;
+    width: 15%;
+    font-weight: bold;
+    text-align: right;
+    margin: 15px 0 0 0; }
+  .slider-container .label-right {
+    float: right;
+    display: inline-block;
+    font-size: 14px;
+    padding: 0 0 0 10px;
+    width: 15%;
+    font-weight: bold;
+    text-align: left;
+    margin: 15px 0 0 0; }
+  .slider-container .range {
+    display: inline-block;
+    margin: 0 auto;
+    width: 70%; }
 
 .form-view {
   width: 100%;

@@ -38,8 +38,8 @@ namespace Talentify.ORM.DAL.Repository
 					icon = "icon-zusagen.png";
 				if (entity.IconType == NotificationIconType.Cancelled)
 					icon = "icon-absagen.png";
-				if (entity.IconType == NotificationIconType.Bonus)
-					icon = "icon-bonus" + entity.Bonus + ".png";
+				//if (entity.IconType == NotificationIconType.Bonus)
+				//	icon = "icon-bonus" + entity.Bonus + ".png";
 
 				var link = entity.TargetId != 0 ? "/Profile/Index/" + entity.TargetId : "/Profile";
 				var profileImage = "/Images/sender-talentify.png";
@@ -52,6 +52,12 @@ namespace Talentify.ORM.DAL.Repository
 
 				var notifictionText = entity.Text;
 
+				if (entity.Bonus != 0)
+				{
+					notifictionText += string.Format("<span style='float: right;background: #ef4d69;color: #fff;padding: 8px 4px;width: 35px;text-align: center;box-sizing: border-box;font-size: 15px;'>{0}{1}</span>", entity.Bonus > 0 ? "+" : string.Empty,
+						entity.Bonus);
+				}
+
 				if ((entity.Text.StartsWith("Neue Nachricht von:") || entity.Text.StartsWith("Lernhilfeanfrage von:")) && !string.IsNullOrEmpty(entity.AdditionalInfo))
 				{
 					notifictionText += "<br/><br/>\"" + entity.AdditionalInfo + "\"";
@@ -59,6 +65,11 @@ namespace Talentify.ORM.DAL.Repository
 
 				Email.SendNotification(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"], icon, link, profileImage, notifictionText);
 			}
+		}
+
+		public void InsertNoEmail(Notification entity)
+		{
+			base.Insert(entity);
 		}
 
 		public int Count(int userId)
@@ -123,6 +134,20 @@ namespace Talentify.ORM.DAL.Repository
 							IconType = notification.IconType,
 							IsNew = notification.ReadDate == null,
 							BadgeIcon = notification.AdditionalInfo,
+							CreatedDate = notification.CreatedDate
+						};
+						listItems.Add(item);
+					}
+
+					if (notification.IconType == NotificationIconType.None && notification.SenderType == NotificationSenderType.Event)
+					{
+						var item = new NotificationListItem
+						{
+							Image = "/Images/sender-talentify.png",
+							Link = "/Events/Detail/" + notification.TargetId,
+							Text = notification.Text,
+							IconType = notification.IconType,
+							IsNew = notification.ReadDate == null,
 							CreatedDate = notification.CreatedDate
 						};
 						listItems.Add(item);

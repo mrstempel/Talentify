@@ -10,6 +10,7 @@ using Talentify.ORM.DAL.Models;
 using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.Content;
+using Talentify.ORM.DAL.Models.Feedback;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.Notification;
@@ -68,6 +69,9 @@ namespace Talentify.ORM.DAL.Context
 
 		// tracking
 		public DbSet<TrackingClick> TrackingClicks { get; set; }
+
+		// feedback
+		public DbSet<EventFeedback> EventFeedbacks { get; set; }
 		
 		public TalentifyContext() : base("EFConnectionString")
 		{
@@ -126,6 +130,9 @@ namespace Talentify.ORM.DAL.Context
 
 			// tracking
 			modelBuilder.Configurations.Add(new TrackingClickMap());
+
+			// feedback
+			modelBuilder.Configurations.Add(new EventFeedbackMap());
 			
 			base.OnModelCreating(modelBuilder);
 		}

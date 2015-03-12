@@ -18,21 +18,24 @@
 				<div class="bubble t-button desktop" id="bubble-events"></div>
 				<h2>Events</h2>
 			</header>
-			@using (Html.BeginForm("Index", "Teacher", FormMethod.Post, new {@class = "form-container search"}))
+			@if (IsAuthenticated)
 			{
-				<div class="field-container">
-					<label for="filter">Events filtern nach:</label>
-					<select name="filter" id="filter" style="width:40%;">
-						<option value="future">Alle zukünftigen Events</option>
-						<option value="my">Meine Events</option>
-						<option value="type0">talentify Academy (Workshops)</option>
-						<option value="type1">talentify Social Skill Lab</option>
-						<option value="type2">talentify on Tour</option>
-						<option value="type3">Eventtipps</option>
-						<option value="past">Vergangene Events</option>
-					</select>
-					<input type="button" value="Filtern" onclick="filterEvents();"/>
-				</div>
+				using (Html.BeginForm("Index", "Events", FormMethod.Post, new {@class = "form-container search"}))
+				 {
+					 <div class="field-container">
+						 <label for="filter">Events filtern nach:</label>
+						 <select name="filter" id="filter" style="width: 40%;">
+							 <option value="future">Alle zukünftigen Events</option>
+							 <option value="my">Meine Events</option>
+							 <option value="type0">talentify Academy (Workshops)</option>
+							 <option value="type1">talentify Social Skill Lab</option>
+							 <option value="type2">talentify on Tour</option>
+							 <option value="type3">Eventtipps</option>
+							 <option value="past">Vergangene Events</option>
+						 </select>
+						 <input type="button" value="Filtern" onclick=" filterEvents(); "/>
+					 </div>
+				 }
 			}
 		</article>
 	</section>

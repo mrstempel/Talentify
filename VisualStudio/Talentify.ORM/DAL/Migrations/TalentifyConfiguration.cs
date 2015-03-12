@@ -28,6 +28,8 @@ namespace Talentify.ORM.DAL.Migrations
 			seeder.Add(new NewSchoolTypeSeeder1(context));
 			seeder.Add(new AdminSeeder2(context));
 			seeder.Add(new IsActiveSeeder(context));
+			seeder.Add(new SchoolStateSeeder(context));
+			seeder.Add(new EventTimeSeeder(context));
 
 			foreach (var baseSeeder in seeder)
 			{

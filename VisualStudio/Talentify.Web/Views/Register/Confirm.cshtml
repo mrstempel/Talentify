@@ -1,19 +1,135 @@
-﻿@model Talentify.ORM.FrontendLogic.Models.Login
+﻿@model Talentify.ORM.DAL.Models.User.Student
 
 @{
     ViewBag.Title = "Confirm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+	$(document).ready(function()
+	{
+		@if (string.IsNullOrEmpty(Model.BlockedReason))
+		{
+			<text>$('#confirm-option-container').hide();</text>
+			<text>$('#school-email').show();</text>
+			<text>$('#confirmOption').val('opt-later');</text>
+		}
+
+		$(".option").click(function()
+		{
+			if (!$(this).hasClass('on'))
+			{
+				showConformOption($(this).attr('id'), $(this));
+			}
+		});
+
+		$(".option").mouseover(function ()
+		{
+			$(this).find('img').each(function()
+			{
+				if ($(this).attr('src').indexOf('-on') == -1)
+				{
+					$(this).attr('src', $(this).attr('src').replace('.png', '-on.png'));
+				}
+			});
+		});
+
+		$(".option").mouseout(function ()
+		{
+			if (!$(this).hasClass('on'))
+			{
+				$(this).find('img').each(function ()
+				{
+					$(this).attr('src', $(this).attr('src').replace('-on.png', '.png'));
+				});
+			}
+		});
+
+		$('#confirm-info').opentip("Du kannst talentify.me erst in vollem Unfang nutzen, wenn du uns bestätigst, dass du ein/e aktive/r SchülerIn bist. Das gaht ganz einfach per Registrierungscode oder Upload eines Fotos deines Schülerausweises", {
+			extends: "alert",
+			color: "#000000",
+			background: "#ffffff",
+			shadow: true,
+			borderColor: "#e5e5e5",
+			tipJoint: "bottom",
+			target: true,
+			hideOn: "mouseout",
+			hideTriggers: ["target", "tip"]
+		});
+	});
+
+	function showConformOption(opt, container)
+	{
+		$('#msg-container').hide();
+		$('#confirmOption').val(opt);
+		$(".option").removeClass('on');
+		$(container).addClass('on');
+		$('.opt-form').hide();
+		$('.opt-form').find('input').removeClass('mandatory');
+		$('.opt-form').find('input').val('');
+		$('#' + opt + "-form").show();
+		$('#' + opt + "-form").find('input').addClass('mandatory');
+	}
+</script>
+
 <div id="page-container" class="form">
-	<section id="register">
-		<h1 class="desktop"><span>Die einzigartige & nachhaltige Lernhilfe -</span><br/><span>von Schülern für Schüler</span></h1>
-		<article class="msg-container" id="msg-container">
-			<div id="msg-error" class="msg error"><h2>Registrierungsbestätigung fehlgeschlagen</h2><p>Der angegebene Code ist leider ungültig oder wurde schon freigeschalten.</p></div>
-			<div id="msg-success" class="msg success">
-				<h2>Registrierung abgeschlossen</h2>
-				<p>Deine Anmeldung wurde erfolgreich abgeschlossen.</p>
-			</div>
-		</article>
-	</section>
+
+
+		<section id="register">
+			<h2 class="desktop" style="margin:25px 0;">Hallo @Model.Firstname, Willkommen bei talentify.me</h2>
+			<article>
+				<p>Du hast dich erfolgreich mit folgenden Daten registriert:</p>
+				<p>
+					@Model.Firstname @Model.Surname<br/>
+					@Model.Email
+					@if (Model.SchoolId.HasValue)
+	 {
+						<br/>@Model.School.Name
+	 }
+				</p>
+				<div id="confirm-option-container">
+					<h3>Account freischalten<i id="confirm-info" class="fa fa-question-circle" style="margin: 25px 0 0 10px;"></i></h3>
+					<div class="option" id="opt-ausweis"><img src="/Images/reg-schuelerausweis.png"/><a href="javascript:void(0);">Schülerausweis hochladen</a></div>
+					<div class="option" id="opt-code"><img src="/Images/reg-code.png"/><a href="javascript:void(0);">Registrierungscode eingeben</a></div>
+					<div class="option" id="opt-later"><img src="/Images/reg-nicht.png"/><a href="javascript:void(0);">Jetzt nicht freischalten</a></div>
+				</div>
+				<article class="msg-container" id="msg-container">
+					<div id="msg-error" class="msg error">
+						<h2>Anmeldung fehlgeschlagen</h2>
+						<p></p>
+					</div>
+					<div id="msg-success" class="msg success"><h2>Anmeldung erfolgreich</h2><p>Ein E-Mail mit Bestätigungslink wurde an deine E-Mail Adresse versendet. </p></div>
+				</article>
+				@using (Html.BeginForm("Confirm", "Register", FormMethod.Post, new { @class = "form-container register", @enctype = "multipart/form-data" }))
+	{
+					<input type="hidden" name="c" value="@Request["c"]"/>
+					<input type="hidden" name="t" value="@Request["t"]"/>
+					<input type="hidden" name="userId" value="@Model.Id"/>
+					<input type="hidden" name="confirmOption" id="confirmOption" value=""/>
+					<div class="opt-form field-container" id="opt-ausweis-form">
+						<input type="file" value="Foto auswählen" name="ausweisUpload"/>
+						<span class="info">Du kannst PNG, JPG, JPEG und PDF Dateien hochladen.<br />Maximale Dateigröße 2 MB</span>
+					</div>
+					<div class="opt-form field-container" id="opt-code-form">
+						<input type="text" name="SchoolRegisterCode" id="SchoolRegisterCode" placeholder="Registrierungscode eingeben"/>
+						<span class="info">Du hast keinen Registrierungscode? Dann lade direkt ein Foto deines Schülerausweises hoch bzw. schreib uns ein E-Mail an support@talentify.me</span>
+					</div>
+					<div class="opt-form field-container" id="opt-later-form">
+						<span class="info large">Du hast deine Schule nicht gefunden bzw. dein Bundesland ist noch nicht freigeschalten? Kein Problem. Du kannst dich in der Zwischenzeit trotzdem anmelden und dir alles ansehen. Sobald wir auch an deiner Schule sind, melden wir uns bei dir.</span>
+					</div>
+					<div class="opt-form field-container" id="school-email">
+						<span class="info large">Du hast dich mit deiner offiziellen Schüler E-Mailadresse @Model.Email registriert. Aus diesem Grund ist dein Account bereits verifiziert und du musst nur noch ein Passwort wählen.</span>
+					</div>
+					<div class="field-container">
+						@Html.PasswordFor(m => m.Password, new { @placeholder = "Wähle Passwort", @class = "mandatory" })
+						<input type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Wiederhole dein Passwort" class="mandatory"/>
+					</div>
+					<div class="field-container desktop">
+						<input type="submit" value="Weiter" onclick=" return validateConfirmForm(); "/>
+					</div>
+	}
+			</article>
+		</section>
+
 </div>
+

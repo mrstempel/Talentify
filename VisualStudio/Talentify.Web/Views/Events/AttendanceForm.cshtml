@@ -1,0 +1,44 @@
+﻿@using System.Globalization
+@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.Content.Event>
+
+@{
+    ViewBag.Title = "AttendanceForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" class="feedback-form">
+	<section>
+		<article class="event-detail">
+			<header>
+				<div class="bubble t-button desktop" id="bubble-events"></div>
+				<h2>Workshop Feedback</h2>
+			</header>
+		</article>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2></h2><p></p></div>
+			<div id="msg-success" class="msg success">
+				<h3>Danke für dein Feedback</h3>
+				<p>@Html.ActionLink("Weitere Workshops besuchen", "Index", "Events")</p>
+			</div>
+		</article>
+		@if (FormSuccess == null && FormError == null)
+		{
+			<p>Du hast dich für den talentify.me Academy Workshop <span class="important">@Model.Title</span> der am <span class="important">@Model.BeginDate.ToString("dddd", new CultureInfo("de")), den @Model.BeginDate.ToString("d.M.yyyy", new CultureInfo("de")) von @Model.BeginTime bis @Model.EndTime</span> stattgefunden hat angemeldet, dann aber leider <span class="important">nicht teilgenommen</span></p>
+			using (Html.BeginForm("AttendanceForm", "Events", FormMethod.Post, new {@class = "form-container feedback"}))
+			{
+				<input type="hidden" name="id" value="@ViewBag.Id"/>
+				<article id="profile-form">
+					<div class="field-container">
+						<span class="important">us diesem Grund wollten wir kurz nachfragen, was der Grund dafür war?</span><br/>
+						<span> Wir freuen uns über ein ehrliches Feedback:</span>
+						<textarea name="comments" class="mandatory"></textarea>
+						<span>Achtung: Sollte dies ein zweites Mal vorkommen, müssen wir dich leider für die Teilnahme an Workshops sperren.</span>
+					</div>
+					<div class="field-container">
+						<input type="submit" value="Feedback senden" onclick="return validateMandatoryOnlyForm();"/>
+					</div>
+				</article>
+			}
+		}
+	</section>
+</div>

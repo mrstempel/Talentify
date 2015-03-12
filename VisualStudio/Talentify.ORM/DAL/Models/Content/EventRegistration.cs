@@ -39,6 +39,12 @@ namespace Talentify.ORM.DAL.Models.Content
 
 		public DateTime CreatedDate { get; set; }
 		public bool Confirmed { get; set; }
+		public bool IsSignedOff { get; set; }
+		public int Price { get; set; }
+		public int Bonuspoints { get; set; }
+		public bool WasNotified { get; set; }
+		public bool HasFollowUpEmail { get; set; }
+		public string Comments { get; set; }
 	}
 
 	public class EventRegistrationMap : EntityTypeConfiguration<EventRegistration>

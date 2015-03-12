@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Migrations;
+using Talentify.ORM.Timers;
 
 namespace Talentify.Web
 {
@@ -24,6 +25,9 @@ namespace Talentify.Web
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 
 			Database.SetInitializer(new MigrateDatabaseToLatestVersion<TalentifyContext, TalentifyConfiguration>());
+
+			// start event email timer
+			EventEmailTimer.Start(this.Server.MachineName);
 		}
 	}
 }

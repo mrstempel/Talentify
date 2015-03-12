@@ -6,6 +6,7 @@
 	foreach (var item in Model)
 	 {
 		 var style = string.Empty;
+		 var bonus = string.Empty;
 
 		 if (item.IconType == NotificationIconType.Confirmed)
 		 {
@@ -17,15 +18,15 @@
 			 style = "background-image: url(/Images/icon-absagen.png);";
 		 }
 
-		 if (item.Bonus > 0)
+		 if (item.Bonus != 0)
 		 {
-			 style = "background-image: url(/Images/icon-bonus" + item.Bonus + ".png);";
+			 bonus = string.Format("<span class='bonus'>{0}{1}</span>", item.Bonus > 0 ? "+" : string.Empty, item.Bonus);
 		 }
 
 		 <div class="item" onclick=" location.href = '@item.Link' " style="@style">
 			 <a href="@item.Link" class="image-link" style="background: url('@item.Image');"></a>
 			 <div class="text">
-				 @if (item.Bonus > 0)
+				 @if (item.Bonus != 0)
 				 {
 					 <span class="system">@Html.Raw(item.Text)</span>
 				 }
@@ -34,6 +35,7 @@
 					 @Html.Raw(item.Text)
 				 }
 			 </div>
+			 @Html.Raw(bonus)
 		 </div>
 	 }
 }

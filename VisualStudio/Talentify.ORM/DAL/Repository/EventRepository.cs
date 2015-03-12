@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -9,6 +11,7 @@ using System.Web;
 using System.Web.Configuration;
 using System.Web.UI.WebControls;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.User;
@@ -26,6 +29,10 @@ namespace Talentify.ORM.DAL.Repository
 
 		public void Insert(Event entity, HttpPostedFileBase uploadPreview, HttpPostedFileBase uploadImage, HttpPostedFileBase homeImage, string uploadPath)
 		{
+			var hours = Convert.ToInt16(entity.BeginTime.Substring(0, 2));
+			var minutes = Convert.ToInt16(entity.BeginTime.Substring(3, 2));
+			entity.BeginDate = entity.BeginDate.AddHours(hours).AddMinutes(minutes);
+
 			// save home image
 			if (homeImage.ContentLength > 0)
 			{
@@ -38,6 +45,9 @@ namespace Talentify.ORM.DAL.Repository
 
 		public void Update(Event entity, HttpPostedFileBase uploadPreview, HttpPostedFileBase uploadImage, HttpPostedFileBase homeImage, string uploadPath)
 		{
+			var hours = Convert.ToInt16(entity.BeginTime.Substring(0, 2));
+			var minutes = Convert.ToInt16(entity.BeginTime.Substring(3, 2));
+			entity.BeginDate = new DateTime(entity.BeginDate.Year, entity.BeginDate.Month, entity.BeginDate.Day, hours, minutes, 0);
 			// save home image
 			if (homeImage != null && homeImage.ContentLength > 0)
 			{
@@ -75,11 +85,11 @@ namespace Talentify.ORM.DAL.Repository
 
 		public IEnumerable<Event> Filter(string filter, int userId)
 		{
-			var events = UnitOfWork.EventRepository.Get();
+			var events = UnitOfWork.EventRepository.Get(e => e.IsOnline);
 
 			if (filter == "future")
 			{
-				return events.Where(e => e.BeginDate >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0)).OrderBy( e => e.BeginDate);
+				return events.Where(e => e.BeginDate >= DateTime.Now).OrderBy( e => e.BeginDate);
 			}
 			
 			// my events
@@ -107,6 +117,16 @@ namespace Talentify.ORM.DAL.Repository
 			return events;
 		}
 
+		public IEnumerable<Event> GetNextEvents(int currentId)
+		{
+			var nextEvents =
+				AsQueryable()
+					.Where(e => e.BeginDate > DateTime.Now && e.Id != currentId)
+					.OrderByDescending(e => e.BeginDate)
+					.Take(2);
+			return nextEvents;
+		}
+
 		public int GetOpenSeats(int eventId)
 		{
 			var talentiyEvent = UnitOfWork.EventRepository.GetById(eventId);
@@ -121,24 +141,47 @@ namespace Talentify.ORM.DAL.Repository
 			
 			if (registration != null)
 			{
-				UnitOfWork.EventRegistrationRepository.Delete(registration);
+				UnitOfWork.EventRegistrationRepository.SignOff(registration);
 				UnitOfWork.Save();
 			}
 
 			return true;
 		}
 
-		public bool AddRegistration(int eventId, int userId)
+		public bool AddRegistration(int eventId, int userId, int price, int bonuspoints)
 		{
 			if (GetOpenSeats(eventId) > 0)
 			{
-				var isRegistered = UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.UserId == userId && r.EventId == eventId) != null;
+				var registration =
+					UnitOfWork.EventRegistrationRepository.AsQueryable()
+						.FirstOrDefault(r => r.EventId == eventId && r.UserId == userId);
 
-				if (!isRegistered)
+				if (registration == null)
 				{
-					var registration = new EventRegistration() {UserId = userId, EventId = eventId, CreatedDate = DateTime.Now};
+					registration = new EventRegistration() {UserId = userId, EventId = eventId, CreatedDate = DateTime.Now, Price = price, Bonuspoints = bonuspoints};
 					UnitOfWork.EventRegistrationRepository.Insert(registration);
 					UnitOfWork.Save();
+
+					if (bonuspoints != 0)
+					{
+						// subtract bonus
+						UnitOfWork.BonuspointRepository.Insert(userId, bonuspoints * -1, "Bonuspunkte für Event gesetzt", 0, true, null);
+						UnitOfWork.Save();
+					}
+				}
+				else if (registration.IsSignedOff)
+				{
+					registration.IsSignedOff = false;
+					registration.CreatedDate = DateTime.Now;
+					UnitOfWork.EventRegistrationRepository.Update(registration);
+					UnitOfWork.Save();
+
+					if (bonuspoints != 0)
+					{
+						// subtract bonus
+						UnitOfWork.BonuspointRepository.Insert(userId, bonuspoints * -1, "Bonuspunkte für Event gesetzt", 0, true, null);
+						UnitOfWork.Save();
+					}
 				}
 
 				return true;
@@ -151,20 +194,101 @@ namespace Talentify.ORM.DAL.Repository
 		{
 			var registration =
 				UnitOfWork.EventRegistrationRepository.AsQueryable()
-					.FirstOrDefault(reg => reg.EventId == eventId && reg.UserId == userId);
+					.FirstOrDefault(reg => reg.EventId == eventId && reg.UserId == userId && !reg.IsSignedOff);
 			return (registration != null);
 		}
 
 		public List<int> GetUserRegisteredEventIds(int userId)
 		{
 			return
-				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId)
+				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId && !reg.IsSignedOff)
 					select regs.EventId).ToList();
 		}
 
 		public IEnumerable<EventRegistration> GetRegistrations(int eventId)
 		{
-			return UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.EventId == eventId);
+			return UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.EventId == eventId && !r.IsSignedOff);
+		}
+
+		public IEnumerable<EventRegistration> GetRegistrationsSignedOff(int eventId)
+		{
+			return UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.EventId == eventId && r.IsSignedOff);
+		}
+
+		public IEnumerable<Event> GetNotificationEvents()
+		{
+			var checkDate = DateTime.Now.AddDays(1);
+			var events = AsQueryable().Where(e => e.BeginDate < checkDate && e.BeginDate > DateTime.Now && e.IsOnline).ToList();
+			return events;
+		}
+
+		public IEnumerable<BaseUser> GetNotifyUsers(int eventId)
+		{
+			var users = from u in UnitOfWork.BaseUserRepository.AsQueryable()
+						join
+							r in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.EventId == eventId && !r.IsSignedOff && !r.WasNotified) on
+							u.Id equals r.UserId
+						select u;
+			
+			return users;
+		}
+
+		public IEnumerable<BaseUser> GetFollowUpUsers(int eventId)
+		{
+			var users = from u in UnitOfWork.BaseUserRepository.AsQueryable()
+						join
+							r in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.EventId == eventId && !r.IsSignedOff && !r.HasFollowUpEmail) on
+							u.Id equals r.UserId
+						select u;
+			return users;
+		}
+
+		public void SendFollowUpEmail(int eventId)
+		{
+			var e = GetById(eventId);
+			var users = GetFollowUpUsers(eventId).ToList();
+			var registrations = GetRegistrations(eventId).Where(r => !r.HasFollowUpEmail).ToList();
+
+			foreach (var user in users)
+			{
+				var reg = registrations.FirstOrDefault(r => r.UserId == user.Id);
+				if (reg != null)
+				{
+					
+					if (reg.Confirmed)
+					{
+						// confirmed follow ups
+						Email.SenEventConfirmedEmail(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"], e.Title, e.Id);
+					}
+					else
+					{
+						// not confirmed follow ups
+						// check how often the user has not attended
+						var notAttendedCount = UnitOfWork.EventRegistrationRepository.GetNotAttendedCount(user.Id);
+						if (notAttendedCount == 0)
+						{
+							var tag = e.BeginDate.ToString("dddd", new CultureInfo("de"));
+							var datum = e.BeginDate.ToString("d.M.yyyy", new CultureInfo("de"));
+							Email.SenEventNotConfirmed1Email(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"],
+								e.Title, tag, datum, e.BeginTime, e.EndTime, reg.Id);
+						}
+						else
+						{
+							var tag = e.BeginDate.ToString("dddd", new CultureInfo("de"));
+							var datum = e.BeginDate.ToString("d.M.yyyy", new CultureInfo("de"));
+							Email.SenEventNotConfirmed2Email(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"],
+								e.Title, tag, datum, e.BeginTime, e.EndTime);
+							user.IsWorkshopBlocked = true;
+							UnitOfWork.BaseUserRepository.Update(user);
+						}
+					}
+
+					reg.HasFollowUpEmail = true;
+					UnitOfWork.EventRegistrationRepository.Update(reg);
+				}
+			}
+
+			UnitOfWork.Save();
 		}
 	}
 }

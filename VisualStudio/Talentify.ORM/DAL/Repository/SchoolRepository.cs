@@ -63,5 +63,32 @@ namespace Talentify.ORM.DAL.Repository
 
 			return schoolInfos;
 		}
+
+		public IEnumerable<School> SearchSchools(string bundesland, int schoolTypeId, string name, string address, bool onlyActive = true)
+		{
+			var schools = (onlyActive) ? Get(s => s.IsActive) : Get();
+
+			if (!string.IsNullOrEmpty(bundesland))
+			{
+				schools = schools.Where(s => s.State == bundesland);
+			}
+
+			if (schoolTypeId > 0)
+			{
+				schools = schools.Where(s => s.SchoolTypeId == schoolTypeId);
+			}
+
+			if (!string.IsNullOrEmpty(name))
+			{
+				schools = schools.Where(s => s.Name.ToLower().Contains(name.ToLower()));
+			}
+
+			if (!string.IsNullOrEmpty(address))
+			{
+				schools = schools.Where(s => s.Address.ToLower().Contains(address.ToLower()));
+			}
+
+			return schools;
+		}
 	}
 }

@@ -1,0 +1,111 @@
+﻿@inherits Talentify.ORM.Mvc.FormView<Talentify.ORM.DAL.Models.Content.Event>
+
+@{
+    ViewBag.Title = "FeedbackForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script src="/Scripts/rangeslider.min.js"></script>
+	<script>
+		$(document).ready(function()
+		{
+			$('input[type="range"]').rangeslider({
+
+				// Feature detection the default is `true`.
+				// Set this to `false` if you want to use
+				// the polyfill also in Browsers which support
+				// the native <input type="range"> element.
+				polyfill: false,
+
+				// Default CSS classes
+				rangeClass: 'rangeslider',
+				fillClass: 'rangeslider__fill',
+				handleClass: 'rangeslider__handle',
+
+				// Callback function
+				onInit: function () { },
+
+				// Callback function
+				onSlide: function (position, value) { },
+
+				// Callback function
+				onSlideEnd: function (position, value) { }
+			});
+		});
+
+		function setSliderValue(slider)
+		{
+			$('#' + $(slider).attr('data-hidden-name')).val($(slider).val());
+		}
+	</script>
+}
+
+@section CustomCss
+{
+	<link href="~/Css/rangeslider.min.css" rel="stylesheet" />
+}
+
+<div id="page-container" class="feedback-form">
+	<section>
+		<article class="event-detail">
+			<header>
+				<div class="bubble t-button desktop" id="bubble-events"></div>
+				<h2>Workshop Feedback</h2>
+			</header>
+		</article>
+		<article class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error"><h2></h2><p></p></div>
+			<div id="msg-success" class="msg success">
+				<h3>Danke für dein Feedback</h3>
+				<p>@Html.ActionLink("Weitere Workshops besuchen", "Index", "Events")</p>
+			</div>
+		</article>
+		@if (FormSuccess == null && FormError == null)
+		{
+			<p>Wir hoffen du hattest einen spannenden talentify Academy Workshop zum Thema <span class="important">"@Model.Title"</span>. Bitte hilf uns die Veranstaltung und das Format weiter zu verbessern. Wir sind dir sehr dankbar, wenn du dir eine Minute Zeit nimmst und uns ein paar Fragen beantwortest.</p>
+			<p>Deine Angaben sind natürlich 100% anonym und werden nur zur internen Weiterentwicklung verwendet.</p>
+			<p>Wir freuen uns auf dein Feedback!</p>
+			using (Html.BeginForm("FeedbackForm", "Events", FormMethod.Post, new {@class = "form-container feedback"}))
+			{
+				<input type="hidden" name="eventId" value="@Model.Id"/>
+				<article id="profile-form">
+					<div class="field-container">
+						<span class="important">Wie hat dir der Academy Workshop gefallen?</span><br/>
+						<span>Hier geht's um deinen Gesamteindruck vom Workshop.</span>
+						<div class="slider-container">
+							<div class="label-left">Nicht so wirklich</div>
+							<div class="range"><input type="hidden" name="liked" id="liked" value="3"/><input type="range" min="1" max="5" step="1" value="3" data-hidden-name="liked" onchange="setSliderValue($(this));"></div>
+							<div class="label-right">Super!</div>
+						</div>
+					</div>
+					<div class="field-container">
+						<span class="important">Konntest du etwas für dich persönlich mitnehmen?</span><br/>
+						<span>Waren neue Aspekte dabei bzw. sind die Themen für die Zukunft von Relevanz für dich?</span>
+						<div class="slider-container">
+							<div class="label-left">Eigentlich nicht</div>
+							<div class="range"><input type="hidden" name="helpful" id="helpful" value="3"/><input type="range" min="1" max="5" step="1" value="3" data-hidden-name="helpful" onchange="setSliderValue($(this));"></div>
+							<div class="label-right">Auf jeden Fall</div>
+						</div>
+					</div>
+					<div class="field-container">
+						<span class="important">Würdest du diesen Workshop an deine Freunde weiterempfehlen?</span><br/>
+						<select name="recommendWorthy">
+							<option value="true">Ja</option>
+							<option value="false">Nein</option>
+						</select>
+					</div>
+					<div class="field-container">
+						<span class="important">Bitte lass uns kurz wissen was dir besonders gut bzw. gar nicht gefallen hat.</span><br/>
+						<span>Dein Feedback hilft uns unglaublich weiter. Wir freuen uns auf deine offenen und ehrlichen Worte.</span>
+						<textarea name="comments"></textarea>
+					</div>
+					<div class="field-container">
+						<input type="submit" value="Feedback senden"/>
+					</div>
+				</article>
+			}
+		}
+	</section>
+</div>

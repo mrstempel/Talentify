@@ -43,6 +43,22 @@
 				<td>@Html.TextBoxFor(m => m.City)</td>
 			</tr>
 			<tr>
+				<td>Bundesland</td>
+				<td>
+					<select name="State" id="State">
+						<option value="WIE">Wien</option>
+						<option value="NOE">Niederösterreich</option>
+						<option value="OOE">Oberösterreich</option>
+						<option value="SBG">Salzburg</option>
+						<option value="TIR">Tirol</option>
+						<option value="VBG">Vorarlberg</option>
+						<option value="BGL">Burgenland</option>
+						<option value="STM">Steiermark</option>
+						<option value="KAE">Kärnten</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
 				<td>@Html.LabelFor(m => m.Country)</td>
 				<td>@Html.TextBoxFor(m => m.Country)</td>
 			</tr>
@@ -53,6 +69,10 @@
 			<tr>
 				<td>@Html.LabelFor(m => m.Email)</td>
 				<td>@Html.TextBoxFor(m => m.Email)</td>
+			</tr>
+			<tr>
+				<td>Schüler E-Mail Endung</td>
+				<td>@Html.TextBoxFor(m => m.EmailSuffix)</td>
 			</tr>
 			<tr>
 				<td>@Html.LabelFor(m => m.Phone)</td>

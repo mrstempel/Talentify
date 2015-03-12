@@ -174,11 +174,46 @@ function validateRegisterForm()
 	}
 
 	// check e-mail syntax
-	if (!validateEmail($('#Email').val()))
+	if ($('#Email').hasClass('mandatory') && !validateEmail($('#Email').val()))
 	{
 		$('#Email').addClass('error');
 		errorText += "Bitte gib eine gültige E-Mail Adresse an.";
 		isValid = false;
+	}
+
+	// check if correct school was selected
+	if ($('#NewSchool').val() == "" && ($('#SchoolId').val() == "" || $('#SchoolId').val() == "0"))
+	{
+		if (errorText.length > 0)
+			errorText += "<br/>";
+		errorText += "Bitte wähle eine Schule aus.";
+		isValid = false;
+	}
+
+	if (!isValid)
+	{
+		showErrorMsg(errorHeadline, errorText, false);
+	}
+
+	return isValid;
+}
+
+function validateConfirmForm()
+{
+	var isValid = true;
+	var errorHeadline = "Fehler bei Anmeldung";
+	var errorText = "";
+
+	if ($('#confirmOption').val() == "")
+	{
+		errorText = "Bitte wähle eine Art aus, wie du deinen Account freischalten willst - Zumindest: Jetzt nicht freischalten!";
+		isValid = false;
+	}
+
+	// check mandatory fields
+	if (!validateMandatoryFields())
+	{
+		return false;
 	}
 
 	// check password length
@@ -190,15 +225,16 @@ function validateRegisterForm()
 		errorText += "Dein Passwort muss mind. 6 Zeichen lang sein.";
 		isValid = false;
 	}
-
-	// check if correct school was selected
-	if ($('#SchoolSelectName').val() == "")
+	else
 	{
-		$('#SchoolSelect').addClass('error');
-		if (errorText.length > 0)
-			errorText += "<br/>";
-		errorText += "Bitte wähle eine Schule aus.";
-		isValid = false;
+		if ($('#Password').val() != $('#passwordConfirm').val())
+		{
+			$('#passwordConfirm').addClass('error');
+			if (errorText.length > 0)
+				errorText += "<br/>";
+			errorText += "Deine Passwortwiederholung stimmt nicht mit deinem gewählten Passwort überein.";
+			isValid = false;
+		}
 	}
 
 	if (!isValid)

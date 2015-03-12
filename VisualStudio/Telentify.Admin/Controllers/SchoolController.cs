@@ -29,8 +29,20 @@ namespace Telentify.Admin.Controllers
 
         public ActionResult Index()
         {
+			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
+			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Code = "Schultyp" });
+			ViewBag.AllSchoolTypes = allSchholTypes;
             return View(UnitOfWork.SchoolRepository.Get());
         }
+
+		[HttpPost]
+		public ActionResult Index(string bundesland, int schoolTypeId, string name, string address)
+		{
+			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
+			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Code = "Schultyp" });
+			ViewBag.AllSchoolTypes = allSchholTypes;
+			return View(UnitOfWork.SchoolRepository.SearchSchools(bundesland, schoolTypeId, name, address));
+		}
 
 	    public ActionResult Create()
 	    {

@@ -49,7 +49,7 @@ namespace Talentify.ORM.DAL.Models.User
 
 		public bool HasSchool
 		{
-			get { return SchoolId.HasValue; }
+			get { return SchoolId.HasValue && string.IsNullOrEmpty(BlockedReason); }
 		}
 	}
 

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Content;
 using Talentify.ORM.Mvc;
@@ -88,5 +89,20 @@ namespace Telentify.Admin.Controllers
 
 			return View(registrations);
 		}
+
+	    public ActionResult SignedOff(int id)
+	    {
+			var e = UnitOfWork.EventRepository.GetById(id);
+			ViewBag.EventTitle = e.Title;
+			ViewBag.Id = e.Id;
+			var registrations = UnitOfWork.EventRepository.GetRegistrationsSignedOff(id);
+			return View(registrations);
+	    }
+
+	    public ActionResult SendFollowUpEmail(int id)
+	    {
+			UnitOfWork.EventRepository.SendFollowUpEmail(id);
+		    return RedirectToAction("Registrations", new {id = id});
+	    }
     }
 }

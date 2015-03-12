@@ -1,9 +1,11 @@
 ﻿@using System.Globalization
+@using Talentify.ORM.DAL.Models.Content
 @model Talentify.ORM.DAL.Models.Content.Event
 
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+	var nextEvents = (ViewBag.NextEvents) as IEnumerable<Event>;
 }
 
 @section CustomMeta 
@@ -59,6 +61,7 @@
 		function disableRegistration()
 		{
 			$('#register-link').hide();
+			$('#cost-info').hide();
 			$('#unregister-link').css('display', 'inline-block');
 			$('#registered').css('display', 'inline-block');
 			$('#past-registered').css('display', 'inline-block');
@@ -71,7 +74,7 @@
 	);</script>
 }
 
-<div id="page-container">
+<div id="page-container" class="form">
 	<section>
 		<article class="event-detail">
 			<header>
@@ -79,49 +82,86 @@
 				<h2>Events</h2>
 			</header>
 			<div class="content-container">
-			<div class="left">
-				<h1>@Html.Raw(Model.Headline)</h1>
-				<div class="content">
-					<img src="@(@ContentUploadUrl)@(@Model.Image)" class="event-image" alt="@Html.Raw(Model.Title)"/>
-					<h4>Eventinformationen</h4>
-					@Html.Raw(Model.Content)
+				<div class="left">
+					<h1>@Html.Raw(Model.Headline)</h1>
+					<div class="content">
+						<img src="@(@ContentUploadUrl)@(@Model.Image)" class="event-image" alt="@Html.Raw(Model.Title)"/>
+						<h4>Eventinformationen</h4>
+						@Html.Raw(Model.Content)
+					</div>
+				</div>
+				<div class="right">
+					<div id="past-event-options">
+						<span id="past-registered" class="link-button">Du warst angemeldet</span>
+					</div>
+					<div id="coming-event-options">
+						<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
+						<div class="cost-info-container" id="cost-info">
+							<div class="bonus-cost"><i class="fa fa-star"></i>@Model.Bonuspoints<br/>Bonuspunkte</div>
+							<!--<div class="divider">oder</div>
+								<div class="money-cost"><i class="fa fa-euro"></i>20<br/>bezahlen</div>-->
+						</div>
+						<span id="registered" class="link-button">Du bist angemeldet</span>
+						<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
+					</div>
+					<div id="not-logged-options">
+						<a href="/Register"class="link-button">Jetzt anmelden</a>
+					</div>
+					<div class="map-container" id="map-container"></div>
+					<div class="address">
+						<div class="left"><i class="fa fa-location-arrow"></i></div>
+						<div class="right">
+							@Model.LocationName<br/>
+							@Model.Address<br/>
+							@Model.ZipCode @Model.City<br/>
+							@Model.Country
+						</div>
+					</div>
+					<div class="time">
+						<div class="left"><i class="fa fa-clock-o"></i></div>
+						<div class="right">
+							@Model.BeginDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))<br/>
+							von @Model.BeginTime bis @Model.EndTime
+						</div>
+					</div>
+					<div class="open-seats">
+						<span id="event-open-seats"></span>
+					</div>
+					<div class="sharing-options">
+						<span class='st_facebook_large' displayText='Facebook' st_title='@Model.Title'></span>
+						<span class='st_twitter_large' displayText='Tweet' st_title='@Model.Title'></span>
+						<span class='st_linkedin_large' displayText='LinkedIn' st_title='@Model.Title'></span>
+						<span class='st_xing_large' displayText='Xing' st_title='@Model.Title'></span>
+						<span class='st_pinterest_large' displayText='Pinterest' st_title='@Model.Title'></span>
+						<span class='st_email_large' displayText='Email' st_title='@Model.Title'></span>
+					</div>
 				</div>
 			</div>
-			<div class="right">
-				<div id="past-event-options">
-					<span id="past-registered" class="link-button">Du warst angemeldet</span>
-				</div>
-				<div id="coming-event-options">
-					<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
-					<span id="registered" class="link-button">Du bist angemeldet</span>
-					<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
-				</div>
-				<div id="not-logged-options">
-					<a href="/Register"class="link-button">Jetzt anmelden</a>
-				</div>
-				<div class="map-container" id="map-container"></div>
-				<div class="address">
-					<span class="important">Zeit und Ort</span><br/>
-					@Model.LocationName<br/>
-					@Model.Address<br/>
-					@Model.ZipCode @Model.City<br/>
-					@Model.Country
-				</div>
-				<div class="time">
-					@Model.BeginDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))<br/>
-					von @Model.BeginTime bis @Model.EndTime
-				</div>
-				<div class="open-seats">
-					<span id="event-open-seats"></span>
-				</div>
-				<div class="sharing-options">
-					<span class='st_facebook_large' displayText='Facebook' st_title='@Model.Title'></span>
-					<span class='st_twitter_large' displayText='Tweet' st_title='@Model.Title'></span>
-					<span class='st_linkedin_large' displayText='LinkedIn' st_title='@Model.Title'></span>
-					<span class='st_xing_large' displayText='Xing' st_title='@Model.Title'></span>
-					<span class='st_pinterest_large' displayText='Pinterest' st_title='@Model.Title'></span>
-					<span class='st_email_large' displayText='Email' st_title='@Model.Title'></span>
-				</div>
+		</article>
+	</section>
+	@if (nextEvents != null && nextEvents.Count() > 1)
+	{
+		<h2 style="margin: 30px 0 0 0;">Ähnliche Workshops</h2>
+		<section id="event-overview" class="next-events">
+			@foreach (var item in nextEvents)
+			{
+				@Html.Partial("_EventPreview", item)
+			}
+		</section>
+	}
+	<section style="margin: 20px 0 0 0;">
+		<article>
+			<h3>Noch Fragen? Wir haben die Antworten</h3>
+			<p><a href="javascript:void(0);">Zum talentify.me Hilfesystem</a></p>
+		</article>
+	</section>
+	<section class="premium-link">
+		<article style="text-align: center;">
+			<h2>Bereit zum Upgrade?</h2>
+			<h3>Investiere in deine Talente und Zukunft.</h3>
+			<div class="premium-container">
+				<img src="/Images/premium1.png"/>
+				<a href="javascript:void(0);">Jetzt Premium-Mitglied werden</a>
 			</div>
 		</article>
 	</section>
@@ -132,6 +172,6 @@
 	<header>
 		<h1>Eventanmeldung<a href="javascript:void(0);" onclick="$('#modal-event-register').modal('hide');" class="close-link"></a></h1>
 	</header>
-	<iframe id="event-register-frame" width="600" height="300" scrolling="no"></iframe>
+	<iframe id="event-register-frame" width="600" height="500" scrolling="no"></iframe>
   </div>
 </div>

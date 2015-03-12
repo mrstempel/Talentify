@@ -10,6 +10,7 @@
 		<h3 style="text-align: left;">Statistik:</h3>
 		<p>Bestätigte Registrierungen: <span class="important">@ViewBag.FullCount.ToString()</span> (@Html.ActionLink("Liste", "ConfirmedList", "User"))</p>
 		<p>Nicht bestätigte Registrierungen: <span class="important">@ViewBag.NotConfirmed.ToString()</span> (@Html.ActionLink("Liste", "NotConfirmedList", "User"))</p>
+		<p>Schülerausweis: <span class="important">@ViewBag.AusweisCount.ToString()</span> (@Html.ActionLink("Liste", "AusweisList", "User"))</p>
 		<p>User mit Lernhilfeangebot: <span class="important">@ViewBag.CoachCount.ToString()</span> (@Html.ActionLink("Liste", "CoachList", "User"))</p>
 		<p>Gelöschte Accounts: <span class="important">@ViewBag.DeletedCount.ToString()</span></p>
 	</div>

@@ -102,10 +102,17 @@ $.TextboxList = function(element, _options){
 		setValues(options.decode(original.val()));
 	};
 	
-	var create = function(klass, value, opt){
+	var create = function (klass, value, opt)
+	{
 		if (klass == 'box'){
-			if (chk(options.max) && list.children('.' + options.prefix + '-bit-box').length + 1 > options.max) return false;
-			if (options.unique && $.inArray(uniqueValue(value), index) != -1) return false;		
+			if (chk(options.max) && list.children('.' + options.prefix + '-bit-box').length + 1 > options.max)
+			{
+				return false;
+			}
+			if (options.unique && $.inArray(uniqueValue(value), index) != -1)
+			{
+				return false;
+			}
 		}		
 		return new $.TextboxListBit(klass, value, self, $.extend(true, options.bitsOptions[klass], opt));
 	};
@@ -120,6 +127,17 @@ $.TextboxList = function(element, _options){
 			if (!afterEl || !afterEl.length) afterEl = list.find('.' + options.prefix + '-bit-box').filter(':last');
 			b.inject(afterEl.length ? afterEl : list, afterEl.length ? 'after' : 'top');
 		} 
+		return self;
+	};
+
+	var forecedAdd = function (plain, id, html, afterEl)
+	{
+		var b = new $.TextboxListBit('box', [id, plain, html], self, $.extend(true, options.bitsOptions['box'], null));
+		if (b)
+		{
+			if (!afterEl || !afterEl.length) afterEl = list.find('.' + options.prefix + '-bit-box').filter(':last');
+			b.inject(afterEl.length ? afterEl : list, afterEl.length ? 'after' : 'top');
+		}
 		return self;
 	};
 	
@@ -161,6 +179,16 @@ $.TextboxList = function(element, _options){
 		$.each(values, function(i, v){
 			if (v) add.apply(self, $.isArray(v) ? [v[1], v[0], v[2]] : [v]);
 		});		
+	};
+
+	var clear = function(){
+		var values = [];
+		list.children().each(function(){
+			var bit = getBit(this);
+			if (!bit.is('editable')){
+				bit.remove();
+			}
+		});
 	};
 	
 	var update = function(){
@@ -267,6 +295,8 @@ $.TextboxList = function(element, _options){
 	this.create = create;
 	this.add = add;
 	this.getValues = getValues;
+	this.clear = clear;
+	this.forecedAdd = forecedAdd;
 	this.plugins = [];
 	init();
 };

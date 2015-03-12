@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Talentify.ORM.DAL.Models.School.School>
+
+<div class="school-search-item-container">
+
+	@if (Model.Any())
+	{
+		foreach (var school in Model)
+		{
+			<div class="item"><i class="fa fa-check-square-o"></i><a href="javascript:void(0);" onclick="selectSchool(@school.Id, '@school.Name')">@school.Name</a></div>
+		}
+	}
+	else
+	{
+		<p>Es wurden keine Schulen gefunden.</p>	
+	}
+</div>

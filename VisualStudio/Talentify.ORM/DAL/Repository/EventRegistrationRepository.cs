@@ -25,6 +25,35 @@ namespace Talentify.ORM.DAL.Repository
         {
         }
 
+		public override void Delete(EventRegistration entity)
+		{
+			if (entity.Bonuspoints > 0)
+			{
+				//re-add bonuspoints to user
+				UnitOfWork.BonuspointRepository.Insert(entity.UserId, entity.Bonuspoints, "Gesetzte Bonuspunkte für Event gutgeschrieben", 0, true, null);
+			}
+			base.Delete(entity);
+		}
+
+		public void SignOff(EventRegistration entity)
+		{
+			if (entity.Bonuspoints > 0)
+			{
+				//re-add bonuspoints to user
+				UnitOfWork.BonuspointRepository.Insert(entity.UserId, entity.Bonuspoints, "Gesetzte Bonuspunkte für Event gutgeschrieben", 0, true, null);
+			}
+
+			entity.CreatedDate = DateTime.Now;
+			entity.IsSignedOff = true;
+			Update(entity);
+		}
+
+		public int GetRegisterCount(int userId)
+		{
+			var regCount = UnitOfWork.EventRegistrationRepository.AsQueryable().Count(r => r.UserId == userId && !r.IsSignedOff);
+			return regCount;
+		}
+
 		public void ConfirmRegistration(int registrationId)
 		{
 			ConfirmRegistration(GetById(registrationId));
@@ -36,6 +65,30 @@ namespace Talentify.ORM.DAL.Repository
 			Update(registration);
 			UnitOfWork.Save();
 			// set bonuspoints
+		}
+
+		public void MarkAsNotified(int eventId, int userId)
+		{
+			var reg = AsQueryable().FirstOrDefault(r => r.EventId == eventId && r.UserId == userId);
+			if (reg != null)
+			{
+				reg.WasNotified = true;
+				Update(reg);
+				//UnitOfWork.Save();
+			}
+		}
+
+		public void AddComment(int id, string comments)
+		{
+			var reg = GetById(id);
+			reg.Comments = comments;
+
+			Update(reg);
+		}
+
+		public int GetNotAttendedCount(int userId)
+		{
+			return AsQueryable().Count(r => !r.Confirmed && r.HasFollowUpEmail && r.UserId == userId);
 		}
 	}
 }

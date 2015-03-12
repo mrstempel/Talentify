@@ -10,7 +10,7 @@
 	<ul>
 		@foreach (var e in Model)
 		{
-			<li>@Html.ActionLink(@e.Title, "Edit", "Events", new {id=e.Id}, null)  @Html.ActionLink("Anmeldungen", "Registrations", "Events", new {id=e.Id}, new {@class="link-button"})</li>
+			<li>@Html.ActionLink(@e.Title, "Edit", "Events", new {id=e.Id}, null)  @Html.ActionLink("Anmeldungen", "Registrations", "Events", new {id=e.Id}, new {@class="link-button"}) @Html.ActionLink("Abmeldungen", "SignedOff", "Events", new {id=e.Id}, new {@class="link-button"})</li>
 		}
 	</ul>
 	

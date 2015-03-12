@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using System.Web.UI.WebControls
 @model Talentify.ORM.DAL.Models.Content.Event
 
 @{
@@ -6,7 +7,31 @@
     Layout = "~/Views/Shared/_LayoutModal.cshtml";
 }
 
-<article>
+<script>
+	$(document).ready(function()
+	{
+		setPayOption('@ViewBag.PayOption');
+	});
+
+	function setPayOption(opt)
+	{
+		$('.pay-opt').hide();
+		$('#pay-opt-' + opt).show();
+
+		// set btn text
+		if (opt == "pay")
+		{
+			$('#btn-submit').val('Jetzt verbindlich anmelden & bezahlen');
+		}
+
+		if (opt == "first")
+		{
+			$('#btn-submit').val('Jetzt verbindlich & kostenlos anmelden');
+		}
+	}
+</script>
+
+<article class="event-registration-popup">
 	<div class="msg-container" id="msg-container">
 		<div id="msg-error" class="msg error"><h2>Fehler bei Anmeldung</h2><p>Ein unerwateter Fehler ist aufgetreten. Bitte versuche es erneut.</p></div>
 		<div id="msg-success" class="msg success"><h2>Anmeldung erfolgreich.</h2><p>Du bist jetzt für das Event @Html.Raw(Model.Headline) angemeldet.</p></div>
@@ -16,14 +41,40 @@
 		using (Html.BeginForm("Register", "Events", FormMethod.Post, new {@class = "form-container"}))
 		{
 			@Html.HiddenFor(m => m.Id)
+			<input type="hidden" name="payOption" value="@ViewBag.PayOption"/>
 			<input type="hidden" name="doRegister" value="true"/>
 			<div class="field-container">
 				<h3>@Html.Raw(Model.Headline)</h3>
-				<p>@Model.LocationName<br/>@Model.Address, @Model.ZipCode @Model.City @Model.Country</p>
-				<p class="important">@Model.BeginDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))<br/>von @Model.BeginTime bis @Model.EndTime</p>
+				<div class="location-time-container">
+					<div class="item">
+						<i class="fa fa-location-arrow"></i>
+						<p>@Model.LocationName<br/>@Model.Address<br />@Model.ZipCode @Model.City @Model.Country</p>
+					</div><div class="item">
+						      <i class="fa fa-clock-o"></i>
+						      <p>@Model.BeginDate.ToString("dddd, d.M.yyyy", new CultureInfo("de"))<br/>von @Model.BeginTime bis @Model.EndTime</p>
+					      </div>
+				</div>
+			</div>
+			<div class="pay-opt" id="pay-opt-pay-or-set">
+				<p>Du hast derzeit <span class="important my-bonus">@ViewBag.MyBonus Bonuspunkte</span>, die du für diesen Workshop einsetzen kannst.</p>
+				<div class="field-container">
+					<input type="radio" name="payOrSetOption" value="set" id="pay-or-set-option-set" checked="true"/><label for="pay-or-set-option-set">Ich setze @Model.Bonuspoints Bonuspunkte</label><br/>
+					@*<input type="radio" name="payOrSetOption" value="pay" id="pay-or-set-option-pay"/><label for="pay-or-set-option-pay">Ich bezahle @Model.Price,- Euro (ohne Bonuspunkte)</label>*@
+				</div>
+			</div>
+			<div class="pay-opt" id="pay-opt-pay">
+				<p>Du hast derzeit <span class="important my-bonus">@ViewBag.MyBonus Bonuspunkte</span>, das ist leider zu wenig für diesen Workshop. Sammle weiter Bonuspunkte oder bezahle @Model.Price,- Euro</p>
+			</div>
+			<div class="pay-opt" id="pay-opt-first">
+				<p>Da du noch <span class="important">keinen Workshop besucht</span> hast, ist der Erste für dich komplett kostenlos. Du musst weder Bonuspunkte setzen noch dafür bezahlen.</p>
+			</div>
+			<div class="pay-opt" id="pay-opt-premium">
+				<p>Du bist <span class="important">Premium-Mitglied</span> und genießt alle damit verbundenen Vorteile. Einer davon ist, dass du diesen Workshop kostenlos und ohne Einsatz von Bonuspunkten besuchen kannst ;-)</p>
 			</div>
 			<div class="field-container">
-				<input type="submit" value="Anmelden" onclick="$(this).addClass('disabled');"/>
+				<input type="submit" value="Jetzt verbindlich anmelden" onclick="$(this).addClass('disabled');" id="btn-submit"/><br/>
+				<span style="margin:5px 0;display:block">oder</span>
+				<a href="javascript:void(0);" onclick="window.parent.hideModal('modal-event-register');">Abbrechen</a>
 			</div>
 		}
 	}

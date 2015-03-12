@@ -31,6 +31,9 @@ namespace Talentify.ORM.DAL.Models.Content
 		public EventType Type { get; set; }
 		public string HomeImage { get; set; }
 		public string DetailUrl { get; set; }
+		public int Bonuspoints { get; set; }
+		public int Price { get; set; }
+		public bool HasFollowUpCompleted { get; set; }
 
 		#region Frontend Properties
 

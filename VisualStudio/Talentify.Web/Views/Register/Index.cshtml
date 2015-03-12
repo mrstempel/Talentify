@@ -5,6 +5,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section CustomCss 
+{
+	<link rel="stylesheet" href="/Scripts/Textboxlist/TextboxList.css" />
+	<link rel="stylesheet" href="/Scripts/Textboxlist/TextboxList.Autocomplete.css" />
+}
+
+@section CustomJavascript 
+{
+	<script src="/Scripts/jquery.browser.min.js"></script>
+	<script src="/Scripts/Textboxlist/GrowingInput.js"></script>
+	<script src="/Scripts/Textboxlist/TextboxList.js"></script>
+	<script src="/Scripts/Textboxlist/TextboxList.Autocomplete.js"></script>
+}
+
 <div id="page-container" class="form">
 	<section id="register">
 		<header>

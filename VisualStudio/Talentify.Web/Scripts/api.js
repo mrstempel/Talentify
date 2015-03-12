@@ -522,6 +522,7 @@ function cancelEventRegistration(id)
 				{
 					loadEventOpenSeats(id);
 					$('#register-link').css('display', 'inline-block');
+					$('#cost-info').css('display', 'inline-block');
 					$('#unregister-link').hide();
 					$('#registered').hide();
 				}
@@ -670,6 +671,12 @@ function loadAddSchoolForm()
 	$('#modal-add-school').modal('show');
 }
 
+function loadSearchSchoolForm()
+{
+	$('#search-school-frame').attr('src', '/FormHelper/SearchSchoolForm');
+	$('#modal-search-school').modal('show');
+}
+
 function loadAddSubjectForm()
 {
 	$('#add-subject-frame').attr('src', '/FormHelper/AddSubjectForm');
@@ -732,3 +739,16 @@ function loadFeedbackForm()
 	$('#feedback-frame').attr('src', '/FormHelper/FeedbackForm');
 	$('#modal-feedback').modal('show');
 }
+
+function searchSchools()
+{
+	if (validateMandatoryOnlyForm())
+	{
+		$('#search-results').hide();
+		$('#search-loading').show();
+		$('#search-results').load('/FormHelper/SearchSchools?bundesland=' + $('#bundesland').val() + '&schoolTypeId=' + $('#SchoolTypeId').val() + '&name=' + $('#Name').val() + '&address=' + $('#Address').val(), function ()
+		{
+			$('#search-loading').hide();
+			$('#search-results').fadeIn('medium');
+		});
+	}

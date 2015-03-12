@@ -17,6 +17,7 @@
 				<th>E-Mail</th>
 				<th>Bietet Lernhilfe an</th>
 				<th>Registriert am</th>
+				<th>Workshop Status</th>
 				<th>Aktiv Status</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -28,6 +29,18 @@
 					<td><a href="mailto:@student.Email">@student.Email</a></td>
 					<td>@student.IsCoachingEnabled</td>
 					<td>@student.JoinedDate.ToString("g", new CultureInfo("de"))</td>
+					<td>
+						<select name="isWorkshopBlocked" id="isWorkshopBlocked_@student.Id">
+							<option value="False">Aktiv</option>
+							<option value="True">Gesperrt</option>
+						</select>
+						@if (student.IsWorkshopBlocked)
+						{
+							<script>
+								$('#isWorkshopBlocked_@student.Id').val('True');
+							</script>
+						}
+					</td>
 					<td>
 						<input type="hidden" name="ids" value="@student.Id" />
 						@*<input type="checkbox" name="isActive" value="@student.Id" @isChecked/>*@

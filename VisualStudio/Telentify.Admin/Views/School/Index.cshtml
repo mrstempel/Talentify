@@ -2,13 +2,44 @@
 @using Talentify.ORM.DAL.Models.School
 @model IEnumerable<Talentify.ORM.DAL.Models.School.School>
 
+
 @{
 	ViewBag.Title = "Index";
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	var schoolTypes = ViewBag.AllSchoolTypes as List<SchoolType>;
 }
 
 <div id="page-container" style="text-align: left;">
 	
+	@using (Html.BeginForm("Index", "School", FormMethod.Post, new { @class = "form-container search-school" }))
+	{
+		<div class="field-container" style="margin-bottom: 10px;">
+			<select name="bundesland" id="bundesland" class="bundesland">
+				<option value="">Bundesland</option>
+				<option value="WIE">Wien</option>
+				<option value="NOE">Niederösterreich</option>
+				<option value="BGL">Burgenland</option>
+			</select>
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			<select name="schoolTypeId">
+				@foreach (var st in schoolTypes)
+				{
+					<option value="@st.Id">@st.Name</option>
+				}
+			</select>
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			<input type="text" name="name" placeholder="Schulname"/>
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			<input type="text" name="address" placeholder="Adresse (Straße)"/>
+		</div>
+		<div class="field-container">
+			<input type="submit" value="Filtern"/>&nbsp;<input type="button" value="Filter aufheben" onclick="location.href='/School'"/>
+		</div>
+	}
+
 	<ul>
 		@foreach (var e in Model)
 		{

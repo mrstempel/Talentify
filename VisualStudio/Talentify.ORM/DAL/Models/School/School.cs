@@ -8,6 +8,18 @@ using KwIt.Project.Pattern.DAL.Models;
 
 namespace Talentify.ORM.DAL.Models.School
 {
+	public enum SchoolState
+	{
+		WIE,
+		NOE,
+		OOE,
+		SBG,
+		TIR,
+		BGL,
+		STM,
+		KAE
+	}
+
 	public class School : BaseEntity
 	{
 		public int SchoolTypeId { get; set; }
@@ -27,6 +39,7 @@ namespace Talentify.ORM.DAL.Models.School
 		public string Code { get; set; }
 		public string Address { get; set; }
 		public string ZipCode { get; set; }
+		public string State { get; set; }
 		public string City { get; set; }
 		public string Country { get; set; }
 		public string Website { get; set; }
@@ -34,6 +47,7 @@ namespace Talentify.ORM.DAL.Models.School
 		public string Phone { get; set; }
 		public string Longitude { get; set; }
 		public string Latitude { get; set; }
+		public string EmailSuffix { get; set; }
 		public bool IsActive { get; set; }
 	}
 

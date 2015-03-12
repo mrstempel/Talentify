@@ -1,0 +1,44 @@
+﻿@using System.Configuration
+@using System.Globalization
+@model IEnumerable<Talentify.ORM.DAL.Models.User.Student>
+
+@{
+    ViewBag.Title = "AusweisList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-container" style="text-align: left;">
+	<h2>Schülerausweise zur Kontrolle</h2>
+	@using (Html.BeginForm("AusweisList", "User", FormMethod.Post, new {enctype = "multipart/form-data"}))
+	{
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>E-Mail</th>
+				<th>Registriert am</th>
+				<th>Ausweisbild</th>
+				<th>Entsperren</th>
+			</tr>
+			@foreach (var student in Model)
+			{
+				<tr>
+					<td>@student.Firstname @student.Surname</td>
+					<td><a href="mailto:@student.Email">@student.Email</a></td>
+					<td>@student.JoinedDate.ToString("g", new CultureInfo("de"))</td>
+					<td><img src="@ConfigurationManager.AppSettings["Portal.Upload.Url"]ausweis/@(@student.AusweisGuid.ToString())_optimiert@(@student.AusweisExtension)"/></td>
+					<td>
+						<input type="hidden" name="ids" value="@student.Id" />
+						<select name="unblock" id="unblock_@student.Id">
+							<option value="False">Gesperrt lassen</option>
+							<option value="True">Freischalten</option>
+						</select>
+					</td>
+				</tr>
+			}
+		</table>
+		<input type="submit" value="Speichern" style="display: inline-block; margin: 10px;"/>
+	}
+	
+	<p>@Html.ActionLink("zurück", "Index", "User")</p>
+
+</div>
