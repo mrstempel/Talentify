@@ -7,7 +7,11 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Content;
+using Talentify.ORM.DAL.Models.Talentecheck;
 using Talentify.ORM.DAL.Models.User;
+using Talentify.ORM.DAL.UnitOfWork;
 using Talentify.ORM.FrontendLogic.Models;
 
 namespace Talentify.ORM.Mvc
@@ -107,8 +111,37 @@ namespace Talentify.ORM.Mvc
 			}
 		}
 
+		public TalentecheckSession TalentecheckSession
+		{
+			get { return BaseController.TalentecheckSession; }
+		}
+
+		public string TalentecheckShareUrl
+		{
+			get { return this.BaseUrl + "/Talentecheck?s=" + TalentecheckSession.SessionId.ToString(); }
+		}
+
+		public TalentifyUnitOfWork<TalentifyContext> UnitOfWork
+		{
+			get { return BaseController.UnitOfWork; }
+		}
+
 		public override void Execute()
 		{
+		}
+
+		public string GetEventTypeReadable(EventType eType)
+		{
+			if (eType == EventType.Academy)
+				return "talentify Academy (Workshops)";
+			if (eType == EventType.OnTour)
+				return "talentify on Tour";
+			if (eType == EventType.SocialSkillLab)
+				return "talentify Social Skill Lab";
+			if (eType == EventType.Tipp)
+				return "Eventtipps";
+
+			return "Event";
 		}
 
 		public string StripHtmlTags(string text)

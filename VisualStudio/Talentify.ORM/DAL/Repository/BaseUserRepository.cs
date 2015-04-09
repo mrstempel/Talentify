@@ -13,6 +13,7 @@ using KwIt.Project.Pattern.Utils;
 using Talentify.ORM.DAL.Context;
 using Talentify.ORM.DAL.Models.Achievements;
 using Talentify.ORM.DAL.Models.Membership;
+using Talentify.ORM.DAL.Models.Talentecheck;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.FrontendLogic;
 using Talentify.ORM.FrontendLogic.Models;
@@ -265,5 +266,15 @@ namespace Talentify.ORM.DAL.Repository
 		}
 
 		#endregion
+
+		#region Talentecheck
+
+		public TalentecheckSession GetTalentecheckSession(TEntity user)
+		{
+			return UnitOfWork.TalentecheckSessionRepository.AsQueryable().FirstOrDefault(s => s.UserId == user.Id);
+		}
+
+		#endregion
+
 	}
 }

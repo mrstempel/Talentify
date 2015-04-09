@@ -44,7 +44,7 @@ namespace Talentify.ORM.DAL.Repository
 		public IEnumerable<SchoolInfo> GetSchoolsWithInfo()
 		{
 			var schoolInfos = new List<SchoolInfo>();
-			var allSchools = AsQueryable().Where(s => s.IsActive);
+			var allSchools = AsQueryable().Where(s => s.IsActive).Take(100);
 			
 			foreach (var school in allSchools)
 			{
@@ -88,7 +88,7 @@ namespace Talentify.ORM.DAL.Repository
 				schools = schools.Where(s => s.Address.ToLower().Contains(address.ToLower()));
 			}
 
-			return schools;
+			return schools.OrderBy(s => s.Name);
 		}
 	}
 }

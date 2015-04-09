@@ -9,6 +9,11 @@
 		{
 			<text>$('#ausweis-info').hide();</text>
 		}
+
+		@if (ViewBag.IsTalentecheckRegister)
+		{
+			<text>$('.talentecheck').show().css('display', 'inline-block');</text>
+		}
 	});
 </script>
 
@@ -26,11 +31,16 @@
 			<div class="bubble t-button desktop" id="bubble-first-login"></div>
 			<h2>Registrierung abgeschlossen</h2>
 			<p>Nochmals ein herzliches Willkommen bei talentify.me!</p>
-			<p id="ausweis-info" style="width:80%;margin: 15px auto;">Dein Schülerausweis wird von unserem Team so schnell wie möglich kontrolliert. Sobald dies passiert und alles OK ist, wird dein Account freigeschalten. Du erhältst dazu ein kurzes E-Mail. In der Zwischenzeit kannst du dir talentify.me mit eingeschränktem Funktionsumfang ansehen.</p>
-			<p style="width:80%;margin: 30px auto 30px auto;">Die Nutzung ist und wird immer kostenlos bleiben. Wir bieten ganz neu auch eine Premium Mitgliedschaft an. Damit genießt du nicht nur weitere Vorteile, sondern unterstützt auch ein innovates Sozialprojekt mit einem Beitrag.</p>
-			<div class="premium-container">
+			<p id="ausweis-info" style="width:80%;margin: 15px auto;font-size:16px;color:#555;">Dein Schülerausweis wird von unserem Team so schnell wie möglich kontrolliert. Sobald dies passiert und alles OK ist, wird dein Account freigeschalten. Du erhältst dazu ein kurzes E-Mail. In der Zwischenzeit kannst du dir talentify.me mit eingeschränktem Funktionsumfang ansehen.</p>
+			@*<p style="width:80%;margin: 30px auto 30px auto;">Die Nutzung ist und wird immer kostenlos bleiben. Wir bieten ganz neu auch eine Premium Mitgliedschaft an. Damit genießt du nicht nur weitere Vorteile, sondern unterstützt auch ein innovates Sozialprojekt mit einem Beitrag.</p>*@
+			@*<div class="premium-container">
 				<img src="/Images/premium1.png"/>
 				<a href="javascript:void(0);">Mehr Informationen und<br/>Premium-Mitglied werden</a>
+			</div>*@
+			<p class="talentecheck" style="width: 100%;">Du hast erfolgreich am Gewinnspiel teilgenommen!</p>
+			<div class="premium-container talentecheck">
+				<img src="/Images/talentecheck-header.png" style="width:170px;"/>
+				<a href="/Highscore/Talentecheck" style="margin: 45px 0 0 0;">Sieh dir deinen Highscore an<br/>und erhöhe deine Gewinnchance!</a>
 			</div>
 		</header>
 	</article>

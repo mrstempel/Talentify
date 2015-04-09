@@ -18,18 +18,18 @@
 			<div id="msg-error" class="msg error"><h2></h2><p></p></div>
 			<div id="msg-success" class="msg success">
 				<h3>Danke für dein Feedback</h3>
-				<p>@Html.ActionLink("Weitere Workshops besuchen", "Index", "Events")</p>
+				<p>Wir hoffen dich bei einem der nächsten Academy Workshops zu sehen!<br /><br />@Html.ActionLink("Weitere Workshops besuchen", "Index", "Events")</p>
 			</div>
 		</article>
 		@if (FormSuccess == null && FormError == null)
 		{
-			<p>Du hast dich für den talentify.me Academy Workshop <span class="important">@Model.Title</span> der am <span class="important">@Model.BeginDate.ToString("dddd", new CultureInfo("de")), den @Model.BeginDate.ToString("d.M.yyyy", new CultureInfo("de")) von @Model.BeginTime bis @Model.EndTime</span> stattgefunden hat angemeldet, dann aber leider <span class="important">nicht teilgenommen</span></p>
+			<p>Du hast dich für den talentify.me Academy Workshop <span class="important">@Model.Title</span> der am <span class="important">@Model.BeginDate.ToString("dddd", new CultureInfo("de")), den @Model.BeginDate.ToString("d.M.yyyy", new CultureInfo("de")) von @Model.BeginTime bis @Model.EndTime</span> stattgefunden hat angemeldet, dann aber leider <span class="important">nicht teilgenommen.</span></p>
 			using (Html.BeginForm("AttendanceForm", "Events", FormMethod.Post, new {@class = "form-container feedback"}))
 			{
 				<input type="hidden" name="id" value="@ViewBag.Id"/>
 				<article id="profile-form">
 					<div class="field-container">
-						<span class="important">us diesem Grund wollten wir kurz nachfragen, was der Grund dafür war?</span><br/>
+						<span class="important">Aus diesem Grund wollten wir kurz nachfragen, was der Grund dafür war?</span><br/>
 						<span> Wir freuen uns über ein ehrliches Feedback:</span>
 						<textarea name="comments" class="mandatory"></textarea>
 						<span>Achtung: Sollte dies ein zweites Mal vorkommen, müssen wir dich leider für die Teilnahme an Workshops sperren.</span>

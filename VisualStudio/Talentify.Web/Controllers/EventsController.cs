@@ -27,8 +27,13 @@ namespace Talentify.Web.Controllers
 	    [AllowAnonymous]
 	    public ActionResult Detail(int id)
 	    {
-			ViewBag.IsUserRegistered = UnitOfWork.EventRepository.IsUserRegistered(id, LoggedUser.Id);
+			var userId = LoggedUser != null ? LoggedUser.Id : 0;
+		    var reg =
+			    UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.UserId == userId && r.EventId == id && !r.IsSignedOff);
+			ViewBag.IsUserRegistered = reg != null;
+		    ViewBag.IsConfirmed = (reg != null) && reg.Confirmed;
 			ViewBag.NextEvents = UnitOfWork.EventRepository.GetNextEvents(id);
+		    ViewBag.IsFirst = UnitOfWork.EventRegistrationRepository.GetRegisterCount(userId) == 0;
 		    return View(UnitOfWork.EventRepository.GetById(id));
 	    }
 
@@ -43,10 +48,16 @@ namespace Talentify.Web.Controllers
 			
 			var eventDetail = UnitOfWork.EventRepository.AsQueryable().FirstOrDefault(e => e.DetailUrl == detailUrl);
 
+			var userId = LoggedUser != null ? LoggedUser.Id : 0;
+			var reg =
+				UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.UserId == userId && r.EventId == eventDetail.Id && !r.IsSignedOff);
+
 			if (eventDetail != null)
 			{
-				ViewBag.IsUserRegistered = UnitOfWork.EventRepository.IsUserRegistered(eventDetail.Id, LoggedUser.Id);
+				ViewBag.IsUserRegistered = reg != null;
+				ViewBag.IsConfirmed = (reg != null) && reg.Confirmed;
 				ViewBag.NextEvents = UnitOfWork.EventRepository.GetNextEvents(eventDetail.Id);
+				ViewBag.IsFirst = (!IsAuthenticated) || UnitOfWork.EventRegistrationRepository.GetRegisterCount(userId) == 0;
 			}
 
 			return View("Detail", eventDetail);
@@ -89,14 +100,15 @@ namespace Talentify.Web.Controllers
 
 				if (payOption == "pay-or-set")
 				{
-					if (payOrSetOption == "set")
-					{
-						bonuspoints = eventDetail.Bonuspoints;
-					}
-					else
-					{
-						price = eventDetail.Price;
-					}
+					bonuspoints = eventDetail.Bonuspoints;
+					//if (payOrSetOption == "set")
+					//{
+					//	bonuspoints = eventDetail.Bonuspoints;
+					//}
+					//else
+					//{
+					//	price = eventDetail.Price;
+					//}
 				}
 
 				if (payOption == "pay")

@@ -143,6 +143,7 @@
     <Compile Include="Controllers\Api\AutocompleteController.cs" />
     <Compile Include="Controllers\Api\FormHelperController.cs" />
     <Compile Include="Controllers\ContentController.cs" />
+    <Compile Include="Controllers\HighscoreController.cs" />
     <Compile Include="Controllers\InviteController.cs" />
     <Compile Include="Controllers\NoSchoolController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
@@ -160,6 +161,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Talentecheck\ResultPageData.cs" />
+    <Compile Include="Models\Talentecheck\TalentecheckHighscoreItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +185,9 @@
     <Content Include="Css\sprite.min.css" />
     <Content Include="Css\sprite.scss" />
     <Content Include="Css\talente-check.css" />
+    <Content Include="Css\talente-check.min.css">
+      <DependentUpon>talente-check.css</DependentUpon>
+    </Content>
     <Content Include="Css\talentify-jq-ui.css">
       <DependentUpon>talentify-jq-ui.scss</DependentUpon>
     </Content>
@@ -254,13 +260,21 @@
     <Content Include="Css\webfonts\2AA7EA_2_0.eot" />
     <Content Include="Css\webfonts\2AA7EA_2_0.ttf" />
     <Content Include="Css\webfonts\2AA7EA_2_0.woff" />
+    <Content Include="Images\badge-brain.png" />
+    <Content Include="Images\badge-creative.png" />
     <Content Include="Images\badge-eistmc2.png" />
+    <Content Include="Images\badge-fashionista.png" />
     <Content Include="Images\badge-genius.png" />
     <Content Include="Images\badge-h2g2.png" />
     <Content Include="Images\badge-infinity.png" />
+    <Content Include="Images\badge-kommunikator.png" />
     <Content Include="Images\badge-lerntiger.png" />
     <Content Include="Images\badge-may4th.png" />
+    <Content Include="Images\badge-nerd.png" />
     <Content Include="Images\badge-peermeister.png" />
+    <Content Include="Images\badge-rockstar.png" />
+    <Content Include="Images\badge-sport.png" />
+    <Content Include="Images\badge-weltverbesserer.png" />
     <Content Include="Images\bubble-anmelden.png" />
     <Content Include="Images\bubble-events.png" />
     <Content Include="Images\bubble-notifications.png" />
@@ -277,55 +291,89 @@
     <Content Include="Images\reg-nicht.png" />
     <Content Include="Images\reg-schuelerausweis-on.png" />
     <Content Include="Images\reg-schuelerausweis.png" />
-    <Content Include="Images\talente-check\arrow_down.png" />
-    <Content Include="Images\talente-check\arrow_down_big.png" />
-    <Content Include="Images\talente-check\button-glyph.png" />
-    <Content Include="Images\talente-check\facebook.png" />
-    <Content Include="Images\talente-check\fb-thumb.png" />
-    <Content Include="Images\talente-check\figur_peace.png" />
-    <Content Include="Images\talente-check\figur_sport.png" />
-    <Content Include="Images\talente-check\gesamt-fill.png" />
-    <Content Include="Images\talente-check\googleplus.png" />
-    <Content Include="Images\talente-check\happy_people.png" />
-    <Content Include="Images\talente-check\header-cluster.png" />
-    <Content Include="Images\talente-check\highscore-fill.png" />
-    <Content Include="Images\talente-check\home_peace.png" />
-    <Content Include="Images\talente-check\home_sport.png" />
-    <Content Include="Images\talente-check\home_vulcan.png" />
-    <Content Include="Images\talente-check\icon-brain.png" />
-    <Content Include="Images\talente-check\icon-cool.png" />
-    <Content Include="Images\talente-check\icon-loud.png" />
-    <Content Include="Images\talente-check\icon-music.png" />
-    <Content Include="Images\talente-check\icon-peace.png" />
-    <Content Include="Images\talente-check\icon-smart.png" />
-    <Content Include="Images\talente-check\icon-smart2.png" />
-    <Content Include="Images\talente-check\icon-sport.png" />
-    <Content Include="Images\talente-check\icon-vulcan.png" />
-    <Content Include="Images\talente-check\icon_cluster01.png" />
-    <Content Include="Images\talente-check\icon_cluster02.png" />
-    <Content Include="Images\talente-check\icon_cluster03.png" />
-    <Content Include="Images\talente-check\mail.png" />
-    <Content Include="Images\talente-check\o.png" />
-    <Content Include="Images\talente-check\press\diePresse.png" />
-    <Content Include="Images\talente-check\press\heute.png" />
-    <Content Include="Images\talente-check\press\inventures.png" />
-    <Content Include="Images\talente-check\press\kurier.png" />
-    <Content Include="Images\talente-check\press\neuwal.png" />
-    <Content Include="Images\talente-check\press\puls4.png" />
-    <Content Include="Images\talente-check\press\wz.png" />
-    <Content Include="Images\talente-check\progressbar.png" />
-    <Content Include="Images\talente-check\progresselement.png" />
-    <Content Include="Images\talente-check\progressfill.png" />
-    <Content Include="Images\talente-check\progressfilled.png" />
-    <Content Include="Images\talente-check\superhelden.png" />
-    <Content Include="Images\talente-check\tafel.png" />
-    <Content Include="Images\talente-check\talentify.png" />
-    <Content Include="Images\talente-check\top_logo.png" />
-    <Content Include="Images\talente-check\tshirt.png" />
-    <Content Include="Images\talente-check\twitter.png" />
-    <Content Include="Images\talente-check\Untitled-1.png" />
-    <Content Include="Images\talente-check\x.png" />
-    <Content Include="Images\talente-check\zukunft-bilden.png" />
+    <Content Include="Images\talentecheck-header.png" />
+    <Content Include="Images\talentecheck-highscore-header.png" />
+    <Content Include="Images\talentecheck\arrow_down.png" />
+    <Content Include="Images\talentecheck\arrow_down_big.png" />
+    <Content Include="Images\talentecheck\brain-bottom.png" />
+    <Content Include="Images\talentecheck\brain-fb-share.png" />
+    <Content Include="Images\talentecheck\brain-top.png" />
+    <Content Include="Images\talentecheck\button-glyph.png" />
+    <Content Include="Images\talentecheck\creative-bottom.png" />
+    <Content Include="Images\talentecheck\creative-fb-share.png" />
+    <Content Include="Images\talentecheck\creative-top.png" />
+    <Content Include="Images\talentecheck\facebook.png" />
+    <Content Include="Images\talentecheck\fashionista-bottom.png" />
+    <Content Include="Images\talentecheck\fashionista-fb-share.png" />
+    <Content Include="Images\talentecheck\fashionista-top.png" />
+    <Content Include="Images\talentecheck\fb-share.png" />
+    <Content Include="Images\talentecheck\fb-thumb.png" />
+    <Content Include="Images\talentecheck\figur_peace.png" />
+    <Content Include="Images\talentecheck\figur_sport.png" />
+    <Content Include="Images\talentecheck\gesamt-fill.png" />
+    <Content Include="Images\talentecheck\googleplus.png" />
+    <Content Include="Images\talentecheck\happy_people.png" />
+    <Content Include="Images\talentecheck\header-cluster.png" />
+    <Content Include="Images\talentecheck\highscore-fill.png" />
+    <Content Include="Images\talentecheck\home_peace.png" />
+    <Content Include="Images\talentecheck\home_sport.png" />
+    <Content Include="Images\talentecheck\home_vulcan.png" />
+    <Content Include="Images\talentecheck\icon-brain.png" />
+    <Content Include="Images\talentecheck\icon-cool.png" />
+    <Content Include="Images\talentecheck\icon-loud.png" />
+    <Content Include="Images\talentecheck\icon-music.png" />
+    <Content Include="Images\talentecheck\icon-peace.png" />
+    <Content Include="Images\talentecheck\icon-smart.png" />
+    <Content Include="Images\talentecheck\icon-smart2.png" />
+    <Content Include="Images\talentecheck\icon-sport.png" />
+    <Content Include="Images\talentecheck\icon-vulcan.png" />
+    <Content Include="Images\talentecheck\icon_cluster01.png" />
+    <Content Include="Images\talentecheck\icon_cluster02.png" />
+    <Content Include="Images\talentecheck\icon_cluster03.png" />
+    <Content Include="Images\talentecheck\kommunikator-bottom.png" />
+    <Content Include="Images\talentecheck\kommunikator-fb-share.png" />
+    <Content Include="Images\talentecheck\kommunikator-top.png" />
+    <Content Include="Images\talentecheck\mail.png" />
+    <Content Include="Images\talentecheck\nerd-bottom.png" />
+    <Content Include="Images\talentecheck\nerd-fb-share.png" />
+    <Content Include="Images\talentecheck\nerd-top.png" />
+    <Content Include="Images\talentecheck\o.png" />
+    <Content Include="Images\talentecheck\press\diePresse.png" />
+    <Content Include="Images\talentecheck\press\heute.png" />
+    <Content Include="Images\talentecheck\press\inventures.png" />
+    <Content Include="Images\talentecheck\press\kurier.png" />
+    <Content Include="Images\talentecheck\press\neuwal.png" />
+    <Content Include="Images\talentecheck\press\puls4.png" />
+    <Content Include="Images\talentecheck\press\wz.png" />
+    <Content Include="Images\talentecheck\progressbar.png" />
+    <Content Include="Images\talentecheck\progresselement.png" />
+    <Content Include="Images\talentecheck\progressfill.png" />
+    <Content Include="Images\talentecheck\progressfilled.png" />
+    <Content Include="Images\talentecheck\rockstar-bottom.png" />
+    <Content Include="Images\talentecheck\rockstar-fb-share.png" />
+    <Content Include="Images\talentecheck\rockstar-top.png" />
+    <Content Include="Images\talentecheck\schablone-conchita-gelb.png" />
+    <Content Include="Images\talentecheck\schablone-conchita.png" />
+    <Content Include="Images\talentecheck\schablone-junge-gelb.png" />
+    <Content Include="Images\talentecheck\schablone-junge.png" />
+    <Content Include="Images\talentecheck\schablone-maedl-gelb.png" />
+    <Content Include="Images\talentecheck\schablone-maedl.png" />
+    <Content Include="Images\talentecheck\sport-bottom.png" />
+    <Content Include="Images\talentecheck\sport-fb-share.png" />
+    <Content Include="Images\talentecheck\sport-top.png" />
+    <Content Include="Images\talentecheck\superhelden.png" />
+    <Content Include="Images\talentecheck\tafel.png" />
+    <Content Include="Images\talentecheck\talentify.png" />
+    <Content Include="Images\talentecheck\top_logo.png" />
+    <Content Include="Images\talentecheck\tshirt.png" />
+    <Content Include="Images\talentecheck\twitter.png" />
+    <Content Include="Images\talentecheck\Untitled-1.png" />
+    <Content Include="Images\talentecheck\weltverbesserer-bottom.png" />
+    <Content Include="Images\talentecheck\weltverbesserer-fb-share.png" />
+    <Content Include="Images\talentecheck\weltverbesserer-top.png" />
+    <Content Include="Images\talentecheck\x.png" />
+    <Content Include="Images\talentecheck\zukunft-bilden.png" />
+    <Content Include="Images\talentify-favicon.png" />
     <Content Include="Images\talentometer-left.gif" />
     <Content Include="Images\talentometer-right.gif" />
     <Content Include="Scripts\api.min.js">
@@ -346,7 +394,9 @@
     <Content Include="Scripts\forms.min.js.map">
       <DependentUpon>forms.js</DependentUpon>
     </Content>
-    <Content Include="Images\talente-check\press\Icon_" />
+    <Content Include="Images\talentecheck\press\Icon_" />
+    <Content Include="Plattform_Schulen_noe.csv" />
+    <Content Include="Plattform_Schulen_noe_correct.csv" />
     <None Include="Properties\PublishProfiles\talentify-me - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me-dev - FTP.pubxml" />
@@ -444,6 +494,7 @@
     <Content Include="Scripts\maps.min.js">
       <DependentUpon>maps.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\markerclusterer_compiled.js" />
     <Content Include="Scripts\Opentip\opentip-jquery.min.js" />
     <Content Include="Scripts\Opentip\opentip.css" />
     <Content Include="Scripts\Opentip\opentip.min.css">
@@ -453,6 +504,10 @@
     <Content Include="Scripts\screen.js" />
     <Content Include="Scripts\screen.min.js">
       <DependentUpon>screen.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\talentecheck.js" />
+    <Content Include="Scripts\talentecheck.min.js">
+      <DependentUpon>talentecheck.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Textboxlist\close.gif" />
     <Content Include="Scripts\Textboxlist\GrowingInput.js" />
@@ -554,10 +609,42 @@
     <Content Include="Views\Events\AttendanceForm.cshtml" />
     <Content Include="Views\Events\Blocked.cshtml" />
     <Content Include="Views\TalenteCheck\Index.cshtml" />
+    <Content Include="Scripts\talentecheck.min.js.map">
+      <DependentUpon>talentecheck.js</DependentUpon>
+    </Content>
+    <Content Include="Views\TalenteCheck\Umfrage.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage1.cshtml" />
+    <Content Include="Views\TalenteCheck\Frage.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage2.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage3.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage4.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage5.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage6.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage7.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage8.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage9.cshtml" />
+    <Content Include="Views\TalenteCheck\Result.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\SportPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\CreativePlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\RockstarPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\NerdPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\WeltverbessererPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\KommunikatorPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\FashionistaPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\BrainPlus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\SportMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\CreativeMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\RockstarMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\NerdMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\WeltverbessererMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\KommunikatorMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\FashionistaMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\BrainMinus.cshtml" />
+    <Content Include="Views\Shared\Talentecheck\Frage10.cshtml" />
+    <Content Include="Views\Highscore\Talentecheck.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,8 +1,20 @@
-﻿<h3>Badges:</h3>
+﻿@using Talentify.ORM.DAL.Models.Talentecheck
+@{
+	var userTalentecheckSession = (ViewBag.TalentecheckSession != null) ? ViewBag.TalentecheckSession as TalentecheckSession : null;
+}
+
+<h3>Badges:</h3>
 <div class="badge-item">
 	<img src="/Images/badge-greenhorn.png"/>
 	<span>Greenhorn</span>
 </div>
+@if (userTalentecheckSession != null)
+{
+	<div class="badge-item">
+		<img src="/Images/badge-@(@userTalentecheckSession.TypMax.ToString()).png"/>
+		<span>@UnitOfWork.TalentecheckSessionRepository.GetTypReadable(userTalentecheckSession.TypMax)</span>
+	</div>
+}
 <!--
 	<div class="badge-item">
 		<img src="/Images/badge-heisenberg.png"/>

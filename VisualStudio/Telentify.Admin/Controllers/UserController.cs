@@ -62,7 +62,13 @@ namespace Telentify.Admin.Controllers
 
 		public ActionResult AusweisList()
 		{
-			return View(UnitOfWork.StudentRepository.GetAusweisList());
+			var users = UnitOfWork.StudentRepository.GetAusweisList();
+			foreach (var u in users)
+			{
+				if (u.SchoolId.HasValue)
+					u.School = UnitOfWork.SchoolRepository.GetById(u.SchoolId.Value);
+			}
+			return View(users);
 		}
 
 		[HttpPost]

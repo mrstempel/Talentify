@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Talentify.ORM.DAL.Context;
+using Talentify.ORM.DAL.Models.Talentecheck;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.DAL.UnitOfWork;
 using Talentify.ORM.FrontendLogic.Models;
@@ -50,6 +51,41 @@ namespace Talentify.ORM.Mvc
 		public bool IsAuthenticated
 		{
 			get { return User.Identity.IsAuthenticated; }
+		}
+
+		private TalentecheckSession talentecheckSessionFromCookie;
+		public virtual TalentecheckSession TalentecheckSessionFromCookie
+		{
+			get
+			{
+				if (talentecheckSessionFromCookie == null && Request.Cookies["TalentecheckGuid"] != null)
+				{
+					Guid cookieGuid;
+					bool isvalid = Guid.TryParse(Request.Cookies["TalentecheckGuid"].Value, out cookieGuid);
+					if (isvalid)
+					{
+						talentecheckSessionFromCookie =
+							UnitOfWork.TalentecheckSessionRepository.AsQueryable()
+								.FirstOrDefault(s => s.SessionId == cookieGuid);
+					}
+				}
+
+				return talentecheckSessionFromCookie;
+			}
+		}
+
+		private TalentecheckSession talentecheckSession;
+		public virtual TalentecheckSession TalentecheckSession
+		{
+			get
+			{
+				if (talentecheckSession == null)
+				{
+					talentecheckSession = UnitOfWork.BaseUserRepository.GetTalentecheckSession(LoggedUser);
+				}
+
+				return talentecheckSession;
+			}
 		}
 
 		public BaseController()

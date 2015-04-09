@@ -1393,6 +1393,7 @@ article.event-preview.registered
 
 article.event-detail
 {
+	header { margin-bottom: 30px !important; }
 	.content-container
 	{
 		@extend .box-sizing;
@@ -1406,17 +1407,31 @@ article.event-detail
 			@extend .box-sizing;
 			display: inline-block;
 			width: 730px;
-			h1
+			.header
 			{
-				text-align: left;
 				background: url(../Images/bg-content-headline.png);
 				background-repeat: no-repeat;
 				background-position: top left;
-				padding: 0 0 0 100px;
-				height: 88px;
-				color: #707070;
-				font-size: 30px;
+				min-height: 88px;
+				display: inline-block;
+				width: 100%;
 				margin: 0 0 20px 0 !important;
+				h1
+				{
+					text-align: left;
+					padding: 0 0 0 100px !important;
+					color: #707070;
+					font-size: 30px;
+					margin: 0 !important;
+					line-height: 32px;		
+				}
+				.event-type
+				{
+					display: inline-block;
+					padding: 0 0 0 100px;
+					width: 100%;
+					font-size: 15px;
+				}
 			}
 			.content
 			{
@@ -1462,7 +1477,7 @@ article.event-detail
 				width: 100%;
 				text-align: center;
 				font-size: 16px;
-				margin: 6px 0 7px 0;
+				margin: 6px 0 30px 0;
 				i { margin-right: 5px; color: $color-green; }
 				.bonus-cost
 				{
@@ -1493,7 +1508,6 @@ article.event-detail
 			.address, .time
 			{
 				line-height: 30px;
-				color: #999;
 				span.important { color: #555; }
 				display: inline-block;
 				width: 100%;
@@ -1504,7 +1518,7 @@ article.event-detail
 					width: 10%;
 					margin: 3px 0 0 0;
 				}
-				.right { float: right; width: 90%; color: $color-blue; padding: 0 0 0 10px;  }
+				.right { float: right; width: 90%; padding: 0 0 0 10px; color: #999 !important; font-size: 18px; line-height: 24px; }
 			}
 			.time { margin: 30px 0 0 0; }
 			.open-seats
@@ -2664,3 +2678,35 @@ div.timetable
 .mobile { display: none; }
 p.left { text-align: left; }
 .auto-width { width: auto !important; }
+
+// kampagnen stuff
+.talentecheck { display: none; }
+.talentecheck-highscore
+{
+
+	.badge-container
+	{
+		display: inline-block;
+		margin: 0 auto 20px auto;
+		text-align: center;
+		width: 100%;
+		vertical-align: top;
+		.description
+		{
+			display: inline-block;
+			width: 400px;
+			text-align: left;
+			vertical-align: top;
+			margin: 25px 0 0 15px;
+		}
+	}
+	h1.dotted { margin: 0 0 20px 0 !important; }
+	.share-container
+	{
+		text-align: center;
+		width: 100%;
+		margin: 0 auto;
+		span { font-family: $font-bold; vertical-align: top; margin: 35px 20px 0 0; display: inline-block; }
+		a { display: inline-block; }
+	}
+}

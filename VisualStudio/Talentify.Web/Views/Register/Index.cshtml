@@ -19,18 +19,37 @@
 	<script src="/Scripts/Textboxlist/TextboxList.Autocomplete.js"></script>
 }
 
+<script>
+	$(document).ready(function()
+	{
+		@if (ViewBag.IsTalentecheck)
+		{
+			<text>$('.talentecheck').show();</text>
+			<text>$('#bubble-register').css('display', 'none');</text>
+		}
+	});
+</script>
+
 <div id="page-container" class="form">
 	<section id="register">
 		<header>
 			<div class="bubble t-button desktop" id="bubble-register"></div>
+			<img src="/Images/talentecheck-header.png" class="talentecheck"/>
 			<h2>Anmelden</h2>
+			<div class="talentecheck" style="margin: 0 0 20px 0;">
+				<span style="font-size:16px;display:block;margin-bottom: 15px;">...und tolle Preise gewinnen!</span>
+			</div>
+			<div id="first-login-info-right" class="talentecheck" style="top:-10px;right:150px;">
+				<img src="/Images/pfeil-rechts.png"/><br/>
+				<span>Bist du schon registriert? Dann einfach hier einloggen!</span>
+			</div>
 		</header>
 		<article class="msg-container" id="msg-container">
 			<div id="msg-error" class="msg error"><h2>Anmeldung fehlgeschlagen</h2><p></p></div>
 			<div id="msg-success" class="msg success"><h2>Anmeldung erfolgreich</h2><p>Ein E-Mail mit Bestätigungslink wurde an deine E-Mail Adresse versendet. </p></div>
 		</article>
 		@if (FormSuccess == null)
-		{
+  {
 			@Html.Partial("Forms/_Register", Model)
 		}
 	</section>

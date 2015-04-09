@@ -12,13 +12,24 @@
 		window.parent.setSchool(id, name);
 		window.parent.hideModal('modal-search-school');
 	}
+
+	function checkSchoolSearchEnterClick(e)
+	{
+		if (e.keyCode == 13)
+		{
+			$('#search-btn').click();
+			return false;
+		}
+
+		return true;
+	}
 </script>
 
 <article>
 	<div class="msg-container" id="msg-container">
 		<div id="msg-success" class="msg success"><p>Deine Nachricht wurde erfolgreich übermittelt</p></div>
 	</div>
-	@using (Html.BeginForm("SearchSchoolForm", "FormHelper", FormMethod.Post, new { @class = "form-container search-school" }))
+	@using (Html.BeginForm("SearchSchoolForm", "FormHelper", FormMethod.Post, new { @class = "form-container search-school", @onkeypress="checkSchoolSearchEnterClick(event);" }))
 	{
 		<div class="field-container" style="margin-bottom: 10px;">
 			<select id="bundesland" class="bundesland">
@@ -38,7 +49,7 @@
 			@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse (Straße)"})
 		</div>
 		<div class="field-container">
-			<input type="button" value="Suchen" onclick="searchSchools();"/>
+			<input type="button" value="Suchen" id="search-btn" onclick="searchSchools();"/>
 		</div>
 		<div id="search-loading" class="loading-message">Lade Suchergebnisse ...</div>
 		<div id="search-results"></div>

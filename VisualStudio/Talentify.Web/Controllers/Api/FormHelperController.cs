@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Net.NetworkInformation;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Talentify.ORM.DAL.Models.Coaching;
 using Talentify.ORM.DAL.Models.School;
 using Talentify.ORM.FrontendLogic.Models;
@@ -73,7 +75,7 @@ namespace Talentify.Web.Controllers.Api
 		[AllowAnonymous]
 		public ActionResult SchoolSelect(string plzStart)
 		{
-			var allSchools = UnitOfWork.SchoolRepository.Get(s => s.IsActive && s.ZipCode.StartsWith(plzStart));
+			var allSchools = UnitOfWork.SchoolRepository.Get(s => s.IsActive).OrderBy(s => s.Name);//.Take(150);
 			ViewBag.Results = "[";
 			foreach (var s in allSchools)
 			{
@@ -90,8 +92,8 @@ namespace Talentify.Web.Controllers.Api
 		{
 
 			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
-			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Code = "Schultyp"});
-			ViewBag.AllSchoolTypes = new SelectList(allSchholTypes, "Id", "Code");
+			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Name = "Schultyp" });
+			ViewBag.AllSchoolTypes = new SelectList(allSchholTypes, "Id", "Name");
 			return View(new School());
 		}
 
@@ -191,5 +193,68 @@ namespace Talentify.Web.Controllers.Api
 			FormSuccess = new FormFeedback();
 			return View();
 		}
+
+	    public JsonResult ImportSchools()
+	    {
+			//var noeSchools = UnitOfWork.SchoolRepository.Get(s => s.State == "NOE").ToList();
+			//foreach (var s in noeSchools)
+			//{
+			//	try
+			//	{
+			//		UnitOfWork.SchoolRepository.Delete(s);
+			//		UnitOfWork.Save();
+			//	}
+			//	catch (Exception ex)
+			//	{
+			//	}
+			//}
+
+			//var csvPath = Server.MapPath("~/Plattform_Schulen_noe_correct.csv");
+			//var reader = new StreamReader(System.IO.File.OpenRead(csvPath));
+			//var i = 0;
+
+
+			//using (var textReader = new StreamReader(csvPath))
+			//{
+			//	string line = textReader.ReadLine();
+			//	int skipCount = 0;
+			//	while (line != null && skipCount < 1)
+			//	{
+			//		line = textReader.ReadLine();
+
+			//		skipCount++;
+			//	}
+
+			//	while (line != null)
+			//	{
+			//		string[] columns = line.Split(';');
+
+			//		UnitOfWork.SchoolRepository.Insert(new School()
+			//		{
+			//			Name = columns[1],
+			//			Code = columns[2],
+			//			Address = columns[3],
+			//			ZipCode = columns[4],
+			//			City = columns[5],
+			//			Country = columns[6],
+			//			Website = columns[7],
+			//			Email = columns[8],
+			//			Phone = columns[9],
+			//			SchoolTypeId = Convert.ToInt16(columns[0]),
+			//			Longitude = columns[10],
+			//			Latitude = columns[11],
+			//			IsActive = columns[12] == "1",
+			//			State = columns[13]
+			//		});
+
+			//		//perform your logic
+			//		line = textReader.ReadLine();
+			//	}
+			//}
+
+			//UnitOfWork.Save();
+
+		    return Json(true, JsonRequestBehavior.AllowGet);
+	    }
     }
 }

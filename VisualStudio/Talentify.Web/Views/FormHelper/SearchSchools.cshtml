@@ -1,16 +1,18 @@
 ﻿@model IEnumerable<Talentify.ORM.DAL.Models.School.School>
 
-<div class="school-search-item-container">
 
-	@if (Model.Any())
+
+@if (Model.Any())
+{
+	<div class="school-search-item-container">
+	@foreach (var school in Model)
 	{
-		foreach (var school in Model)
-		{
-			<div class="item"><i class="fa fa-check-square-o"></i><a href="javascript:void(0);" onclick="selectSchool(@school.Id, '@school.Name')">@school.Name</a></div>
-		}
+		<div class="item"><i class="fa fa-check-square-o"></i><a href="javascript:void(0);" onclick="selectSchool(@school.Id, '@school.Name')">@school.Name</a></div>
 	}
-	else
-	{
-		<p>Es wurden keine Schulen gefunden.</p>	
-	}
-</div>
+	</div>
+}
+else
+{
+	<p style="margin: 20px auto;text-align: center;width: 80%;">Es wurden keine Schulen gefunden die auf deine Suche zutreffen. Kein Problem: <a href="javascript:void(0);" onclick="window.parent.meineSchuleFehlt();window.parent.hideModal('modal-search-school');">Sag uns einfach auf welche Schule du gehst</a>!</p>	
+}
+

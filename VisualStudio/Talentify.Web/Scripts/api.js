@@ -22,9 +22,13 @@ function login()
 		data: { email: $('#login-email').val(), password: $('#login-password').val() },
 		success: function (data)
 		{
-			if (data)
+			if (data == 1)
 			{
 				location.href = "/Start";
+			}
+			else if (data == 2)
+			{
+				location.href = "/Highscore/Talentecheck";
 			}
 			else
 			{
@@ -55,9 +59,13 @@ function submitLoginScreenForm()
 		data: { email: $('#login-email-screen').val(), password: $('#login-password-screen').val() },
 		success: function (data)
 		{
-			if (data)
+			if (data == 1)
 			{
 				location.href = "/Start";
+			}
+			else if (data == 2)
+			{
+				location.href = "/Highscore/Talentecheck";
 			}
 			else
 			{
@@ -96,14 +104,14 @@ function deleteAccount()
 			url: '/Auth/DeleteAccount',
 			type: 'get',
 			async: true,
-			success: function(data)
+			success: function (data)
 			{
 				if (data)
 				{
 					logout();
 				}
 			},
-			error: function(request, status, error)
+			error: function (request, status, error)
 			{
 			}
 		});
@@ -201,7 +209,7 @@ function setClassDropdown(schoolListId, classListId, selectedClass)
 		data: { schoolId: $('#' + schoolListId).val() },
 		success: function (data)
 		{
-			$.each(data, function(i, option)
+			$.each(data, function (i, option)
 			{
 				$('#' + classListId).append($('<option/>').attr("value", option).text(option + ". Klasse"));
 			});
@@ -396,7 +404,7 @@ function searchCoaching()
 	{
 		$('#search-results').hide();
 		$('#search-loading').show();
-		$('#search-results').load('/Search/Search?Class=' + $('#Class').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function()
+		$('#search-results').load('/Search/Search?Class=' + $('#Class').val() + '&SubjectCategoryId=' + $('#SubjectCategoryId').val(), function ()
 		{
 			$('#search-loading').hide();
 			$('#search-results').css('opacity', 0);
@@ -518,14 +526,21 @@ function cancelEventRegistration(id)
 			data: { eventId: id },
 			success: function (data)
 			{
-				if (data)
+				loadEventOpenSeats(id);
+				$('#register-link').css('display', 'inline-block');
+				$('#cost-info').css('display', 'inline-block');
+				if (data == 0)
 				{
-					loadEventOpenSeats(id);
-					$('#register-link').css('display', 'inline-block');
-					$('#cost-info').css('display', 'inline-block');
-					$('#unregister-link').hide();
-					$('#registered').hide();
+					$('#first-bonus').show();
+					$('#second-bonus').hide();
 				}
+				else
+				{
+					$('#first-bonus').hide();
+					$('#second-bonus').show();
+				}
+				$('#unregister-link').hide();
+				$('#registered').hide();
 			},
 			error: function (request, status, error)
 			{
@@ -544,7 +559,7 @@ function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
 			type: 'get',
 			async: true,
 			data: { conversationId: conversationId, fromUserId: fromUserId, toUserId: toUserId, targetId: targetId, text: text },
-			success: function(data)
+			success: function (data)
 			{
 				if (data)
 				{
@@ -558,7 +573,7 @@ function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
 
 				unlockApiCall('coaching-new-message-btn');
 			},
-			error: function(request, status, error)
+			error: function (request, status, error)
 			{
 				unlockApiCall('coaching-new-message-btn');
 			}
@@ -752,3 +767,34 @@ function searchSchools()
 			$('#search-results').fadeIn('medium');
 		});
 	}
+}
+
+function shareFacebookUi(url, image, description)
+{
+	FB.ui({
+		method: 'feed',
+		link: url,
+		picture: 'https://www.talentify.me/Images/talentecheck/' + image,
+		name: 'Der große Talentecheck',
+		caption: 'Der große Talentecheck',
+		description: description
+	},
+	function (response)
+	{
+		if (response != null)
+		{
+			$.ajax({
+				url: '/Highscore/AddShareBonus',
+				type: 'get',
+				async: true,
+				data: { network: 'fb' },
+				success: function (data)
+				{
+				},
+				error: function (request, status, error)
+				{
+				}
+			});
+		}
+	});
+}

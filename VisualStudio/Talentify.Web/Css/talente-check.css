@@ -57,6 +57,28 @@ anuar.suarez@hotmail.com
         padding: 10px 0;
         font-size: 36px;
     }
+
+	.figur-container-center
+	{
+		height: 18em !important;
+		margin-bottom: 1em;
+	}
+
+	.figur-bg
+	{
+		max-width: 119px !important;
+		border-left: 1px solid #fff;
+	}
+	.figur-bottom .figur-bg
+	{
+		border-left: 1px solid #ffc800;
+	}
+
+	.figur-schablone
+	{
+		height: 18em !important;
+	}
+	.figur-schablone img {top: 70px !important;width: 20px !important; }
     
     .tafel-block {
         font-size: 0.9em;
@@ -169,6 +191,11 @@ label {
     font-weight: 400;
 }
 
+a:hover {text-decoration: none !important; }
+
+.div-link {cursor: pointer; }
+a .div-link, a:hover .div-link {text-decoration: none !important; }
+
 
 
 .yellow-block-head {
@@ -197,7 +224,7 @@ label {
     min-height: 376px;
     width: 100%;
     display: block;
-    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/happy_people.png);
+    background-image: url(../Images/talentecheck/top_logo.png), url(../Images/talentecheck/happy_people.png);
     background-size: auto, cover;
     background-position: 80px -45px,center ;
     background-repeat: no-repeat, no-repeat;
@@ -207,7 +234,7 @@ label {
     height: 180px;
     width: 100%;
     display: block;
-    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/happy_people.png);
+    background-image: url(../Images/talentecheck/top_logo.png), url(../Images/talentecheck/happy_people.png);
     background-size: 200px 170px, cover;
     background-position: 5px -35px, -20px 0px;
     background-repeat: no-repeat, no-repeat;
@@ -215,7 +242,7 @@ label {
 
 .icon_cluster {
     height: 100%;
-    margin-top: -48px;
+    margin-top: -68px;
     margin-bottom: -110px;
     overflow: visible;
     text-align: right;
@@ -268,7 +295,7 @@ label {
 }
 
 .tafel-block {
-    background-image: url("../Images/talente-check/tafel.png");
+    background-image: url("../Images/talentecheck/tafel.png");
     background-size: cover;
     background-repeat: no-repeat;
     color: #fff;
@@ -286,7 +313,7 @@ label {
 }
 
 .fb-ico {
-    background-image: url("../Images/talente-check/fb-thumb.png");
+    background-image: url("../Images/talentecheck/fb-thumb.png");
 }
 
 .share-icon {
@@ -307,15 +334,15 @@ label {
 }
 
 .mail-ico {
-    background-image: url("../Images/talente-check/mail.png");
+    background-image: url("../Images/talentecheck/mail.png");
 }
 
 .twit-ico {
-    background-image: url("../Images/talente-check/twitter.png");
+    background-image: url("../Images/talentecheck/twitter.png");
 }
 
 .gp-ico {
-    background-image: url("../Images/talente-check/googleplus.png");
+    background-image: url("../Images/talentecheck/googleplus.png");
 }
 
 .sport-icon {
@@ -351,7 +378,7 @@ label {
     height: 306px;
     width: 100%;
     display: block;
-    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/header-cluster.png);
+    background-image: url(../Images/talentecheck/top_logo.png), url(../Images/talentecheck/header-cluster.png);
     background-size: auto, 500px 300px;
     background-position: 80px -45px, 400px -35px;
     background-repeat: no-repeat, no-repeat;
@@ -361,7 +388,7 @@ label {
     height: 180px;
     width: 100%;
     display: block;
-    background-image: url(../Images/talente-check/top_logo.png), url(../Images/talente-check/icon_cluster03.png);
+    background-image: url(../Images/talentecheck/top_logo.png), url(../Images/talentecheck/icon_cluster03.png);
     background-size: 200px 170px, auto;
     background-position: 5px -35px, 105% -15px;
     background-repeat: no-repeat, no-repeat;
@@ -375,18 +402,18 @@ label {
 }
 
 .progress-empty {
-    /*background-image: url("../Images/talente-check/progresselement.png");*/
+    /*background-image: url("../Images/talentecheck/progresselement.png");*/
     border-style: solid;
     border-width: 2px 2px 3px 2px;
 }
 
 .progress-filled {
-    background-image: url("../Images/talente-check/progressfill.png");
+    background-image: url("../Images/talentecheck/progressfill.png");
     border-style: solid;
     border-width: 2px 2px 3px 2px;
 }
 .counter {
-    margin-right: 4em;
+	margin-right: 4em;
     font-size: 10px;
 }
 
@@ -395,7 +422,7 @@ label {
 }
 
 .antwort {
-    background-image: url("../Images/talente-check/o.png");
+    background-image: url("../Images/talentecheck/o.png");
     background-size: 1em, 1em;
     background-position: center center;
     background-repeat: no-repeat;
@@ -405,7 +432,7 @@ label {
 }
 
 .ticked {
-    background-image: url("../Images/talente-check/x.png"), url("../Images/talente-check/o.png");
+    background-image: url("../Images/talentecheck/x.png"), url("../Images/talentecheck/o.png");
 }
 
 .quiz {
@@ -446,6 +473,74 @@ label {
     background-size: contain;
     display: block;
 }
+
+.figur-container
+{
+	position: relative;
+	display: block;
+	height: 30em;
+}
+
+.figur-container-center
+{
+	position: relative;
+	display: block;
+	height: 30em;
+	width: 100%;
+	margin: 10px auto;
+	text-align: center;
+}
+
+.figur-bg
+{
+	z-index: 99;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 1px;
+	width: 100%;
+	max-width: 249px;
+	background-color: #008b80;
+	margin: 0 auto;
+	min-height: 10%;
+}
+.figur-bottom .figur-bg
+{
+	background-color: #c54261 !important;
+	border-left: 1px solid #ffc800;
+}
+
+
+.figur-schablone
+{
+	z-index: 100;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	max-width: 249px;
+	height: 30em;
+	background-size: contain;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+}
+.figur-schablone img {position: absolute;top: 150px;left: 0;right: 0;width: 47px;margin: 0 auto; }
+.figur-schablone.sex-1 { background-image: url(/Images/talentecheck/schablone-junge.png); }
+.figur-schablone.sex-2 { background-image: url(/Images/talentecheck/schablone-maedl.png); }
+.figur-schablone.sex-3 { background-image: url(/Images/talentecheck/schablone-conchita.png); }
+.figur-bottom .figur-schablone.sex-1 { background-image: url(/Images/talentecheck/schablone-junge-gelb.png); }
+.figur-bottom .figur-schablone.sex-2 { background-image: url(/Images/talentecheck/schablone-maedl-gelb.png); }
+.figur-bottom .figur-schablone.sex-3 { background-image: url(/Images/talentecheck/schablone-conchita-gelb.png); }
+.figur-schablone h3
+{
+	font-family: CaeciliaLTPro-85Heavy;
+    font-weight: normal;
+    font-style: normal;
+}
+.figur-bottom .figur-schablone h3 {color: #c54261; }
+.figur-container-center .figur-schablone h3 {float: left; }
 
 
 
@@ -529,12 +624,12 @@ label {
 }
 
 .rating-active {
-    background-image: url("../Images/talente-check/gesamt-fill.png");
+    background-image: url("../Images/talentecheck/gesamt-fill.png");
     border-color: #008b80;
 }
 
 .highscore-active {
-    background-image: url("../Images/talente-check/highscore-fill.png");
+    background-image: url("../Images/talentecheck/highscore-fill.png");
     border-color: #c54261;
 }
 .highscore {
@@ -564,7 +659,7 @@ label {
 
 
 .btn-talentify-tq:hover, .btn-talentify-red:hover {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .btn-talentify-tq:hover {
@@ -604,17 +699,18 @@ input.talentify-radio[type="radio"] + label span   {
 
 
 input.talentify-radio[type="radio"] + label span {
-    background-image: url("../Images/talente-check/o.png");
+    background-image: url("../Images/talentecheck/o.png");
     background-size: contain;
 }
 
 input.talentify-radio[type="radio"]:checked + label span {
-     background-image: url("../Images/talente-check/x.png"), url("../Images/talente-check/o.png");
+     background-image: url("../Images/talentecheck/x.png"), url("../Images/talentecheck/o.png");
     background-size: contain;
 }
 
 .call-to-action {
     font-size:1.5em;
+	cursor: pointer;
 }
 .gesamtwertung-andere h4 {
     color: #008b80;
@@ -665,7 +761,7 @@ input.talentify-radio[type="radio"]:checked + label span {
     display: block;
     height:  30em;
     width: 100%;
-    background-image: url("../Images/talente-check/arrow_down_big.png");
+    background-image: url("../Images/talentecheck/arrow_down_big.png");
     background-repeat: no-repeat;
     background-size: 8em 70%;
     background-position: right 4em;
@@ -693,11 +789,11 @@ input.talentify-radio[type="radio"]:checked + label span {
 
 /*************************** Figuren ******************************/
 .figur-peace {
-    background-image: url("../Images/talente-check/figur_peace.png");
+    background-image: url("../Images/talentecheck/figur_peace.png");
 }
 
 .figur-sport {
-    background-image: url("../Images/talente-check/figur_sport.png");
+    background-image: url("../Images/talentecheck/figur_sport.png");
 }
 
 .call-to-action-container {
@@ -709,8 +805,6 @@ input.talentify-radio[type="radio"]:checked + label span {
     z-index: 999;
 }
 
-
-
-.container {
-    
-}
+/* david add ons */
+#col-back-btn, #col-next-btn {cursor: pointer; }
+.logged-in {display: none; }

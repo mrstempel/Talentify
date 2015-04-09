@@ -140,31 +140,64 @@ function initBackgroundMap()
 
 function loadSchoolMarkers()
 {
-	schoolInfoWindow = new google.maps.InfoWindow({ content: "" });
-
-	for (i = 0; i < schoolLatLngs.length; i++)
-	{
-		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(schoolLatLngs[i].lat, schoolLatLngs[i].lng),
-			title: "Details anzeigen",
-			map: map
-		});
-
-		google.maps.event.addListener(marker, 'click', (function (marker, i)
+	console.log('lade schulmap dinger ...');
+	$.ajax({
+		url: '/Start/SchoolLatLng',
+		type: 'get',
+		async: true,
+		success: function (data)
 		{
-			return function ()
+			if (data != null && data.length > 0)
 			{
-				map_recenter(marker.getPosition(), 0, -100);
-				var content = '<div class="map-school-info">';
-				content += '<h2>' + schoolLatLngs[i].name + '</h2>';
-				content += '<p>' + schoolLatLngs[i].address + ', ' + schoolLatLngs[i].zipCode + ' ' + schoolLatLngs[i].city + '</p>';
-				content += '<p><a href="' + schoolLatLngs[i].website + '" target="_blank">' + schoolLatLngs[i].website + '</a></p>';
-				content += '<p>' + schoolLatLngs[i].coachingStudentCount + ' Lernhilfeangebote in ' + schoolLatLngs[i].coachingSubjectCount + ' Fächern</p>';
-				content += '</div>';
+				console.log('schulmap dinger geladen');
+				schoolInfoWindow = new google.maps.InfoWindow({ content: "" });
 
-				schoolInfoWindow.setContent(content);
-				schoolInfoWindow.open(map, marker);
-			};
-		})(marker, i));
-	}
+				/*{
+					name: '@schoolInfo.School.Name', 
+					address: '@schoolInfo.School.Address', 
+					zipCode: '@schoolInfo.School.ZipCode', 
+					city: '@schoolInfo.School.City', 
+					website: '@schoolInfo.School.Website', 
+					lat: @schoolInfo.School.Latitude, 
+					lng: @schoolInfo.School.Longitude, 
+					coachingStudentCount: @schoolInfo.CoachingStudentCount, 
+					coachingSubjectCount: @schoolInfo.CoachingSubjectCount
+				}*/
+
+				//alert(data[0]['School']['Name']);
+				var schoolMarkers = new Array();
+
+				for (i = 0; i < data.length; i++)
+				{
+					var marker = new google.maps.Marker({
+						position: new google.maps.LatLng(data[i]['School']['Latitude'], data[i]['School']['Longitude']),
+						title: "Details anzeigen",
+						map: map
+					});
+					schoolMarkers.push(marker);
+
+					google.maps.event.addListener(marker, 'click', (function (marker, i)
+					{
+						return function ()
+						{
+							map_recenter(marker.getPosition(), 0, -100);
+							var content = '<div class="map-school-info">';
+							content += '<h2>' + data[i]['School']['Name'] + '</h2>';
+							content += '<p>' + data[i]['School']['Address'] + ', ' + data[i]['School']['ZipCode'] + ' ' + data[i]['School']['City'] + '</p>';
+							content += '<p><a href="' + data[i]['School']['Website'] + '" target="_blank">' + data[i]['School']['Website'] + '</a></p>';
+							content += '<p>' + data[i]['CoachingStudentCount'] + ' Lernhilfeangebote in ' + data[i]['CoachingSubjectCount'] + ' Fächern</p>';
+							content += '</div>';
+
+							schoolInfoWindow.setContent(content);
+							schoolInfoWindow.open(map, marker);
+						};
+					})(marker, i));
+				}
+				console.log('schulmap marker gesetzt');
+
+				var schoolMarkerCluster = new MarkerClusterer(map, schoolMarkers, { gridSize: 50 });
+				console.log('schulmap cluster gesetzt');
+			}
+		}
+	});
 }

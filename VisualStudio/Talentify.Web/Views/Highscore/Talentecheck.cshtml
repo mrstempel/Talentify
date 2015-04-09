@@ -1,0 +1,73 @@
+﻿@using Talentify.Web.Models.Talentecheck
+@{
+    ViewBag.Title = "Talentecheck";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+	var highscoreList = ViewBag.HighscoreList as IEnumerable<TalentecheckHighscoreItem>;
+}
+@section CustomAfterBody 
+{
+	<script>
+		window.fbAsyncInit = function ()
+		{
+			FB.init({
+				appId: '450900105062753',
+				xfbml: true,
+				version: 'v2.1'
+			});
+		};
+
+		(function (d, s, id)
+		{
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) { return; }
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+    </script>
+}
+
+<div id="page-container">
+	<section class="talentecheck-highscore">
+		<article>
+			<header>
+				<img src="/Images/talentecheck-header.png"/>
+				<h2>Dein aktueller Highscore</h2>
+				<h3>@ViewBag.MyHighscore Punkte</h3>
+			</header>
+		</article>
+		<article style="margin: 50px 0 0 0;">
+			<div class="badge-container">
+				<img src="/Images/badge-@(@TalentecheckSession.TypMax).png"/>
+				<span class="description">Dein <span class="important">@UnitOfWork.TalentecheckSessionRepository.GetTypReadable(TalentecheckSession.TypMax)</span> Badge wurde erfolgreich zu deinem Profil hinzugefügt.</span>
+			</div>
+			<div class="" style="width:80%;margin:0 auto;">
+				<p>Für jeden deiner Freunde, der sich aufgrund deiner Empfehlung auf talentify.me anmeldet, klettert dein High Score nach oben. Je mehr Bonuspunkte du sammelst, desto größer ist deine Gewinnchance auf ein Tablet, Smartphone oder ein Supertalent-T-Shirt.</p>
+				<div class="share-container">
+					<span>Sag's weiter und erhalte Bonuspunkte</span>
+					<a href="javascript:void(0);" onclick="shareFacebookUi('@TalentecheckShareUrl', '@(@TalentecheckSession.TypMax)-fb-share.png', 'Finde jetzt mit dem großen talentify.me-Talentecheck und 10 kurzen Fragen ganz schnell dein Talent heraus!');"><img src="/Images/talentecheck/fb-thumb.png"/></a>
+					<a href="mailto:;?subject=Mach jetzt den großen Talentecheck&body=@TalentecheckShareUrl"><img src="/Images/talentecheck/mail.png"/></a>
+					<a href="javascript:void(0);" onclick="shareTwitter('@TalentecheckShareUrl');"><img src="/Images/talentecheck/twitter.png"/></a>
+					<a href="javascript:void(0);" onclick="shareGoogle('@TalentecheckShareUrl');"><img src="/Images/talentecheck/googleplus.png"/></a>
+				</div>
+				<h1 class="dotted">...............................................................................................................................</h1>
+			</div>
+			<div class="gesamtwertung highscore-all">
+                <h4>High Score-Liste</h4>
+	            <p>Hier siehst du die vorläufigen GewinnerInnen, also all jene, die bis jetzt am meisten Bonuspunkte gesammelt haben. Klettere auch du rauf auf der Gewinnerleiter, melde dich auf talentify.me an und teile den Talente-Check auf Facebook! Bis 26. April 2015 hast du noch Zeit, um ganz nach oben zu kommen!</p>
+				@if (highscoreList != null && highscoreList.Any())
+				{
+					var i = 1;
+					foreach (var item in highscoreList)
+					{
+						<div style="display:inline-block;width:100%;margin: 3px auto;text-align: center;">
+							<div style="display:inline-block;width:20px;margin-right:5px;text-align: left;">@(@i++).</div>
+							<div style="display:inline-block;text-align: left;margin-right: 20px;width:220px;">@item.Firstname @(@item.Surname.Substring(0, 1)).</div>
+							<div style="display:inline-block;width:500px;text-align: left;"><div style="width:@(@item.Rank*10)%;border:2px solid black;height:10px;"></div></div>
+						</div>
+					}
+				}
+            </div>
+		</article>
+	</section>
+</div>

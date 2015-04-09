@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<title>talentify - Zukunft bilden</title>
+		<link rel="icon" type="image/png" href="/Images/talentify-favicon.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		@RenderSection("CustomMeta", required: false)
 		<script src="/Scripts/jquery-2.1.0.min.js"></script>
@@ -89,7 +90,7 @@
 		<div class="modal fade" id="modal-no-school" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
 			<div class="modal-dialog">
 				<header>
-					<h1>Keine Partnerschule<a href="javascript:void(0);" onclick="$('#modal-no-school').modal('hide');" class="close-link"></a></h1>
+					<h1>Dein Account ist noch nicht freigeschalten<a href="javascript:void(0);" onclick="$('#modal-no-school').modal('hide');" class="close-link"></a></h1>
 				</header>
 				<iframe id="no-school-frame" width="600" height="250" scrolling="no"></iframe>
 			</div>
@@ -113,7 +114,7 @@
 			<div class="container">
 				<nav>
 					<ul>
-						<li>&copy; 2014 talentify</li>
+						<li>&copy; @DateTime.Now.Year talentify</li>
 						<li>@Html.ActionLink("Impressum", "Impressum", "Content")</li>
 						<li>@Html.ActionLink("Datenschutzbestimmungen", "Datenschutz", "Content")</li>
 						<li>@Html.ActionLink("AGB", "Agb", "Content")</li>

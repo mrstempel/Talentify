@@ -15,6 +15,13 @@
 			<text>$('#confirmOption').val('opt-later');</text>
 		}
 
+		@if (ViewBag.NoSchool != null && Convert.ToBoolean(ViewBag.NoSchool))
+		{
+			<text>$('#confirm-option-container').hide();</text>
+			<text>$('#opt-later-form').show();</text>
+			<text>$('#confirmOption').val('opt-later');</text>
+		}
+
 		$(".option").click(function()
 		{
 			if (!$(this).hasClass('on'))

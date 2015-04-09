@@ -15,18 +15,23 @@
 
 	function setPayOption(opt)
 	{
+		$('#btn-premium').hide();
 		$('.pay-opt').hide();
 		$('#pay-opt-' + opt).show();
 
 		// set btn text
 		if (opt == "pay")
 		{
-			$('#btn-submit').val('Jetzt verbindlich anmelden & bezahlen');
+			$('#btn-submit').hide();
+			$('#btn-submit').click(function () { return false; });
+			$('#btn-premium').show();
+			$('#kleingedrucktes').hide();
 		}
 
 		if (opt == "first")
 		{
 			$('#btn-submit').val('Jetzt verbindlich & kostenlos anmelden');
+			$('#kleingedrucktes').hide();
 		}
 	}
 </script>
@@ -56,14 +61,14 @@
 				</div>
 			</div>
 			<div class="pay-opt" id="pay-opt-pay-or-set">
-				<p>Du hast derzeit <span class="important my-bonus">@ViewBag.MyBonus Bonuspunkte</span>, die du für diesen Workshop einsetzen kannst.</p>
+				<p>Du hast derzeit <span class="important my-bonus">@ViewBag.MyBonus Bonuspunkte</span>, die du für diesen Workshop einsetzen kannst. Perfekt.</p>
 				<div class="field-container">
-					<input type="radio" name="payOrSetOption" value="set" id="pay-or-set-option-set" checked="true"/><label for="pay-or-set-option-set">Ich setze @Model.Bonuspoints Bonuspunkte</label><br/>
+					<!--<input type="radio" name="payOrSetOption" value="set" id="pay-or-set-option-set" checked="true"/>--><i class="fa fa-check-square-o" style="margin:0 10px 0 0;"></i><label for="pay-or-set-option-set">Ich setze @Model.Bonuspoints Bonuspunkte für diesen Workshop*</label><br/>
 					@*<input type="radio" name="payOrSetOption" value="pay" id="pay-or-set-option-pay"/><label for="pay-or-set-option-pay">Ich bezahle @Model.Price,- Euro (ohne Bonuspunkte)</label>*@
 				</div>
 			</div>
 			<div class="pay-opt" id="pay-opt-pay">
-				<p>Du hast derzeit <span class="important my-bonus">@ViewBag.MyBonus Bonuspunkte</span>, das ist leider zu wenig für diesen Workshop. Sammle weiter Bonuspunkte oder bezahle @Model.Price,- Euro</p>
+				<p>Du hast derzeit <span class="important my-bonus">@ViewBag.MyBonus Bonuspunkte</span>, das ist leider zu wenig für diesen Workshop. Sammle weiter Bonuspunkte indem du Lernhilfe anbietest oder Freunde zu talentify.me einlädst.</p>
 			</div>
 			<div class="pay-opt" id="pay-opt-first">
 				<p>Da du noch <span class="important">keinen Workshop besucht</span> hast, ist der Erste für dich komplett kostenlos. Du musst weder Bonuspunkte setzen noch dafür bezahlen.</p>
@@ -72,9 +77,11 @@
 				<p>Du bist <span class="important">Premium-Mitglied</span> und genießt alle damit verbundenen Vorteile. Einer davon ist, dass du diesen Workshop kostenlos und ohne Einsatz von Bonuspunkten besuchen kannst ;-)</p>
 			</div>
 			<div class="field-container">
+				<input type="button" value="Jetzt Lernhilfe anbieten" onclick="window.parent.location.href='/Profile'" id="btn-premium"/>
 				<input type="submit" value="Jetzt verbindlich anmelden" onclick="$(this).addClass('disabled');" id="btn-submit"/><br/>
 				<span style="margin:5px 0;display:block">oder</span>
-				<a href="javascript:void(0);" onclick="window.parent.hideModal('modal-event-register');">Abbrechen</a>
+				<a href="javascript:void(0);" onclick="window.parent.hideModal('modal-event-register');">Abbrechen</a><br/>
+				<span id="kleingedrucktes" style="font-size:12px;display:inline-block;width:80%;margin: 20px auto 0 auto;">* Bei einer Abmeldung bis 24 Stunden vor dem Workshop, bekommst du die eingesetzten Bonuspunkte wieder zurück. Bei nicht erscheinen oder einer zu späten Abmeldung nicht.</span>
 			</div>
 		}
 	}

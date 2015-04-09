@@ -36,6 +36,15 @@
 			{
 				<text>loadEventOpenSeats(@Model.Id);</text>
 			}
+
+			@if (Convert.ToBoolean(ViewBag.IsFirst))
+			{
+				<text>$('#first-bonus').show();$('#second-bonus').hide();</text>
+			}
+			else
+			{
+				<text>$('#first-bonus').hide();$('#second-bonus').show();</text>
+			}
 			
 			@if (!IsAuthenticated)
 			{
@@ -56,6 +65,10 @@
 			$('#past-event-options').show();
 			$('#coming-event-options').hide();
 			$('.open-seats').hide();
+			@if (ViewBag.IsConfirmed)
+			{
+				<text>$('#past-registered').html('Du hast teilgenommen');</text>
+			}
 		}
 
 		function disableRegistration()
@@ -69,9 +82,7 @@
 	</script>
 	<script type="text/javascript">var switchTo5x=true;</script>
 	<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-	<script type="text/javascript">stLight.options(
-	{publisher: "f4ea43f1-2aa5-4a89-8ba7-6ef106fcec8a", doNotHash: true, doNotCopy: true, hashAddressBar: false, shorten: false}
-	);</script>
+	<script type="text/javascript">stLight.options({publisher: "f4ea43f1-2aa5-4a89-8ba7-6ef106fcec8a", doNotHash: true, doNotCopy: true, hashAddressBar: false, shorten: false});</script>
 }
 
 <div id="page-container" class="form">
@@ -80,10 +91,14 @@
 			<header>
 				<div class="bubble t-button desktop" id="bubble-events"></div>
 				<h2>Events</h2>
+				<a href="/Events" style="font-size:16px;">Alle Events</a>
 			</header>
 			<div class="content-container">
 				<div class="left">
-					<h1>@Html.Raw(Model.Headline)</h1>
+					<div class="header">
+						<h1>@Html.Raw(Model.Headline)</h1>
+						<span class="event-type">@GetEventTypeReadable(Model.Type)</span>
+					</div>
 					<div class="content">
 						<img src="@(@ContentUploadUrl)@(@Model.Image)" class="event-image" alt="@Html.Raw(Model.Title)"/>
 						<h4>Eventinformationen</h4>
@@ -97,11 +112,10 @@
 					<div id="coming-event-options">
 						<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link">Jetzt anmelden</a>
 						<div class="cost-info-container" id="cost-info">
-							<div class="bonus-cost"><i class="fa fa-star"></i>@Model.Bonuspoints<br/>Bonuspunkte</div>
-							<!--<div class="divider">oder</div>
-								<div class="money-cost"><i class="fa fa-euro"></i>20<br/>bezahlen</div>-->
+							<div class="bonus-cost" id="second-bonus"><i class="fa fa-star"></i>@Model.Bonuspoints Bonuspunkte</div>
+							<div class="bonus-cost" id="first-bonus">Der erste Workshop ist frei :-)</div>
 						</div>
-						<span id="registered" class="link-button">Du bist angemeldet</span>
+						<span id="registered" style="color:#fff !important;padding: 8px 0;text-align:center;width:100%;font-weight: bold;font-size: 20px;">Du bist angemeldet</span>
 						<a href="javascript:void(0);" onclick="cancelEventRegistration(@Model.Id);" class="link-button red" id="unregister-link">Teilnahme absagen</a>
 					</div>
 					<div id="not-logged-options">
@@ -140,31 +154,30 @@
 		</article>
 	</section>
 	@if (nextEvents != null && nextEvents.Count() > 1)
-	{
-		<h2 style="margin: 30px 0 0 0;">Ähnliche Workshops</h2>
+ {
+		<h2 style="margin: 75px 0 0 0;">Ähnliche Workshops</h2>
 		<section id="event-overview" class="next-events">
 			@foreach (var item in nextEvents)
-			{
+   {
 				@Html.Partial("_EventPreview", item)
-			}
+   }
 		</section>
 	}
 	<section style="margin: 20px 0 0 0;">
 		<article>
-			<h3>Noch Fragen? Wir haben die Antworten</h3>
-			<p><a href="javascript:void(0);">Zum talentify.me Hilfesystem</a></p>
+			<p style="font-size:18px;">Noch Fragen? Wir haben die Antworten<br/><a href="https://talentify.zendesk.com/hc/de/sections/200922122-Veranstaltungen-und-Workshops" target="_blank">Zum talentify.me Hilfesystem</a></p>
 		</article>
 	</section>
-	<section class="premium-link">
+	@*<section class="premium-link" style="margin-top: 60px;">
 		<article style="text-align: center;">
 			<h2>Bereit zum Upgrade?</h2>
-			<h3>Investiere in deine Talente und Zukunft.</h3>
+			<h3 style="font-family: CaeciliaLTPro-55Roman;font-size:20px;">Investiere in deine Talente und Zukunft.</h3>
 			<div class="premium-container">
 				<img src="/Images/premium1.png"/>
 				<a href="javascript:void(0);">Jetzt Premium-Mitglied werden</a>
 			</div>
 		</article>
-	</section>
+	</section>*@
 </div>
 
 <div class="modal fade" id="modal-event-register" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">

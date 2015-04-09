@@ -336,6 +336,9 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Badges(int userId)
 	    {
+		    ViewBag.TalentecheckSession =
+			    UnitOfWork.TalentecheckSessionRepository.AsQueryable().FirstOrDefault(s => s.UserId == userId);
+
 		    return View();
 	    }
     }

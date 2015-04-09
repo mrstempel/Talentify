@@ -168,6 +168,11 @@
 			}
 		});
 	}
+
+	function meineSchuleFehlt()
+	{
+		$('#add-school').click();
+	}
 </script>
 
 <p style="font-size: 16px;width:80%;margin: 0 auto 40px auto;">Die Anmeldung dauert nur wenige Sekunden und ist ab 13 Jahren direkt als SchülerIn oder sonst als Elternteil möglich. talentify.me befindet sich gerade in einer öffentlichen Testphase in Wien, Niederösterreich und dem Burgenland. Sollte deine Schule/Bundesland nicht dabei sein - kein Problem: gib uns einfach kurz Bescheid. Du kannst dich auf jeden Fall registrieren und alles ansehen.</p>
@@ -186,18 +191,11 @@
 			<input type="text" name="FirstnameChild" id="FirstnameChild" placeholder="Vorname des Kindes" style="border-top:0;" value="@Model.FirstnameChild"/>
 		</div>
 		<div class="field-container">
-			<!--<select id="bundesland" class="bundesland">
-				    <option value="">Bundesland</option>
-				    <option value="">Wien</option>
-				    <option value="">Niederösterreich</option>
-				    <option value="">Oberösterreich</option>
-				    <option value="">Tirol</option>
-			    </select>-->
 			<span class="header-label" id="school-label">Wähle deine Schule</span>
 			@Html.HiddenFor(m => m.SchoolId)
 			<input type="text" id="school-textbox" class="schule" placeholder="wähle deine Schule..."/>
 			<div class="add-field" style="top:36px;"><a href="javascript:void(0);" onclick="loadSearchSchoolForm()" data-add-tipp="Schule finden"><i class="fa fa-search"></i></a></div>
-			<a href="javascript:void(0);" id="add-school">Fehlt deine Schule oder findest du sie nicht?</a>
+			<a href="javascript:void(0);" id="add-school" style="display:none;">Fehlt deine Schule oder findest du sie nicht?</a>
 			@*@Html.DropDownListFor(model => model.SchoolId, AllSchoolsRegister, "wähle deine Schule...", new { @class = "mandatory" })*@
 			<input type="text" id="RegisterCode" name="RegisterCode" placeholder="Registrierungscode eingeben" style="border-top: 0px;"/>
 			<span id="no-school-info">
@@ -217,11 +215,11 @@
 			<p>Ich bestätige, die <a href="javascript:void(0);" onclick="loadAgb()">AGB</a> gelesen zu haben und aktzeptiere diese.</p>
 		</div>
 		<div class="field-container desktop">
-			<input type="submit" value="Absenden" onclick=" return validateRegisterForm(); "/>
+			<input type="submit" value="Jetzt anmelden" onclick=" return validateRegisterForm(); "/>
 		</div>
 	</article>
 	<footer class="submit mobile">
-		<input type="submit" value="Absenden"  onclick=" return validateRegisterForm(); " />
+		<input type="submit" value="Jetzt anmelden"  onclick=" return validateRegisterForm(); " />
 	</footer>
 }
 

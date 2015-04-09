@@ -87,7 +87,7 @@ namespace Talentify.ORM.DAL.Repository
 		{
 			var events = UnitOfWork.EventRepository.Get(e => e.IsOnline);
 
-			if (filter == "future")
+			if (filter == "future" || userId == 0)
 			{
 				return events.Where(e => e.BeginDate >= DateTime.Now).OrderBy( e => e.BeginDate);
 			}
@@ -121,9 +121,15 @@ namespace Talentify.ORM.DAL.Repository
 		{
 			var nextEvents =
 				AsQueryable()
-					.Where(e => e.BeginDate > DateTime.Now && e.Id != currentId)
-					.OrderByDescending(e => e.BeginDate)
-					.Take(2);
+					.Where(e => e.BeginDate > DateTime.Now && e.Id != currentId && e.IsOnline)
+					.OrderByDescending(e => e.BeginDate).ToList();
+
+			if (nextEvents.Any())
+			{
+				nextEvents.Shuffle();
+				return nextEvents.Take(2);
+			}
+
 			return nextEvents;
 		}
 
@@ -134,7 +140,7 @@ namespace Talentify.ORM.DAL.Repository
 			return talentiyEvent.MaxParticipant - registrations.Count();
 		}
 
-		public bool CancelRegistration(int eventId, int userId)
+		public int CancelRegistration(int eventId, int userId)
 		{
 			var registration =
 				UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.EventId == eventId && r.UserId == userId);
@@ -145,7 +151,7 @@ namespace Talentify.ORM.DAL.Repository
 				UnitOfWork.Save();
 			}
 
-			return true;
+			return UnitOfWork.EventRegistrationRepository.GetRegisterCount(userId);
 		}
 
 		public bool AddRegistration(int eventId, int userId, int price, int bonuspoints)
@@ -173,6 +179,8 @@ namespace Talentify.ORM.DAL.Repository
 				{
 					registration.IsSignedOff = false;
 					registration.CreatedDate = DateTime.Now;
+					registration.Price = price;
+					registration.Bonuspoints = bonuspoints;
 					UnitOfWork.EventRegistrationRepository.Update(registration);
 					UnitOfWork.Save();
 

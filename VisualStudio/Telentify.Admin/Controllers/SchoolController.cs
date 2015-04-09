@@ -41,7 +41,7 @@ namespace Telentify.Admin.Controllers
 			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
 			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Code = "Schultyp" });
 			ViewBag.AllSchoolTypes = allSchholTypes;
-			return View(UnitOfWork.SchoolRepository.SearchSchools(bundesland, schoolTypeId, name, address));
+			return View(UnitOfWork.SchoolRepository.SearchSchools(bundesland, schoolTypeId, name, address, false));
 		}
 
 	    public ActionResult Create()

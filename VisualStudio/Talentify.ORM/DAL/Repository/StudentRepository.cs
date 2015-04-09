@@ -189,7 +189,7 @@ namespace Talentify.ORM.DAL.Repository
 					// save large file
 					var filenameLarge = student.AusweisGuid.ToString() + "_optimiert" + fileExtension;
 					var pathLarge = Path.Combine(basePath, filenameLarge);
-					KwIt.Project.Pattern.Utils.Image.SaveResize(originalPath, pathLarge, 334);
+					KwIt.Project.Pattern.Utils.Image.SaveResize(originalPath, pathLarge, 600);
 
 					// delete original file
 					File.Delete(originalPath);

@@ -103,6 +103,9 @@
     <Compile Include="DAL\Migrations\AdminSeeder.cs" />
     <Compile Include="DAL\Migrations\BadgeSeeder.cs" />
     <Compile Include="DAL\Migrations\AdminSeeder2.cs" />
+    <Compile Include="DAL\Migrations\BadgeSeeder2.cs" />
+    <Compile Include="DAL\Migrations\NewSchoolSeeder2.cs" />
+    <Compile Include="DAL\Migrations\NewSchoolTypeSeeder2.cs" />
     <Compile Include="DAL\Migrations\EventTimeSeeder.cs" />
     <Compile Include="DAL\Migrations\SchoolStateSeeder.cs" />
     <Compile Include="DAL\Migrations\IsActiveSeeder.cs" />
@@ -135,6 +138,8 @@
     <Compile Include="DAL\Models\Notification\Notification.cs" />
     <Compile Include="DAL\Models\School\School.cs" />
     <Compile Include="DAL\Models\School\SchoolType.cs" />
+    <Compile Include="DAL\Models\Talentecheck\TalentecheckBonus.cs" />
+    <Compile Include="DAL\Models\Talentecheck\TalentecheckHighscore.cs" />
     <Compile Include="DAL\Models\Talentecheck\TalentecheckSession.cs" />
     <Compile Include="DAL\Models\Tracking\TrackingClick.cs" />
     <Compile Include="DAL\Models\User\ActionToken.cs" />
@@ -153,6 +158,8 @@
     <Compile Include="DAL\Repository\BadgeRepository.cs" />
     <Compile Include="DAL\Repository\ActionTokenRepository.cs" />
     <Compile Include="DAL\Repository\CoachingTimeRepository.cs" />
+    <Compile Include="DAL\Repository\TalentecheckBonusRepository.cs" />
+    <Compile Include="DAL\Repository\TalentecheckSessionRepository.cs" />
     <Compile Include="DAL\Repository\EventFeedbackRepository.cs" />
     <Compile Include="DAL\Repository\RegisterCodeRepository.cs" />
     <Compile Include="DAL\Repository\TalentometerLevelRepository.cs" />
@@ -339,16 +346,38 @@
     <Compile Include="Migrations\201503120848415_add-ausweis-extension.Designer.cs">
       <DependentUpon>201503120848415_add-ausweis-extension.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503121420040_add-talentecheck-session-and-bonus.cs" />
+    <Compile Include="Migrations\201503121420040_add-talentecheck-session-and-bonus.Designer.cs">
+      <DependentUpon>201503121420040_add-talentecheck-session-and-bonus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503161455132_add-talentecheck-percentage.cs" />
+    <Compile Include="Migrations\201503161455132_add-talentecheck-percentage.Designer.cs">
+      <DependentUpon>201503161455132_add-talentecheck-percentage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503161459379_change-talentechek-sex.cs" />
+    <Compile Include="Migrations\201503161459379_change-talentechek-sex.Designer.cs">
+      <DependentUpon>201503161459379_change-talentechek-sex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503161631346_add-talentecheck-highscores.cs" />
+    <Compile Include="Migrations\201503161631346_add-talentecheck-highscores.Designer.cs">
+      <DependentUpon>201503161631346_add-talentecheck-highscores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503161723294_add-invite-session-id.cs" />
+    <Compile Include="Migrations\201503161723294_add-invite-session-id.Designer.cs">
+      <DependentUpon>201503161723294_add-invite-session-id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Mvc\AdminController.cs" />
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\BaseView.cs" />
     <Compile Include="FrontendLogic\Models\FormFeedback.cs" />
     <Compile Include="FrontendLogic\Models\Login.cs" />
+    <Compile Include="Mvc\TalentecheckView.cs" />
     <Compile Include="Mvc\Extensions\FormExtensions.cs" />
     <Compile Include="Mvc\FormView.cs" />
     <Compile Include="Mvc\Security\AdminMembershipProvider.cs" />
     <Compile Include="Mvc\Security\RequireActiveSchool.cs" />
     <Compile Include="Mvc\Security\TalentifyMembershipProvider.cs" />
+    <Compile Include="Mvc\TalentecheckBaseController.cs" />
     <Compile Include="Mvc\TrackClickActionFilter.cs" />
     <Compile Include="Mvc\WebContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -359,6 +388,7 @@
     </Compile>
     <Compile Include="Timers\EventEmailTimer.cs" />
     <Compile Include="Utils\Email.cs" />
+    <Compile Include="Utils\ListExtensions.cs" />
     <Compile Include="Utils\ProfileCompleteAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -489,6 +519,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503120848415_add-ausweis-extension.resx">
       <DependentUpon>201503120848415_add-ausweis-extension.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503121420040_add-talentecheck-session-and-bonus.resx">
+      <DependentUpon>201503121420040_add-talentecheck-session-and-bonus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503161455132_add-talentecheck-percentage.resx">
+      <DependentUpon>201503161455132_add-talentecheck-percentage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503161459379_change-talentechek-sex.resx">
+      <DependentUpon>201503161459379_change-talentechek-sex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503161631346_add-talentecheck-highscores.resx">
+      <DependentUpon>201503161631346_add-talentecheck-highscores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503161723294_add-invite-session-id.resx">
+      <DependentUpon>201503161723294_add-invite-session-id.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

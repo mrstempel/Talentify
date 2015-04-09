@@ -15,6 +15,7 @@ using Talentify.ORM.DAL.Models.Feedback;
 using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.School;
+using Talentify.ORM.DAL.Models.Talentecheck;
 using Talentify.ORM.DAL.Models.Tracking;
 using Talentify.ORM.DAL.Models.User;
 using Talentify.ORM.DAL.Repository;
@@ -307,15 +308,44 @@ namespace Talentify.ORM.DAL.UnitOfWork
 			}
 		}
 
-		private IRepository<DBMigrationHistory> _dBMigrationHistoryRepository;
-		public IRepository<DBMigrationHistory> DBMigrationHistoryRepository
+		// talentecheck
+		private TalentecheckSessionRepository _talentecheckSessionRepository;
+		public TalentecheckSessionRepository TalentecheckSessionRepository
 		{
 			get
 			{
-				if (_dBMigrationHistoryRepository == null)
-					_dBMigrationHistoryRepository = new TalentifyRepository<DBMigrationHistory>(this.Context);
+				return _talentecheckSessionRepository ??
+					(_talentecheckSessionRepository = new TalentecheckSessionRepository(this.Context));
+			}
+		}
 
-				return _dBMigrationHistoryRepository;
+		private TalentecheckBonusRepository _talentecheckBonusRepository;
+		public TalentecheckBonusRepository TalentecheckBonusRepository
+		{
+			get
+			{
+				return _talentecheckBonusRepository ??
+					(_talentecheckBonusRepository = new TalentecheckBonusRepository(this.Context));
+			}
+		}
+
+		private IRepository<TalentecheckHighscore> _talentecheckHighscoreRepository;
+		public IRepository<TalentecheckHighscore> TalentecheckHighscoreRepository
+		{
+			get 
+			{
+				return _talentecheckHighscoreRepository ??
+				       (_talentecheckHighscoreRepository = new TalentifyRepository<TalentecheckHighscore>(this.Context));
+			}
+		}
+
+		private IRepository<DBMigrationHistory> _dBMigrationHistoryRepository;
+		public IRepository<DBMigrationHistory> DBMigrationHistoryRepository
+		{
+			get 
+			{
+				return _dBMigrationHistoryRepository ??
+				       (_dBMigrationHistoryRepository = new TalentifyRepository<DBMigrationHistory>(this.Context));
 			}
 		}
 

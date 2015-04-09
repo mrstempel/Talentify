@@ -17,6 +17,7 @@
 				<th>E-Mail</th>
 				<th>Registriert am</th>
 				<th>Ausweisbild</th>
+				<th>Schule</th>
 				<th>Entsperren</th>
 			</tr>
 			@foreach (var student in Model)
@@ -25,7 +26,13 @@
 					<td>@student.Firstname @student.Surname</td>
 					<td><a href="mailto:@student.Email">@student.Email</a></td>
 					<td>@student.JoinedDate.ToString("g", new CultureInfo("de"))</td>
-					<td><img src="@ConfigurationManager.AppSettings["Portal.Upload.Url"]ausweis/@(@student.AusweisGuid.ToString())_optimiert@(@student.AusweisExtension)"/></td>
+					<td><img src="@ConfigurationManager.AppSettings["Portal.Upload.Url"]ausweis/@(@student.AusweisGuid.ToString())_optimiert@(@student.AusweisExtension)" style="width:300px;"/></td>
+					<td>
+						@if (student.School != null)
+						{
+							@student.School.Name
+						}
+					</td>
 					<td>
 						<input type="hidden" name="ids" value="@student.Id" />
 						<select name="unblock" id="unblock_@student.Id">

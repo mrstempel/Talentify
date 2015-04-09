@@ -1,4 +1,8 @@
-﻿<script>
+﻿@{
+	var talentecheckLink = TalentecheckSession != null ? "/Highscore/Talentecheck" : "/Talentecheck";
+}
+
+<script>
 	$(this).ready(function()
 	{
 		setNotificationCount(@NotificationCount, false);
@@ -33,6 +37,7 @@
 </div>
 <div class="logged-container">
 	<ul>
+		<li><a href="@talentecheckLink"><img src="/Images/talentecheck-highscore-header.png"/></a></li>
 		<li><a href="javascript:void(0);" onclick="loadFeedbackForm();" class="link-button desktop" style="font-size: 14px;padding: 8px 20px;display:inline-block;">Feedback...</a></li>
 		<li class="profile-img"><a href="/Profile" title="@LoggedUser.Firstname @LoggedUser.Surname" style="background:url('@LoggedUser.ProfileImageSmall')"></a></li>
 		<li class="notifications">

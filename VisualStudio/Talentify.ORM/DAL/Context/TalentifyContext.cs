@@ -15,6 +15,7 @@ using Talentify.ORM.DAL.Models.Membership;
 using Talentify.ORM.DAL.Models.Messaging;
 using Talentify.ORM.DAL.Models.Notification;
 using Talentify.ORM.DAL.Models.School;
+using Talentify.ORM.DAL.Models.Talentecheck;
 using Talentify.ORM.DAL.Models.Tracking;
 using Talentify.ORM.DAL.Models.User;
 using Membership = System.Web.Security.Membership;
@@ -72,6 +73,11 @@ namespace Talentify.ORM.DAL.Context
 
 		// feedback
 		public DbSet<EventFeedback> EventFeedbacks { get; set; }
+
+		// talentecheck
+		public DbSet<TalentecheckSession> TalentecheckSessions { get; set; }
+		public DbSet<TalentecheckBonus> TalentecheckBonus { get; set; }
+		public DbSet<TalentecheckHighscore> TalentecheckHighscores { get; set; }
 		
 		public TalentifyContext() : base("EFConnectionString")
 		{
@@ -133,6 +139,11 @@ namespace Talentify.ORM.DAL.Context
 
 			// feedback
 			modelBuilder.Configurations.Add(new EventFeedbackMap());
+
+			// talentecheck
+			modelBuilder.Configurations.Add(new TalentecheckSessionMap());
+			modelBuilder.Configurations.Add(new TalentecheckBonusMap());
+			modelBuilder.Configurations.Add(new TalentecheckHighscoreMap());
 			
 			base.OnModelCreating(modelBuilder);
 		}

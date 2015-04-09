@@ -73,14 +73,19 @@ namespace Talentify.ORM.DAL.Repository
 			}
 		}
 
-		public long GetUserBonus(int userId)
+		public long GetUserBonus(int userId, bool onlyPositive = false)
 		{
 			try
 			{
-				return (from b in UnitOfWork.BonuspointRepository.AsQueryable()
-						   where
-							   b.UserId == userId
-						   select (long)b.Points).Sum();
+				return (onlyPositive) ? 
+						(from b in UnitOfWork.BonuspointRepository.AsQueryable()
+					where
+						b.UserId == userId && b.Message != "Bonuspunkte für Event gesetzt" && b.Message != "Gesetzte Bonuspunkte für Event gutgeschrieben"
+							select (long) b.Points).Sum() :
+						   (from b in UnitOfWork.BonuspointRepository.AsQueryable()
+							where
+								b.UserId == userId
+							select (long)b.Points).Sum();
 			}
 			catch (Exception)
 			{

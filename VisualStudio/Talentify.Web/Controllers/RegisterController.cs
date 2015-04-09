@@ -6,7 +6,9 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using KwIt.Project.Pattern.DAL.Context;
+using Talentify.ORM.DAL.Models.Talentecheck;
 using Talentify.ORM.DAL.Models.User;
+using Talentify.ORM.DAL.Repository;
 using Talentify.ORM.FrontendLogic;
 using Talentify.ORM.FrontendLogic.Models;
 using Talentify.ORM.Mvc;
@@ -20,12 +22,14 @@ namespace Talentify.Web.Controllers
     {
         public ActionResult Index()
         {
+			ViewBag.IsTalentecheck = (this.TalentecheckSessionFromCookie != null && this.TalentecheckSessionFromCookie.UserId == 0 && this.TalentecheckSessionFromCookie.IsFinished);
             return View(new Student());
         }
 
 		[HttpPost]
 	    public ActionResult Index(Student student)
 		{
+			ViewBag.IsTalentecheck = false;
 			// no school option
 			if (student.SchoolId == 0)
 			{
@@ -48,6 +52,21 @@ namespace Talentify.Web.Controllers
 					Email.Send(mailMsg);
 				}
 
+				// if talentecheck register, save user-id to talentecheck-session
+				if (this.TalentecheckSessionFromCookie != null)
+				{
+					this.TalentecheckSessionFromCookie.UserId = student.Id;
+					UnitOfWork.TalentecheckSessionRepository.Update(this.TalentecheckSessionFromCookie);
+					UnitOfWork.Save();
+
+					if (Request.Cookies["TalentecheckGuid"] != null)
+					{
+						var myCookie = new HttpCookie("TalentecheckGuid");
+						myCookie.Expires = DateTime.Now.AddDays(-1);
+						Response.Cookies.Add(myCookie);
+					}
+				}
+
 				this.FormSuccess = saveFeedback;
 			}
 
@@ -63,6 +82,10 @@ namespace Talentify.Web.Controllers
 			    if (user.SchoolId.HasValue)
 			    {
 				    user.School = UnitOfWork.SchoolRepository.GetById(user.SchoolId.Value);
+			    }
+			    else
+			    {
+				    ViewBag.NoSchool = true;
 			    }
 		    }
 		    catch (Exception ex) { }
@@ -95,6 +118,38 @@ namespace Talentify.Web.Controllers
 					if (WebSecurity.Login(student.Email, student.Password))
 					{
 						Session["IsFirstLogin"] = true;
+
+						if (TalentecheckSession != null)
+						{
+							var talentecheckBonus = new TalentecheckBonus()
+							{
+								Action = TalentecheckBonusAction.Register.ToString(),
+								Points = TalentecheckBonusPointsFor.Register,
+								CreateDate = DateTime.Now,
+								TalentecheckSessionId = TalentecheckSession.Id
+							};
+							UnitOfWork.TalentecheckBonusRepository.Insert(talentecheckBonus);
+							UnitOfWork.BadgeRepository.AddBadgeToUser(student, TalentecheckSession.TypMax.ToString());
+
+							var inviteSession =
+								UnitOfWork.TalentecheckSessionRepository.AsQueryable()
+									.FirstOrDefault(s => s.SessionId == TalentecheckSession.InviteSessionId);
+							if (inviteSession != null)
+							{
+								var inviteBonus = new TalentecheckBonus()
+								{
+									Action = TalentecheckBonusAction.Invite.ToString(),
+									Points = TalentecheckBonusPointsFor.Invite,
+									CreateDate = DateTime.Now,
+									TalentecheckSessionId = inviteSession.Id
+								};
+								UnitOfWork.TalentecheckBonusRepository.Insert(inviteBonus);
+							}
+
+							UnitOfWork.Save();
+						}
+
+
 						return RedirectToAction("Index", "Start");
 					}
 				}

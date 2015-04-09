@@ -29,9 +29,11 @@ namespace Talentify.Web.Controllers
 
 		public ActionResult Index()
         {
-			ViewBag.IsFirstLogin = true;
+			//ViewBag.IsFirstLogin = true;
 			if (Session["IsFirstLogin"] != null && Convert.ToBoolean(Session["IsFirstLogin"]))
 				ViewBag.IsFirstLogin = true;
+
+			ViewBag.IsTalentecheckRegister = this.TalentecheckSession != null;
 
 	        LastStreamItemDate = null;
 	        Session["IsFirstLogin"] = null;
@@ -39,10 +41,15 @@ namespace Talentify.Web.Controllers
 			var surveyToken = UnitOfWork.ActionTokenRepository.GetSurveyToken(LoggedUser.Id);
 			ViewBag.Latitude = (student.HasSchool) ? student.School.Latitude : ConfigurationManager.AppSettings["SchoolMap.Default.Lat"];
 			ViewBag.Longitude = (student.HasSchool) ? student.School.Longitude : ConfigurationManager.AppSettings["SchoolMap.Default.Lng"];
-			ViewBag.AllSchools = UnitOfWork.SchoolRepository.GetSchoolsWithInfo();
+			//ViewBag.AllSchools = UnitOfWork.SchoolRepository.GetSchoolsWithInfo().Take(50);
 			ViewBag.ShowSurvey = surveyToken.ValidUntil != DateTime.MinValue;
             return View(new SearchParams());
         }
+
+	    public JsonResult SchoolLatLng()
+	    {
+		    return Json(UnitOfWork.SchoolRepository.GetSchoolsWithInfo(), JsonRequestBehavior.AllowGet);
+	    }
 
 	    public ActionResult Stream()
 	    {

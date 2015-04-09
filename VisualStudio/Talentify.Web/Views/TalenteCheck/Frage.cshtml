@@ -1,0 +1,13 @@
+﻿@{
+	string frageView = "Talentecheck/Frage" + ViewBag.Frage.ToString();
+}
+<script>
+	$(document).ready(function()
+	{
+		@if (ViewBag.Answer != null)
+		{
+			<text>$('#a@(@ViewBag.Answer)').prop('checked', true);</text>
+		}
+	});
+</script>
+@Html.Partial(frageView, null)
