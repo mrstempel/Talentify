@@ -294,6 +294,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Backend_New_Html\" />
+    <Folder Include="Metronic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
