@@ -39,8 +39,14 @@ namespace Talentify.ORM.DAL.Repository
 		{
 			if (entity.Bonuspoints > 0)
 			{
-				//re-add bonuspoints to user
-				UnitOfWork.BonuspointRepository.Insert(entity.UserId, entity.Bonuspoints, "Gesetzte Bonuspunkte für Event gutgeschrieben", 0, true, null);
+				// check if event is longer than 24 hours away
+				var eventDetail = UnitOfWork.EventRepository.GetById(entity.EventId);
+				if (eventDetail != null && eventDetail.BeginDate >= DateTime.Now.AddDays(1))
+				{
+					//re-add bonuspoints to user
+					UnitOfWork.BonuspointRepository.Insert(entity.UserId, entity.Bonuspoints,
+						"Gesetzte Bonuspunkte für Event gutgeschrieben", 0, true, null);
+				}
 			}
 
 			entity.CreatedDate = DateTime.Now;

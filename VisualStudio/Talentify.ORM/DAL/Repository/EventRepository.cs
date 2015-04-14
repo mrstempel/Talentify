@@ -136,7 +136,7 @@ namespace Talentify.ORM.DAL.Repository
 		public int GetOpenSeats(int eventId)
 		{
 			var talentiyEvent = UnitOfWork.EventRepository.GetById(eventId);
-			var registrations = UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.EventId == eventId);
+			var registrations = UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.EventId == eventId && !reg.IsSignedOff);
 			return talentiyEvent.MaxParticipant - registrations.Count();
 		}
 
@@ -285,7 +285,7 @@ namespace Talentify.ORM.DAL.Repository
 							var tag = e.BeginDate.ToString("dddd", new CultureInfo("de"));
 							var datum = e.BeginDate.ToString("d.M.yyyy", new CultureInfo("de"));
 							Email.SenEventNotConfirmed2Email(user.Email, ConfigurationManager.AppSettings["Email.Notifiction.Subject"],
-								e.Title, tag, datum, e.BeginTime, e.EndTime);
+								e.Title, tag, datum, e.BeginTime, e.EndTime, reg.Id);
 							user.IsWorkshopBlocked = true;
 							UnitOfWork.BaseUserRepository.Update(user);
 						}

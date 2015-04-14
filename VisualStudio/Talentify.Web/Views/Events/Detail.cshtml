@@ -74,6 +74,7 @@
 		function disableRegistration()
 		{
 			$('#register-link').hide();
+			$('#register-link-bottom').hide();
 			$('#cost-info').hide();
 			$('#unregister-link').css('display', 'inline-block');
 			$('#registered').css('display', 'inline-block');
@@ -103,7 +104,9 @@
 						<img src="@(@ContentUploadUrl)@(@Model.Image)" class="event-image" alt="@Html.Raw(Model.Title)"/>
 						<h4>Eventinformationen</h4>
 						@Html.Raw(Model.Content)
+						<a href="javascript:void(0);" onclick="loadEventRegistrationForm(@Model.Id);" class="link-button" id="register-link-bottom">Jetzt anmelden</a>
 					</div>
+					
 				</div>
 				<div class="right">
 					<div id="past-event-options">
@@ -140,6 +143,7 @@
 					</div>
 					<div class="open-seats">
 						<span id="event-open-seats"></span>
+						
 					</div>
 					<div class="sharing-options">
 						<span class='st_facebook_large' displayText='Facebook' st_title='@Model.Title'></span>
@@ -153,15 +157,14 @@
 			</div>
 		</article>
 	</section>
-	@if (nextEvents != null && nextEvents.Count() > 1)
- {
+	@if (nextEvents != null && nextEvents.Count() > 0)
+	{
 		<h2 style="margin: 75px 0 0 0;">Ähnliche Workshops</h2>
-		<section id="event-overview" class="next-events">
-			@foreach (var item in nextEvents)
-   {
-				@Html.Partial("_EventPreview", item)
-   }
-		</section>
+		<section id="event-overview-next" class="next-events">@foreach (var item in nextEvents){ @Html.Partial("_EventPreview", item) }</section>
+	}
+	else
+	{
+		<section id="event-overview-next" class="next-events"><span>Dies ist der letzte geplante Workshops in diesem Semester.<br/>Sobald es wieder losgeht mit der Schule, starten unsere Events wieder.</span></section>
 	}
 	<section style="margin: 20px 0 0 0;">
 		<article>

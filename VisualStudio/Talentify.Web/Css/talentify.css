@@ -1,4 +1,4 @@
-﻿.box-sizing, .input-switch .option, .filter-container, .form-container.search .checkbox-container, .form-container.coaching-center-filter .checkbox-container, .form-container.search-school, .form-container.search-school input[type="button"], .form-container.search-school .loading-message, #confirm-option-container, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, #notification-list .item .bonus, .all-notifications .item .bonus, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, .event-registration-popup .location-time-container, .event-registration-popup .location-time-container .item, #event-overview article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .form-container.feedback .field-container textarea, .slider-container, .slider-container .label-left, .slider-container .label-right, div.timetable, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
+﻿.box-sizing, .input-switch .option, .filter-container, .form-container.search .checkbox-container, .form-container.coaching-center-filter .checkbox-container, .form-container.search-school, .form-container.search-school input[type="button"], .form-container.search-school .loading-message, #confirm-option-container, #page-header .content, #notification-count, #notification-list-loading, #notification-list, .all-notifications, #notification-list .item, .all-notifications .item, #notification-list .item .bonus, .all-notifications .item .bonus, .all-notifications .date, .nav-menu, .nav-menu a, #page-footer .invite, #page-container, #page-container.full-width section article, #page-container.full-width .big-bg .label, #page-container.full-width .big-bg-events .label, #home-events, #home-events .item, #home-events .item .details, #search-results article, .two-col-container .col-container, .two-col-container .col-container article, #stream-container-load-more .link-button, article.event-detail .content-container, article.event-detail .content-container .left, article.event-detail .content-container .left .content, article.event-detail .content-container .right, article.event-detail .content-container .right .open-seats, article.event-detail .content-container .right .open-seats span, article.event-detail .content-container .right .sharing-options, #past-event-options, #not-logged-options, #register-link-bottom, .event-registration-popup .location-time-container, .event-registration-popup .location-time-container .item, #event-overview article, #event-overview-next article, #search-session-view article, #search-session-view article .prev-item, #search-session-view article .next-item, #search-session-view article .search-params, .user-profile .link-button, .user-settings .link-button, .user-profile article, .user-settings article, .user-profile article .left, .user-settings article .left, .user-profile article .right, .user-settings article .right, .user-profile article .right .tag, .user-settings article .right .tag, .achievements .talentometer-container, .achievements .talentometer-container .bar-labels, .achievements .badges-container, .request-list .item, .request-list .item span, .request-list .item .details, .request-list .item .contact, #in-out-filter, #request-stream, #request-stream .item, #request-stream .btn-container, #request-stream .btn-container .link-button, #new-message-form, #new-message-form textarea, #new-message-form .link-button, #status-update-complete, #status-update-complete .feedback-container, #status-update-complete .date-form, #status-update-complete .confirm-btn-container .link-button, .form-container.feedback .field-container textarea, .slider-container, .slider-container .label-left, .slider-container .label-right, div.timetable, .msg-container, .msg, .loading-message, .talentify-modal-container, .talentify-modal-container article .content, .talentify-modal-container article .form-container, .modal-dialog header, .agb-container {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -1243,6 +1243,13 @@ article.event-detail .content-container {
   margin: 0 0 0 0;
   font-size: 20px; }
 
+#register-link-bottom {
+  margin: 20px 0 0 0;
+  font-size: 20px;
+  width: 100%;
+  display: inline-block;
+  text-align: center; }
+
 #unregister-link {
   display: none; }
 
@@ -1304,6 +1311,24 @@ article.event-detail .content-container {
     #event-overview article h3 {
       font-size: 18px; }
   #event-overview article:last-child {
+    margin: 10px 0 10px 0 !important; }
+
+#event-overview-next {
+  margin: 20px 0 0 0;
+  padding: 10px; }
+  #event-overview-next article {
+    -moz-box-shadow: 0 0 5px #c3c3c3;
+    -webkit-box-shadow: 0 0 5px #c3c3c3;
+    box-shadow: 0 0 5px #c3c3c3;
+    width: 48%;
+    margin: 10px 22px 10px 0 !important;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 18px; }
+    #event-overview-next article h3 {
+      font-size: 18px; }
+  #event-overview-next article:last-child {
     margin: 10px 0 10px 0 !important; }
 
 #search-session-view article {

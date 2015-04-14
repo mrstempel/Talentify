@@ -24,7 +24,14 @@ function login()
 		{
 			if (data == 1)
 			{
-				location.href = "/Start";
+				if (getUrlParam("ReturnUrl") != "")
+				{
+					location.href = decodeURIComponent(getUrlParam("ReturnUrl"));
+				}
+				else
+				{
+					location.href = "/Start";	
+				}
 			}
 			else if (data == 2)
 			{
@@ -32,7 +39,7 @@ function login()
 			}
 			else
 			{
-				location.href = "/Login/Error";
+				location.href = "/Login/Error?ReturnUrl=" + getUrlParam("ReturnUrl");
 			}
 		},
 		error: function (request, status, error)
@@ -61,7 +68,14 @@ function submitLoginScreenForm()
 		{
 			if (data == 1)
 			{
-				location.href = "/Start";
+				if (getUrlParam("ReturnUrl") != "")
+				{
+					location.href = decodeURIComponent(getUrlParam("ReturnUrl"));
+				}
+				else
+				{
+					location.href = "/Start";
+				}
 			}
 			else if (data == 2)
 			{
@@ -69,7 +83,7 @@ function submitLoginScreenForm()
 			}
 			else
 			{
-				location.href = "/Login/Error";
+				location.href = "/Login/Error?ReturnUrl=" + getUrlParam("ReturnUrl");
 			}
 		},
 		error: function (request, status, error)
@@ -528,6 +542,7 @@ function cancelEventRegistration(id)
 			{
 				loadEventOpenSeats(id);
 				$('#register-link').css('display', 'inline-block');
+				$('#register-link-bottom').css('display', 'inline-block');
 				$('#cost-info').css('display', 'inline-block');
 				if (data == 0)
 				{
@@ -797,4 +812,16 @@ function shareFacebookUi(url, image, description)
 			});
 		}
 	});
+}
+
+function getUrlParam(name)
+{
+	name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	var regexS = "[\\?&]" + name + "=([^&#]*)";
+	var regex = new RegExp(regexS);
+	var results = regex.exec(window.location.href);
+	if (results == null)
+		return "";
+	else
+		return results[1];
 }

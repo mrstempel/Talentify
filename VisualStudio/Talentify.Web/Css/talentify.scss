@@ -1564,6 +1564,7 @@ article.event-detail
 	display: none;
 }
 #register-link { margin: 0 0 0 0; font-size: 20px; }
+#register-link-bottom { margin: 20px 0 0 0; font-size: 20px; width: 100%; display: inline-block; @extend .box-sizing; text-align: center; }
 #unregister-link { display: none; }
 
 .event-registration-popup
@@ -1622,6 +1623,26 @@ article.event-detail
 		margin: 10px 22px 10px 0 !important;
 		padding: 10px;
 		float: left;
+		h3 { font-size: 18px; }
+		font-size: 18px;
+	}
+	article:last-child { margin: 10px 0 10px 0 !important; }
+}
+
+#event-overview-next
+{
+	margin: 20px 0 0 0;
+	padding: 10px;
+	article
+	{
+		@extend .box-sizing;
+		@include shadow($color-shadow, 5px);
+		width: 48%;
+		margin: 10px 22px 10px 0 !important;
+		padding: 10px;
+		//float: left;
+		display: inline-block;
+		vertical-align: top;
 		h3 { font-size: 18px; }
 		font-size: 18px;
 	}

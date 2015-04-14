@@ -193,7 +193,7 @@ namespace Talentify.ORM.Utils
 		}
 
 		public static void SenEventNotConfirmed2Email(string to, string subject, string title, string tag, string datum,
-			string uhrzeitVon, string uhrzeitBis)
+			string uhrzeitVon, string uhrzeitBis, int registerId)
 		{
 			var reader = new StreamReader(HostingEnvironment.MapPath("~/Templates/EmailEventNotConfirmed2.html"));
 			string templateContent = reader.ReadToEnd();
@@ -205,6 +205,7 @@ namespace Talentify.ORM.Utils
 			templateContent = templateContent.Replace("{Datum}", datum);
 			templateContent = templateContent.Replace("{UhrzeitVon}", uhrzeitVon);
 			templateContent = templateContent.Replace("{UhrzeitBis}", uhrzeitBis);
+			templateContent = templateContent.Replace("{RegisterId}", registerId.ToString());
 
 			var msg = new MailMessage(ConfigurationManager.AppSettings["Email.From"], to)
 			{
