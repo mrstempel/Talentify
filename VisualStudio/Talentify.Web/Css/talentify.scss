@@ -1367,6 +1367,7 @@ article.event-preview
 	p { text-align: left !important; margin: 10 0 10px 0; }
 	img { float: left; margin: 0 10px 0 0; }
 	.register-icon { display: none; }
+	.nonattendant-icon { display: none; }
 }
 article.event-preview:hover, article.event-preview.past:hover
 {
@@ -1381,6 +1382,19 @@ article.event-preview.past
 article.event-preview.registered
 {
 	.register-icon 
+	{ 
+		position: absolute;
+		display: inline-block;
+		top: 10px;
+		left: 10px;
+		z-index: 10;
+		opacity: 1.0 !important;
+	}
+}
+
+article.event-preview.nonattendant
+{
+	.nonattendant-icon 
 	{ 
 		position: absolute;
 		display: inline-block;

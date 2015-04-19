@@ -21,6 +21,7 @@ namespace Talentify.Web.Controllers
 		public ActionResult Filter(string filter, bool isFilter)
 		{
 			ViewBag.RegisteredIds = IsAuthenticated ? UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id) : new List<int>();
+			ViewBag.NonattendantIds = IsAuthenticated ? UnitOfWork.EventRepository.GetUserNonattendantEventIds(LoggedUser.Id) : new List<int>();
 			return View(UnitOfWork.EventRepository.Filter(filter, (IsAuthenticated) ? LoggedUser.Id : 0));
 		}
 
@@ -32,7 +33,10 @@ namespace Talentify.Web.Controllers
 			    UnitOfWork.EventRegistrationRepository.AsQueryable().FirstOrDefault(r => r.UserId == userId && r.EventId == id && !r.IsSignedOff);
 			ViewBag.IsUserRegistered = reg != null;
 		    ViewBag.IsConfirmed = (reg != null) && reg.Confirmed;
+			ViewBag.Nonattendant = (reg != null) && !reg.Confirmed && reg.HasFollowUpEmail;
 			ViewBag.NextEvents = UnitOfWork.EventRepository.GetNextEvents(id);
+			ViewBag.RegisteredIds = IsAuthenticated ? UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id) : new List<int>();
+			ViewBag.NonattendantIds = IsAuthenticated ? UnitOfWork.EventRepository.GetUserNonattendantEventIds(LoggedUser.Id) : new List<int>();
 		    ViewBag.IsFirst = UnitOfWork.EventRegistrationRepository.GetRegisterCount(userId) == 0;
 		    return View(UnitOfWork.EventRepository.GetById(id));
 	    }
@@ -56,7 +60,10 @@ namespace Talentify.Web.Controllers
 			{
 				ViewBag.IsUserRegistered = reg != null;
 				ViewBag.IsConfirmed = (reg != null) && reg.Confirmed;
+				ViewBag.Nonattendant = (reg != null) && !reg.Confirmed && reg.HasFollowUpEmail;
 				ViewBag.NextEvents = UnitOfWork.EventRepository.GetNextEvents(eventDetail.Id);
+				ViewBag.RegisteredIds = IsAuthenticated ? UnitOfWork.EventRepository.GetUserRegisteredEventIds(LoggedUser.Id) : new List<int>();
+				ViewBag.NonattendantIds = IsAuthenticated ? UnitOfWork.EventRepository.GetUserNonattendantEventIds(LoggedUser.Id) : new List<int>();
 				ViewBag.IsFirst = (!IsAuthenticated) || UnitOfWork.EventRegistrationRepository.GetRegisterCount(userId) == 0;
 			}
 

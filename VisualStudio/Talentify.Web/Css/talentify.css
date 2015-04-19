@@ -1087,6 +1087,8 @@ article.event-preview {
     margin: 0 10px 0 0; }
   article.event-preview .register-icon {
     display: none; }
+  article.event-preview .nonattendant-icon {
+    display: none; }
 
 article.event-preview:hover, article.event-preview.past:hover {
   background: #e6f7f3; }
@@ -1098,6 +1100,14 @@ article.event-preview.past {
     opacity: 0.7; }
 
 article.event-preview.registered .register-icon {
+  position: absolute;
+  display: inline-block;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  opacity: 1 !important; }
+
+article.event-preview.nonattendant .nonattendant-icon {
   position: absolute;
   display: inline-block;
   top: 10px;

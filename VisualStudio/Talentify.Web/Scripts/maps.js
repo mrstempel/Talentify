@@ -170,7 +170,7 @@ function loadSchoolMarkers()
 				for (i = 0; i < data.length; i++)
 				{
 					var marker = new google.maps.Marker({
-						position: new google.maps.LatLng(data[i]['School']['Latitude'], data[i]['School']['Longitude']),
+						position: new google.maps.LatLng(data[i]['Latitude'], data[i]['Longitude']),
 						title: "Details anzeigen",
 						map: map
 					});
@@ -182,10 +182,10 @@ function loadSchoolMarkers()
 						{
 							map_recenter(marker.getPosition(), 0, -100);
 							var content = '<div class="map-school-info">';
-							content += '<h2>' + data[i]['School']['Name'] + '</h2>';
-							content += '<p>' + data[i]['School']['Address'] + ', ' + data[i]['School']['ZipCode'] + ' ' + data[i]['School']['City'] + '</p>';
-							content += '<p><a href="' + data[i]['School']['Website'] + '" target="_blank">' + data[i]['School']['Website'] + '</a></p>';
-							content += '<p>' + data[i]['CoachingStudentCount'] + ' Lernhilfeangebote in ' + data[i]['CoachingSubjectCount'] + ' Fächern</p>';
+							content += '<h2>' + data[i]['Name'] + '</h2>';
+							content += '<p>' + data[i]['Address'] + ', ' + data[i]['ZipCode'] + ' ' + data[i]['City'] + '</p>';
+							content += '<p><a href="' + data[i]['Website'] + '" target="_blank">' + data[i]['Website'] + '</a></p>';
+							//content += '<p>' + data[i]['CoachingStudentCount'] + ' Lernhilfeangebote in ' + data[i]['CoachingSubjectCount'] + ' Fächern</p>';
 							content += '</div>';
 
 							schoolInfoWindow.setContent(content);

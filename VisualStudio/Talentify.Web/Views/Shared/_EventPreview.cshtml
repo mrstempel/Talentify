@@ -3,16 +3,23 @@
 @{
 	var registeredEvents = ViewBag.RegisteredIds as List<int>;
 	var isUserRegistered = (registeredEvents != null) && registeredEvents.Contains(Model.Id);
+	var nonattendantEvents = ViewBag.NonattendantIds as List<int>;
+	var isUsernonattendant = (nonattendantEvents != null) && nonattendantEvents.Contains(Model.Id);
 	var cssClass = Model.BeginDate < DateTime.Now ? "past" : string.Empty;
 	if (isUserRegistered)
 	{
 		cssClass += " registered";
+	}
+	if (isUsernonattendant)
+	{
+		cssClass += " nonattendant";
 	}
 	var linkText = (Model.BeginDate < DateTime.Now || isUserRegistered) ? "Details anzeigen" : "Hier geht's zur Anmeldung";
 }
 
 <article class="event-preview @cssClass" onclick="location.href='@Model.Link'">
 	<div class="register-icon"><img src="/Images/icon-event-register.png"/></div>
+	<div class="nonattendant-icon"><img src="/Images/icon-absagen.png"/></div>
 	<a href="@Model.Link"><img src="@(@ContentUploadUrl)@(@Model.PreviewImage)" alt="" class="prev-img"/></a>
 	<h3>@Html.Raw(Model.Title)</h3>
 	@Model.BeginDate.ToString("dd.MM.yyyy") | @Model.BeginTime - @Model.EndTime

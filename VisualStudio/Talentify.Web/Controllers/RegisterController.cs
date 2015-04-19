@@ -53,7 +53,7 @@ namespace Talentify.Web.Controllers
 				}
 
 				// if talentecheck register, save user-id to talentecheck-session
-				if (this.TalentecheckSessionFromCookie != null)
+				if (this.TalentecheckSessionFromCookie != null && this.TalentecheckSessionFromCookie.UserId == 0 && this.TalentecheckSessionFromCookie.IsFinished)
 				{
 					this.TalentecheckSessionFromCookie.UserId = student.Id;
 					UnitOfWork.TalentecheckSessionRepository.Update(this.TalentecheckSessionFromCookie);

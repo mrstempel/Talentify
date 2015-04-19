@@ -41,10 +41,15 @@ namespace Talentify.ORM.DAL.Repository
 			return classes;
 		}
 
+		public IEnumerable<School> GetMapSchools()
+		{
+			return AsQueryable().Where(s => s.IsActive);
+		}
+
 		public IEnumerable<SchoolInfo> GetSchoolsWithInfo()
 		{
 			var schoolInfos = new List<SchoolInfo>();
-			var allSchools = AsQueryable().Where(s => s.IsActive).Take(100);
+			var allSchools = AsQueryable().Where(s => s.IsActive);//.Take(100);
 			
 			foreach (var school in allSchools)
 			{

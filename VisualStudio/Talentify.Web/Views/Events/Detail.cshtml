@@ -64,10 +64,16 @@
 		{
 			$('#past-event-options').show();
 			$('#coming-event-options').hide();
+			$('#register-link-bottom').hide();
 			$('.open-seats').hide();
 			@if (ViewBag.IsConfirmed)
 			{
 				<text>$('#past-registered').html('Du hast teilgenommen');</text>
+			}
+
+			@if (ViewBag.Nonattendant)
+			{
+				<text>$('#past-registered').html('Du bist nicht erschienen');$('#past-registered').css('background-color', '#ef4d69;');$('#past-registered').css('color', '#fff;');</text>
 			}
 		}
 
@@ -92,7 +98,7 @@
 			<header>
 				<div class="bubble t-button desktop" id="bubble-events"></div>
 				<h2>Events</h2>
-				<a href="/Events" style="font-size:16px;">Alle Events</a>
+				<a href="/Events" style="font-size:16px;color:#ef4d69;">Alle Events</a>
 			</header>
 			<div class="content-container">
 				<div class="left">

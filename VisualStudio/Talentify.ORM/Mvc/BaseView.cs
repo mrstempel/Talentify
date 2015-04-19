@@ -133,7 +133,7 @@ namespace Talentify.ORM.Mvc
 		public string GetEventTypeReadable(EventType eType)
 		{
 			if (eType == EventType.Academy)
-				return "talentify Academy (Workshops)";
+				return "talentify.me Academy Workshop";
 			if (eType == EventType.OnTour)
 				return "talentify on Tour";
 			if (eType == EventType.SocialSkillLab)

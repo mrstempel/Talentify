@@ -96,7 +96,7 @@ namespace Talentify.ORM.DAL.Repository
 			if (filter == "my")
 			{
 				return from e in events join
-						myRegistrations in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.UserId == userId) on e.Id equals myRegistrations.EventId
+						myRegistrations in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(r => r.UserId == userId && !r.IsSignedOff) on e.Id equals myRegistrations.EventId
 						orderby e.BeginDate
 					select e;
 			}
@@ -209,8 +209,15 @@ namespace Talentify.ORM.DAL.Repository
 		public List<int> GetUserRegisteredEventIds(int userId)
 		{
 			return
-				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId && !reg.IsSignedOff)
+				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId && !reg.IsSignedOff && (reg.Confirmed || !reg.HasFollowUpEmail))
 					select regs.EventId).ToList();
+		}
+
+		public List<int> GetUserNonattendantEventIds(int userId)
+		{
+			return
+				(from regs in UnitOfWork.EventRegistrationRepository.AsQueryable().Where(reg => reg.UserId == userId && !reg.IsSignedOff && (!reg.Confirmed && reg.HasFollowUpEmail))
+				 select regs.EventId).ToList();
 		}
 
 		public IEnumerable<EventRegistration> GetRegistrations(int eventId)

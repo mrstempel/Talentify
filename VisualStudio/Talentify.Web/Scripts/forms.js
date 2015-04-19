@@ -173,6 +173,20 @@ function validateRegisterForm()
 		return false;
 	}
 
+	if ($('#schoolEmail').hasClass('mandatory'))
+	{
+		if ($('#schoolEmail').val().indexOf("@") != -1)
+		{
+			$('#schoolEmail').addClass('error');
+			errorText += "Für deine ausgewählte Schule kannst du dich mit deiner Schüler E-Mailadresse verifizieren. Gibt dazu bitte nur den Teil vor dem @-Zeichen im Eingabefeld ein";
+			isValid = false;
+		}
+		else
+		{
+			$('#schoolEmail').removeClass('error');
+		}
+	}
+
 	// check e-mail syntax
 	if ($('#Email').hasClass('mandatory') && !validateEmail($('#Email').val()))
 	{

@@ -48,7 +48,7 @@ namespace Talentify.Web.Controllers
 
 	    public JsonResult SchoolLatLng()
 	    {
-		    return Json(UnitOfWork.SchoolRepository.GetSchoolsWithInfo(), JsonRequestBehavior.AllowGet);
+			return Json(UnitOfWork.SchoolRepository.GetMapSchools(), JsonRequestBehavior.AllowGet);
 	    }
 
 	    public ActionResult Stream()
