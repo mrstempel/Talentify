@@ -186,13 +186,16 @@ namespace Talentify.ORM.DAL.Repository
 					upload.SaveAs(originalPath);
 					student.AusweisExtension = fileExtension;
 
-					// save large file
-					var filenameLarge = student.AusweisGuid.ToString() + "_optimiert" + fileExtension;
-					var pathLarge = Path.Combine(basePath, filenameLarge);
-					KwIt.Project.Pattern.Utils.Image.SaveResize(originalPath, pathLarge, 600);
+					if (fileExtension != ".pdf")
+					{
+						// save large file
+						var filenameLarge = student.AusweisGuid.ToString() + "_optimiert" + fileExtension;
+						var pathLarge = Path.Combine(basePath, filenameLarge);
+						KwIt.Project.Pattern.Utils.Image.SaveResize(originalPath, pathLarge, 600);
 
-					// delete original file
-					File.Delete(originalPath);
+						// delete original file
+						File.Delete(originalPath);
+					}
 				}
 				else
 				{

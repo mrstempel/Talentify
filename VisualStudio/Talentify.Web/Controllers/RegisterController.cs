@@ -75,6 +75,8 @@ namespace Talentify.Web.Controllers
 
 	    public ActionResult Confirm(string c, string t)
 	    {
+		    ViewBag.IsTalentecheckRegister = false;
+
 		    Student user = null;
 		    try
 		    {
@@ -95,12 +97,20 @@ namespace Talentify.Web.Controllers
 				this.FormError = new FormFeedback();
 			}
 
+		    try
+		    {
+				ViewBag.IsTalentecheckRegister = UnitOfWork.BaseUserRepository.GetTalentecheckSession(user) != null;
+		    }
+		    catch (Exception){}
+			
+
 			return View(user);
 	    }
 
 		[HttpPost]
 		public ActionResult Confirm(int userId, string c, string t, HttpPostedFileBase ausweisUpload)
 		{
+			ViewBag.IsTalentecheckRegister = false;
 			var student = UnitOfWork.StudentRepository.GetById(userId);
 			try
 			{
@@ -158,6 +168,12 @@ namespace Talentify.Web.Controllers
 			{
 				this.FormError = new FormFeedback() { AutoClose = false };
 			}
+
+			try
+			{
+				ViewBag.IsTalentecheckRegister = UnitOfWork.BaseUserRepository.GetTalentecheckSession(student) != null;
+			}
+			catch (Exception) { }
 
 			return View(student);
 		}

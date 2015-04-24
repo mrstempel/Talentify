@@ -26,7 +26,16 @@
 					<td>@student.Firstname @student.Surname</td>
 					<td><a href="mailto:@student.Email">@student.Email</a></td>
 					<td>@student.JoinedDate.ToString("g", new CultureInfo("de"))</td>
-					<td><img src="@ConfigurationManager.AppSettings["Portal.Upload.Url"]ausweis/@(@student.AusweisGuid.ToString())_optimiert@(@student.AusweisExtension)" style="width:300px;"/></td>
+					<td>
+						@if (student.AusweisExtension == ".pdf")
+						{
+							<a href="@ConfigurationManager.AppSettings["Portal.Upload.Url"]ausweis/@(@student.AusweisGuid.ToString())@(@student.AusweisExtension)" target="_blank">PDF</a>
+						}
+						else
+						{
+							<img src="@ConfigurationManager.AppSettings["Portal.Upload.Url"]ausweis/@(@student.AusweisGuid.ToString())_optimiert@(@student.AusweisExtension)" style="width:300px;"/>	
+						}
+					</td>
 					<td>
 						@if (student.School != null)
 						{
