@@ -24,32 +24,40 @@ function loadCoachingRequestTimeline(requestId)
 
 function updateCoachingRequestStatus(coachingRequestId, status)
 {
-	$.ajax({
-		url: '/CoachingCenter/UpdateStatus',
-		type: 'get',
-		async: true,
-		data: { coachingRequestId: coachingRequestId, status: status },
-		success: function (data)
-		{
-			if (data && !data.error)
+	if (!sendSemaphore)
+	{
+		lockApiCall('btn-coaching-request-accept');
+		$.ajax({
+			url: '/CoachingCenter/UpdateStatus',
+			type: 'get',
+			async: true,
+			data: { coachingRequestId: coachingRequestId, status: status },
+			success: function(data)
 			{
-				$('#status-update-error').hide();
-				// implemented in coaching-center.js
-				addCoachingRequestStatusToTimeline(data.status);
-			}
-			else
+				if (data && !data.error)
+				{
+					$('#status-update-error').hide();
+					// implemented in coaching-center.js
+					//addCoachingRequestStatusToTimeline(data.status);
+					loadCoachingRequestTimeline(coachingRequestId);
+				} else
+				{
+					$('#status-update-error').fadeIn();
+				}
+
+				unlockApiCall('btn-coaching-request-accept');
+			},
+			error: function(request, status, error)
 			{
-				$('#status-update-error').fadeIn();
+				unlockApiCall('btn-coaching-request-accept');
 			}
-		},
-		error: function (request, status, error)
-		{
-		}
-	});
+		});
+	}
 }
 
 function addCoachingRequestStatusToTimeline(status)
 {
+	alert(status.type);
 	// add status to timeline
 	$('#timeline-container').append('<div class="item ' + status.type + '"><div class="profile-img"><a href="/Profile/Index/' + status.userId + '" class="image-link" style="background: url(\'' + status.image + '\');"></a></div><div class="content"><h3>' + status.username + '</h3><p>' + status.message + '</p></div></div>');
 
@@ -244,7 +252,8 @@ function rejectCoachingRequest(coachingRequestId)
 				$('#status-update-confirm').hide();
 				// hide messaging form
 				$('#new-message-form').hide();
-				addCoachingRequestStatusToTimeline(data.status);
+				//addCoachingRequestStatusToTimeline(data.status);
+				loadCoachingRequestTimeline(coachingRequestId);
 			}
 			else
 			{

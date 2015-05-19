@@ -12,6 +12,15 @@ namespace Talentify.Web.Controllers
 	[AllowAnonymous]
     public class LoginController : BaseController
     {
+		public ActionResult Index()
+		{
+			if (IsAuthenticated)
+			{
+				return RedirectToAction("Index", "Start", null);
+			}
+			return View();
+		}
+
         public ActionResult Error()
         {
 	        ViewBag.BlockedReason = (Session["BlockedReason"] != null) ? Session["BlockedReason"].ToString() : null;

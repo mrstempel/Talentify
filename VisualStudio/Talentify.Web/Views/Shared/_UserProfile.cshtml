@@ -104,7 +104,10 @@
 		<div id="badges-loading">Lade Badges ...</div>
 	</article>
 </section>
-<input type="button" value="Lernhilfe anfragen" onclick="loadRequestCoachingForm('@Model.Id	', '@searchClass	', '@searchSubjectCategoryId	');" id="choaching-request-btn"/>
+@if (Model.IsCoachingEnabled)
+{
+	<input type="button" value="Lernhilfe anfragen" onclick=" loadRequestCoachingForm('@Model.Id', '@searchClass', '@searchSubjectCategoryId');" id="choaching-request-btn"/>
+}
 
 <div class="modal fade" id="modal-request-coaching" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
   <div class="modal-dialog" id="request-coaching-form">

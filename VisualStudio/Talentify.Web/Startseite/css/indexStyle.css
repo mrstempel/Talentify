@@ -1,0 +1,508 @@
+/* ---------------------------------------- Index Page ---------------------------------------- */
+
+/* ---------- Row preheader ---------- */
+#preheaderbg {
+	background: #2f4053
+}
+
+
+#preheader {
+	height: 28px
+}
+
+#preheader p, #preheader a, #preheader a:hover{
+	color: #fff;
+	font-size: 12.6px
+}
+
+/* ---------- Row header ---------- */
+#headerbg {
+		background: url("../img/index_header.png"), #00a77f;
+		background-position: center bottom;
+		background-repeat: no-repeat
+}
+
+#header {
+	padding: 24px 0 0 0;
+	height: 772px;
+	color: #c9f0e7;
+	text-align: left
+}
+
+#header h1 {
+	margin-top: 106px;
+	text-align: left
+}
+
+#header p.account{
+	font-size: 14px;
+	margin-left: 40px	
+}
+
+#header img.mdlglogo {
+	height: 55px;
+	margin-top: 7px
+}
+
+#header img.logo {
+	height: 44px;
+	width: 200px;
+	margin-top: 7px
+}
+
+#header img.dots {
+	margin: 15px 0 15px 0
+}
+
+#header button {
+	width: 180px;
+	margin-left: 40px;
+	margin-top: -5px;
+	padding: 5px 5px 5px 5px
+}
+
+/* ---------- Row postheader ---------- */
+#postheaderbg {
+	background: rgba(34, 51, 67, 0.5)
+}	
+
+#postheader {
+	height: 240px;
+	margin-top: -240px;
+	color: #c9f0e7;
+	padding: 30px 0 30px 0
+}
+
+#postheader p.big {
+	padding: 0 0 20px 0
+}
+
+#postheader p.small{
+	font-size: 14px;
+	padding: 30px 0 0 0
+}
+
+#postheader button {
+	-moz-box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+    -webkit-box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+    box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+}
+
+#postheader button, #postheader input {
+	height: 40px;
+	width: 240px
+}
+
+#postheader input{
+	font-size: 18px;
+	margin-left: 60px
+}
+
+#postheader button {
+	margin-left: 10px
+ }
+
+/* ---------- Row knownfrom ---------- */
+#knownfrom  {
+	margin: 90px auto 90px auto
+}
+
+#knownfrom img {
+	height: 71px;
+	margin: 15px 15px 0 0
+}
+
+#knownfrom .lastimg {
+	margin: 15px 0 0 0
+}
+
+#knownfrom img.grayscale {
+	filter: gray;
+	-webkit-filter: grayscale(100%);
+	-webkit-transition: all .6s ease;
+	-webkit-backface-visibility: hidden
+}  
+
+#knownfrom img.grayscale:hover{
+  filter: none;
+  -webkit-filter: grayscale(0%)
+} 
+
+/* ---------- Row features ---------- */
+#features  {
+	margin: 90px auto 90px auto
+}
+
+#features h3 {
+	margin-top: 30px
+}
+
+#features p{
+	width: 270px;
+	margin-top: 40px
+}
+
+/* ---------- Row makethetour ---------- */
+#makethetourbg {
+	background: #e64461;
+	cursor:pointer
+}
+
+#makethetour {
+	padding: 50px 0 50px 0
+}
+
+#makethetour h1 {
+	margin: 15px 0 30px 0
+}
+
+#makethetour p {
+	font-size: 22px;
+	line-height: 28px;
+	margin-bottom: 0
+}
+
+#makethetour img {
+	margin-left: -45px
+}
+
+/* ---------- Row comment ---------- */
+#comment {
+	margin: 90px auto 90px auto
+}
+
+#comment a, #comment a:hover{
+	color: #ffbe00;
+	margin-top: 75px;
+}
+
+#comment a {
+	border-bottom: solid #ffbe00;
+	border-bottom-width:1px;
+	padding-bottom:7px;
+	text-decoration: none
+}
+
+#comment a:hover{
+	text-decoration: none;
+	border-bottom: none;
+	margin-bottom: 1px
+}
+
+#comment a.no-line{
+	border-bottom: none;
+}
+
+
+/* ---------- Row academy ---------- */
+#academybg {
+	background: #f5f5f7
+}
+
+#academy h2 {
+	margin: 50px 0 50px 0
+}
+
+#academy a, #academy a:hover{
+	color: #394d63;
+	margin: 50px 0 50px 0
+}
+
+#academy a:link {
+	border-bottom: solid #394d63;
+	border-bottom-width:1px;
+	padding-bottom:7px;
+	text-decoration: none
+}
+
+#academy a:hover, #academy a:visited, #academy a:active{
+	text-decoration: none;
+	border-bottom: none;
+	margin-bottom: 51px
+}
+
+#academy a.no-line{
+	border-bottom: none;
+}
+
+#academy a.caption-link{
+	margin: 0;
+	border-bottom: none;
+}
+
+#academy img {
+	margin: 0 5px 0 0;
+	height: 166px;
+	width: 294px;
+	-moz-box-shadow: 0 5px #c3c3c5;
+	-webkit-box-shadow: 0 5px #c3c3c5;
+	box-shadow: 0 5px #c3c3c5
+}
+
+.caption {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #223343;
+	filter: alpha(opacity=80);
+	filter: progid: DXImageTransform.Microsoft.Alpha(opacity=80);
+	opacity: 0.8;
+	-moz-opacity: 0.80;
+	height: 166px;
+	width: 294px;
+	margin-left: 9px
+}
+.caption h3, .caption p {
+	color: #fff
+}
+.caption h3 {
+	font-size: 16px;
+	margin: 15px 0 15px 0;
+}
+.caption p {
+	font-size: 16px;
+	margin: 15px 0 15px 0;
+}
+
+/* ---------- Row aboutus ---------- */
+#aboutus {
+	margin: 90px auto 90px auto
+}
+
+#aboutus p {
+	font-size: 22px;
+	line-height: 28px;
+	margin-bottom: 0
+}
+
+#aboutus img {
+	width: 320px;
+	margin-bottom: 40px
+}
+
+#aboutus a, #aboutus a:hover{
+	color: #00a77f;
+}
+
+#aboutus a {
+	border-bottom: solid #00a77f;
+	border-bottom-width:1px;
+	padding-bottom:7px;
+	text-decoration: none
+}
+
+#aboutus a:hover{
+	border-bottom: none;
+	margin-bottom: 1px;
+	text-decoration: none
+}
+
+#aboutus a.no-line{
+	border-bottom: none;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (min-width: 768px) and (max-width: 991px) { 
+	/* --- Row header --- */
+	#header img.kids {
+		margin-left: -230px;
+		margin-top: -103px;
+		position: relative;
+		vertical-align: bottom;
+		z-index: 0
+	}	
+
+	/* --- Row postheader --- */
+	#postheader input, #postheader.input-group {
+		margin-right: 10px
+	}
+	
+	#postheader button {
+		margin-left: -10px
+	}	
+	
+	/* --- Row features --- */
+	#features p {
+		margin-left: 40px
+	}
+	
+	/* --- Row academy --- */
+	#academy {
+		margin-left: 48px
+	}
+	
+	#academy img {
+		margin-left: -48px
+	}
+		
+	.caption {
+		display: inline
+	}
+	
+	/* --- Row aboutus --- */
+	#aboutus img {
+		width: 384px;
+		margin-bottom: 40px
+	}
+
+	/* --- Row footer --- */
+	#footer {
+		margin-bottom: 90px
+	}
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+
+	*,p{
+		font-family: 'Lato', san-serif;
+		font-size: 16px;
+		line-height: 22px
+	}
+	
+	/* --- Row mobileheader --- */
+	#mobileheaderbg {
+		background: url("../img/index_mobileheader.png"), #00a77f;
+		background-position: right bottom;
+		background-repeat: no-repeat
+	}
+	
+	#mobileheader {
+		padding: 15px 0 30px 0
+	}
+	
+	#mobileheader img.logo {
+		width: 105%;
+		height: 105%
+	}
+	
+	#mobileheader img.menu{
+		margin-top: 5px;
+		margin-left: -5px;
+		width: 125%;
+		height: 125%
+	}	
+	#mobileheader h1 {
+		margin: 45px 0 135px 0;
+		font-size: 26px
+	}
+	
+	#mobileheader button.redbutton {
+		height: 45px;
+		font-size: 18px;
+		width: 100%
+	}
+
+	/* --- Row knownfrom --- */
+	#knownfrom {
+		margin: 45px auto 90px auto
+	}
+	
+	#knownfrom img {
+		width: 131px;
+		height: 56px;
+		margin-bottom: 5px
+	}
+	
+	/* --- Row features --- */
+	#features {
+		margin: 0 auto 30px auto
+	}
+		
+	#features img{
+		margin: 30px 0 0 0
+	}
+	
+	#features h3 {
+		margin: 10px 0 0 0
+	}
+	
+	#features p {
+		width: 100%;
+		margin: 22px auto 0 auto;
+		font-size: 16px
+	}
+
+	/* --- Row makethetour --- */
+	#makethetour {
+		padding: 30px 0 30px 0
+	}
+	
+	#makethetour h1 {
+		font-size: 38px
+	}
+	
+	#makethetour p {
+		font-size: 18px;
+		padding: 0
+	}
+	
+	#makethetour img {
+		margin-top: -15px;
+		margin-left: -60px;
+		width: 80px;
+		height: 80px
+	}
+	/* --- Row comment --- */
+	#comment {
+		margin: 30px auto 30px auto
+	}
+	
+	#comment p.blockquote {
+		font-family: 'Lato', san-serif;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 1.15
+	}
+	
+	#comment p.blockquotecite {
+		font-size: 16px;
+		margin-bottom: -45px
+	}
+	
+	/* --- Row academy --- */
+	#academy {
+		margin: 30px 0 30px 0
+	}
+
+	#academy h2 {
+		font-size: 22px
+	}	
+	
+	#academy img {
+		width: 100%;
+		height: 100%;
+		margin: 0
+	}	
+	
+	.caption {
+		display: inline;
+		width: 100%;
+		height: 100%;
+		margin: 0
+	}	
+	
+	#academy  a{
+		margin: 15px 0 45px 0
+	}
+	
+	/* --- Row aboutus --- */	
+	#aboutus {
+		margin: 30px auto 30px auto
+	}
+	
+	#aboutus img {
+		width: 100%;
+		height: 100%;
+		margin-bottom: 30px
+	}	
+
+	#aboutus p.blue {
+		font-size: 16px;
+		line-height: 1.5
+	}
+}
+
+/* ---------------------------------------- End Index Page ---------------------------------------- */

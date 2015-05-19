@@ -21,13 +21,13 @@
 				@Html.ActionLink("Lernhilfecenter", "Index", "CoachingCenter")
 				if (IsCoachingEnabled)
 				{
-					@Html.ActionLink("Lerncoach finden", "Index", "Teacher")
+					@Html.ActionLink("MentorIn finden", "Index", "Teacher")
 				}
 			}
 			else
 			{
 				<a href="javascript:void(0);" onclick="loadNoSchoolPopup();">Lernhilfecenter</a>
-				<a href="javascript:void(0);" onclick="loadNoSchoolPopup();">Lerncoach finden</a>
+				<a href="javascript:void(0);" onclick="loadNoSchoolPopup();">MentorIn finden</a>
 			}
 			
 			@Html.ActionLink("Events", "Index", "Events")

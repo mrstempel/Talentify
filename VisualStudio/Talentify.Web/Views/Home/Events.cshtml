@@ -3,26 +3,24 @@
 <script>
 	$(this).ready(function()
 	{
-		$('#home-events > .item').mouseenter(function ()
-		{
-			$(this).find('.details').slideDown('fast');
-		});
-
-		$('#home-events > .item').mouseleave(function ()
-		{
-			$(this).find('.details').slideUp('fast');
-		});
+		initAcademyHover();
 	});
 </script>
-
+@{
+	var i = 0;
+}
 @foreach (var item in Model)
 {
-	<div class="item">
-		<img src="@(@ContentUploadUrl)@(@item.HomeImage)" alt="" class="prev-img"/>
-		<div class="details" onclick="location.href='@item.Link';">
-			<h3>@Html.Raw(item.Title)</h3>
-			<p class="date">@item.BeginDate.ToString("dd.MM.yyyy") | @item.BeginTime - @item.EndTime</p>
-			@Html.Raw(item.Content.Substring(0, 105))...
-		</div>
+	var hiddenTag = i == 0 ? string.Empty : "hidden-xs";
+	var hiddenMedium = i == 2 ? "hidden-sm" : string.Empty;
+	<div class="hover @hiddenTag @hiddenMedium col-xs-12 col-sm-6 col-md-4 no-gutter">
+			<div class="caption" onclick="location.href='@item.Link';" style="cursor: pointer;">
+				<h3>@Html.Raw(item.Title)</h3>
+				<p>@item.BeginDate.ToString("dd.MM.yyyy") | @item.BeginTime - @item.EndTime</p>
+				<p>@Html.Raw(item.Content.Substring(0, 75))...</p>
+			</div>
+		<img src="@(@ContentUploadUrl)@(@item.HomeImage)" alt="Academy News"/>
 	</div>
+
+	i++;
 }

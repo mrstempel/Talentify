@@ -39,7 +39,7 @@
 					}
 
 					<div id="request-item-@Model.ElementAt(i).RequestId" class="item @detailClass">
-						<a href="javascript:void(0);" onclick=" loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId) " class="image-link" style="background: url('@userImage');"></a>
+						<a href="javascript:void(0);" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId) " class="image-link" style="background: url('@userImage');"></a>
 						<h3 onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId)">@username</h3>
 						<div class="details @detailClass" onclick="loadCoachingRequestTimeline(@Model.ElementAt(i).RequestId)">
 							<span class="important">@Model.ElementAt(i).Subject</span>

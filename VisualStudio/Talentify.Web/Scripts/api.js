@@ -568,7 +568,7 @@ function sendMessage(conversationId, fromUserId, toUserId, targetId, text)
 {
 	if (!sendSemaphore)
 	{
-		lockApiCall('coaching-new-message-btn');
+		lockApiCall('btn-coaching-request-accept');
 		$.ajax({
 			url: '/FormHelper/SendMessage',
 			type: 'get',
@@ -707,6 +707,16 @@ function loadSearchSchoolForm()
 	$('#modal-search-school').modal('show');
 }
 
+function loadSearchSchoolFormProfile(confirmOnly)
+{
+	if (confirmOnly)
+	{
+		$('#school-popup-headline-text').html('Schule freischalten');
+	}
+	$('#search-school-frame').attr('src', '/FormHelper/SearchSchoolFormProfile');
+	$('#modal-search-school').modal('show');
+}
+
 function loadAddSubjectForm()
 {
 	$('#add-subject-frame').attr('src', '/FormHelper/AddSubjectForm');
@@ -770,7 +780,7 @@ function loadFeedbackForm()
 	$('#modal-feedback').modal('show');
 }
 
-function searchSchools()
+function searchSchools(showAddSchoolLink)
 {
 	if (validateMandatoryOnlyForm())
 	{
@@ -778,6 +788,10 @@ function searchSchools()
 		$('#search-loading').show();
 		$('#search-results').load('/FormHelper/SearchSchools?bundesland=' + $('#bundesland').val() + '&schoolTypeId=' + $('#SchoolTypeId').val() + '&name=' + $('#Name').val() + '&address=' + $('#Address').val(), function ()
 		{
+			if (!showAddSchoolLink)
+			{
+				$('#add-school-link').hide();
+			}
 			$('#search-loading').hide();
 			$('#search-results').fadeIn('medium');
 		});

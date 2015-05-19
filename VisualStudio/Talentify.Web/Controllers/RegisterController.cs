@@ -110,7 +110,7 @@ namespace Talentify.Web.Controllers
 		[HttpPost]
 		public ActionResult Confirm(int userId, string c, string t, HttpPostedFileBase ausweisUpload)
 		{
-			ViewBag.IsTalentecheckRegister = false;
+			ViewBag.IsTalentecheck = (this.TalentecheckSessionFromCookie != null && this.TalentecheckSessionFromCookie.UserId == 0 && this.TalentecheckSessionFromCookie.IsFinished);
 			var student = UnitOfWork.StudentRepository.GetById(userId);
 			try
 			{

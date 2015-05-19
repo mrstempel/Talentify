@@ -1,163 +1,298 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
 }
+
+@section CustomCss
+{
+	<link rel="stylesheet" href="/Css/indexStyle.min.css">
+} 
 
 @section CustomJavascript 
 {
+	<script src="/Scripts/talentify-home.min.js"></script>
 	<script>
 		hasWaypoints = true;
-		$(this).ready(function()
+		$(document).ready(function()
 		{
 			loadHomeEvents();
+			HomePage.init();
 		});
 
-		$(function ()
+		if (!isMobile())
 		{
-			$('a[href*=#]:not([href=#])').click(function ()
+			$(document).ready(function ()
 			{
-				if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname)
-				{
-					var target = $(this.hash);
-					target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-					if (target.length)
+				$('#makethetourbg').hover(
+					function ()
 					{
-						$('html,body').animate({
-							scrollTop: target.offset().top - topMargin + 21
-						}, 1000);
-						return false;
+						$("#makethetourbg").css("background-color", "#f3516e");
+						$("#makethetourbg h1").css({
+							'margin-left': '50px',
+							'transition': 'margin-left .5s',
+							'-moz-transition': 'margin-left .5s',
+							'-webkit-transition': 'margin-left .5s',
+							'-o-transition': 'margin-left .5s'
+						});
+						$("#makethetourbg img").css({
+							'margin-left': '15px',
+							'transition': 'margin-left .5s',
+							'-moz-transition': 'margin-left .5s',
+							'-webkit-transition': 'margin-left .5s',
+							'-o-transition': 'margin-left .5s'
+						});
+					},
+					function ()
+					{
+						$("#makethetourbg").css("background-color", "#e64461");
+						$("#makethetourbg h1").css({
+							'margin-left': '0',
+							'transition': 'margin-left .5s',
+							'-moz-transition': 'margin-left .5s',
+							'-webkit-transition': 'margin-left .5s',
+							'-o-transition': 'margin-left .5s'
+						});
+						$("#makethetourbg img").css({
+							'margin-left': '-50px',
+							'transition': 'margin-left .5s',
+							'-moz-transition': 'margin-left .5s',
+							'-webkit-transition': 'margin-left .5s',
+							'-o-transition': 'margin-left .5s'
+						});
 					}
-				}
+				);
 			});
-		});
+		}
+
+		function emailRegister()
+		{
+			location.href = '/Register?m=' + $('#eingabefeldEmail').val();
+		}
 	</script>
 }
 
 @section CustomAfterBody 
 {
-	<div id="fb-root"></div>
-	<script>(function (d, s, id)
-	{
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=685063364892421&version=v2.0";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
 }
 
-<nav id="home-nav" class="desktop">
-	<ul>
-		<li><a id="nav-fact1" href="#fact1"><span>Lernhilfe finden</span></a></li>
-		<li><a id="nav-fact2" href="#fact2"><span>Lernhilfe anbieten</span></a></li>
-		<li><a id="nav-fact3" href="#fact3"><span>Events besuchen</span></a></li>
-	</ul>
-</nav>
+<div id="preheaderbg">
+		<div class="row hidden-xs" id="preheader">
+			<div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
+				<p>talentify.me befindet sich gerade in einer sog. "Public Beta" Testphase in Wien,
+				Niederösterreich und dem Burgenland <i class="icon-arrow fa fa-arrow-right fa-lg"></i> <a href="https://talentify.zendesk.com/hc/de/articles/202531761-Was-bedeutet-Testphase-bzw-Beta-Phase-" target="_blank"> mehr erfahren </a>
+			</div>
+		</div>
+		</div>
+		
+		<div id="headerbg">
+		<div class="row hidden-xs" id="header">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 hidden-md hidden-lg">
+					<img src="/Images/header_logo.png" class="logo" alt="logo"/>
+				</div>
+				<div class="col-md-3 hidden-xs hidden-sm no-gutter">
+					<img src="/Images/header_logo.png" class="mdlglogo" alt="logo"/>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-6">
+					<p class="account">Du hast einen Account?</p>
+					<a href="/login">
+						<button type="button" class="greenbutton_header btn btn-primary btn-lg visible-sm-block visible-md-block visible-lg-block">
+							<b>Anmelden</b>
+						</button>
+					</a>
+				</div>	
+			</div>
+			<div class="row hidden-md hidden-lg">
+				<div class="col-xs-12 col-sm-11">
+					<h1 class="white">&bdquo;Lernhilfe auf Augenhöhe, super!&ldquo;</h1>
+				</div>
+				<div class="col-xs-12 col-sm-9">
+					<img src="/Images/header_dots.png" class="dots" alt="header dots"/>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<p>Es war eine schnelle, unkomplizierte aber<br/> sehr effektive Hilfe! Meiner Tochter macht Mathematik nun sichtlich mehr Spaß.</p>
+				</div>
+			</div>
+			<div class="row hidden-xs hidden-sm">
+				<div class="col-md-9 no-gutter">
+					<h1 class="white">&bdquo;Lernhilfe auf Augenhöhe, super!&ldquo;</h1>
+				</div>
+				<div class="col-md-9 no-gutter">
+					<img src="/Images/header_dots.png" class="dots" alt="header dots"/>
+				</div>
+				<div class="col-md-5 no-gutter">
+					<p>Es war eine schnelle, unkomplizierte aber<br/> sehr effektive Hilfe! Meiner Tochter macht Mathematik nun sichtlich mehr Spaß.</p>
+				</div>
+
+			</div>
+			</div>			
+		</div>
+		
+		<div id="postheaderbg">
+		<div class="row hidden-xs" id="postheader">
+			<div class="row">
+				<div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+					<p class="big">talentify.me ist eine Plattform zur Förderung von jungen Talenten<br/> und der Lernhilfe von SchülerInnen für SchülerInnen.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-5 col-sm-offset-1 col-md-3 col-md-offset-2">
+					<div class="input-group">
+						<input type="email" class="form-control" id="eingabefeldEmail" placeholder="E-Mail Adresse">
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3 col-md-offset-1 col-leftened">
+						<button type="button" class="redbutton btn btn-primary btn-md hidden-xs visible-sm-* visible-md-* visible-lg-* text-center">
+							<a href="javascript:void(0);" class="buttonlink" onclick="emailRegister();">
+								Kostenlos registrieren
+							</a>
+						</button>
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+					<p class="small">talentify.me ist und wird immer kostenlos sein, solange du es verwenden möchtest.</p>
+				</div>
+			</div>			
+		</div>		
+		</div>
+
+		@Html.Partial("_MobileHeaderPublic")
+		
+		<div class="row" id="knownfrom">
+			<div class=" col-sm-12 col-md-12 no-gutter">
+				<h3 class="blue"> Bekannt aus:</h3>
+				<div id="images">
+					<a href="http://kurier.at/chronik/niederoesterreich/internet-plattform-schueler-geben-gratis-nachhilfe/126.584.429" target="blank">
+						<img src="/Images/press_kurier.png" class="grayscale" alt="Kurier"/>
+					</a>	
+					<a href="http://derstandard.at/2000012982250/Plattform-fuer-Nachhilfe-unter-Schuelern-startet" target="blank">
+						<img src="/Images/press_derstandard.png" class="grayscale" alt="Der Standard"/>
+					</a>	
+					<a href="http://www.vienna.at/viennas-start-ups-bilungsspecial-teil-2-talentify-me/4246116" target="blank">
+						<img src="/Images/press_viennaat.png" class="grayscale" alt="Vienna.at"/>
+					</a>	
+					<a href="https://www.youtube.com/watch?v=trBiyjYfKUM" target="blank">
+						<img src="/Images/press_cafepuls.png" class="grayscale" alt="'Café Puls"/>
+					</a>	
+					<a href="http://www.news.at/a/talentify.me-neue-nachhilfe-plattform" target="blank">
+						<img class="lastimg hidden-xs hidden-sm grayscale" src="/Images/press_news.png" alt="News"/>
+					</a>
+					<div class="mobile-filler hidden-md hidden-lg"></div>
+				</div>
+			</div>			
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
+				<h3 class="dots">............................................................................................................</h3>	
+			</div>
+		</div>
+		
+		<div class="row" id="features">
+			<div class="col-xs-12 col-md-4 col-sm-6">
+				<img src="/Images/icon_lupe.png" alt="Lupe"/>
+				<h3 class="blue">Lernhilfe suchen</h3>
+				<p class="blue">Finde jetzt ältere SchülerInnen, die dir beim Lernen für den Nachzipf, 
+				eine Schularbeit oder einfach mal zwischendurch<br/> helfen. Schnell & einfach!</p>
+			</div>
+			<div class="col-xs-12 col-md-4 col-sm-6">
+				<img src="/Images/icon_lightbulb.png" alt="Glühbirne"/>
+				<h3 class="blue">Lernhilfe anbieten</h3>
+				<p class="blue">Deine Stärken liegen in Mathe, Deutsch oder Bio? Super! Nutze deine Talente
+				und unterstütze jüngere MitschülerInnen aktiv beim Lernen.</p>
+			</div>			
+			<div class="col-xs-12 col-md-4 col-sm-6 col-sm-offset-3  col-md-offset-0">
+				<img src="/Images/icon_calendar.png" alt="Kalender"/>
+				<h3 class="blue">Workshops besuchen</h3>
+				<p class="blue">Im Berufsalltag entscheidend und trotzdem nicht am Lehrplan? In diesen Workshops
+				könnt ihr euch Skills aneignen, auf die es im Leben wirklich ankommt.</p>
+			</div>
+		</div>
+		
+		<div id="makethetourbg" onclick="window.location='/Home/Tour';">
+		<div class="row" id="makethetour">
+			<div class="col-xs-12 col-sm-12 col-md-12">
+			<p class="red">Schau dir an was talentify.me für dich bringt</p>
+			<div class="row vertical-align">
+				<div class="col-xs-1 col-sm-3 col-md-3">
+				</div>
+				<div class="col-xs-10 col-sm-6 col-md-6 text-center">
+					<h1 class="white"> Mach einen Rundgang </h1>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1">
+					<a href="/Home/Tour"><img src="/Images/index_arrow.png" alt="Pfeil"/></a>
+				</div>
+			</div>
+			<p class="red"> Screenshots, alle Funktionen und vieles mehr</p>
+			</div>	
+		</div>
+		</div>
+		
+		<div class="row" id="comment">
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0">
+					<p class="blue blockquote">
+						&bdquo;Ein riesen großes Lob für die Webseite! Die ist wirklich sehr 
+						gut gelungen. Sehr benutzerfreundlich, ich hab mich gleich 
+						ausgekannt wie die zu handhaben ist.&ldquo;</p>
+					<p class="blue blockquotecite"> Felix M. ist Schüler am TGM - Schule der Technik </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<a href="/Home/Voice"> Was andere über talentify.me sagen</a> 
+					<a href="/Home/Voice" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
+				</div>
+			</div>				
+		</div>
 	
-<div id="page-container" class="full-width">
-	<h1><span>Die einzigartige und nachhaltige Lernhilfe -</span><br/><span>von SchülerInnen für SchülerInnen</span></h1>
-	<section class="home" id="fact1">
-		<div class="big-bg" id="bg1">
-			<p>Schnell & Einfach</p>
-			<span class="small">Finde jetzt SchülerInnen, die dir beim Lernen für den Nachzipf,<br/>eine Schularbeit und einfach mal zwischendurch helfen.</span>
-			<div class="label">Lernhilfe finden</div>
-		</div>
-		<article>
-			<form action="/Register" class="form-container search" method="get">
-				<div class="field-container">
-					<select style="width:252px;margin-right: 5px;">
-						<option value="">Schulstufe auswählen</option>
-						<optgroup label="Volksschule">
-							<option value="1">1. Klasse</option>
-							<option value="2">2. Klasse</option>
-							<option value="3">3. Klasse</option>
-							<option value="4">4. Klasse</option>
-						</optgroup>
-						<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
-							<option value="5">1. Klasse</option>
-							<option value="6">2. Klasse</option>
-							<option value="7">3. Klasse</option>
-							<option value="8">4. Klasse</option>
-						</optgroup>
-						<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
-							<option value="9">1./5. Klasse</option>
-							<option value="10">2./6. Klasse</option>
-							<option value="11">3./7. Klasse</option>
-							<option value="12">4./8. Klasse</option>
-							<option value="13">5. Klasse</option>
-						</optgroup>
-					</select>
-					@Html.DropDownList("AllCoachingSubjects")
-					<input type="button" value="Finden" onclick="location.href='/Register'">
-				</div>
-			</form>
-			<p class="register-link-container">@Html.ActionLink("Jetzt anmelden", "Index", "Register")</p>
-		</article>
-	</section>
-	<section class="home" id="fact2">
-		<div class="big-bg" id="bg2">
-			<p>Überall & Sofort</p>
-			<span class="small">Deine Stärken liegen in Mathe, Deutsch oder Bio? Super! Nutze dein Talent<br/>und unterstütze deine jüngeren MitschülerInnen beim Lernen.</span>
-			<div class="label">Lernhilfe anbieten</div>
-		</div>
-		<article>
-			<form action="/Register" class="form-container search" method="get">
-				<div class="field-container">
-					<select style="width:252px;margin-right: 5px;">
-						<option value="">Schulstufe auswählen</option>
-						<optgroup label="Volksschule">
-							<option value="1">1. Klasse</option>
-							<option value="2">2. Klasse</option>
-							<option value="3">3. Klasse</option>
-							<option value="4">4. Klasse</option>
-						</optgroup>
-						<optgroup label="Mittelschule (HS, NMS, Unterstufe)">
-							<option value="5">1. Klasse</option>
-							<option value="6">2. Klasse</option>
-							<option value="7">3. Klasse</option>
-							<option value="8">4. Klasse</option>
-						</optgroup>
-						<optgroup label="Höhere Schule (HTL, HAK, Oberstufe, ...)">
-							<option value="9">1./5. Klasse</option>
-							<option value="10">2./6. Klasse</option>
-							<option value="11">3./7. Klasse</option>
-							<option value="12">4./8. Klasse</option>
-							<option value="13">5. Klasse</option>
-						</optgroup>
-					</select>
-					@Html.DropDownList("AllCoachingSubjects")
-					<input type="button" value="Hinzufügen" onclick="location.href = '/Register'">
-				</div>
-			</form>
-			<p class="register-link-container">@Html.ActionLink("Jetzt anmelden", "Index", "Register")</p>
-		</article>
-	</section>
-	<section class="home" id="fact3">
-		<div class="big-bg events" id="bg3">
-			<p>Einen Schritt voraus</p>
-			<span class="small">Im Berufsalltag entscheidend und trotzdem nicht am Lehrplan?<br/>In diesen Workshops könnt ihr euch Skills aneignen,<br />auf die es im Leben wirklich ankommt.</span>
-			<div id="home-events-loading">Lade Events ...</div>
+		<div id="academybg">
+		<div class="row" id="academy">
+			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+				<h2 class="blue">Einen Schritt voraus, mit der talentify.me Academy</h2>
+			</div>
 			<div id="home-events"></div>
-			<div class="label" style="position: static;">Events besuchen</div>
+			<div class="col-xs-12 col-sm-12 col-md-12">
+				<a href="/Events">Alle Events in der Übersicht</a>
+				<a href="/Events" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
+			</div>
+		</div>		
 		</div>
-		<article>
-			<input type="button" value="Jetzt anmelden" onclick="location.href = '/Register'">
-		</article>
-	</section>
-	<section class="home teaser">
-		<article>
-			<h3>Registrierung für LehrerInnen</h3>
-			<a href="/Register/Teacher"><img src="/Images/teaser-teacher.png"/></a>
-		</article>
-		<article>
-			<h3>Zur talentify Website</h3>
-			<a href="http://www.talentify.co" target="_blank"><img src="/Images/teaser-talentify.jpg"/></a>
-		</article>
-		<article>
-			<h3>Folge talentify auf Facebook</h3><div class="fb-like-box" data-href="https://www.facebook.com/talentify.me" data-width="355" data-height="200" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="true"></div>
-		</article>
-	</section>
-	<footer class="mobile submit cols2">
-		@Html.ActionLink("Jetzt anmelden", "Index", "Register", null, new { @class = "link-button"})<a href="javascript:void(0);" class="link-button">Einloggen</a>
-	</footer>
-</div>
+		
+		<div class="row" id="aboutus">
+			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+				<img src="/Images/index_logo.png" alt="talentify.me"/>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+				<p class="blue"> Wir sind auf einer Mission, die individuellen Talente von <br/> jungen Menschen zu
+				fördern, unabhängig von der sozialen <br/> und finanziellen Situation der Eltern.</p>
+				<a href="/Home/About" class="linkgreen">Erfahre mehr über uns</a>
+				<a href="/Home/About" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
+			</div>			
+		</div>
+		
+		<div class="row" id="yourregistry">
+			<div class="row">
+				<div class="hidden-xs col-sm-12 col-md-12">
+						<button type="button" class="redbutton normalbutton btn btn-primary btn-lg hidden-xs visible-sm-* visible-md-* visible-lg-* text-center">
+							<a href="/Register" class="buttonlink">
+								Jetzt kostenlos registrieren
+							</a>
+						</button>
+				</div>
+				<div class="hidden-sm hidden-md hidden-lg col-sm-12 col-md-12">
+						<button type="button" class="redbutton mobilebutton btn btn-primary btn-lg visible-xs-* hidden-sm hidden-md hidden-lg text-center">
+							<a href="/Register" class="buttonlink">
+								Kostenlos registrieren
+							</a>
+						</button>
+				</div>					
+			</div>			
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<p class="blue">Noch Fragen? Wir haben die Antworten.</p>
+					<a href="https://talentify.zendesk.com/hc/de" target="blank" class="yra linkgreen">Zum talentify.me Hilfesystem </a>
+				</div>				
+			</div>	
+		</div>

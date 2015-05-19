@@ -13,6 +13,7 @@
 
 @section CustomJavascript 
 {
+	<script src="/Scripts/talentify-utils.min.js"></script>
 	<script src="/Scripts/jquery.browser.min.js"></script>
 	<script src="/Scripts/Textboxlist/GrowingInput.js"></script>
 	<script src="/Scripts/Textboxlist/TextboxList.js"></script>
@@ -27,10 +28,15 @@
 			<text>$('.talentecheck').show();</text>
 			<text>$('#bubble-register').css('display', 'none');</text>
 		}
+
+		if (getUrlParam('m').length > 0)
+		{
+			$('#Email').val(getUrlParam('m'));
+		}
 	});
 </script>
 
-@section CustomAfterBody
+@*@section CustomAfterBody
 {
 	@if (ViewBag.IsTalentecheck)
 	{
@@ -39,7 +45,7 @@
 		<script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-57NRFB');</script>
 		<!-- End Google Tag Manager -->
 	}
-}
+}*@
 
 <div id="page-container" class="form">
 	<section id="register">

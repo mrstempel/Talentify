@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJavascript 
+{
+	<script>
+		$(this).ready(function ()
+		{
+			$('#header-login').hide();
+		});
+
+		function checkLoginErrorEnterClick(e)
+		{
+			if (e.keyCode == 13)
+			{
+				submitLoginScreenForm();
+				return false;
+			}
+
+			return true;
+		}
+	</script>
+}
+
+<div id="page-container">
+	<section>
+		
+		@using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "form-container register" }))
+  {
+			<article class="password-form">
+				
+				<div class="field-container">
+					<input type="text" id="login-email-screen" class="mandatory" placeholder="E-Mail Adresse" onkeypress="checkLoginErrorEnterClick(event)"/>
+					<input type="password" id="login-password-screen" class="mandatory" placeholder="Passwort" onkeypress="checkLoginErrorEnterClick(event)"/>
+				</div>
+				<div class="field-container desktop">
+					<input type="button" value="Log-In" onclick="submitLoginScreenForm(); "/>
+				</div>
+				<div class="field-container">
+					@Html.ActionLink("Passwort vergessen?", "Password", "Login")
+				</div>
+				<div class="field-container">
+					@Html.ActionLink("Jetzt Account erstellen!", "Index", "Register")
+				</div>
+			</article>
+		}
+	</section>
+</div>

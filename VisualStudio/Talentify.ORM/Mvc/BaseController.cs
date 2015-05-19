@@ -13,7 +13,7 @@ using Talentify.ORM.FrontendLogic.Models;
 namespace Talentify.ORM.Mvc
 {
 	[Authorize]
-	//[RequireHttps]
+	[RequireHttps]
 	public class BaseController : Controller
 	{
 		public BaseUser LoggedUser

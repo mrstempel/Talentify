@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="keywords" content="Talentify, Lernhilfe, Schülerhilfe, Premium, Akademie, Nachhilfe" />
+	<meta name="p:domain_verify" content="f5dc3ac3a7a3679b6c8d7649157c9690"/>
+
+	<link rel="icon" href="/Images/talentify-favicon.png">
+	<title>talentify - Zukunft bilden</title>
+
+	<!-- Bootstrap -->
+	@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">*@
+	<link rel="stylesheet" href="/Css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
+	<!-- Slick Slideshow -->
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.2/slick.css"/>
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.2/slick-theme.css"/>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="/Css/MyFontsWebfontsKit.css">
+	<link rel="stylesheet" href="/Css/talentify-style-public.min.css">
+	
+	<!-- Google Font Lato -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700">
+	
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
+	@RenderSection("CustomCss", required: false)
+	<script>
+		(function (i, s, o, g, r, a, m)
+		{
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function ()
+			{ (i[r].q = i[r].q || []).push(arguments) }
+					, i[r].l = 1 * new Date(); a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-54475730-2', 'auto');
+		ga('send', 'pageview');
+	</script>
+
+</head>	
+
+	<body>
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-57NRFB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = '//www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-57NRFB');</script>
+		<!-- End Google Tag Manager -->
+		@RenderSection("CustomAfterBody", required: false)
+		
+		<div class="container-fluid no-gutter text-center">
+			@RenderBody()
+			@Html.Partial("_Footer")
+		</div>
+		
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		@*<script src="js/javascript.js"></script>*@
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="/Scripts/talentify-utils.min.js"></script>
+		<script src="/Scripts/api.min.js"></script>
+		@RenderSection("CustomJavascript", required: false)
+		
+	</body>
+</html>

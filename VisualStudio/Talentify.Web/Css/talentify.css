@@ -196,7 +196,8 @@ iframe {
     .form-container .field-container .add-field {
       position: absolute;
       top: 0;
-      right: -45px; }
+      right: -45px;
+      overflow: hidden; }
       .form-container .field-container .add-field a {
         font-family: Lucida Grande, Tahoma;
         font-weight: bold;
@@ -207,10 +208,16 @@ iframe {
         display: inline-block; }
       .form-container .field-container .add-field a:hover {
         background: #167e64; }
+      .form-container .field-container .add-field .text {
+        font-size: 14px;
+        margin: 0 0 0 5px; }
     .form-container .field-container h4 {
       margin: 0 0 10px 0; }
   .form-container .border-bottom {
     border-bottom: 1px solid #e3e4e8 !important; }
+
+#confirm-school {
+  display: none; }
 
 .filter-container {
   display: inline-block;
@@ -297,6 +304,19 @@ input[type="text"].mandatory, input[type="password"].mandatory {
   float: left;
   margin-right: 10px;
   height: 35px; }
+.form-container.register .select-school-container {
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  font-size: 16px; }
+  .form-container.register .select-school-container .span {
+    display: inline-block; }
+  .form-container.register .select-school-container .name {
+    font-weight: bold; }
+  .form-container.register .select-school-container .edit-school {
+    display: inline-block;
+    margin: 0 0 0 10px; }
 
 #add-school {
   font-size: 16px;
@@ -413,6 +433,18 @@ input[type="text"].mandatory, input[type="password"].mandatory {
       text-decoration: none; }
   #confirm-option-container .option.on a, #confirm-option-container .option:hover a {
     color: #1e7d64; }
+
+#confirm-option-container.profile .option {
+  cursor: pointer;
+  display: inline-block;
+  float: left;
+  width: 50%;
+  text-align: center; }
+  #confirm-option-container.profile .option img {
+    display: block;
+    margin: 0 auto 10px auto; }
+  #confirm-option-container.profile .option a {
+    text-decoration: none; }
 
 .opt-form {
   display: none; }

@@ -40,7 +40,7 @@
 
 				@if (FormSuccess != null)
 				{
-					<text>showSuccessMsg('@FormSuccess.Headline', '@FormSuccess.Text');</text>
+					<text>showSuccessMsg('@FormSuccess.Headline', '@Html.Raw(FormSuccess.Text)');</text>
 				}
 			});
 

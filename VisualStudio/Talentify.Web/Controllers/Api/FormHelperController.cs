@@ -97,6 +97,57 @@ namespace Talentify.Web.Controllers.Api
 			return View(new School());
 		}
 
+		public ActionResult SearchSchoolFormProfile()
+		{
+			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
+			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Name = "Schultyp" });
+			ViewBag.AllSchoolTypes = new SelectList(allSchholTypes, "Id", "Name");
+			ViewBag.SchoolId = 0;
+			var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
+			if (student.SchoolId.HasValue)
+			{
+				ViewBag.SchoolId = student.SchoolId.Value;
+				ViewBag.SchoolName = student.School.Name;
+			}
+
+			return View(new School());
+		}
+
+		[HttpPost]
+	    public ActionResult SearchSchoolFormProfile(HttpPostedFileBase ausweisUpload)
+		{
+			var school = UnitOfWork.SchoolRepository.GetById(Convert.ToInt32(Request["SchoolId"]));
+			var allSchholTypes = UnitOfWork.SchoolTypeRepository.Get().ToList();
+			allSchholTypes.Insert(0, new SchoolType() { Id = 0, Name = "Schultyp" });
+			ViewBag.AllSchoolTypes = new SelectList(allSchholTypes, "Id", "Name");	
+			
+			try
+			{
+				var student = UnitOfWork.StudentRepository.GetById(LoggedUser.Id);
+				student.SchoolId = school.Id;
+				var feedback = UnitOfWork.StudentRepository.AddSchool(student, Request["confirmOption"], ausweisUpload,
+					Server.MapPath("~" + ConfigurationManager.AppSettings["Upload.Ausweis"]), Request["SchoolRegisterCode"]);
+
+				if (feedback.IsError)
+				{
+					FormError = feedback;
+				}
+				else
+				{
+					FormSuccess = feedback;
+					LoggedUser.AusweisGuid = student.AusweisGuid;
+					LoggedUser.BlockedReason = student.BlockedReason;
+					UnitOfWork.Save();
+				}
+			}
+			catch (Exception ex)
+			{
+				this.FormError = new FormFeedback() { AutoClose = false };
+			}
+
+			return View(school);
+	    }
+
 		[AllowAnonymous]
 	    public ActionResult SearchSchools(string bundesland, int schoolTypeId, string name, string address)
 	    {
@@ -193,68 +244,5 @@ namespace Talentify.Web.Controllers.Api
 			FormSuccess = new FormFeedback();
 			return View();
 		}
-
-	    public JsonResult ImportSchools()
-	    {
-			//var noeSchools = UnitOfWork.SchoolRepository.Get(s => s.State == "NOE").ToList();
-			//foreach (var s in noeSchools)
-			//{
-			//	try
-			//	{
-			//		UnitOfWork.SchoolRepository.Delete(s);
-			//		UnitOfWork.Save();
-			//	}
-			//	catch (Exception ex)
-			//	{
-			//	}
-			//}
-
-			//var csvPath = Server.MapPath("~/Plattform_Schulen_noe_correct.csv");
-			//var reader = new StreamReader(System.IO.File.OpenRead(csvPath));
-			//var i = 0;
-
-
-			//using (var textReader = new StreamReader(csvPath))
-			//{
-			//	string line = textReader.ReadLine();
-			//	int skipCount = 0;
-			//	while (line != null && skipCount < 1)
-			//	{
-			//		line = textReader.ReadLine();
-
-			//		skipCount++;
-			//	}
-
-			//	while (line != null)
-			//	{
-			//		string[] columns = line.Split(';');
-
-			//		UnitOfWork.SchoolRepository.Insert(new School()
-			//		{
-			//			Name = columns[1],
-			//			Code = columns[2],
-			//			Address = columns[3],
-			//			ZipCode = columns[4],
-			//			City = columns[5],
-			//			Country = columns[6],
-			//			Website = columns[7],
-			//			Email = columns[8],
-			//			Phone = columns[9],
-			//			SchoolTypeId = Convert.ToInt16(columns[0]),
-			//			Longitude = columns[10],
-			//			Latitude = columns[11],
-			//			IsActive = columns[12] == "1",
-			//			State = columns[13]
-			//		});
-
-			//		//perform your logic
-			//		line = textReader.ReadLine();
-			//	}
-			//}
-
-			//UnitOfWork.Save();
-
-		    return Json(true, JsonRequestBehavior.AllowGet);
-	    }
     }
 }

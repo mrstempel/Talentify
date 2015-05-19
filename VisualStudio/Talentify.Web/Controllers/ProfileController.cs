@@ -95,32 +95,27 @@ namespace Talentify.Web.Controllers
 				if (student.SchoolId.HasValue && student.SchoolId.Value == 0)
 					student.SchoolId = null;
 
-				if (student.SchoolId.HasValue && 
-					student.SchoolId.Value != Convert.ToInt32(Request["OldSchoolId"]) && 
-					!UnitOfWork.StudentRepository.SetRegisterCode(student, Request["RegisterCode"]))
-				{
-					if (Request["OldSchoolId"] == "0")
-					{
-						ViewBag.OldSchoolId = 0;
-						student.SchoolId = null;
-					}
-					else
-					{
-						ViewBag.OldSchoolId = Convert.ToInt32(Request["OldSchoolId"]);
-						student.SchoolId = Convert.ToInt32(Request["OldSchoolId"]);
-					}
+				// new logic - not need anymore?
+				//if (student.SchoolId.HasValue && 
+				//	student.SchoolId.Value != Convert.ToInt32(Request["OldSchoolId"]) && 
+				//	!UnitOfWork.StudentRepository.SetRegisterCode(student, Request["RegisterCode"]))
+				//{
+				//	if (Request["OldSchoolId"] == "0")
+				//	{
+				//		ViewBag.OldSchoolId = 0;
+				//		student.SchoolId = null;
+				//	}
+				//	else
+				//	{
+				//		ViewBag.OldSchoolId = Convert.ToInt32(Request["OldSchoolId"]);
+				//		student.SchoolId = Convert.ToInt32(Request["OldSchoolId"]);
+				//	}
 
-					FormError = new FormFeedback() { Text = "Der angegebene Registrierungscode ist nicht korrekt." };
-					return View(student);
-				}
+				//	FormError = new FormFeedback() { Text = "Der angegebene Registrierungscode ist nicht korrekt." };
+				//	return View(student);
+				//}
 
 				this.WebContext.Student = student;
-
-				//if (student.SchoolId.HasValue && 
-				//	Convert.ToInt32(Request["OldSchoolId"]) == 0)
-				//{
-				//	this.WebContext.HasSchool = true;
-				//}
 
 				UnitOfWork.StudentRepository.Update(student);
 				UnitOfWork.Save();

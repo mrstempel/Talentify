@@ -51,6 +51,16 @@ namespace Talentify.ORM.DAL.Models.User
 		{
 			get { return SchoolId.HasValue && string.IsNullOrEmpty(BlockedReason); }
 		}
+
+		public bool Ausweiskontrolle
+		{
+			get { return SchoolId.HasValue && !string.IsNullOrEmpty(BlockedReason) && AusweisGuid != null; }
+		}
+
+		public bool SchoolBlocked
+		{
+			get { return SchoolId.HasValue && !string.IsNullOrEmpty(BlockedReason) && AusweisGuid == null; }
+		}
 	}
 
 	public class StudentMap : EntityTypeConfiguration<Student>

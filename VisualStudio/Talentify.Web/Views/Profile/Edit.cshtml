@@ -9,8 +9,24 @@
 	var mySchoolId = 0;
 	$(this).ready(function ()
 	{
+		$('.add-field').find('a').each(function ()
+		{
+			$(this).opentip($(this).attr('data-add-tipp'), {
+				extends: "alert",
+				color: "#000000",
+				background: "#ffffff",
+				shadow: true,
+				borderColor: "#e5e5e5",
+				tipJoint: "bottom",
+				target: true,
+				hideOn: "mouseout",
+				hideTriggers: ["target", "tip"]
+			});
+		});
+
 		setClassDropdown('SchoolId', 'Class', @Model.Class);
 		$('#ParentEducation').val('@Model.ParentEducation');
+		$('#confirm-school').hide();
 
 		$('#SchoolId').change(function()
 		{
@@ -27,13 +43,26 @@
 			<text>$('#Country').val('@Model.Country');</text>
 		}
 
-		@if (!HasSchool)
+		@if (!Model.SchoolId.HasValue)
 		{
-			<text>$('#SchoolId').val('0');</text>
+			<text>$('#SchoolId').val('0');$('#selected-school-name').hide();</text>
+			<text>$('#ausweiskontrolle').hide();</text>
 		}
-		else 
+		else
 		{
 			<text>mySchoolId = </text>@(@Model.SchoolId)<text>;</text>
+			<text>$('#selected-school-name').val('@Html.Raw(Model.School.Name)')</text>
+			<text>$('#oida-school-name').html('@Html.Raw(Model.School.Name)')</text>
+
+			if (!Model.Ausweiskontrolle)
+			{
+				<text>$('#ausweiskontrolle').hide();</text>
+			}
+
+			if (Model.SchoolBlocked)
+			{
+				<text>$('#confirm-school').show();$('#selected-school-name').hide();</text>
+			}
 		}
 
 		$('#RegisterCode').hide();
@@ -46,6 +75,11 @@
 			setSchoolFields();
 		});
 	});
+
+	function showAusweiskontrolle()
+	{
+		$('#ausweiskontrolle').show();
+	}
 
 	function setSchoolFields()
 	{
@@ -76,6 +110,17 @@
 			$('#register-code-info').hide();
 		}
 	}
+
+	function setSchoolFromPopup(id, name, guid, blockedReason)
+	{
+		$('#confirm-school').hide();
+		$('#SchoolId').val(id);
+		$('#BlockedReason').val(blockedReason);
+		$('#AusweisGuid').val(guid);
+		$('#selected-school-name').val(name);
+		$('#selected-school-name').show();
+		$('.select-school-container').hide();
+	}
 </script>
 
 <div id="page-container" class="form">
@@ -94,51 +139,53 @@
 			</div>
 		</article>
 		@if (FormSuccess == null)
-		{
-			using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new {@class = "form-container register"}))
-			{
+  {
+	  using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { @class = "form-container register" }))
+	  {
 				@Html.HiddenFor(m => m.Id)
 				@Html.HiddenFor(m => m.SettingsId)
 				@Html.HiddenFor(m => m.HeardOfTalentify)
 				@Html.HiddenFor(m => m.IsParentAccount)
 				@Html.HiddenFor(m => m.IsActive)
+				@Html.HiddenFor(m => m.BlockedReason)
+				@Html.HiddenFor(m => m.AusweisGuid)
 				<input type="hidden" name="OldSchoolId" value="@ViewBag.OldSchoolId"/>
 				<article id="profile-form">
 					<div class="field-container">
 						<span>
 							@if (Model.IsParentAccount)
-							{
+	   {
 								<text>Ich bin ein Elternteil</text>
-							}
-							else
-							{
+	   }
+	   else
+	   {
 								<text>Ich bin SchülerIn (ab 13 Jahre)</text>
-							}
+	   }
 						</span>
 					</div>
 					<div class="field-container">
 						<h4>Kontaktinfos</h4>
-						@Html.TextBoxFor(m => m.Firstname, new {@placeholder = "Vorname", @class = "mandatory"})
-						@Html.TextBoxFor(m => m.Surname, new {@placeholder = "Nachname", @class = "mandatory"})
-						@Html.TextBoxFor(m => m.Email, new {@placeholder = "E-Mail Adresse", @class = "mandatory"})
-						@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse"})
-						@Html.TextBoxFor(m => m.ZipCode, new {@placeholder = "PLZ"})
-						@Html.TextBoxFor(m => m.City, new {@placeholder = "Ort"})
+						@Html.TextBoxFor(m => m.Firstname, new { @placeholder = "Vorname", @class = "mandatory" })
+						@Html.TextBoxFor(m => m.Surname, new { @placeholder = "Nachname", @class = "mandatory" })
+						@Html.TextBoxFor(m => m.Email, new { @placeholder = "E-Mail Adresse", @class = "mandatory" })
+						@Html.TextBoxFor(m => m.Address, new { @placeholder = "Adresse" })
+						@Html.TextBoxFor(m => m.ZipCode, new { @placeholder = "PLZ" })
+						@Html.TextBoxFor(m => m.City, new { @placeholder = "Ort" })
 						<select name="Country" id="Country">
 							<option value="">Land auswählen</option>
 							<option value="AT">Österreich</option>
 						</select>
-						@Html.TextBoxFor(m => m.Phone, new {@placeholder = "Telefon (Mobilnummer)"})
+						@Html.TextBoxFor(m => m.Phone, new { @placeholder = "Telefon (Mobilnummer)" })
 						@if (Model.IsParentAccount)
-						{
-							@Html.TextBoxFor(m => m.FirstnameChild, new {@placeholder = "Vorname des Kindes"})
-						}
+	  {
+							@Html.TextBoxFor(m => m.FirstnameChild, new { @placeholder = "Vorname des Kindes" })
+	  }
 						
 					</div>
 					<div class="field-container">
-						<h4>Schulinfos </h4>
-						<select name="Gender" id="Gender" class="border-bottom">
-							<option>Geschlecht wählen</option>
+						<h4>Schulinfos</h4>
+						<select name="Gender" id="Gender" class="border-bottom mandatory">
+							<option value="">Geschlecht wählen</option>
 							<option value="F">Weiblich</option>
 							<option value="M">Männlich</option>
 						</select>
@@ -146,40 +193,52 @@
 							<label>Geburtsdatum</label>
 							@Html.DatePicker("birthday", false, Model.BirthDate)
 						</div>
-						@Html.DropDownListFor(model => model.SchoolId, AllSchoolsEdit, "wähle deine Schule...", new { @class = "mandatory" })
+						@Html.HiddenFor(m => m.SchoolId)
+						<div id="confirm-school" style="font-size:16px;padding: 5px 10px;text-align: left;"><span id="oida-school-name"></span><a href="javascript:void(0);" data-add-tipp="Klicke hier um deine Schule freizuschalten." onclick="loadSearchSchoolFormProfile(true);" style="margin-left: 10px;"><i class="fa fa-warning" style="margin-right:10px;"></i>Schule freischalten</a></div>
+						<div class="add-field" id="ausweiskontrolle" style="top:101px;right:-250px;"><a href="javascript:void(0);" data-add-tipp="Dein Schülerausweis wird von unserem Team so schnell wie möglich überprüft. Sobald dies passiert und alles OK ist, wird dein Account freigeschalten. Du erhältst dazu ein kurzes E-Mail. In der Zwischenzeit kannst du talentify.me mit eingeschränktem Funktionsumfang weiterhin nutzen."><i class="fa fa-info"></i></a><span class="text">Schülerausweis wird überprüft</span></div>
+						<input type="text" disabled="true" id="selected-school-name"/>
+						@if (!Model.SchoolId.HasValue)
+						{
+							<div class="select-school-container">
+								<span id="school-name">Keine Schule ausgewählt</span>
+								<a href="javascript:void(0);" onclick="loadSearchSchoolFormProfile(false);" class="edit-school">Schule hinzufügen</a>
+							</div>
+						}
+						
+						@*@Html.DropDownListFor(model => model.SchoolId, AllSchoolsEdit, "wähle deine Schule...", new { @class = "mandatory" })
 						<input type="text" id="RegisterCode" name="RegisterCode" placeholder="Registrierungscode eingeben" style="margin-bottom: 5px;"/>
 						<span id="no-school-info" style="margin: 0 0 10px 0;">
 							<input type="text" name="NewSchool" id="NewSchool" placeholder="Auf welche Schule gehst du?" style="margin-bottom: 5px;"/>
 							Du findest deine Schule nicht in der Liste? Kein Problem. Sag uns einfach auf welche Schule du gehst. Sobald wir mind. 10 Anmeldungen von deiner Schule haben, schalten wir diese frei. Du kannst dich in der Zwischenzeit trotzdem anmelden und Workshops besuchen ;)
 						</span>
-						<span id="register-code-info" style="margin: 0 0 10px 0;">Du hast noch keinen Registrierungscode und gehst auf eine der aufgelisteten Schulen? Dann schicke uns bitte einfach ein E-Mail mit einem Foto deines Schülerausweis an <a href="mailto:hallo@talentify.at">hallo@talentify.at</a> oder frage direkt an deiner Schule nach.</span>
+						<span id="register-code-info" style="margin: 0 0 10px 0;">Du hast noch keinen Registrierungscode und gehst auf eine der aufgelisteten Schulen? Dann schicke uns bitte einfach ein E-Mail mit einem Foto deines Schülerausweis an <a href="mailto:hallo@talentify.at">hallo@talentify.at</a> oder frage direkt an deiner Schule nach.</span>*@
 						<select id="Class" name="Class">
 							<option value="0">wähle deine Klasse</option>
 						</select>
 					</div>
 					<div class="field-container">
-						@Html.TextAreaFor(m => m.AboutMe, new {@placeholder = "Dein Lernmotto", @maxlength = "140", @class="border-bottom"})
+						@Html.TextAreaFor(m => m.AboutMe, new { @placeholder = "Dein Lernmotto", @maxlength = "140", @class = "border-bottom" })
 					</div>
 					@if (!Model.IsParentAccount)
-					{
+	 {
 						<div class="field-container">
-							@Html.TextBoxFor(m => m.FacebookUrl, new {@placeholder = "Url zu deinem Facebook Profil"})
-							@Html.TextBoxFor(m => m.GooglePlusUrl, new {@placeholder = "Url zu deinem Google+ Profil"})
-							@Html.TextBoxFor(m => m.TwitterUrl, new {@placeholder = "Url zu deinem Twitter Profil"})
-							@Html.TextBoxFor(m => m.InstagramUrl, new {@placeholder = "Url zu deinem Instagram Profil"})
-							@Html.TextBoxFor(m => m.PinterestUrl, new {@placeholder = "Url zu deinem Pinterest Profil"})
+							@Html.TextBoxFor(m => m.FacebookUrl, new { @placeholder = "Url zu deinem Facebook Profil" })
+							@Html.TextBoxFor(m => m.GooglePlusUrl, new { @placeholder = "Url zu deinem Google+ Profil" })
+							@Html.TextBoxFor(m => m.TwitterUrl, new { @placeholder = "Url zu deinem Twitter Profil" })
+							@Html.TextBoxFor(m => m.InstagramUrl, new { @placeholder = "Url zu deinem Instagram Profil" })
+							@Html.TextBoxFor(m => m.PinterestUrl, new { @placeholder = "Url zu deinem Pinterest Profil" })
 						</div>
-					}
+	 }
 					<div class="field-container">
 						<label style="font-size: 16px;">
 							@if (Model.IsParentAccount)
-							{
+	   {
 								<text>Was ist die höchste Ausbildung der Eltern?</text>
-							}
-							else
-							{
+	   }
+	   else
+	   {
 								<text>Was ist die höchste Ausbildung deiner Eltern?</text>
-							}
+	   }
 						</label>
 						<select name="ParentEducation" id="ParentEducation" class="mandatory" style="margin: 10px 0 0 0;">
 							<option value="">Bitte auswählen</option>
@@ -190,15 +249,24 @@
 						</select>
 					</div>
 					<div class="field-container desktop">
-						<input type="submit" value="Absenden" onclick=" return validateProfileForm(); " style="margin-bottom: 15px;"/><br/>
+						<input type="submit" value="Speichern" onclick=" return validateProfileForm(); " style="margin-bottom: 15px;"/><br/>
 						oder<br/>
 						@Html.ActionLink("Abbrechen und zurück zum Profil", "Index", "Profile")
 					</div>
 				</article>
 				<footer class="submit mobile">
-					<input type="submit" value="Absenden"  onclick=" return validateProfileForm(); " />
+					<input type="submit" value="Speichern"  onclick=" return validateProfileForm(); " />
 				</footer>
 			}
 		}
 	</section>
+</div>
+
+<div class="modal fade" id="modal-search-school" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display:none;">
+	<div class="modal-dialog">
+	<header>
+		<h1><span id="school-popup-headline-text" style="font-family: CaeciliaLTPro-85Heavy">Schule hinzufügen</span><a href="javascript:void(0);" onclick="$('#modal-search-school').modal('hide');" class="close-link"></a></h1>
+	</header>
+	<iframe id="search-school-frame" width="600" height="500" scrolling="no"></iframe>
+	</div>
 </div>

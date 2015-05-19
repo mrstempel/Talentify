@@ -25,42 +25,24 @@ namespace Talentify.Web.Controllers
             return View();
         }
 
+		public ActionResult Tour()
+		{
+			return View();
+		}
+
+		public ActionResult Voice()
+		{
+			return View();
+		}
+
+		public ActionResult About()
+		{
+			return View();
+		}
+
 		public ActionResult Events()
 		{
 			return View(UnitOfWork.EventRepository.GetOnlineEvents().Take(3));
-		}
-
-		public ActionResult MailChimpTest()
-		{
-			var mailchimpApiService = new MailChimpApiService(MailChimpServiceConfiguration.Settings.ApiKey);
-			
-			var subscribeSources = new Grouping { Name = "Subscribe Source" };
-			subscribeSources.Groups.Add("Platform");
-
-			var fields = new Dictionary<string, string>
-                    {
-                        {"FNAME", "Vorname"},
-						{"LNAME", "Nachname"},
-						{"GESCHLECHT", "Männlich"},
-						{"SCHULE", "Schule"},
-						{"KLASSE", "Klasse"},
-						{"TELEFON", "Telefon"}
-                    };
-
-			var response = mailchimpApiService.Subscribe("dstempel@gmail.com", new List<Grouping>() { subscribeSources }, fields, false);
-			ViewBag.Success = response.IsSuccesful;
-			ViewBag.Mailchimp = response.ResponseJson;
-			return View();
-		}
-
-		public ActionResult MailChimpTest2()
-		{
-			var mailchimpApiService = new MailChimpApiService(MailChimpServiceConfiguration.Settings.ApiKey);
-
-			var response = mailchimpApiService.Unsubscribe("dstempel@gmail.com");
-			ViewBag.Success = response.IsSuccesful;
-			ViewBag.Mailchimp = response.ResponseJson;
-			return View();
 		}
     }
 }

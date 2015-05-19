@@ -213,6 +213,72 @@ namespace Talentify.ORM.DAL.Repository
 			return new FormFeedback() { IsError = false };
 		}
 
+		public virtual FormFeedback AddSchool(Student student, string confirmOption, HttpPostedFileBase upload, string basePath, string schoolRegisterCode)
+		{
+			var successMsg = string.Empty;
+			var successTitle = string.Empty;
+
+			// confirm with code
+			if (confirmOption == "opt-code")
+			{
+				if (student.SchoolId.HasValue && !SetRegisterCode(student, schoolRegisterCode))
+				{
+					return new FormFeedback() { IsError = true, Text = "Der angegebene Registrierungscode ist nicht korrekt." };
+				}
+
+				student.BlockedReason = null;
+			}
+
+			// confirm with upload
+			if (confirmOption == "opt-ausweis")
+			{
+				if (upload.ContentLength > 0)
+				{
+					// check upload properties
+					// filesize < 2mb
+					if (upload.ContentLength > 2100000)
+					{
+						return new FormFeedback() { IsError = true, Text = "Das File ist zu groß. Die maximale Dateigröe beträgt 2 MB." };
+					}
+
+					// only png, jpg, jpeg and pdf allowed
+					var fileExtension = Path.GetExtension(upload.FileName).ToLower();
+
+					if (fileExtension != ".png" && fileExtension != ".jpg" && fileExtension != ".jpeg" && fileExtension != ".pdf")
+					{
+						return new FormFeedback() { IsError = true, Text = "Es sind nur PNG, JPG, JPEG und PDF Dateien erlaubt." };
+					}
+
+					student.AusweisGuid = Guid.NewGuid();
+					// save original file
+					var fileName = student.AusweisGuid.ToString() + fileExtension;
+					var originalPath = Path.Combine(basePath, fileName);
+					upload.SaveAs(originalPath);
+					student.AusweisExtension = fileExtension;
+
+					if (fileExtension != ".pdf")
+					{
+						// save large file
+						var filenameLarge = student.AusweisGuid.ToString() + "_optimiert" + fileExtension;
+						var pathLarge = Path.Combine(basePath, filenameLarge);
+						KwIt.Project.Pattern.Utils.Image.SaveResize(originalPath, pathLarge, 600);
+
+						// delete original file
+						File.Delete(originalPath);
+					}
+
+					successTitle = "";
+					successMsg = "Deine Schule wurde erfolgreich gespeichert!<br/><br/>Dein Schülerausweis wird von unserem Team so schnell wie möglich überprüft. Sobald dies passiert und alles OK ist, wird dein Account freigeschalten. Du erhältst dazu ein kurzes E-Mail. In der Zwischenzeit kannst du talentify.me mit eingeschränktem Funktionsumfang weiterhin nutzen.";
+				}
+				else
+				{
+					return new FormFeedback() { IsError = true, Text = "Kein gültiger Schülerausweis gefunden." };
+				}
+			}
+
+			return new FormFeedback() { IsError = false, Text = successMsg, Headline = successTitle};
+		}
+
 		#endregion
 
 		public void Update(Student entity, bool doGetAttackedModel = true)

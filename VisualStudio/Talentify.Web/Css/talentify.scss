@@ -255,6 +255,7 @@ iframe
 			position: absolute;
 			top: 0;
 			right: -45px;
+			overflow:hidden;
 			a
 			{
 				font-family: $font-form;
@@ -269,6 +270,7 @@ iframe
 			{
 				background: #167e64;
 			}
+			.text { font-size: 14px; margin: 0 0 0 5px; }
 		}
 		h4
 		{
@@ -280,6 +282,7 @@ iframe
 		border-bottom: 1px solid #e3e4e8 !important;
 	}
 }
+#confirm-school { display: none; }
 .filter-container
 {
 	display: inline-block;
@@ -359,6 +362,18 @@ input[type="text"].mandatory, input[type="password"].mandatory
 	}
 	.bundesland { width: 140px; float:left; margin-right:10px; height: 35px; }
 	//.schule { width: 368px; float:left; border-bottom: 1px solid #e3e4e8; margin-left: 10px;  }
+	.select-school-container
+	{
+		display: inline-block;
+		width: 100%;
+		text-align: left;
+		padding: 10px;
+		font-size: 16px;
+
+		.span { display: inline-block; }
+		.name { font-weight: bold; }
+		.edit-school { display: inline-block; margin: 0 0 0 10px; }
+	}
 }
 #add-school { font-size: 16px; display: inline-block; width: 100%; margin: 10px 0; }
 #register-form
@@ -488,6 +503,19 @@ input[type="text"].mandatory, input[type="password"].mandatory
 	.option.on, .option:hover
 	{
 		a { color: #1e7d64; }
+	}
+}
+#confirm-option-container.profile
+{
+	.option
+	{
+		cursor: pointer;
+		display: inline-block;
+		float: left;
+		width: 50%;
+		text-align: center;
+		img { display: block; margin: 0 auto 10px auto; }
+		a { text-decoration: none; }
 	}
 }
 .opt-form

@@ -49,7 +49,7 @@
 			@Html.TextBoxFor(m => m.Address, new {@placeholder = "Adresse (Straße)"})
 		</div>
 		<div class="field-container">
-			<input type="button" value="Suchen" id="search-btn" onclick="searchSchools();"/>
+			<input type="button" value="Suchen" id="search-btn" onclick="searchSchools(true);"/>
 		</div>
 		<div id="search-loading" class="loading-message">Lade Suchergebnisse ...</div>
 		<div id="search-results"></div>

@@ -68,8 +68,8 @@
 	@if (Model.Status == StatusType.Request && Model.CoachingRequest.ToUserId == LoggedUser.Id)
 	{
 		<div id="status-update-confirm" class="btn-container">
-			<a href="javascript:void(0);" onclick="updateCoachingRequestStatus(@Model.CoachingRequest.Id, 1)" class="link-button">Annehmen</a>
-			<a href="javascript:void(0);" onclick="rejectCoachingRequest(@Model.CoachingRequest.Id)" class="link-button">Ablehnen</a>
+			<a href="javascript:void(0);" onclick="updateCoachingRequestStatus(@Model.CoachingRequest.Id, 1)" class="link-button" id="btn-coaching-request-accept">Annehmen</a>
+			<a href="javascript:void(0);" onclick="rejectCoachingRequest(@Model.CoachingRequest.Id)" class="link-button" id="btn-coaching-request-cancel">Ablehnen</a>
 		</div>
 	}
 

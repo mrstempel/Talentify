@@ -1,0 +1,275 @@
+/* ---------------------------------------- Tour Page ---------------------------------------- */
+
+/* ---------- Row header ---------- */
+#headerbg {
+		background: url("../img/tour_header.png"), #ffbe00;
+		background-position: 60% bottom;
+		background-repeat: no-repeat
+}
+
+#header {
+	height: 480px;
+	color: #fff3cd;
+	text-align: left
+}
+
+#header h1 {
+	margin: 70px 0 0 0;
+	text-align: left;
+	position: relative;
+	z-index:1 !important
+}
+
+#header p.account{
+	font-size: 14px;
+	margin: 24px 0 0 40px	
+}
+
+#header img.mdlglogo {
+	height: 55px;
+	margin-top: 33px
+}
+
+#header img.logo {
+	height: 44px;
+	width: 200px;
+	margin-top: 33px
+}
+
+#header img.dots {
+	margin: 15px 0 15px 0
+}
+
+#header button { 
+	width: 180px;
+	margin-left: 40px;
+	padding: 5px 5px 5px 5px
+}
+
+/* ---------- Row thinkaboutit ---------- */
+#thinkaboutit  {
+	margin: 125px auto 90px auto
+}
+
+/* ---------- Row slideshow ---------- */
+#slideshow  {
+	margin: 60px auto 60px auto
+}
+
+#slideshow  img{
+	margin: 0
+}
+
+/* ---------- Row school ---------- */
+#school {
+	margin: -60px auto 90px auto
+}
+
+#school a {
+	border-bottom: solid #00a77f;
+	border-bottom-width:1px;
+	padding-bottom:7px;
+	text-decoration: none
+}
+
+#school a:hover{
+	text-decoration: none;
+	border-bottom: none;
+	margin-bottom: 1px
+}
+
+/* ---------- Row findpupil ---------- */
+#findpupilbg {
+	background: #00a77f
+}
+
+#findpupil {
+	padding: 50px 0 0 0
+}
+
+#findpupil img {
+	margin-top: 65px;
+	vertical-align: bottom
+}
+
+/* ---------- Row help ---------- */
+#help {
+	margin: 50px auto 50px auto;
+}
+
+
+/* ---------- Row communication ---------- */
+#communicationbg {
+	background: #f5f5f7
+}
+
+#communicationbig {
+	padding: 50px 0 0 0
+}
+
+
+/* ---------- Row bonus ---------- */
+#bonus {
+	margin: 90px auto 90px auto
+}
+
+#bonus p {
+	max-width: 400px;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (min-width: 768px) and (max-width: 991px) { 
+	/* --- Row footer --- */
+	#footer {
+		margin-bottom: 90px
+	}	
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+	/* --- Row mobileheader --- */
+	#mobileheaderbg {
+		background: url("../img/tour_mobileheader.png"), #ffbe00;
+		background-position: 50% 200%;
+		background-repeat: no-repeat
+	}
+	
+	#mobileheader {
+		padding: 15px 0 30px 0
+	}
+	
+	#mobileheader img.logo {
+		width: 105%;
+		height: 105%
+	}
+	
+	#mobileheader img.menu{
+		margin-top: 5px;
+		margin-left: -5px;
+		width: 125%;
+		height: 125%
+	}	
+	#mobileheader h1 {
+		margin: 45px 0 135px 0;
+		font-size: 28px
+	}
+	
+	#mobileheader button.redbutton {
+		height: 45px;
+		font-size: 18px;
+		width: 100%
+	}
+	
+	/* --- Row thinkaboutit --- */
+	#thinkaboutit {
+		margin: 45px auto 15px auto
+	}
+	
+	#thinkaboutit h2 {
+		font-family: 'Lato', san-serif;
+		font-weight: 700;
+		font-size: 22px;
+		line-height: 1.15
+	}
+
+	/* --- Row slideshow --- */
+	#slideshow {
+		margin: 45px auto 15px auto
+	}
+		
+	/* --- Row findpupil --- */
+	#findpupil {
+		margin: 30px 0 30px 0
+	}
+	
+	#findpupil img {
+		height: 182px;
+		width: 308px;	
+		margin: 70px 0 0 0;
+	}	
+		
+	#findpupil h3 {
+		margin: 0
+	}	
+	
+	#findpupil p {
+		font-size: 16px;
+		margin-bottom: 45px
+	}	
+	
+	/* --- Row help --- */
+	#help {
+		margin: 30px auto 30px auto
+	}
+	
+	#help img {
+		height: 173px;
+		width: 246px;	
+		margin: 30px 0 0 0;
+	}	
+		
+	#help h3 {
+		margin-top: 15px
+	}	
+	
+	#help p {
+		font-size: 16px;
+		margin-bottom: 30px
+	}	
+	
+	/* --- Row communication --- */
+	#communicationsmall {
+		padding: 30px auto 30px auto
+	}
+	
+	#communicationsmall img,#communicationbig img  {
+		height: 206px;
+		width: 308px;	
+		margin: 15px 0 0 0;
+	}	
+		
+	#communicationsmall h3 {
+		padding-top: 30px
+	}	
+	
+	#communicationsmall p {
+		font-size: 16px;
+		margin-bottom: 15px
+	}	
+	
+	/* --- Row bonus --- */	
+	#bonus {
+		margin: 30px auto 30px auto
+	}
+	
+	#bonus h3 {
+		margin: 0 0 11px 0
+	}
+	
+	#bonus p {
+		font-size: 16px;
+		margin-bottom: 45px
+	}
+}
+
+/* ---------- Custom ---------- */
+@media (max-width: 767px) {
+	#findpupil img {
+		height: 122px;
+		width: 205px;	
+		margin: -15px 0 30px 0;
+	}	
+	#help img {
+		height: 115px;
+		width: 164px;
+		margin: 0 0 30px 0;
+	}	
+	#communicationsmall img {
+		height: 137px;
+		width: 206px;
+	}			
+}
+
+
+/* ---------------------------------------- End Tour Page ---------------------------------------- */

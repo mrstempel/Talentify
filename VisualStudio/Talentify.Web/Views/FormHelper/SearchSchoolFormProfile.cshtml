@@ -1,0 +1,199 @@
+﻿@model Talentify.ORM.DAL.Models.School.School
+
+@{
+	ViewBag.Title = "SearchSchoolForm";
+	Layout = "~/Views/Shared/_LayoutModal.cshtml";
+	var schoolTypes = ViewBag.AllSchoolTypes as SelectList;
+}
+
+<script>
+	$(document).ready(function()
+	{
+		$('#school-confirm').hide();
+		$('#save-succes').hide();
+
+		@if (FormSuccess != null)
+		{
+			if (!string.IsNullOrEmpty(FormSuccess.Text))
+			{
+				<text>showSuccess('@Model.Id', '@Html.Raw(Model.Name)', true);</text>
+			}
+			else
+			{
+				<text>$('#success-close-btn').hide();showSuccess('@Model.Id', '@Html.Raw(Model.Name)', false);</text>
+			}
+		}
+
+		@if (FormError != null)
+		{
+			<text>selectSchool('@Model.Id', '@Model.Name');</text>
+		}
+
+		@if (ViewBag.SchoolId > 0)
+		{
+			<text>selectSchool('@ViewBag.SchoolId', '@Html.Raw(ViewBag.SchoolName)');</text>
+		}
+
+		$(".option").click(function ()
+		{
+			if (!$(this).hasClass('on'))
+			{
+				showConformOption($(this).attr('id'), $(this));
+			}
+		});
+
+		$(".option").mouseover(function ()
+		{
+			$(this).find('img').each(function ()
+			{
+				if ($(this).attr('src').indexOf('-on') == -1)
+				{
+					$(this).attr('src', $(this).attr('src').replace('.png', '-on.png'));
+				}
+			});
+		});
+
+		$(".option").mouseout(function ()
+		{
+			if (!$(this).hasClass('on'))
+			{
+				$(this).find('img').each(function ()
+				{
+					$(this).attr('src', $(this).attr('src').replace('-on.png', '.png'));
+				});
+			}
+		});
+
+		$('#confirm-info').opentip("Du kannst talentify.me erst in vollem Unfang nutzen, wenn du uns bestätigst, dass du ein/e aktive/r SchülerIn bist. Das gaht ganz einfach per Registrierungscode oder Upload eines Fotos deines Schülerausweises", {
+			extends: "alert",
+			color: "#000000",
+			background: "#ffffff",
+			shadow: true,
+			borderColor: "#e5e5e5",
+			tipJoint: "bottom",
+			target: true,
+			hideOn: "mouseout",
+			hideTriggers: ["target", "tip"]
+		});
+	});
+
+	function showSuccess(id, name, ausweiskontrolle)
+	{
+		$('#school-search-form').hide();
+		$('#save-succes').show();
+		window.parent.setSchoolFromPopup(id, name, '@LoggedUser.AusweisGuid', '@LoggedUser.BlockedReason');
+		if (ausweiskontrolle)
+		{
+			window.parent.showAusweiskontrolle();
+		}
+	}
+
+	function showConformOption(opt, container)
+	{
+		$('#msg-container').hide();
+		$('#confirmOption').val(opt);
+		$(".option").removeClass('on');
+		$(container).addClass('on');
+		$('.opt-form').hide();
+		$('.opt-form').find('input').removeClass('mandatory');
+		$('.opt-form').find('input').val('');
+		$('#' + opt + "-form").show();
+		$('#' + opt + "-form").find('input').addClass('mandatory');
+	}
+
+	function changeSchool()
+	{
+		$('#selected-school-name').html('');
+		$('#SchoolId').val(0);
+		$('#school-confirm').hide();
+		$('#school-search-form').show();
+	}
+
+	function selectSchool(id, name)
+	{
+		$('#selected-school-name').html(name);
+		$('#SchoolId').val(id);
+		$('#school-search-form').hide();
+		$('#school-confirm').show();
+	}
+
+	function checkSchoolSearchEnterClick(e)
+	{
+		if (e.keyCode == 13)
+		{
+			$('#search-btn').click();
+			return false;
+		}
+
+		return true;
+	}
+</script>
+
+<article id="save-succes" style="text-align: center;">
+	<div class="msg-container visible">
+		<div id="msg-success" class="msg success">
+			<p>Deine Schule wurde erfolgreich gespeichert!</p>
+		</div>
+	</div>
+	<input type="button" value="Weiter" id="success-close-btn" onclick="window.parent.hideModal('modal-search-school');">
+</article>
+
+<article id="school-search-form">
+	@using (Html.BeginForm("SearchSchoolFormProfile", "FormHelper", FormMethod.Post, new { @class = "form-container search-school", @onkeypress = "checkSchoolSearchEnterClick(event);" }))
+	{
+		<div class="field-container" style="margin-bottom: 10px;">
+			<select id="bundesland" class="bundesland">
+				<option value="">Bundesland</option>
+				<option value="WIE">Wien</option>
+				<option value="NOE">Niederösterreich</option>
+				<option value="BGL">Burgenland</option>
+			</select>
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			@Html.DropDownListFor(model => model.SchoolTypeId, schoolTypes)
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			@Html.TextBoxFor(m => m.Name, new { @placeholder = "Schulname" })
+		</div>
+		<div class="field-container" style="margin-bottom: 10px;">
+			@Html.TextBoxFor(m => m.Address, new { @placeholder = "Adresse (Straße)" })
+		</div>
+		<div class="field-container">
+			<input type="button" value="Suchen" id="search-btn" onclick="searchSchools(false);"/>
+		</div>
+		<div id="search-loading" class="loading-message">Lade Suchergebnisse ...</div>
+		<div id="search-results"></div>
+ }
+</article>
+
+<article id="school-confirm">
+	@using (Html.BeginForm("SearchSchoolFormProfile", "FormHelper", FormMethod.Post, new { @class = "form-container confirm-school", @enctype = "multipart/form-data" }))
+	{
+		<h3 id="selected-school-name"></h3>
+		<a href="javascript:void(0);" onclick="changeSchool();">Schule ändern</a>
+		<input type="hidden" name="SchoolId" id="SchoolId" value="@Model.Id"/>
+		<div id="confirm-option-container" class="profile">
+			<h3>Account freischalten<i id="confirm-info" class="fa fa-question-circle" style="margin: 25px 0 0 10px;"></i></h3>
+			<div class="option" id="opt-ausweis"><img src="/Images/reg-schuelerausweis.png"/><a href="javascript:void(0);">Schülerausweis hochladen</a></div>
+			<div class="option" id="opt-code"><img src="/Images/reg-code.png"/><a href="javascript:void(0);">Registrierungscode eingeben</a></div>
+		</div>
+		<div class="msg-container" id="msg-container">
+			<div id="msg-error" class="msg error">
+				<h2>Es ist leider ein Fehler aufgetreten. Bitte versuche es erneut!</h2>
+				<p></p>
+			</div>
+		</div>
+		<input type="hidden" name="confirmOption" id="confirmOption" value=""/>
+		<div class="opt-form field-container" id="opt-ausweis-form">
+			<input type="file" value="Foto auswählen" name="ausweisUpload"/>
+			<span class="info">Du kannst PNG, JPG, JPEG und PDF Dateien hochladen.<br />Maximale Dateigröße 2 MB</span>
+		</div>
+		<div class="opt-form field-container" id="opt-code-form">
+			<input type="text" name="SchoolRegisterCode" id="SchoolRegisterCode" placeholder="Registrierungscode eingeben"/>
+			<span class="info">Du hast keinen Registrierungscode? Dann lade direkt ein Foto deines Schülerausweises hoch bzw. schreib uns ein E-Mail an support@talentify.me</span>
+		</div>
+		<div class="field-container desktop">
+			<input type="submit" value="Speichern" onclick=" return validateConfirmForm(); "/>
+		</div>
+	}
+</article>

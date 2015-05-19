@@ -215,7 +215,7 @@ namespace Talentify.ORM.DAL.Repository
 								   sType = status.StatusType
 							   }).FirstOrDefault();
 
-			return (openRequest != null && openRequest.sType != StatusType.Completed && openRequest.sType != StatusType.Canceled);
+			return (openRequest != null && openRequest.sType != StatusType.Completed && openRequest.sType != StatusType.Canceled && openRequest.sType != StatusType.Rejected);
 		}
 
 		public CoachingRequestStatus UpdateStatus(int coachingRequestId, StatusType status, BaseUser fromUser)

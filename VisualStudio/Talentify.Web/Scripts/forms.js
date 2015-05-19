@@ -259,6 +259,32 @@ function validateConfirmForm()
 	return isValid;
 }
 
+function validateConfirmFormProfile()
+{
+	var isValid = true;
+	var errorHeadline = "Fehler bei Anmeldung";
+	var errorText = "";
+
+	if ($('#confirmOption').val() == "")
+	{
+		errorText = "Bitte wähle eine Art aus, wie du deinen Account freischalten willst - Zumindest: Jetzt nicht freischalten!";
+		isValid = false;
+	}
+
+	// check mandatory fields
+	if (!validateMandatoryFields())
+	{
+		return false;
+	}
+
+	if (!isValid)
+	{
+		showErrorMsg(errorHeadline, errorText, false);
+	}
+
+	return isValid;
+}
+
 function validateTeacherRegisterForm()
 {
 	var isValid = true;

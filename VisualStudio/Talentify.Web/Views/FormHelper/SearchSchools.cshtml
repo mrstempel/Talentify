@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Talentify.ORM.DAL.Models.School.School>
 
-
-
 @if (Model.Any())
 {
 	<div class="school-search-item-container">
@@ -13,6 +11,6 @@
 }
 else
 {
-	<p style="margin: 20px auto;text-align: center;width: 80%;">Es wurden keine Schulen gefunden die auf deine Suche zutreffen. Kein Problem: <a href="javascript:void(0);" onclick="window.parent.meineSchuleFehlt();window.parent.hideModal('modal-search-school');">Sag uns einfach auf welche Schule du gehst</a>!</p>	
+	<p style="margin: 20px auto;text-align: center;width: 80%;">Es wurden keine Schulen gefunden die auf deine Suche zutreffen. <span id="add-school-link">Kein Problem: <a href="javascript:void(0);" onclick="window.parent.meineSchuleFehlt();window.parent.hideModal('modal-search-school');">Sag uns einfach auf welche Schule du gehst</a>!</span></p>	
 }
 

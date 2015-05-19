@@ -169,10 +169,18 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Css\aboutStyle.css" />
+    <Content Include="Css\aboutStyle.min.css">
+      <DependentUpon>aboutStyle.css</DependentUpon>
+    </Content>
     <Content Include="Css\bootstrap.min.css" />
     <Content Include="Css\font-awesome\css\font-awesome.css" />
     <Content Include="Css\font-awesome\css\font-awesome.min.css" />
     <Content Include="Css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Css\indexStyle.css" />
+    <Content Include="Css\indexStyle.min.css">
+      <DependentUpon>indexStyle.css</DependentUpon>
+    </Content>
     <Content Include="Css\jquery.mCustomScrollbar.min.css" />
     <Content Include="Css\MyFontsWebfontsKit.css" />
     <Content Include="Css\rangeslider.css" />
@@ -184,6 +192,7 @@
     </Content>
     <Content Include="Css\sprite.min.css" />
     <Content Include="Css\sprite.scss" />
+    <Content Include="Css\talentify-style-public.css" />
     <Content Include="Css\talente-check.css" />
     <Content Include="Css\talente-check.min.css">
       <DependentUpon>talente-check.css</DependentUpon>
@@ -228,10 +237,17 @@
       <DependentUpon>talentify-mobile.scss</DependentUpon>
     </Content>
     <Content Include="Css\talentify-mobile.min.css" />
+    <Content Include="Css\talentify-style-public.min.css">
+      <DependentUpon>talentify-style-public.css</DependentUpon>
+    </Content>
     <Content Include="Css\talentify.css">
       <DependentUpon>talentify.scss</DependentUpon>
     </Content>
     <Content Include="Css\talentify.min.css" />
+    <Content Include="Css\tourStyle.css" />
+    <Content Include="Css\tourStyle.min.css">
+      <DependentUpon>tourStyle.css</DependentUpon>
+    </Content>
     <Content Include="Css\ui-lightness\images\animated-overlay.gif" />
     <Content Include="Css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -249,6 +265,10 @@
     <Content Include="Css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Css\ui-lightness\jquery-ui-1.10.4.custom.css" />
     <Content Include="Css\ui-lightness\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="Css\voiceStyle.css" />
+    <Content Include="Css\voiceStyle.min.css">
+      <DependentUpon>voiceStyle.css</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Css\talentify.scss" />
     <Content Include="Css\webfonts\2AA7EA_0_0.eot" />
@@ -260,6 +280,19 @@
     <Content Include="Css\webfonts\2AA7EA_2_0.eot" />
     <Content Include="Css\webfonts\2AA7EA_2_0.ttf" />
     <Content Include="Css\webfonts\2AA7EA_2_0.woff" />
+    <Content Include="Images\about_bernhard.png" />
+    <Content Include="Images\about_business.png" />
+    <Content Include="Images\about_header.png" />
+    <Content Include="Images\about_heft.png" />
+    <Content Include="Images\about_house.png" />
+    <Content Include="Images\about_mobileheader.png" />
+    <Content Include="Images\about_parent.png" />
+    <Content Include="Images\about_puzzle.png" />
+    <Content Include="Images\about_teacher.png" />
+    <Content Include="Images\about_team-bhofer.jpg" />
+    <Content Include="Images\about_team-cschmid.jpg" />
+    <Content Include="Images\about_team-dhofer.jpg" />
+    <Content Include="Images\about_team-vberne.jpg" />
     <Content Include="Images\badge-brain.png" />
     <Content Include="Images\badge-creative.png" />
     <Content Include="Images\badge-eistmc2.png" />
@@ -281,16 +314,50 @@
     <Content Include="Images\bubble-reg-abgeschlossen.png" />
     <Content Include="Images\bubble-search.png" />
     <Content Include="Images\bubble-settings.png" />
+    <Content Include="Images\header_dots.png" />
+    <Content Include="Images\header_logo.png" />
+    <Content Include="Images\header_menu.png" />
+    <Content Include="Images\helper_accent.jpg" />
+    <Content Include="Images\helper_aws.jpg" />
+    <Content Include="Images\helper_ktp.jpg" />
+    <Content Include="Images\icon_calendar.png" />
+    <Content Include="Images\icon_lightbulb.png" />
+    <Content Include="Images\icon_lupe.png" />
+    <Content Include="Images\icon_plus.png" />
+    <Content Include="Images\index_arrow.png" />
+    <Content Include="Images\index_content_center.png" />
+    <Content Include="Images\index_content_left.png" />
+    <Content Include="Images\index_content_right.png" />
+    <Content Include="Images\index_header.png" />
+    <Content Include="Images\index_horizontal_line_dotted.png" />
+    <Content Include="Images\index_logo.png" />
+    <Content Include="Images\index_mobileheader.png" />
+    <Content Include="Images\partner_coop_lsv-wien.jpg" />
+    <Content Include="Images\partner_coop_sis.jpg" />
+    <Content Include="Images\partner_coop_yem.jpg" />
+    <Content Include="Images\partner_extern_braenda.jpg" />
+    <Content Include="Images\partner_extern_cfx.jpg" />
+    <Content Include="Images\partner_extern_slash.jpg" />
     <Content Include="Images\pfeil-links.png" />
     <Content Include="Images\pfeil-rechts.png" />
     <Content Include="Images\premium1.png" />
     <Content Include="Images\premium2.png" />
+    <Content Include="Images\press_cafepuls.png" />
+    <Content Include="Images\press_derstandard.png" />
+    <Content Include="Images\press_kurier.png" />
+    <Content Include="Images\press_news.png" />
+    <Content Include="Images\press_viennaat.png" />
     <Content Include="Images\reg-code-on.png" />
     <Content Include="Images\reg-code.png" />
     <Content Include="Images\reg-nicht-on.png" />
     <Content Include="Images\reg-nicht.png" />
     <Content Include="Images\reg-schuelerausweis-on.png" />
     <Content Include="Images\reg-schuelerausweis.png" />
+    <Content Include="Images\slideshow_grg16.png" />
+    <Content Include="Images\slideshow_htl-mistelbach.png" />
+    <Content Include="Images\slideshow_htl-rennweg.png" />
+    <Content Include="Images\slideshow_tgm.png" />
+    <Content Include="Images\slideshow_vbs-schoenborngasse.png" />
     <Content Include="Images\talentecheck-header.png" />
     <Content Include="Images\talentecheck-highscore-header.png" />
     <Content Include="Images\talentecheck\arrow_down.png" />
@@ -376,6 +443,20 @@
     <Content Include="Images\talentify-favicon.png" />
     <Content Include="Images\talentometer-left.gif" />
     <Content Include="Images\talentometer-right.gif" />
+    <Content Include="Images\tour_header.png" />
+    <Content Include="Images\tour_ipad.png" />
+    <Content Include="Images\tour_lernhilfe.png" />
+    <Content Include="Images\tour_macbook.png" />
+    <Content Include="Images\tour_mobileheader.png" />
+    <Content Include="Images\voice_arrow.png" />
+    <Content Include="Images\voice_derstandard.jpg" />
+    <Content Include="Images\voice_direktorin-grubner.jpg" />
+    <Content Include="Images\voice_header.png" />
+    <Content Include="Images\voice_kurier.jpg" />
+    <Content Include="Images\voice_lehrer-mair.jpg" />
+    <Content Include="Images\voice_mobileheader.png" />
+    <Content Include="Images\voice_schueler-florian.jpg" />
+    <Content Include="Images\voice_schueler-mia.jpg" />
     <Content Include="Scripts\api.min.js">
       <DependentUpon>api.js</DependentUpon>
     </Content>
@@ -397,6 +478,7 @@
     <Content Include="Images\talentecheck\press\Icon_" />
     <Content Include="Plattform_Schulen_noe.csv" />
     <Content Include="Plattform_Schulen_noe_correct.csv" />
+    <Content Include="Images\.DS_Store" />
     <None Include="Properties\PublishProfiles\talentify-me - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\talentify-me-dev - FTP.pubxml" />
@@ -505,9 +587,21 @@
     <Content Include="Scripts\screen.min.js">
       <DependentUpon>screen.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\slideshow.js" />
+    <Content Include="Scripts\slideshow.min.js">
+      <DependentUpon>slideshow.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\talentecheck.js" />
     <Content Include="Scripts\talentecheck.min.js">
       <DependentUpon>talentecheck.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\talentify-home.js" />
+    <Content Include="Scripts\talentify-home.min.js">
+      <DependentUpon>talentify-home.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\talentify-utils.js" />
+    <Content Include="Scripts\talentify-utils.min.js">
+      <DependentUpon>talentify-utils.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Textboxlist\close.gif" />
     <Content Include="Scripts\Textboxlist\GrowingInput.js" />
@@ -516,6 +610,82 @@
     <Content Include="Scripts\Textboxlist\TextboxList.css" />
     <Content Include="Scripts\Textboxlist\TextboxList.js" />
     <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Startseite\about.html" />
+    <Content Include="Startseite\ajax-loader.gif" />
+    <Content Include="Startseite\css\aboutStyle.css" />
+    <Content Include="Startseite\css\indexStyle.css" />
+    <Content Include="Startseite\css\MyFontsWebfontsKit.css" />
+    <Content Include="Startseite\css\style.css" />
+    <Content Include="Startseite\css\tourStyle.css" />
+    <Content Include="Startseite\css\voiceStyle.css" />
+    <Content Include="Startseite\img\about_bernhard.png" />
+    <Content Include="Startseite\img\about_business.png" />
+    <Content Include="Startseite\img\about_header.png" />
+    <Content Include="Startseite\img\about_heft.png" />
+    <Content Include="Startseite\img\about_house.png" />
+    <Content Include="Startseite\img\about_mobileheader.png" />
+    <Content Include="Startseite\img\about_parent.png" />
+    <Content Include="Startseite\img\about_puzzle.png" />
+    <Content Include="Startseite\img\about_teacher.png" />
+    <Content Include="Startseite\img\about_team-bhofer.jpg" />
+    <Content Include="Startseite\img\about_team-cschmid.jpg" />
+    <Content Include="Startseite\img\about_team-dhofer.jpg" />
+    <Content Include="Startseite\img\about_team-vberne.jpg" />
+    <Content Include="Startseite\img\header_dots.png" />
+    <Content Include="Startseite\img\header_logo.png" />
+    <Content Include="Startseite\img\header_menu.png" />
+    <Content Include="Startseite\img\helper_accent.jpg" />
+    <Content Include="Startseite\img\helper_aws.jpg" />
+    <Content Include="Startseite\img\helper_ktp.jpg" />
+    <Content Include="Startseite\img\icon_calendar.png" />
+    <Content Include="Startseite\img\icon_lightbulb.png" />
+    <Content Include="Startseite\img\icon_lupe.png" />
+    <Content Include="Startseite\img\icon_plus.png" />
+    <Content Include="Startseite\img\index_arrow.png" />
+    <Content Include="Startseite\img\index_content_center.png" />
+    <Content Include="Startseite\img\index_content_left.png" />
+    <Content Include="Startseite\img\index_content_right.png" />
+    <Content Include="Startseite\img\index_header.png" />
+    <Content Include="Startseite\img\index_horizontal_line_dotted.png" />
+    <Content Include="Startseite\img\index_logo.png" />
+    <Content Include="Startseite\img\index_mobileheader.png" />
+    <Content Include="Startseite\img\partner_coop_lsv-wien.jpg" />
+    <Content Include="Startseite\img\partner_coop_sis.jpg" />
+    <Content Include="Startseite\img\partner_coop_yem.jpg" />
+    <Content Include="Startseite\img\partner_extern_braenda.jpg" />
+    <Content Include="Startseite\img\partner_extern_cfx.jpg" />
+    <Content Include="Startseite\img\partner_extern_slash.jpg" />
+    <Content Include="Startseite\img\press_cafepuls.png" />
+    <Content Include="Startseite\img\press_derstandard.png" />
+    <Content Include="Startseite\img\press_kurier.png" />
+    <Content Include="Startseite\img\press_news.png" />
+    <Content Include="Startseite\img\press_viennaat.png" />
+    <Content Include="Startseite\img\slideshow_grg16.png" />
+    <Content Include="Startseite\img\slideshow_htl-mistelbach.png" />
+    <Content Include="Startseite\img\slideshow_htl-rennweg.png" />
+    <Content Include="Startseite\img\slideshow_tgm.png" />
+    <Content Include="Startseite\img\slideshow_vbs-schoenborngasse.png" />
+    <Content Include="Startseite\img\talentify-favicon.png" />
+    <Content Include="Startseite\img\tour_header.png" />
+    <Content Include="Startseite\img\tour_ipad.png" />
+    <Content Include="Startseite\img\tour_lernhilfe.png" />
+    <Content Include="Startseite\img\tour_macbook.png" />
+    <Content Include="Startseite\img\tour_mobileheader.png" />
+    <Content Include="Startseite\img\voice_arrow.png" />
+    <Content Include="Startseite\img\voice_derstandard.jpg" />
+    <Content Include="Startseite\img\voice_direktorin-grubner.jpg" />
+    <Content Include="Startseite\img\voice_header.png" />
+    <Content Include="Startseite\img\voice_kurier.jpg" />
+    <Content Include="Startseite\img\voice_lehrer-mair.jpg" />
+    <Content Include="Startseite\img\voice_mobileheader.png" />
+    <Content Include="Startseite\img\voice_schueler-florian.jpg" />
+    <Content Include="Startseite\img\voice_schueler-mia.jpg" />
+    <Content Include="Startseite\index.html" />
+    <Content Include="Startseite\js\javascript.js" />
+    <Content Include="Startseite\js\slideshow.js" />
+    <Content Include="Startseite\js\stripe.js" />
+    <Content Include="Startseite\tour.html" />
+    <Content Include="Startseite\voice.html" />
     <Content Include="Templates\EmailWorkshopReminder.html" />
     <Content Include="Templates\EmailNotification.html" />
     <Content Include="Templates\EmailDelete.html" />
@@ -642,6 +812,41 @@
     <Content Include="Views\Shared\Talentecheck\BrainMinus.cshtml" />
     <Content Include="Views\Shared\Talentecheck\Frage10.cshtml" />
     <Content Include="Views\Highscore\Talentecheck.cshtml" />
+    <Content Include="Views\FormHelper\SearchSchoolFormProfile.cshtml" />
+    <Content Include="Startseite\.DS_Store" />
+    <Content Include="Startseite\css\.DS_Store" />
+    <Content Include="Startseite\css\Icon_" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_0_0.eot" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_0_0.ttf" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_0_0.woff" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_1_0.eot" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_1_0.ttf" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_1_0.woff" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_2_0.eot" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_2_0.ttf" />
+    <Content Include="Startseite\css\webfonts\2AA7EA_2_0.woff" />
+    <Content Include="Startseite\css\webfonts\Icon_" />
+    <Content Include="Startseite\css\webfonts\Icon" />
+    <Content Include="Startseite\Icon_" />
+    <Content Include="Startseite\img\.DS_Store" />
+    <Content Include="Startseite\img\Icon_" />
+    <Content Include="Startseite\js\Icon_" />
+    <Content Include="Scripts\slideshow.min.js.map">
+      <DependentUpon>slideshow.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\talentify-home.min.js.map">
+      <DependentUpon>talentify-home.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\talentify-utils.min.js.map">
+      <DependentUpon>talentify-utils.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Shared\_LayoutPublic.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_MobileHeaderPublic.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\Tour.cshtml" />
+    <Content Include="Views\Home\Voice.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
