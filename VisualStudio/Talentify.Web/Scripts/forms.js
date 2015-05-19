@@ -208,6 +208,10 @@ function validateRegisterForm()
 	{
 		showErrorMsg(errorHeadline, errorText, false);
 	}
+	else
+	{
+		dataLayer.push({ 'event': 'successForm', 'category': 'form-nachhilfe', 'action': 'submit', 'virtualurl': '/register-nachhilfe-success.html' });
+	}
 
 	return isValid;
 }
