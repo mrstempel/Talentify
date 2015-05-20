@@ -456,6 +456,7 @@
     <Content Include="Images\voice_lehrer-mair.jpg" />
     <Content Include="Images\voice_mobileheader.png" />
     <Content Include="Images\voice_schueler-florian.jpg" />
+    <Content Include="Images\voice_schueler-lea.jpg" />
     <Content Include="Images\voice_schueler-mia.jpg" />
     <Content Include="Scripts\api.min.js">
       <DependentUpon>api.js</DependentUpon>
