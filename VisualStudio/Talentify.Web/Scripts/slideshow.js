@@ -16,7 +16,7 @@ $(document).ready(function() {
 			centerMode: true,
 			autoplay: true,
 			autoplaySpeed: 3000,
-			centerPadding: '60px',
+			centerPadding: '0px',
 			slidesToShow: 3
 		  }
 		},
@@ -27,7 +27,7 @@ $(document).ready(function() {
 			autoplay: true,
 			autoplaySpeed: 3000,
 			centerMode: true,
-			centerPadding: '25px',
+			centerPadding: '20px',
 			slidesToShow: 1
 		  }
 		}

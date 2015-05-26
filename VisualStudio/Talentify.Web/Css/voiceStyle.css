@@ -105,13 +105,11 @@
 }
 
 #parents h2{
-	line-height: 38px;
 	max-width: 980px
 }
 
 #parents p {
 	font-size: 22px;
-	line-height: 28px;
 	margin-bottom: 0
 }
 
@@ -122,10 +120,6 @@
 
 #teacher img {
 	margin-bottom: 40px
-}
-
-#teacher h3 {
-	line-height: 28px
 }
 
 /* ---------- Row slideshow ---------- */
