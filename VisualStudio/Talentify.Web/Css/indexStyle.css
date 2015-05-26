@@ -94,8 +94,15 @@
 }
 
 #postheader input{
+	font-family: CaeciliaLTPro-85Heavy;
+	text-align: center;
 	font-size: 18px;
 	margin-left: 60px
+}
+
+#postheader input:focus {
+    box-shadow: 0 0 5px rgba(210, 48, 77, 1);
+	border: 1px solid rgba(210, 48, 77, 1);
 }
 
 #postheader button {

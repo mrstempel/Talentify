@@ -98,6 +98,10 @@
 }
 
 
+#help img {
+	margin-top: 30px
+}
+
 /* ---------- Row communication ---------- */
 #communicationbg {
 	background: #f0f0f2

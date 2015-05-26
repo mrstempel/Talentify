@@ -133,7 +133,7 @@
 
 /* ---------- Row ourteam ---------- */
 #ourteambg {
-	background: #f5f5f7
+	background: #f0f0f2
 }
 
 #ourteambig {
@@ -153,11 +153,15 @@
 	text-align: left
 }
 
-#ourteambig a, #ourteambig a:hover, #ourteambig a:active, #ourteambig a:visited{
+#ourteambig a {
 	color: #394d63;
 	text-decoration: none;
 	font-size: 18px;
 	font-weight: 400
+}
+
+#ourteambig a:hover {
+	text-decoration: underline
 }
 
 #ourteambig .va {
@@ -444,14 +448,16 @@
 		height: 50%
 	}	
 	
-	#ourteamsmall a, #ourteamsmall a:hover, 
-	#ourteamsmall a:active, #ourteamsmall a:visited{
-	color: #394d63;
-	text-decoration: none;
-	font-size: 18px;
-	font-weight: 400
-}
+	#ourteamsmall a {
+	    color: #394d63;
+	    text-decoration: none;
+	    font-size: 18px;
+	    font-weight: 400
+    }
 
+	#ourteamsmall a:hover {
+	    text-decoration: underline;
+    }
 	
 	/* --- Row ourpartner --- */
 	#ourpartner {
