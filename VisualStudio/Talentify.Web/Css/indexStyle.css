@@ -54,6 +54,10 @@
 	margin: 15px 0 15px 0
 }
 
+#header a:hover {
+    text-decoration:none
+}
+
 #header button {
 	width: 180px;
 	margin-left: 40px;
@@ -63,14 +67,16 @@
 
 /* ---------- Row postheader ---------- */
 #postheaderbg {
-	background: rgba(34, 51, 67, 0.5)
+	background: rgba(34, 51, 67, 0.5);
+    text-align: center;
 }	
 
 #postheader {
 	height: 240px;
 	margin-top: -240px;
 	color: #c9f0e7;
-	padding: 30px 0 30px 0
+	padding: 30px 0 30px 0;
+    text-align: center
 }
 
 #postheader p.big {
@@ -90,24 +96,25 @@
 
 #postheader button, #postheader input {
 	height: 40px;
-	width: 240px
+	width: 240px;
+    margin: 0px;
+    padding: 0px
+}
+
+#postheader button {
+	margin-right: 195px
 }
 
 #postheader input{
-	font-family: CaeciliaLTPro-85Heavy;
-	text-align: center;
-	font-size: 18px;
-	margin-left: 60px
+    padding-left: 10px;
+    margin-left: 195px;
+	font-size: 18px
 }
 
 #postheader input:focus {
     box-shadow: 0 0 5px rgba(210, 48, 77, 1);
 	border: 1px solid rgba(210, 48, 77, 1);
 }
-
-#postheader button {
-	margin-left: 10px
- }
 
 /* ---------- Row knownfrom ---------- */
 #knownfrom  {
@@ -186,7 +193,7 @@
 #comment a {
 	border-bottom: solid #ffbe00;
 	border-bottom-width:1px;
-	padding-bottom:5px;
+	padding-bottom:3px;
 	text-decoration: none
 }
 
@@ -218,7 +225,7 @@
 #academy a:link {
 	border-bottom: solid #394d63;
 	border-bottom-width:1px;
-	padding-bottom:5px;
+	padding-bottom:3px;
 	text-decoration: none
 }
 
@@ -293,7 +300,7 @@
 #aboutus a {
 	border-bottom: solid #00a77f;
 	border-bottom-width:1px;
-	padding-bottom:5px;
+	padding-bottom:3px;
 	text-decoration: none
 }
 
@@ -307,6 +314,21 @@
 	border-bottom: none;
 }
 
+/* ---------- 11 Zoll Header Optimisation ----------*/
+@media (min-width: 992px) and (max-width: 1024px) {
+      /* --- Row header --- */ 
+      #header {
+            padding: 24px 0 0 0;
+            height: 672px;
+            color: #c9f0e7;
+            text-align: left;
+        }
+
+        #header h1 {
+            margin-top: 56px;
+            text-align: left;
+        }
+}
 /* ---------- Tablet ---------- */
 
 @media (min-width: 768px) and (max-width: 991px) { 
@@ -415,12 +437,12 @@
 	}
 	
 	#knownfrom img {
-		width: 131px;
-		height: 56px;
+		height: 50px;
 		margin-bottom: 5px
 	}
 
-    #knownfrom img.grayscale{
+
+    #knownfrom img.grayscale {
 		filter: none;
 		-webkit-filter: grayscale(0%)
 	} 
@@ -430,7 +452,7 @@
 		margin: 0 auto 30px auto
 	}
 		
-	#features img{
+	#features img {
 		margin: 30px 0 0 0
 	}
 	

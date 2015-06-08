@@ -2,7 +2,7 @@
 *,p{
 	font-family: 'Lato', san-serif;
 	font-size: 18px;
-	line-height: 28px
+	line-height: 25px
 }
 
 html,body{
@@ -356,7 +356,7 @@ height: 95%;
 #yourregistry a.yra:link {
 	border-bottom: solid #00a77f;
 	border-bottom-width:1px;
-	padding-bottom:7px;
+	padding-bottom:3px;
 	text-decoration: none
 }
 
@@ -386,10 +386,14 @@ height: 95%;
 	margin-bottom: 10px
 }
 
-#footer p, #footer a, #footer a:hover, #footer a:visited , #footer a:active {
+#footer p, #footer a {
 	font-size: 18px;
 	color: #394d63;
 	text-decoration: none
+}
+
+#footer a:hover {
+    text-decoration: underline
 }
 
 #footer a.thin {

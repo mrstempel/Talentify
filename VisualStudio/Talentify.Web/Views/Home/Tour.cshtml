@@ -66,7 +66,49 @@
 		</div>
 		</div>	
 		
-		@Html.Partial("_MobileHeaderPublic")
+		<div id="mobileheaderbg">
+        <div class="row hidden-sm hidden-md hidden-lg" id="mobileheader">
+            <div class="row">
+                <div class="col-xs-8">
+                    <a href="/"><img src="/Images/header_logo.png" class="logo" alt="logo" /></a>
+                </div>
+                <div class="col-xs-2 col-xs-offset-2">
+                    <img src="/Images/header_menu.png" class="menu" id="mobilemenutrigger" alt="logo" />
+                </div>
+                <div class="col-xs-12" id="mobilemenu">
+                    <div class="row">
+                        <a href="/">Startseite</a>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <a href="/Home/Tour">Rundgang</a>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <a href="/Home/Voice">Stimmen zu talentify.me</a>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <a href="/Home/About">About</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="white">&bdquo;Lernen im 21. Jahrhundert!&ldquo;</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg text-center">
+                        <a href="/Register" class="buttonlink">
+                            Kostenlos registrieren
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        </div>
 		
 		<div class="row" id="thinkaboutit">
 			<div class="col-xs-12 col-sm-12 col-md-12">
@@ -168,7 +210,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-5 col-md-5 col-md-offset-2">
 				<img src="/Images/icon_calendar.png" alt="Kalender"/>
-				<h3 class="blue">In Workshops lernen, worauf es kannkommt.</h3>
+				<h3 class="blue">In Workshops lernen, worauf es ankommt.</h3>
 				<br/>
 				<p class="blue">Lass dich von ExpertInnen inspirieren, lerne Neues und stärke deine Talente. Die talentify.me Academy bietet eine Vielzahl an
 				verschiedensten Themen und Workshops. Von Kommunikation über Bewerbungscoaching bis hin zu Kreativ- und Tanzworkshops, alles mit
