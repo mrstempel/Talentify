@@ -1,0 +1,258 @@
+/* ---------------------------------------- Tour Page ---------------------------------------- */
+
+/* ---------- Row header ---------- */
+#headerbg {
+	background: #ffbe00;
+}
+
+#header {
+	height: 90px;
+	color: #fff3cd;
+	text-align: left
+}
+
+#header h1 {
+	margin: 72px 0 0 0;
+	text-align: left;
+	position: relative;
+	z-index:1 !important
+}
+
+#header p.account{
+	font-size: 14px;
+	margin: 10px 0 0 40px	
+}
+
+#header img.logo {
+	height: 44px;
+	width: 200px;
+	margin-top: 28px
+}
+
+#header img.dots {
+	margin: 15px 0 15px 0
+}
+
+#header button {
+	width: 180px;
+	margin-left: 40px;
+	padding: 5px 5px 5px 5px
+}
+
+/* ---------- Row form ---------- */
+#register-form  {
+    width: auto;
+	margin: 60px auto 60px auto;
+	text-align: left;
+}
+
+#register-form  h2{
+	text-align: left
+}
+
+#register-form i {
+	font-size: 18px;
+	margin-right: 10px
+}
+
+#register-form  i.red {
+	color: #e64461
+}
+
+#register-form  i.yellow {
+	color: #ffbe00
+}
+
+#register-form  i.green {
+	color: #00a77f
+}
+
+#register-form  i.black {
+	color: #000;
+	margin: 0;
+	padding: 5px;
+}
+
+#register-form a.green {
+	font-size: 18px;
+	color: #00a77f
+}
+
+#register-form p, #register-form p b {
+	margin: 0;
+	font-size: 18px;
+}
+
+#register-form p.info, #register-form p.info b, #register-form p.info a{
+	color: #000;
+	font-size: 14px;
+	line-height: 1.5
+}
+
+#register-form p.radio {
+	padding-top: 11px;
+	margin: 0 0 0 20px
+}
+
+#register-form img#schooltip{
+	margin-top: -8px;
+	margin-left: -15px
+}
+
+#register-form img#email {
+	margin-top: 5px;
+	margin-left: -50px
+}
+
+#register-form input  {
+	height: 40px;
+	padding: 20px 10px 20px 10px;
+	margin: 5px 0 5px 0;
+	font-size: 18px;
+	border-radius: 0
+}
+
+#register-form input[type="radio"] {
+	border-radius: 3px
+}
+
+#register-form input:focus  {
+	color: #e64461;
+	border-color: #e64461;
+	outline: none;
+	box-shadow:none;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: #e64461;
+}
+
+input:focus::-moz-placeholder {
+    color: #e64461;
+}
+
+input:focus:-ms-input-placeholder {
+    color: #e64461;
+}
+
+#register-form .radio {
+	margin: -15px 0 15px 0
+}
+
+#register-form .infobox {
+	padding: 5px 10px 5px 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border-style: solid;
+    border-width: 1px;
+	border-color: #ffbe00
+}
+
+#register-form .errorbox {
+	padding: 5px 10px 5px 10px;
+	margin-top: 15px;
+	margin-bottom: 30px;
+	border-style: solid;
+    border-width: 1px;
+	border-color: #e64461
+}
+
+#register-form .infotext {
+	margin-top: 14px;
+	margin-left: 35px;
+}
+
+#register-form .checkboxinfo {
+	font-size: 15px;
+	margin-top: -40px;
+	margin-left: 20px;
+}
+
+#register-form button.normalbutton {
+	height: 40px;
+	margin: 25px 0 5px 0;
+	width: 100%;
+	-moz-box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+    -webkit-box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+    box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+}
+
+/* ---------- Tablet ---------- */
+
+@media (min-width: 768px) and (max-width: 991px) { 
+	/* --- Row register-form --- */
+	#register-form {
+	padding: 0 10px 0 10px
+	}
+	
+	#register-form img#schooltip{
+		margin-top: -8px;
+		margin-left: -20px
+	}
+
+	#register-form img#email {
+		margin-top: 5px;
+		margin-left: -5px
+	}
+	/* --- Row footer --- */
+	#footer {
+		margin-bottom: 90px
+	}	
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 768px) {
+	/* --- Row mobileheader --- */
+	#mobileheaderbg {
+		background: #ffbe00;
+		background-position: 50% 200%;
+		background-repeat: no-repeat
+	}
+	
+	#mobileheader {
+		padding: 15px 0 30px 0
+	}
+	
+	#mobileheader img.logo {
+		width: 105%;
+		height: 105%
+	}
+	
+	#mobileheader img.menu{
+		margin-top: 5px;
+		margin-left: -5px;
+		width: 125%;
+		height: 125%
+	}	
+	#mobileheader h1 {
+		margin: 45px 0 135px 0;
+		font-size: 28px
+	}
+	
+	#mobileheader button.redbutton {
+		height: 45px;
+		font-size: 18px;
+		width: 100%
+	}
+	
+	/* --- Row register-form --- */
+	#register-form {
+	padding: 0 5px 0 5px
+	}
+	
+	#register-form  h2{
+		text-align: left;
+		font-size: 22px
+	}
+	
+	#register-form button.mobilebutton {
+	height: 40px;
+	margin: 25px 0 5px 0;
+	width: 100%;
+	-moz-box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+    -webkit-box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+    box-shadow: 0 2px 0 rgba(210, 48, 77, 1);
+}
+}
+	
+/* ---------------------------------------- End Login Page ---------------------------------------- */

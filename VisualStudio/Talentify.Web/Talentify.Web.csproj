@@ -319,6 +319,7 @@
     <Content Include="Images\header_menu.png" />
     <Content Include="Images\helper_accent.jpg" />
     <Content Include="Images\helper_aws.jpg" />
+    <Content Include="Images\helper_ibm.jpg" />
     <Content Include="Images\helper_ktp.jpg" />
     <Content Include="Images\icon_calendar.png" />
     <Content Include="Images\icon_lightbulb.png" />
@@ -332,6 +333,7 @@
     <Content Include="Images\index_horizontal_line_dotted.png" />
     <Content Include="Images\index_logo.png" />
     <Content Include="Images\index_mobileheader.png" />
+    <Content Include="Images\partner_coop_jugendinfo.jpg" />
     <Content Include="Images\partner_coop_lsv-wien.jpg" />
     <Content Include="Images\partner_coop_sis.jpg" />
     <Content Include="Images\partner_coop_yem.jpg" />
@@ -346,6 +348,7 @@
     <Content Include="Images\press_derstandard.png" />
     <Content Include="Images\press_kurier.png" />
     <Content Include="Images\press_news.png" />
+    <Content Include="Images\press_puls4.png" />
     <Content Include="Images\press_viennaat.png" />
     <Content Include="Images\reg-code-on.png" />
     <Content Include="Images\reg-code.png" />
@@ -381,6 +384,7 @@
     <Content Include="Images\talentecheck\googleplus.png" />
     <Content Include="Images\talentecheck\happy_people.png" />
     <Content Include="Images\talentecheck\header-cluster.png" />
+    <Content Include="Images\talentecheck\helper_ibm.jpg" />
     <Content Include="Images\talentecheck\highscore-fill.png" />
     <Content Include="Images\talentecheck\home_peace.png" />
     <Content Include="Images\talentecheck\home_sport.png" />
@@ -405,6 +409,7 @@
     <Content Include="Images\talentecheck\nerd-fb-share.png" />
     <Content Include="Images\talentecheck\nerd-top.png" />
     <Content Include="Images\talentecheck\o.png" />
+    <Content Include="Images\talentecheck\partner_coop_jugendinfo.jpg" />
     <Content Include="Images\talentecheck\press\diePresse.png" />
     <Content Include="Images\talentecheck\press\heute.png" />
     <Content Include="Images\talentecheck\press\inventures.png" />
@@ -848,6 +853,7 @@
     <Content Include="Views\Home\Tour.cshtml" />
     <Content Include="Views\Home\Voice.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Shared\Forms\_Register-New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

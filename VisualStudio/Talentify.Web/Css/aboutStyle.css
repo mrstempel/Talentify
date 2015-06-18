@@ -60,14 +60,12 @@
 	padding: 50px 0 50px 0
 }
 
-#whatwedo h3{
+#whatwedo h3, #whatwedo p{
 	margin: 0 auto;
+    width: 270px;
 	text-align: center;
 }
 
-#whatwedo p{
-	width: 270px
-}
 
 /* ---------- Row howitstarted ---------- */
 #howitstarted {

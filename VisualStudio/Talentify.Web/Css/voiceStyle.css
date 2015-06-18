@@ -3,7 +3,7 @@
 /* ---------- Row header ---------- */
 #headerbg {
 		background: url("/Images/voice_header.png"), #00a77f;
-		background-position: 83% bottom;
+		background-position: 72% bottom;
 		background-repeat: no-repeat
 }
 
@@ -88,9 +88,13 @@
 	color: #223343
 }
 
-#newspaper a.newspaper, #newspaper a.newspaper:hover, 
-#newspaper a.newspaper:visited, #newspaper a.newspaper:active  {
+#newspaper a.newspaper  {
 	text-decoration: none;
+	font-size: 18px
+}
+
+#newspaper a.newspaper:hover  {
+	text-decoration: underline;
 	font-size: 18px
 }
 
@@ -135,7 +139,7 @@
 #school a {
 	border-bottom: solid #00a77f;
 	border-bottom-width:1px;
-	padding-bottom:7px;
+	padding-bottom:3px;
 	text-decoration: none
 }
 
