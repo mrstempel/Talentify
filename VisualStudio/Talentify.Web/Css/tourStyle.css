@@ -253,6 +253,7 @@
 	}
 	
 	#bonus p {
+        max-width: 100%;
 		font-size: 16px;
 		margin-bottom: 45px
 	}
@@ -273,7 +274,8 @@
 	#communicationsmall img {
 		height: 137px;
 		width: 206px;
-	}			
+	}	
+ 
 }
 
 
