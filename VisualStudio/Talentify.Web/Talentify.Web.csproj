@@ -446,6 +446,7 @@
     <Content Include="Images\talentecheck\x.png" />
     <Content Include="Images\talentecheck\zukunft-bilden.png" />
     <Content Include="Images\talentify-favicon.png" />
+    <Content Include="Images\talentifyme-fb-share.jpg" />
     <Content Include="Images\talentometer-left.gif" />
     <Content Include="Images\talentometer-right.gif" />
     <Content Include="Images\tour_header.png" />
