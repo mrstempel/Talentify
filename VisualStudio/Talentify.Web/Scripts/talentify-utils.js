@@ -33,3 +33,35 @@ function getUrlParam(name)
 	else
 		return results[1];
 }
+
+// Navbar Index
+$(document).ready(function () {
+    $(window).scroll(function () {
+        //if you hard code, then use console
+        //.log to determine when you want the 
+        //nav bar to stick.  
+        console.log($(window).scrollTop())
+        if ($(window).scrollTop() < 372) {
+            $('#indexmenubg').slideUp();
+        }
+        if ($(window).scrollTop() > 372) {
+            $('#indexmenubg').slideDown();
+        }
+    });
+});
+
+//Navbar Tour, Voice and About
+$(document).ready(function () {
+    $(window).scroll(function () {
+        //if you hard code, then use console
+        //.log to determine when you want the 
+        //nav bar to stick.  
+        console.log($(window).scrollTop())
+        if ($(window).scrollTop() < 360) {
+            $('#menubg').slideUp();
+        }
+        if ($(window).scrollTop() > 360) {
+            $('#menubg').slideDown();
+        }
+    });
+});

@@ -5,337 +5,421 @@
 
 @section CustomCss
 {
-	<link rel="stylesheet" href="/Css/indexStyle.min.css">
-} 
+    <link rel="stylesheet" href="/Css/indexStyle.min.css">
+}
 
-@section CustomJavascript 
+@section CustomJavascript
 {
-	<script src="/Scripts/talentify-home.min.js"></script>
-	<script>
-		hasWaypoints = true;
-		$(document).ready(function()
-		{
-			loadHomeEvents();
-			HomePage.init();
-		});
+    <script src="/Scripts/talentify-home.min.js"></script>
+    <script>
+        hasWaypoints = true;
+        $(document).ready(function () {
+            loadHomeEvents();
+            HomePage.init();
+        });
 
-		if (!isMobile())
-		{
-			$(document).ready(function ()
-			{
-				$('#makethetourbg').hover(
-					function ()
-					{
-						$("#makethetourbg").css("background-color", "#f3516e");
-						$("#makethetourbg h1").css({
-							'margin-left': '50px',
-							'transition': 'margin-left .5s',
-							'-moz-transition': 'margin-left .5s',
-							'-webkit-transition': 'margin-left .5s',
-							'-o-transition': 'margin-left .5s'
-						});
-						$("#makethetourbg img").css({
-							'margin-left': '15px',
-							'transition': 'margin-left .5s',
-							'-moz-transition': 'margin-left .5s',
-							'-webkit-transition': 'margin-left .5s',
-							'-o-transition': 'margin-left .5s'
-						});
+        if (!isMobile()) {
+            $(document).ready(function () {
+                $('#makethetourbg').hover(
+					function () {
+					    $("#makethetourbg").css("background-color", "#f3516e");
+					    $("#makethetourbg h1").css({
+					        'margin-left': '50px',
+					        'transition': 'margin-left .5s',
+					        '-moz-transition': 'margin-left .5s',
+					        '-webkit-transition': 'margin-left .5s',
+					        '-o-transition': 'margin-left .5s'
+					    });
+					    $("#makethetourbg img").css({
+					        'margin-left': '15px',
+					        'transition': 'margin-left .5s',
+					        '-moz-transition': 'margin-left .5s',
+					        '-webkit-transition': 'margin-left .5s',
+					        '-o-transition': 'margin-left .5s'
+					    });
 					},
-					function ()
-					{
-						$("#makethetourbg").css("background-color", "#e64461");
-						$("#makethetourbg h1").css({
-							'margin-left': '0',
-							'transition': 'margin-left .5s',
-							'-moz-transition': 'margin-left .5s',
-							'-webkit-transition': 'margin-left .5s',
-							'-o-transition': 'margin-left .5s'
-						});
-						$("#makethetourbg img").css({
-							'margin-left': '-50px',
-							'transition': 'margin-left .5s',
-							'-moz-transition': 'margin-left .5s',
-							'-webkit-transition': 'margin-left .5s',
-							'-o-transition': 'margin-left .5s'
-						});
+					function () {
+					    $("#makethetourbg").css("background-color", "#e64461");
+					    $("#makethetourbg h1").css({
+					        'margin-left': '0',
+					        'transition': 'margin-left .5s',
+					        '-moz-transition': 'margin-left .5s',
+					        '-webkit-transition': 'margin-left .5s',
+					        '-o-transition': 'margin-left .5s'
+					    });
+					    $("#makethetourbg img").css({
+					        'margin-left': '-50px',
+					        'transition': 'margin-left .5s',
+					        '-moz-transition': 'margin-left .5s',
+					        '-webkit-transition': 'margin-left .5s',
+					        '-o-transition': 'margin-left .5s'
+					    });
 					}
 				);
-			});
-		}
+            });
+        }
 
-		function emailRegister()
-		{
-			location.href = '/Register?m=' + $('#eingabefeldEmail').val();
-		}
-	</script>
+        function emailRegister() {
+            location.href = '/Register?m=' + $('#eingabefeldEmail').val();
+        }
+    </script>
+
+    <script>
+        // Navbar Index Header Hiding
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                //if you hard code, then use console
+                //.log to determine when you want the 
+                //nav bar to stick.  
+                console.log($(window).scrollTop())
+                if ($(window).scrollTop() < 122) {
+                    $("#header p").fadeIn("slow", function () {
+                        $(this).removeClass("hidden");
+                    });
+                }
+                if ($(window).scrollTop() > 122) {
+                    $("#header p").fadeOut("slow", function () {
+                        $(this).addClass("hidden");
+                    });
+                }
+                if ($(window).scrollTop() < 172) {
+                    $("#header img.dots").fadeIn("slow", function () {
+                        $(this).removeClass("hidden");
+                    });
+                }
+                if ($(window).scrollTop() > 172) {
+                    $("#header img.dots").fadeOut("slow", function () {
+                        $(this).addClass("hidden");
+                    });
+                }
+                if ($(window).scrollTop() < 272) {
+                    $("#header h1").fadeIn("slow", function () {
+                        $(this).removeClass("hidden");
+                    });
+                }
+                if ($(window).scrollTop() > 272) {
+                    $("#header h1").fadeOut("slow", function () {
+                        $(this).addClass("hidden");
+                    });
+                };
+            });
+        });
+    </script>
+
+    <script>
+        var headerbg = document.getElementById("headerbg");
+        var speed = 1;
+        
+        window.onscroll = function () {
+            var yOffset = window.pageYOffset + 220;
+            headerbg.style.backgroundPosition = "0px " + ((yOffset / speed) / 2) + "px";
+            headerbg.style.backgroundPositionX = "center";
+        }
+    </script>
 }
 
-@section CustomAfterBody 
+@section CustomAfterBody
 {
 }
 
-<div id="preheaderbg">
-		<div class="row hidden-xs" id="preheader">
-			<div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
-				<p>talentify.me befindet sich gerade in einer sog. "Public Beta" Testphase in Wien,
-				Niederösterreich und dem Burgenland <i class="icon-arrow fa fa-arrow-right fa-lg"></i> <a href="https://talentify.zendesk.com/hc/de/articles/202531761-Was-bedeutet-Testphase-bzw-Beta-Phase-" target="_blank"> mehr erfahren </a>
-			</div>
-		</div>
-		</div>
-		
-		<div id="headerbg">
-		<div class="row hidden-xs" id="header">
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 hidden-md hidden-lg">
-					<img src="/Images/header_logo.png" class="logo" alt="logo"/>
-				</div>
-				<div class="col-md-3 hidden-xs hidden-sm no-gutter">
-					<img src="/Images/header_logo.png" class="mdlglogo" alt="logo"/>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-6">
-					<p class="account">Du hast einen Account?</p>
-					<a href="/login">
-						<button type="button" class="greenbutton_header btn btn-primary btn-lg visible-sm-block visible-md-block visible-lg-block">
-							<b>Anmelden</b>
-						</button>
-					</a>
-				</div>	
-			</div>
-			<div class="row hidden-md hidden-lg">
-				<div class="col-xs-12 col-sm-11">
-					<h1 class="white">&bdquo;Lernhilfe auf Augenhöhe, super!&ldquo;</h1>
-				</div>
-				<div class="col-xs-12 col-sm-9">
-					<img src="/Images/header_dots.png" class="dots" alt="header dots"/>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<p>Es war eine schnelle, unkomplizierte aber<br/> sehr effektive Hilfe! Meiner Tochter macht Mathematik nun sichtlich mehr Spaß.</p>
-				</div>
-			</div>
-			<div class="row hidden-xs hidden-sm">
-				<div class="col-md-9 no-gutter">
-					<h1 class="white">&bdquo;Lernhilfe auf Augenhöhe, super!&ldquo;</h1>
-				</div>
-				<div class="col-md-9 no-gutter">
-					<img src="/Images/header_dots.png" class="dots" alt="header dots"/>
-				</div>
-				<div class="col-md-5 no-gutter">
-					<p>Es war eine schnelle, unkomplizierte aber<br/> sehr effektive Hilfe! Meiner Tochter macht Mathematik nun sichtlich mehr Spaß.</p>
-				</div>
-
-			</div>
-			</div>			
-		</div>
-		
-		<div id="postheaderbg">
-		<div class="row hidden-xs" id="postheader">
-			<div class="row">
-				<div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-					<p class="big">talentify.me ist eine Plattform zur Förderung von jungen Talenten<br/> und der Lernhilfe von SchülerInnen für SchülerInnen.</p>
-				</div>
-			</div>
-			<div class="row">
-                <div class="col-sm-5 col-sm-offset-1 col-md-6 col-md-offset-0">
-                    <div class="input-group">
-                        <input type="email" class="form-control" id="eingabefeldEmail" placeholder="E-Mail-Adresse">
-                    </div>
-                </div>
-				<div class="col-sm-6 col-md-6 col-md-offset-0 col-rightened">
-						<button type="button" class="redbutton btn btn-primary btn-md hidden-xs visible-sm-* visible-md-* visible-lg-* text-center">
-							<a href="javascript:void(0);" class="buttonlink" onclick="emailRegister();">
-								Kostenlos registrieren
-							</a>
-						</button>
-				</div>
-			</div>	
-			<div class="row">
-				<div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-                    <p class="small">talentify.me ist und wird für SchülerInnen immer kostenlos sein.</p>
-				</div>
-			</div>			
-		</div>		
-		</div>
-
-		<div id="mobileheaderbg">
-            <div class="row hidden-sm hidden-md hidden-lg" id="mobileheader">
-                <div class="row">
-                    <div class="col-xs-8">
-                        <a href="/"><img src="/Images/header_logo.png" class="logo" alt="logo" /></a>
-                    </div>
-                    <div class="col-xs-2 col-xs-offset-2">
-                        <img src="/Images/header_menu.png" class="menu" id="mobilemenutrigger" alt="logo" />
-                    </div>
-                    <div class="col-xs-12" id="mobilemenu">
-                        <div class="row">
-                            <a href="/">Startseite</a>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <a href="/Home/Tour">Rundgang</a>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <a href="/Home/Voice">Stimmen zu talentify.me</a>
-                        </div>
-                        <hr />
-                        <div class="row">
-                            <a href="/Home/About">Das ist talentify.me</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1 class="white">&bdquo;Lernhilfe auf Augenhöhe, super!&ldquo;</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg text-center">
-                            <a href="/Register" class="buttonlink">
-                                Kostenlos registrieren
-                            </a>
+<div id="headerbg">
+    <div class="row hidden-xs" id="header">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 hidden-md hidden-lg">
+                <img src="/Images/header_logo.png" class="logo" alt="logo" />
+            </div>
+            <div class="col-md-3 hidden-xs hidden-sm no-gutter">
+                <img src="/Images/header_logo.png" class="mdlglogo" alt="logo" />
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-7 col-md-offset-2 col-rightened">
+                <div class="menu">
+                    <a class="menu" href="/Home/Tour">Rundgang</a>
+                    <a class="menu" href="/Home/Voice">Referenzen</a>
+                    <a class="menu" href="/Home/About">Über uns</a>
+                    <a href="/login">
+                        <button type="button" class="greenbutton_header btn btn-primary btn-lg visible-sm-block visible-md-block visible-lg-block">
+                            <b>Anmelden</b>
                         </button>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
-		
-		<div class="row" id="knownfrom">
-			<div class=" col-sm-12 col-md-12 no-gutter">
-				<h3 class="blue"> Bekannt aus:</h3>
-				<div id="images">
-					<a href="http://kurier.at/chronik/niederoesterreich/internet-plattform-schueler-geben-gratis-nachhilfe/126.584.429" target="blank">
-						<img src="/Images/press_kurier.png" class="grayscale" alt="Kurier"/>
-					</a>	
-					<a href="http://derstandard.at/2000012982250/Plattform-fuer-Nachhilfe-unter-Schuelern-startet" target="blank">
-						<img src="/Images/press_derstandard.png" class="grayscale" alt="Der Standard"/>
-					</a>	
-                    <a href="http://www.puls4.com/video/puls-4-news/play/2777345" target="blank">
-                        <img src="/Images/press_puls4.png" class="grayscale" alt="Puls 4" />
-                    </a>	
-					<a href="https://www.youtube.com/watch?v=trBiyjYfKUM" target="blank">
-						<img src="/Images/press_cafepuls.png" class="lastmobileimg grayscale" alt="'Café Puls"/>
-					</a>	
-					<a href="http://www.news.at/a/talentify.me-neue-nachhilfe-plattform" target="blank">
-						<img class="lastimg hidden-xs hidden-sm grayscale" src="/Images/press_news.png" alt="News"/>
-					</a>
-					<div class="mobile-filler hidden-md hidden-lg"></div>
-				</div>
-			</div>			
-		</div>
-		
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
-				<h3 class="dots">............................................................................................................</h3>	
-			</div>
-		</div>
-		
-		<div class="row" id="features">
-			<div class="col-xs-12 col-md-4 col-sm-6" onclick="location.href='/Register'" style="cursor: pointer;">
-				<img src="/Images/icon_lupe.png" alt="Lupe"/>
-				<h3 class="blue">Lernhilfe suchen</h3>
-				<p class="blue">Finde jetzt ältere SchülerInnen, die dir beim Lernen für den Nachzipf, 
-				eine Schularbeit oder einfach mal zwischendurch<br/> helfen. Schnell & einfach!</p>
-			</div>
-			<div class="col-xs-12 col-md-4 col-sm-6" onclick="location.href='/Register'" style="cursor: pointer;">
-				<img src="/Images/icon_lightbulb.png" alt="Glühbirne"/>
-				<h3 class="blue">Lernhilfe anbieten</h3>
-				<p class="blue">Deine Stärken liegen in Mathe, Deutsch oder Bio? Super! Nutze deine Talente
-				und unterstütze jüngere MitschülerInnen aktiv beim Lernen.</p>
-			</div>			
-			<div class="col-xs-12 col-md-4 col-sm-6 col-sm-offset-3  col-md-offset-0" onclick="location.href='/Events'" style="cursor: pointer;">
-				<img src="/Images/icon_calendar.png" alt="Kalender"/>
-				<h3 class="blue">Workshops besuchen</h3>
-				<p class="blue">Im Berufsalltag entscheidend und trotzdem nicht am Lehrplan? In diesen Workshops
-				könnt ihr euch Skills aneignen, auf die es im Leben wirklich ankommt.</p>
-			</div>
-		</div>
-		
-		<div id="makethetourbg" onclick="window.location='/Home/Tour';">
-		<div class="row" id="makethetour">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-			<p class="red">Schau dir an was talentify.me für dich bringt</p>
-			<div class="row vertical-align">
-				<div class="col-xs-1 col-sm-3 col-md-3">
-				</div>
-				<div class="col-xs-10 col-sm-6 col-md-6 text-center">
-					<h1 class="white"> Mach einen Rundgang </h1>
-				</div>
-				<div class="col-xs-1 col-sm-1 col-md-1 hidden-xs">
-					<a href="/Home/Tour"><img src="/Images/index_arrow.png" alt="Pfeil"/></a>
-				</div>
-			</div>
-			<p class="red"> Screenshots, alle Funktionen und vieles mehr</p>
-			</div>	
-		</div>
-		</div>
-		
-		<div class="row" id="comment">
-			<div class="row">
-				<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0">
-					<p class="blue blockquote">
-						&bdquo;Ein riesengroßes Lob für die Webseite! Die ist wirklich sehr 
-						gut gelungen. Sehr benutzerfreundlich, ich hab mich gleich 
-						ausgekannt wie die zu handhaben ist.&ldquo;</p>
-					<p class="blue blockquotecite"> Felix M. ist Schüler am TGM - Schule der Technik </p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					<a href="/Home/Voice"> Was andere über talentify.me sagen</a> 
-					<a href="/Home/Voice" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
-				</div>
-			</div>				
-		</div>
-	
-		<div id="academybg">
-		<div class="row" id="academy">
-			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-				<h2 class="blue">Einen Schritt voraus, mit der talentify.me Academy</h2>
-			</div>
-			<div id="home-events"></div>
-            <h3 class="blue">Derzeit finden leider keine Events statt.</h3>
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<a href="/Events">Alle Events in der Übersicht</a>
-				<a href="/Events" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
-			</div>
-		</div>		
-		</div>
-		
-		<div class="row" id="aboutus">
-			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-				<img src="/Images/index_logo.png" alt="talentify.me"/>
-			</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <p class="blue">Unser Ziel ist es, die individuellen Talente junger Menschen zu fördern,<br />
-                unabhängig von der sozialen und finanziellen Situation der Eltern.</p>
-				<a href="/Home/About" class="linkgreen">Erfahre mehr über uns</a>
-				<a href="/Home/About" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
-			</div>			
-		</div>
-		
-		<div class="row" id="yourregistry">
-			<div class="row">
-				<div class="hidden-xs col-sm-12 col-md-12">
-                    <button type="button" class="redbutton normalbutton btn btn-primary btn-lg hidden-xs visible-sm-* visible-md-* visible-lg-* text-center" onclick="location.href='/Register'">
-                        <a href="/Register" class="buttonlink">
-                            Jetzt kostenlos registrieren
-                        </a>
+        <div class="row hidden-md hidden-lg">
+            <div class="col-xs-12 col-sm-11">
+                <h1 class="white">Mehr als Nachhilfe</h1>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <img src="/Images/header_dots.png" class="dots" alt="header dots" />
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <p>talentify.me unterstützt die schulübergreifende Lernhilfe zwischen SchülerInnen, fördert gezielt Talente und bietet spannende Workshops.</p>
+            </div>
+        </div>
+        <div class="row hidden-xs hidden-sm">
+            <div class="col-md-9 no-gutter">
+                <h1 class="white">Mehr als Nachhilfe</h1>
+            </div>
+            <div class="col-md-9 no-gutter">
+                <img src="/Images/header_dots.png" class="dots" alt="header dots" />
+            </div>
+            <div class="col-md-5 no-gutter">
+                <p>talentify.me unterstützt die schulübergreifende Lernhilfe zwischen SchülerInnen, fördert gezielt Talente und bietet spannende Workshops.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="postheaderbg">
+    <div class="row hidden-xs" id="postheader">
+        <div class="row">
+            <div class="col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+                <p class="big">talentify.me ist und wird für SchülerInnen immer kostenlos sein.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5 col-sm-offset-1 col-md-6 col-md-offset-0">
+                <div class="input-group">
+                    <input type="email" class="form-control" id="eingabefeldEmail" placeholder="E-Mail-Adresse">
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-md-offset-0 col-rightened">
+                <button type="button" class="redbutton btn btn-primary btn-md hidden-xs visible-sm-* visible-md-* visible-lg-* text-center">
+                    <a href="javascript:void(0);" class="buttonlink" onclick="emailRegister();">
+                        Kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mobileheaderbg">
+    <div class="row hidden-sm hidden-md hidden-lg" id="mobileheader">
+        <div class="row">
+            <div class="col-xs-8">
+                <a href="/"><img src="/Images/header_logo.png" class="logo" alt="logo" /></a>
+            </div>
+            <div class="col-xs-2 col-xs-offset-2">
+                <img src="/Images/header_menu.png" class="menu" id="mobilemenutrigger" alt="logo" />
+            </div>
+            <div class="col-xs-12" id="mobilemenu">
+                <div class="row">
+                    <a href="/">Startseite</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Home/Tour">Rundgang</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Home/Voice">Referenzen</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Home/About">Das ist talentify.me</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Login">Anmelden</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="white">Mehr als Nachhilfe</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg text-center">
+                    <a href="/Register" class="buttonlink">
+                        Kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="indexmenubg">
+    <div class ="row hidden-xs" id="menu">
+        <div class="col-xs-12 col-sm-3 hidden-md hidden-lg">
+            <img src="/Images/index_logo.png" class="logo" alt="logo" />
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm no-gutter">
+            <img src="/Images/index_logo.png" class="mdlglogo" alt="logo" />
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-7 col-md-offset-2 col-rightened">
+            <div class="menu">
+                <a class="menu" href="/Home/Tour">Rundgang</a>
+                <a class="menu" href="/Home/Voice">Stimmen</a>
+                <a class="menu" href="/Home/About">Über uns</a>
+                <a href="/login">
+                    <button type="button" class="redbutton btn btn-primary btn-lg visible-sm-block visible-md-block visible-lg-block">
+                        <b>Anmelden</b>
                     </button>
-				</div>
-				<div class="hidden-sm hidden-md hidden-lg col-sm-12 col-md-12">
-                    <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg visible-xs-* hidden-sm hidden-md hidden-lg text-center" onclick="location.href='/Register'">
-                        <a href="/Register" class="buttonlink">
-                            Kostenlos registrieren
-                        </a>
-                    </button>
-				</div>					
-			</div>			
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					<p class="blue">Noch Fragen? Wir haben die Antworten.</p>
-					<a href="https://talentify.zendesk.com/hc/de" target="blank" class="yra linkgreen">Zum talentify.me Hilfesystem </a>
-				</div>				
-			</div>	
-		</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="knownfrombg">
+    <div class="row" id="knownfrom">
+        <div class=" col-sm-12 col-md-12 no-gutter">
+            <h3 class="blue"> Bekannt aus:</h3>
+            <div id="images">
+                <a href="http://kurier.at/chronik/niederoesterreich/internet-plattform-schueler-geben-gratis-nachhilfe/126.584.429" target="blank">
+                    <img src="/Images/press_kurier.png" class="grayscale" alt="Kurier" />
+                </a>
+                <a href="http://derstandard.at/2000012982250/Plattform-fuer-Nachhilfe-unter-Schuelern-startet" target="blank">
+                    <img src="/Images/press_derstandard.png" class="grayscale" alt="Der Standard" />
+                </a>
+                <a href="https://www.youtube.com/watch?v=N0KYex2q0hk" target="blank">
+                    <img src="/Images/press_atv.png" class="grayscale" alt="ATV" />
+                </a>
+                <a href="http://www.puls4.com/video/puls-4-news/play/2777345" target="blank">
+                    <img src="/Images/press_puls4.png" class="lastmobileimg grayscale" alt="'Puls 4" />
+                </a>
+                <a href="http://www.news.at/a/talentify.me-neue-nachhilfe-plattform" target="blank">
+                    <img class="lastimg hidden-xs hidden-sm grayscale" src="/Images/press_news.png" alt="News" />
+                </a>
+                <div class="mobile-filler hidden-md hidden-lg"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="totopbg">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
+            <h3 class="dots">............................................................................................................</h3>
+        </div>
+    </div>
+</div>
+
+<div id="featuresbg">
+    <div class="row" id="features">
+        <div class="col-xs-12 col-md-4 col-sm-6" onclick="location.href='/Register'" style="cursor: pointer;">
+            <img src="/Images/icon_lupe.png" alt="Lupe" />
+            <h3 class="blue">Lernhilfe suchen</h3>
+            <p class="blue">
+                Finde jetzt ältere SchülerInnen, die dir beim Lernen für den Nachzipf,
+                eine Schularbeit oder einfach mal zwischendurch<br /> helfen. Schnell & einfach!
+            </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-sm-6" onclick="location.href='/Register'" style="cursor: pointer;">
+            <img src="/Images/icon_lightbulb.png" alt="Glühbirne" />
+            <h3 class="blue">Lernhilfe anbieten</h3>
+            <p class="blue">
+                Deine Stärken liegen in Mathe, Deutsch oder Bio? Super! Nutze deine Talente
+                und unterstütze jüngere MitschülerInnen aktiv beim Lernen.
+            </p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-sm-6 col-sm-offset-3  col-md-offset-0" onclick="location.href='http://www.talentify.academy'" style="cursor: pointer;">
+            <img src="/Images/icon_unihut.png" class="unihut" alt="Academy" />
+            <h3 class="blue">talentify<sup>&reg;</sup> Academy</h3>
+            <p class="blue">
+                Sichere dir einen Wissensvorsprung, schmücke deinen Lebenslauf
+                mit einem Diplom und finde heraus welcher Weg für dich "der Richtige" ist!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="makethetourbg" onclick="window.location='/Home/Tour';">
+    <div class="row" id="makethetour">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <p class="red">Schau dir an was talentify.me für dich bringt</p>
+            <div class="row vertical-align">
+                <div class="col-xs-1 col-sm-3 col-md-3">
+                </div>
+                <div class="col-xs-10 col-sm-6 col-md-6 text-center">
+                    <h1 class="white"> Mach einen Rundgang </h1>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 hidden-xs">
+                    <a href="/Home/Tour"><img src="/Images/index_arrow.png" alt="Pfeil" /></a>
+                </div>
+            </div>
+            <p class="red"> Screenshots, alle Funktionen und vieles mehr</p>
+        </div>
+    </div>
+</div>
+
+<div id="commentbg">
+    <div class="row" id="comment">
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0">
+                <p class="blue blockquote">
+                    &bdquo;Ein riesengroßes Lob für die Webseite! Die ist wirklich sehr
+                    gut gelungen. Sehr benutzerfreundlich, ich hab mich gleich
+                    ausgekannt wie die zu handhaben ist.&ldquo;
+                </p>
+                <p class="blue blockquotecite"> Felix M. ist Schüler am TGM - Schule der Technik </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <a href="/Home/Voice"> Was andere über talentify.me sagen</a>
+                <a href="/Home/Voice" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="academybg">
+    <div class="row" id="academy">
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <h2 class="blue">Einen Schritt voraus, mit der talentify<sup>&reg;</sup> Academy</h2>
+        </div>
+        <div id="home-events"></div>
+        <p class="blue">Die Academy Workshops starten wieder im Herbst 2015.</p>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <a href="http://www.talentify.academy">Hier geht’s zur talentify<sup>&reg;</sup> Academy</a>
+            <a href="http://www.talentify.academy" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
+        </div>
+    </div>
+</div>
+
+<div id="aboutusbg">
+    <div class="row" id="aboutus">
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <img src="/Images/index_logo.png" alt="talentify.me" />
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <p class="blue">
+                Unser Ziel ist es, die individuellen Talente junger Menschen zu fördern,<br />
+                unabhängig von der sozialen und finanziellen Situation der Eltern.
+            </p>
+            <a href="/Home/About" class="linkgreen">Erfahre mehr über uns</a>
+            <a href="/Home/About" class="no-line"> <i class="icon-arrow hidden-xs fa fa-arrow-right fa-sm"></i></a>
+        </div>
+    </div>
+</div>
+
+<div id="yourregistrybg">
+    <div class="row" id="yourregistry">
+        <div class="row">
+            <div class="hidden-xs col-sm-12 col-md-12">
+                <button type="button" class="redbutton normalbutton btn btn-primary btn-lg hidden-xs visible-sm-* visible-md-* visible-lg-* text-center" onclick="location.href='/Register'">
+                    <a href="/Register" class="buttonlink">
+                        Jetzt kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+            <div class="hidden-sm hidden-md hidden-lg col-sm-12 col-md-12">
+                <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg visible-xs-* hidden-sm hidden-md hidden-lg text-center" onclick="location.href='/Register'">
+                    <a href="/Register" class="buttonlink">
+                        Kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p class="blue">Noch Fragen? Wir haben die Antworten.</p>
+                <a href="https://talentify.zendesk.com/hc/de" target="blank" class="yra linkgreen">Zum talentify.me Hilfesystem </a>
+            </div>
+        </div>
+    </div>
+</div>

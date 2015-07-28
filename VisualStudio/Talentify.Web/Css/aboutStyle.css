@@ -4,7 +4,10 @@
 #headerbg {
 		background: url("/Images/about_header.png"), #ffbe00;
 		background-position: 55% bottom;
-		background-repeat: no-repeat
+		background-repeat: no-repeat;
+        position: fixed;
+        z-index: 0;
+        width: 100%;
 }
 
 #header {
@@ -20,10 +23,6 @@
 	z-index:1 !important
 }
 
-#header p.account{
-	font-size: 14px;
-	margin: 24px 0 0 40px	
-}
 
 #header img.mdlglogo {
 	height: 55px;
@@ -36,15 +35,40 @@
 	margin-top: 33px
 }
 
-#header button {
-	width: 180px;
-	margin-left: 40px;
-	padding: 5px 5px 5px 5px
+#header a.menu {
+    color: #fff;
+    margin: 0 20px 0 20px;
+    font-size: 18px;
 }
 
+#header a.menu:hover {
+    color: #fff3cd;
+    text-decoration: none;
+}
+
+#header a:hover {
+    text-decoration: none
+}
+
+#header button {
+    margin: 41px 0 8px 20px;
+	padding: 5px 25px 5px 25px
+}
+
+.menu {
+    margin-right: -20px;
+    z-index: 1 !important
+}
 /* ---------- Row description ---------- */
+#descriptionbg {
+    background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #description  {
-	margin: 90px auto 90px auto
+	margin: 480px auto 0 auto;
+    padding: 90px 0 90px 0;
 }
 
 #description h3  {
@@ -54,6 +78,8 @@
 /* ---------- Row whatwedo ---------- */
 #whatwedobg {
 	background: #f0f0f2;
+    position: relative;
+    z-index: 1
 }
 
 #whatwedo {
@@ -68,8 +94,15 @@
 
 
 /* ---------- Row howitstarted ---------- */
+#howitstartedbg {
+    background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #howitstarted {
-	margin: 90px auto 0 auto
+	margin: 0 auto 0 auto;
+    padding-top: 90px
 }
 
 #howitstarted p.sm, #howitstarted h2.sm{
@@ -84,7 +117,9 @@
 
 /* ---------- Row whyweexist ---------- */
 #whyweexistbg {
-	background: #e64461
+	background: #e64461;
+    position: relative;
+    z-index: 1
 }
 
 #whyweexist {
@@ -101,8 +136,16 @@
 }
 
 /* ---------- Row bepartofit ---------- */
+#bepartofitbg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
+
 #bepartofit {
-	margin: 90px auto 30px auto;
+	margin: 0 auto 0 auto;
+    padding: 90px 0 30px 0;
 	text-align: left
 }
 
@@ -131,7 +174,9 @@
 
 /* ---------- Row ourteam ---------- */
 #ourteambg {
-	background: #f0f0f2
+	background: #f0f0f2;
+    position: relative;
+    z-index: 1
 }
 
 #ourteambig {
@@ -175,8 +220,15 @@
 }
 
 /* ---------- Row ourpartner ---------- */
+#ourpartnerbg {
+    background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #ourpartner {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #ourpartner img {
@@ -195,7 +247,9 @@
 
 /* ---------- Row yourinformation ---------- */
 #yourinformationbg {
-	background: #00a77f
+	background: #00a77f;
+    position: relative;
+    z-index: 1
 }
 
 #yourinformation {
@@ -242,6 +296,15 @@
 		vertical-align: bottom;
 		z-index:0 !important
 	}	
+
+    #header a.menu {
+        margin: 0 15px 0 15px;
+        font-size: 16px;
+    }
+
+    .menu {
+        margin-right: 0
+    }
 	
 	/* --- Row bepartofit --- */
 	
@@ -312,6 +375,7 @@
 	#mobileheader img.menu{
 		float: right;
 		margin-top: 5px;
+        margin-right: 0;
 		height: 22px
 	}	
 	#mobileheader h1 {

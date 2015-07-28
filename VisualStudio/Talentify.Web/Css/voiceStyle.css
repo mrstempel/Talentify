@@ -1,10 +1,67 @@
 /* ---------------------------------------- Voice Page ---------------------------------------- */
 
+/* ---------- modal ---------- */
+
+.modal a, .modal b, .modal p {
+	text-align: left;
+	font-size: 16px
+}	
+
+.modal a {
+    color: #ffbe00;
+}
+
+.modal .calc p {
+    margin-bottom: 5px
+}
+
+.modal h1 {
+	font-family: CaeciliaLTPro-85Heavy;
+	text-align: left;
+	color: #ffbe00;
+    margin-bottom: 16px;
+	font-size: 28px
+}
+
+.modal i {
+    color: #ffbe00;
+    font-size: 36px;
+    margin-top: -50px
+}
+
+.modal i.info {
+    margin-left: 1px;
+    font-size: 14px
+}
+
+.modal button {
+	max-width: 40px;
+	text-align: right;
+    opacity: 0.5;
+    margin-top: -37px
+}
+
+.modal button:hover {
+	opacity: 1
+}
+
+.modal button img {
+	width:90%
+}
+
+.modal img {
+    margin-top: 10px;
+    width: 860px
+}
+
 /* ---------- Row header ---------- */
 #headerbg {
 		background: url("/Images/voice_header.png"), #00a77f;
 		background-position: 72% bottom;
-		background-repeat: no-repeat
+		background-repeat: no-repeat;
+        position: fixed;
+        z-index: 0;
+        width: 100%;
 }
 
 #header {
@@ -40,15 +97,41 @@
 	margin: 15px 0 15px 0
 }
 
+#header a.menu {
+    color: #fff;
+    margin: 0 20px 0 20px;
+    font-size: 18px;
+}
+
+#header a.menu:hover {
+    color: #c9f0e7;
+    text-decoration: none
+
+}
+
+#header a:hover {
+    text-decoration: none
+}
+
 #header button {
-	width: 180px;
-	margin-left: 40px;
-	padding: 5px 5px 5px 5px
+    margin: 41px 0 8px 20px;
+	padding: 5px 25px 5px 25px
+}
+
+.menu {
+    margin-right: -20px
 }
 
 /* ---------- Row video ---------- */
+#videobg {
+    background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #video  {
-	margin: 90px auto 90px auto;
+    margin: 480px auto 0 auto;
+	padding: 90px 0 90px 0;
 	text-align: left
 }
 
@@ -64,7 +147,9 @@
 
 /* ---------- Row comment ---------- */
 #commentbg {
-	background: #f0f0f2
+	background: #f0f0f2;
+    position: relative;
+    z-index: 1
 }
 
 #comment {
@@ -76,8 +161,15 @@
 }
 
 /* ---------- Row newspaper ---------- */
+#newspaperbg {
+    background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #newspaper {
-	margin: 70px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 70px 0 90px 0
 }
 
 #newspaper img {
@@ -98,9 +190,38 @@
 	font-size: 18px
 }
 
+#newspaper p.yra {
+    margin: 60px 0 0 0;
+    font-size: 22px
+}
+
+#newspaper a.yra, #newspaper a.yra:hover{
+	color: #00a77f;
+}
+
+#newspaper a.yra:link {
+	border-bottom: solid #00a77f;
+	border-bottom-width:1px;
+	padding-bottom:3px;
+	text-decoration: none
+}
+
+#newspaper a.yra:hover, #newspaper a.yra:active,
+#newspaper a.yra:visited{
+	border-bottom: none;
+	text-decoration: none;
+	margin-bottom: 1px
+}
+
+#newspaper a.yra.no-line{
+	border-bottom: none;
+}
+
 /* ---------- Row parents ---------- */
 #parentsbg {
-	background: #e64461
+	background: #e64461;
+    position: relative;
+    z-index: 1
 }
 
 #parents {
@@ -118,8 +239,15 @@
 }
 
 /* ---------- Row teacher ---------- */
+#teacherbg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #teacher {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #teacher img {
@@ -127,13 +255,27 @@
 }
 
 /* ---------- Row slideshow ---------- */
+#slideshowbg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #slideshow  {
-	margin: 60px auto 60px auto
+	margin: -1px auto -1px auto;
+    padding: 60px 0 60px 0
 }
 
 /* ---------- Row school ---------- */
+#schoolbg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #school {
-	margin: -60px auto -10px auto
+	margin: -1px auto -1px auto;
+    padding: -60px 0 -10px 0
 }
 
 #school a {
@@ -152,6 +294,14 @@
 /* ---------- Tablet ---------- */
 
 @media (min-width: 768px) and (max-width: 991px) { 
+
+    /* --- Row modal --- */
+    
+    .modal img {
+        margin-top: 10px;
+        width: 560px
+    }
+
 	/* --- Row header --- */
 	#header img.kids {
 		margin-left: -119px;
@@ -161,6 +311,15 @@
 		z-index:0 !important
 	}	
 	
+    #header a.menu {
+        margin: 0 15px 0 15px;
+        font-size: 16px;
+    }
+
+    .menu {
+        margin-right: 0
+    }
+
 	/* --- Row footer --- */
 	#footer {
 		margin-bottom: 90px
@@ -168,7 +327,29 @@
 }
 
 /* ---------- Mobile ---------- */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+    /* --- modal --- */
+    .modal a, .modal b, .modal p {
+	    text-align: left;
+	    font-size: 14px
+    }	
+    
+    .modal i {
+        color: #ffbe00;
+        margin-top: 16px;
+        font-size: 20px
+    }
+
+    .modal h1{
+	    font-size: 20px
+    }
+
+    .modal img {
+        margin-top: 10px;
+        width: 260px
+    }
+
+
 	/* --- Row mobileheader --- */
 	#mobileheaderbg {
 		background: url("/Images/voice_mobileheader.png"), #00a77f;
@@ -188,6 +369,7 @@
 	#mobileheader img.menu{
 		float: right;
 		margin-top: 5px;
+        margin-right: 0;
 		height: 22px
 	}	
 	#mobileheader h1 {

@@ -4,7 +4,10 @@
 #headerbg {
 		background: url("/Images/tour_header.png"), #ffbe00;
 		background-position: 60% bottom;
-		background-repeat: no-repeat
+		background-repeat: no-repeat;
+        position: fixed;
+        z-index: 0;
+        width: 100%;
 }
 
 #header {
@@ -40,20 +43,53 @@
 	margin: 15px 0 15px 0
 }
 
-#header button { 
-	width: 180px;
-	margin-left: 40px;
-	padding: 5px 5px 5px 5px
+#header a.menu {
+    color: #fff;
+    margin: 0 20px 0 20px;
+    font-size: 18px;
+}
+
+#header a.menu:hover {
+    color: #fff3cd;
+    text-decoration: none
+}
+
+#header button {
+    margin: 41px 0 8px 20px;
+	padding: 5px 25px 5px 25px;
+    text-decoration: none
+}
+
+#header a:hover {
+    text-decoration: none
+}
+
+.menu {
+    margin-right: -20px
 }
 
 /* ---------- Row thinkaboutit ---------- */
+#thinkaboutitbg {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #thinkaboutit  {
-	margin: 125px auto 90px auto
+	margin: 480px auto 0 auto;
+    padding: 125px 0 90px 0
 }
 
 /* ---------- Row slideshow ---------- */
+#slideshowbg {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #slideshow  {
-	margin: 60px auto 60px auto
+	margin: 0 auto 0 auto;
+    padding: 60px 0 60px 0
 }
 
 #slideshow  img{
@@ -61,8 +97,15 @@
 }
 
 /* ---------- Row school ---------- */
+#schoolbg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #school {
-	margin: -60px auto 90px auto
+	margin: -1px auto -1px auto;
+    padding: -60px 0 -10px 0
 }
 
 #school a {
@@ -80,7 +123,9 @@
 
 /* ---------- Row findpupil ---------- */
 #findpupilbg {
-	background: #00a77f
+	background: #00a77f;
+    position: relative;
+    z-index: 1;
 }
 
 #findpupil {
@@ -93,8 +138,15 @@
 }
 
 /* ---------- Row help ---------- */
+#helpbg {
+	background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #help {
-	margin: 50px auto 50px auto;
+	margin: 0 auto 0 auto;
+    padding: 50px 0 50px 0
 }
 
 
@@ -104,7 +156,9 @@
 
 /* ---------- Row communication ---------- */
 #communicationbg {
-	background: #f0f0f2
+	background: #f0f0f2;
+    position: relative;
+    z-index: 1;
 }
 
 #communicationbig {
@@ -113,8 +167,15 @@
 
 
 /* ---------- Row bonus ---------- */
+#bonusbg {
+	background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #bonus {
-	margin: 90px auto 90px auto
+	margin: 0 auto -1px auto;
+    padding: 90px 0 90px 0
 }
 
 #bonus p {
@@ -124,7 +185,17 @@
 /* ---------- Tablet ---------- */
 
 @media (min-width: 768px) and (max-width: 991px) { 
-	/* --- Row footer --- */
+	/* --- Row header --- */
+    #header a.menu {
+        margin: 0 15px 0 15px;
+        font-size: 16px;
+    }
+
+    .menu {
+        margin-right: 0
+    }
+    
+    /* --- Row footer --- */
 	#footer {
 		margin-bottom: 90px
 	}	
@@ -153,6 +224,7 @@
 	#mobileheader img.menu{
 		float: right;
 		margin-top: 5px;
+        margin-right: 0;
 		height: 22px
 	}	
 	#mobileheader h1 {

@@ -5,240 +5,293 @@
 
 @section CustomCss
 {
-	<link rel="stylesheet" href="/Css/tourStyle.min.css">
+    <link rel="stylesheet" href="/Css/tourStyle.min.css">
 }
 
-@section CustomJavascript 
+@section CustomJavascript
 {
-	<!-- Slick Slideshow -->
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.2/slick.min.js"></script>
-	<script type="text/javascript" src="/Scripts/slideshow.min.js"></script>
-	<script src="/Scripts/talentify-home.min.js"></script>
-	<script>
-		hasWaypoints = true;
-		$(document).ready(function()
-		{
-			HomePage.init();
-		});
-	</script>
+    <!-- Slick Slideshow -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.2/slick.min.js"></script>
+    <script type="text/javascript" src="/Scripts/slideshow.min.js"></script>
+    <script src="/Scripts/talentify-home.min.js"></script>
+    <script>
+        hasWaypoints = true;
+        $(document).ready(function () {
+            HomePage.init();
+        });
+    </script>
 }
 
-		<div id="headerbg">
-		<div class="row hidden-xs" id="header">
-			<div class="row">
-				<div class="col-xs-12 col-sm-6 hidden-md hidden-lg">
-					<a href="/"><img src="/Images/header_logo.png" class="logo" alt="talentify.me"/></a>
-				</div>
-				<div class="col-md-3 hidden-xs hidden-sm no-gutter">
-					<a href="/"><img src="/Images/header_logo.png" class="mdlglogo" alt="talentify.me"/></a>
-				</div>
-				<div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-6">
-					<p class="account">Du hast einen Account?</p>
-					<a href="/Login" class="buttonlink">
-						<button type="button" class="yellowbutton_header btn btn-primary btn-lg visible-sm-* visible-md-* visible-lg-*">
-							<b>Anmelden</b>
-						</button>
-					</a>
-				</div>	
-			</div>
-			<div class="row hidden-md hidden-lg">
-				<div class="col-xs-12 col-sm-8">
-					<h1 class="white">Lernen im<br/> 21. Jahrhundert</h1>
-				</div>
-				<div class="col-xs-12 col-sm-9">
-					<img src="/Images/header_dots.png" class="dots" alt="Dots"/>
-				</div>
-				<div class="col-xs-12 col-sm-5">
-					<p>Talente fördern mit Lernhilfe von <br/> SchüleRInnen für SchülerInnen</p>
-				</div>
-			</div>
-			<div class="row hidden-xs hidden-sm">
-				<div class="col-md-7 no-gutter">
-					<h1 class="white">Lernen im<br/> 21. Jahrhundert</h1>
-				</div>
-				<div class="col-md-9 no-gutter">
-					<img src="/Images/header_dots.png" class="dots" alt="Dots"/>
-				</div>
-				<div class="col-md-5 no-gutter">
-					<p>Talente fördern mit Lernhilfe von <br/> SchülerInnen für SchülerInnen</p>
-				</div>
-			</div>			
-		</div>
-		</div>	
-		
-		<div id="mobileheaderbg">
-        <div class="row hidden-sm hidden-md hidden-lg" id="mobileheader">
-            <div class="row">
-                <div class="col-xs-8">
-                    <a href="/"><img src="/Images/header_logo.png" class="logo" alt="logo" /></a>
-                </div>
-                <div class="col-xs-2 col-xs-offset-2">
-                    <img src="/Images/header_menu.png" class="menu" id="mobilemenutrigger" alt="logo" />
-                </div>
-                <div class="col-xs-12" id="mobilemenu">
-                    <div class="row">
-                        <a href="/">Startseite</a>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <a href="/Home/Tour">Rundgang</a>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <a href="/Home/Voice">Stimmen zu talentify.me</a>
-                    </div>
-                    <hr />
-                    <div class="row">
-                        <a href="/Home/About">Das ist talentify.me</a>
-                    </div>
+<div id="headerbg">
+    <div class="row hidden-xs" id="header">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3 hidden-md hidden-lg">
+                <a href="/"><img src="/Images/header_logo.png" class="logo" alt="talentify.me" /></a>
+            </div>
+            <div class="col-md-3 hidden-xs hidden-sm no-gutter">
+                <a href="/"><img src="/Images/header_logo.png" class="mdlglogo" alt="talentify.me" /></a>
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-7 col-md-offset-2 col-rightened">
+                <div class="menu">
+                    <a class="menu" href="/Home/Tour">Rundgang</a>
+                    <a class="menu" href="/Home/Voice">Referenzen</a>
+                    <a class="menu" href="/Home/About">Über uns</a>
+                    <a href="/login">
+                        <button type="button" class="yellowbutton_header btn btn-primary btn-lg visible-sm-block visible-md-block visible-lg-block">
+                            <b>Anmelden</b>
+                        </button>
+                    </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h1 class="white">&bdquo;Lernen im 21. Jahrhundert!&ldquo;</h1>
+        </div>
+        <div class="row hidden-md hidden-lg">
+            <div class="col-xs-12 col-sm-8">
+                <h1 class="white">Lernen im<br /> 21. Jahrhundert</h1>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <img src="/Images/header_dots.png" class="dots" alt="Dots" />
+            </div>
+            <div class="col-xs-12 col-sm-5">
+                <p>Talente fördern mit Lernhilfe von <br /> SchüleRInnen für SchülerInnen</p>
+            </div>
+        </div>
+        <div class="row hidden-xs hidden-sm">
+            <div class="col-md-7 no-gutter">
+                <h1 class="white">Lernen im<br /> 21. Jahrhundert</h1>
+            </div>
+            <div class="col-md-9 no-gutter">
+                <img src="/Images/header_dots.png" class="dots" alt="Dots" />
+            </div>
+            <div class="col-md-5 no-gutter">
+                <p>Talente fördern mit Lernhilfe von <br /> SchülerInnen für SchülerInnen</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mobileheaderbg">
+    <div class="row hidden-sm hidden-md hidden-lg" id="mobileheader">
+        <div class="row">
+            <div class="col-xs-8">
+                <a href="/"><img src="/Images/header_logo.png" class="logo" alt="logo" /></a>
+            </div>
+            <div class="col-xs-2 col-xs-offset-2">
+                <img src="/Images/header_menu.png" class="menu" id="mobilemenutrigger" alt="logo" />
+            </div>
+            <div class="col-xs-12" id="mobilemenu">
+                <div class="row">
+                    <a href="/">Startseite</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Home/Tour">Rundgang</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Home/Voice">Referenzen</a>
+                </div>
+                <hr />
+                <div class="row">
+                    <a href="/Home/About">Das ist talentify.me</a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg text-center">
-                        <a href="/Register" class="buttonlink">
-                            Kostenlos registrieren
-                        </a>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="white">&bdquo;Lernen im 21. Jahrhundert!&ldquo;</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg text-center">
+                    <a href="/Register" class="buttonlink">
+                        Kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  id="menubg">
+    <div class="row hidden-xs" id="menu">
+        <div class="col-xs-12 col-sm-3 hidden-md hidden-lg">
+            <a href="/"><img src="/Images/index_logo.png" class="logo" alt="talentify.me" /></a>
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm no-gutter">
+            <a href="/"><img src="/Images/index_logo.png" class="mdlglogo" alt="talentify.me" /></a>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-sm-offset-1 col-md-7 col-md-offset-2 col-rightened">
+            <div class="menu">
+                <a class="menu" href="/Home/Tour">Rundgang</a>
+                <a class="menu" href="/Home/Voice">Referenzen</a>
+                <a class="menu" href="/Home/About">Über uns</a>
+                <a href="/login">
+                    <button type="button" class="redbutton btn btn-primary btn-lg visible-sm-block visible-md-block visible-lg-block">
+                        <b>Anmelden</b>
                     </button>
-                </div>
+                </a>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="thinkaboutitbg">
+    <div class="row" id="thinkaboutit">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <h2 class="blue">Stell dir vor, du findest ältere SchülerInnen die dir beim Lernen helfen, bietest selbst Lernhilfe an oder besuchst spannende Workshops. Das ist talentify.me</h2>
         </div>
-		
-		<div class="row" id="thinkaboutit">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<h2 class="blue">Stell dir vor, du findest ältere SchülerInnen die dir beim Lernen helfen, bietest selbst Lernhilfe an oder besuchst spannende Workshops. Das ist talentify.me</h2>
-			</div>
-		</div>
-		
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
-				<h3 class="dots">............................................................................................................</h3>	
-			</div>
-		</div>
-		
-		<div class="row" id="slideshow">
-			<div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0">
-				<button type="button" data-role="none" class="prev"><i class="hidden-xs hidden-sm fa fa-arrow-left fa-lg"></i></button>
-				<div class="slider center"> 
-					<div><a href="http://www.g16.at/" target="blank"><img src="/Images/slideshow_grg16.png" alt="GRG 16"/></a></div>
-					<div><a href="http://www.htlmistelbach.ac.at/" target="blank"><img src="/Images/slideshow_htl-mistelbach.png" alt="HTL Mistelbach"/></a></div>
-					<div><a href="http://www.htl.rennweg.at/" target="blank"><img src="/Images/slideshow_htl-rennweg.png" alt="HTL Rennweg"/></a></div>
-					<div><a href="http://www.tgm.ac.at/" target="blank"><img src="/Images/slideshow_tgm.png" alt="TGM"/></a></div>
-					<div><a href="https://schoenborngasse.vbs.ac.at/" target="blank"><img src="/Images/slideshow_vbs-schoenborngasse.png" alt="VBS Schönborngasse"/></a></div>
-					<div><a href="http://www.g16.at/" target="blank"><img src="/Images/slideshow_grg16.png" alt="GRG 16"/></a></div>
-					<div><a href="http://www.htlmistelbach.ac.at/" target="blank"><img src="/Images/slideshow_htl-mistelbach.png" alt="HTL Mistelbach"/></a></div>
-					<div><a href="http://www.htl.rennweg.at/" target="blank"><img src="/Images/slideshow_htl-rennweg.png" alt="HTL Rennweg"/></a></div>
-					<div><a href="http://www.tgm.ac.at/" target="blank"><img src="/Images/slideshow_tgm.png" alt="TGM"/></a></div>
-					<div><a href="https://schoenborngasse.vbs.ac.at/" target="blank"><img src="/Images/slideshow_vbs-schoenborngasse.png" alt="VBS Schönborngasse"/></a></div>
-				</div>
-				<button type="button" data-role="none" class="next"><i class="hidden-xs hidden-sm fa fa-arrow-right fa-lg"></i></button>
-			</div>
-		</div>
-				
-		<div class="row" id="school">
-			<div class="col-xs-12 col-sm-12 col-md-12">
-				<br/><p  class="blue">Diese Schulen unterstützen talentify.me und fördern dabei aktiv ihre SchülerInnen</p>
-				<a href="https://docs.google.com/forms/d/14gzslkxqBh4qMtBrp_v9MZ8veaKrVnADL_dd3RUH1mc/viewform?c=0&w=1" class="linkgreen" target="_blank">Jetzt Partnerschule werden</a>				
-			</div>					
-		</div>	
-		
-		<div id="findpupilbg">
-		<div class="row" id="findpupil">
-			<div class="col-xs-12 col-sm-6 col-md-6">
-				<img src="/Images/tour_macbook.png" alt="Macbook"/>
-			</div>	
-			<div class="col-xs-12 col-sm-6 col-md-5">
-				<h3 class="white col-leftened">Finde SchülerInnen zur <br/>Lernhilfe in deiner Nähe</h3><br/>
-				<p class="green col-leftened">Mit einer einfachen Suche findest du schnell und einfach SchülerInnen an deiner oder
-				benachbarten Schulen. Eine Kartenübersicht und Filterfunktionen erleichtern die Suche. Und solltest du
-				einmal niemanden finden, melde dich einfach bei uns - wir helfen weiter!</p>
-			</div>	
-		</div>
-		</div>
-		
-		<div class="row" id="help">
-			<div class="col-xs-12 col-sm-6 col-md-5">
-				<h3 class="blue col-leftened">Biete Lernhilfe an und <br/> hilf anderen SchülerInnen</h3><br/>
-                <p class="blue col-leftened">Wenn du Lernhilfe anbieten möchtest (nicht verpflichtend), kannst du in deinem Profil angeben,
+    </div>
+</div>
+
+<div id="totopbg">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 no-gutter">
+            <h3 class="dots">............................................................................................................</h3>
+        </div>
+    </div>
+</div>
+
+<div id="slideshowbg">
+    <div class="row" id="slideshow">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-12 col-sm-offset-0 col-md-12 col-md-offset-0">
+            <button type="button" data-role="none" class="prev"><i class="hidden-xs hidden-sm fa fa-arrow-left fa-lg"></i></button>
+            <div class="slider center">
+                <div><a href="http://www.g16.at/" target="blank"><img src="/Images/slideshow_grg16.png" alt="GRG 16" /></a></div>
+                <div><a href="http://www.htlmistelbach.ac.at/" target="blank"><img src="/Images/slideshow_htl-mistelbach.png" alt="HTL Mistelbach" /></a></div>
+                <div><a href="http://www.htl.rennweg.at/" target="blank"><img src="/Images/slideshow_htl-rennweg.png" alt="HTL Rennweg" /></a></div>
+                <div><a href="http://www.tgm.ac.at/" target="blank"><img src="/Images/slideshow_tgm.png" alt="TGM" /></a></div>
+                <div><a href="https://schoenborngasse.vbs.ac.at/" target="blank"><img src="/Images/slideshow_vbs-schoenborngasse.png" alt="VBS Schönborngasse" /></a></div>
+                <div><a href="http://www.g16.at/" target="blank"><img src="/Images/slideshow_grg16.png" alt="GRG 16" /></a></div>
+                <div><a href="http://www.htlmistelbach.ac.at/" target="blank"><img src="/Images/slideshow_htl-mistelbach.png" alt="HTL Mistelbach" /></a></div>
+                <div><a href="http://www.htl.rennweg.at/" target="blank"><img src="/Images/slideshow_htl-rennweg.png" alt="HTL Rennweg" /></a></div>
+                <div><a href="http://www.tgm.ac.at/" target="blank"><img src="/Images/slideshow_tgm.png" alt="TGM" /></a></div>
+                <div><a href="https://schoenborngasse.vbs.ac.at/" target="blank"><img src="/Images/slideshow_vbs-schoenborngasse.png" alt="VBS Schönborngasse" /></a></div>
+            </div>
+            <button type="button" data-role="none" class="next"><i class="hidden-xs hidden-sm fa fa-arrow-right fa-lg"></i></button>
+        </div>
+    </div>
+</div>
+
+<div id="schoolbg">
+    <div class="row" id="school">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <br /><p class="blue">Diese Schulen unterstützen talentify.me und fördern dabei aktiv ihre SchülerInnen</p>
+            <a href="https://docs.google.com/forms/d/14gzslkxqBh4qMtBrp_v9MZ8veaKrVnADL_dd3RUH1mc/viewform?c=0&w=1" class="linkgreen" target="_blank">Jetzt Partnerschule werden</a>
+        </div>
+    </div>
+</div>
+
+<div id="findpupilbg">
+    <div class="row" id="findpupil">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <img src="/Images/tour_macbook.png" alt="Macbook" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5">
+            <h3 class="white col-leftened">Finde SchülerInnen zur <br />Lernhilfe in deiner Nähe</h3><br />
+            <p class="green col-leftened">
+                Mit einer einfachen Suche findest du schnell und einfach SchülerInnen an deiner oder
+                benachbarten Schulen. Eine Kartenübersicht und Filterfunktionen erleichtern die Suche. Und solltest du
+                einmal niemanden finden, melde dich einfach bei uns - wir helfen weiter!
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="helpbg">
+    <div class="row" id="help">
+        <div class="col-xs-12 col-sm-6 col-md-5">
+            <h3 class="blue col-leftened">Biete Lernhilfe an und <br /> hilf anderen SchülerInnen</h3><br />
+            <p class="blue col-leftened">
+                Wenn du Lernhilfe anbieten möchtest (nicht verpflichtend), kannst du in deinem Profil angeben,
                 in welchen Fächern du anderen helfen willst, wann du am besten Zeit hast und ob bzw. wieviel du verlangen möchtest.
-                Je günstiger du es anbietest, desto mehr Bonuspunkte gibt’s!</p>
-			</div>
-			<div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-1">
-				<img src="/Images/tour_ipad.png" alt="iPad"/>
-			</div>	
-		</div>
-		
-		<div id="communicationbg">
-		<div class="row hidden-xs" id="communicationbig">
-			<div class="col-sm-6 col-md-6">
-				<img src="/Images/tour_lernhilfe.png" alt="Screenshot"/>
-			</div>	
-			<div class="col-sm-6 col-md-5">
-				<h3 class="blue col-leftened">Alle Kommunikation <br/> an einem Platz.</h3><br/>
-				<p class="blue col-leftened">Das Lernhilfecenter ist der zentrale Platz, über den die gesamte Kommunikation auf talentify.me läuft. 
-				Chatte mit anderen SchülerInnen, bekomme Benachrichtigungen und bewerte deine Lernbuddies. Einfach und unkompliziert.</p>
-			</div>
-		</div>			
-		
-		<div class="row hidden-sm hidden-md hidden-lg" id="communicationsmall">
-			<div class="col-xs-12">
-				<h3 class="blue col-leftened">Alle Kommunikation <br/> an einem Platz.</h3><br/>
-				<p class="blue col-leftened">Das Lernhilfecenter ist der zentrale Platz, über den die gesamte Kommunikation auf talentify.me läuft. 
-				Chatte mit anderen SchülerInnen, bekomme Benachrichtigungen und bewerte deine Lernbuddies. Einfach und unkompliziert.</p>
-			</div>
-			<div class="col-xs-12">
-				<img src="/Images/tour_lernhilfe.png" alt="Screenshot"/>
-			</div>	
-		</div>			
-		</div>
-		
-		<div class="row" id="bonus">
-			<div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-0">
-				<img src="/Images/icon_plus.png" alt="Plus"/>
-				<h3 class="blue">Bonuspunkte sammeln und einlösen.</h3>
-				<br/>
-                <p class="blue"> Mit jeder gegebenen Stunde Lernhilfe sammelst du fleißig Bonuspunkte,
-                    mit denen du ab einer gewissen Anzahl das nächste Level erreichen kannst.
-                    Pro Level werden neue Funktionen freigeschalten und du kannst Bonuspunkte auf talentify.me für
-                    verschiedenste Dinge einsetzen, wie zum Beispiel Academy Workshops.</p>
-			</div>
-			<div class="col-xs-12 col-sm-5 col-md-5 col-md-offset-2">
-				<img src="/Images/icon_calendar.png" alt="Kalender"/>
-				<h3 class="blue">In Workshops lernen, worauf es ankommt.</h3>
-				<br/>
-				<p class="blue">Lass dich von ExpertInnen inspirieren, lerne Neues und stärke deine Talente. Die talentify.me Academy bietet eine Vielzahl an
-				verschiedensten Themen und Workshops. Von Kommunikation über Bewerbungscoaching bis hin zu Kreativ- und Tanzworkshops, alles mit
-				dabei. Lerne Inhalte, auf die es im Leben wirklich ankommt.</p>
-			</div>				
-		</div>
-		
-		<div class="row" id="yourregistry">
-			<div class="row">
-				<div class="hidden-xs col-sm-12 col-md-12">
-						<button type="button" class="redbutton normalbutton btn btn-primary btn-lg hidden-xs visible-sm-* visible-md-* visible-lg-* text-center">
-							<a href="/Register" class="buttonlink">
-								Jetzt kostenlos registrieren
-							</a>
-						</button>
-				</div>
-				<div class="hidden-sm hidden-md hidden-lg col-sm-12 col-md-12">
-						<button type="button" class="redbutton mobilebutton btn btn-primary btn-lg visible-xs-* hidden-sm hidden-md hidden-lg text-center">
-							<a href="/Register" class="buttonlink">
-								Kostenlos registrieren
-							</a>
-						</button>
-				</div>					
-			</div>			
-			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12">
-					<p class="blue">Noch Fragen? Wir haben die Antworten.</p>
-					<a href="https://talentify.zendesk.com/hc/de" target="blank" class="yra linkgreen">Zum talentify.me Hilfesystem </a>
-				</div>				
-			</div>	
-		</div>
+                Je günstiger du es anbietest, desto mehr Bonuspunkte gibt’s!
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-1">
+            <img src="/Images/tour_ipad.png" alt="iPad" />
+        </div>
+    </div>
+</div>
+
+<div id="communicationbg">
+    <div class="row hidden-xs" id="communicationbig">
+        <div class="col-sm-6 col-md-6">
+            <img src="/Images/tour_lernhilfe.png" alt="Screenshot" />
+        </div>
+        <div class="col-sm-6 col-md-5">
+            <h3 class="blue col-leftened">Alle Kommunikation <br /> an einem Platz.</h3><br />
+            <p class="blue col-leftened">
+                Das Lernhilfecenter ist der zentrale Platz, über den die gesamte Kommunikation auf talentify.me läuft.
+                Chatte mit anderen SchülerInnen, bekomme Benachrichtigungen und bewerte deine Lernbuddies. Einfach und unkompliziert.
+            </p>
+        </div>
+    </div>
+
+    <div class="row hidden-sm hidden-md hidden-lg" id="communicationsmall">
+        <div class="col-xs-12">
+            <h3 class="blue col-leftened">Alle Kommunikation <br /> an einem Platz.</h3><br />
+            <p class="blue col-leftened">
+                Das Lernhilfecenter ist der zentrale Platz, über den die gesamte Kommunikation auf talentify.me läuft.
+                Chatte mit anderen SchülerInnen, bekomme Benachrichtigungen und bewerte deine Lernbuddies. Einfach und unkompliziert.
+            </p>
+        </div>
+        <div class="col-xs-12">
+            <img src="/Images/tour_lernhilfe.png" alt="Screenshot" />
+        </div>
+    </div>
+</div>
+
+<div id="bonusbg">
+    <div class="row" id="bonus">
+        <div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-0">
+            <img src="/Images/icon_plus.png" alt="Plus" />
+            <h3 class="blue">Bonuspunkte sammeln und einlösen.</h3>
+            <br />
+            <p class="blue">
+                Mit jeder gegebenen Stunde Lernhilfe sammelst du fleißig Bonuspunkte,
+                mit denen du ab einer gewissen Anzahl das nächste Level erreichen kannst.
+                Pro Level werden neue Funktionen freigeschalten und du kannst Bonuspunkte auf talentify.me für
+                verschiedenste Dinge einsetzen, wie zum Beispiel Academy Workshops.
+            </p>
+        </div>
+        <div class="col-xs-12 col-sm-5 col-md-5 col-md-offset-2" onclick="location.href='http://www.talentify.academy'" style="cursor: pointer;">
+            <img src="/Images/icon_unihut.png" class="unihut" alt="Academy" />
+            <h3 class="blue">Einen Schritt voraus sein - mit Skills und Diplom.</h3>
+            <br />
+            <p class="blue">
+                Lass dich von ExpertInnen inspirieren, lerne Neues und stärke deine Talente.
+                In der talentify<sup>&reg;</sup> Academy entdecken SchülerInnen ihre Kreativität, Persönlichkeit,
+                ihren Weg und ein ganz neues Selbstbewusstsein. Mit Inhalten, auf die es im Leben wirklich ankommt
+                und einem starken Diplom für deinen Lebenslauf.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="yourregistrybg">
+    <div class="row" id="yourregistry">
+        <div class="row">
+            <div class="hidden-xs col-sm-12 col-md-12">
+                <button type="button" class="redbutton normalbutton btn btn-primary btn-lg hidden-xs visible-sm-* visible-md-* visible-lg-* text-center">
+                    <a href="/Register" class="buttonlink">
+                        Jetzt kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+            <div class="hidden-sm hidden-md hidden-lg col-sm-12 col-md-12">
+                <button type="button" class="redbutton mobilebutton btn btn-primary btn-lg visible-xs-* hidden-sm hidden-md hidden-lg text-center">
+                    <a href="/Register" class="buttonlink">
+                        Kostenlos registrieren
+                    </a>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <p class="blue">Noch Fragen? Wir haben die Antworten.</p>
+                <a href="https://talentify.zendesk.com/hc/de" target="blank" class="yra linkgreen">Zum talentify.me Hilfesystem </a>
+            </div>
+        </div>
+    </div>
+</div>

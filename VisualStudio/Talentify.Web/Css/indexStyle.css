@@ -1,30 +1,19 @@
 /* ---------------------------------------- Index Page ---------------------------------------- */
 
-/* ---------- Row preheader ---------- */
-#preheaderbg {
-	background: #2f4053
-}
-
-
-#preheader {
-	height: 28px
-}
-
-#preheader p, #preheader a, #preheader a:hover{
-	color: #fff;
-	font-size: 12.6px
-}
-
 /* ---------- Row header ---------- */
 #headerbg {
-		background: url("/Images/index_header.png"), #00a77f;
-		background-position: center bottom;
-		background-repeat: no-repeat
+	background: url("/Images/index_header.png"), #00a77f;
+	background-position:center bottom;
+	background-repeat: no-repeat;
+    background-position-x:center;
+    position: fixed;
+    z-index: 0;
+    width: 100%;
 }
 
 #header {
 	padding: 24px 0 0 0;
-	height: 772px;
+	height: 696px;
 	color: #c9f0e7;
 	text-align: left
 }
@@ -34,14 +23,8 @@
 	text-align: left
 }
 
-#header p.account{
-	font-size: 14px;
-	margin-left: 40px	
-}
-
 #header img.mdlglogo {
 	height: 55px;
-	margin-top: 7px
 }
 
 #header img.logo {
@@ -51,32 +34,54 @@
 }
 
 #header img.dots {
-	margin: 15px 0 15px 0
+	margin: 25px 0 25px 0
 }
 
 #header a:hover {
     text-decoration:none
 }
 
-#header button {
-	width: 180px;
-	margin-left: 40px;
-	margin-top: -5px;
-	padding: 5px 5px 5px 5px
+#header a.menu {
+    color: #fff;
+    margin: 0 20px 0 20px;
+    font-size: 18px;
 }
+
+#header a.menu:hover {
+    color: #c9f0e7;
+    text-decoration: none
+
+}
+
+#header button {
+    margin: 8px 0 8px 20px;
+	padding: 5px 25px 5px 25px
+}
+
+.menu {
+    margin-right: -20px
+}
+
+.hidden {
+    display: none
+}
+
+
 
 /* ---------- Row postheader ---------- */
 #postheaderbg {
 	background: rgba(34, 51, 67, 0.5);
     text-align: center;
+    position: relative;
+    z-index: 1;
 }	
 
 #postheader {
-	height: 240px;
-	margin-top: -240px;
+	height: 200px;
 	color: #c9f0e7;
-	padding: 30px 0 30px 0;
-    text-align: center
+	padding: 50px 0 45px 0;
+    text-align: center;
+    margin: 496px auto 0 auto;
 }
 
 #postheader p.big {
@@ -97,17 +102,17 @@
 #postheader button, #postheader input {
 	height: 40px;
 	width: 240px;
-    margin: 0px;
-    padding: 0px
+    margin: 0;
+    padding: 0
 }
 
 #postheader button {
-	margin-right: 195px
+	margin-right: 205px
 }
 
 #postheader input{
     padding-left: 10px;
-    margin-left: 195px;
+    margin-left: 205px;
 	font-size: 18px
 }
 
@@ -117,8 +122,15 @@
 }
 
 /* ---------- Row knownfrom ---------- */
+#knownfrombg {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #knownfrom  {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #knownfrom img {
@@ -143,8 +155,15 @@
 } 
 
 /* ---------- Row features ---------- */
+#featuresbg {
+    background :#fff;
+    position: relative;
+    z-index: 1
+}
+
 #features  {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #features h3, #features p{
@@ -156,7 +175,10 @@
 /* ---------- Row makethetour ---------- */
 #makethetourbg {
 	background: #e64461;
-	cursor:pointer
+	cursor:pointer;
+    position: relative;
+    z-index: 1;
+}
 }
 
 #makethetour {
@@ -178,13 +200,20 @@
 }
 
 /* ---------- Row comment ---------- */
+#commentbg {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #comment {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #comment a, #comment a:hover{
 	color: #ffbe00;
-	margin-top: 75px;
+	margin-top: 35px;
 }
 
 #comment a {
@@ -208,6 +237,12 @@
 /* ---------- Row academy ---------- */
 #academybg {
 	background: #f0f0f2;
+    position: relative;
+    z-index: 1;
+}
+
+#academy {
+    margin: -1px auto -1px auto
 }
 
 #academy h2 {
@@ -276,8 +311,15 @@
 }
 
 /* ---------- Row aboutus ---------- */
+#aboutusbg {
+    background: #fff;
+    position: relative;
+    z-index: 1;
+}
+
 #aboutus {
-	margin: 90px auto 90px auto
+	margin: -1px auto -1px auto;
+    padding: 90px 0 90px 0
 }
 
 #aboutus p {
@@ -291,6 +333,7 @@
 }
 
 #aboutus a, #aboutus a:hover{
+    margin-top: 22px;
 	color: #00a77f;
 }
 
@@ -316,26 +359,18 @@
       /* --- Row header --- */ 
       #header {
             padding: 24px 0 0 0;
-            height: 672px;
+            height: 722px;
             color: #c9f0e7;
             text-align: left;
         }
-
-        #header h1 {
-            margin-top: 56px;
-            text-align: left;
-        }
 }
+
 /* ---------- Tablet ---------- */
 
 @media (min-width: 768px) and (max-width: 991px) { 
 	/* --- Row header --- */
 	#header {
         height: 672px;
-    }
-
-    #header h1 {
-        margin-top: 56px;
     }
     
     #header img.kids {
@@ -345,6 +380,15 @@
 		vertical-align: bottom;
 		z-index: 0
 	}	
+
+    #header a.menu {
+        margin: 0 15px 0 15px;
+        font-size: 16px;
+    }
+
+    .menu {
+        margin-right: 0
+    }
 
 	/* --- Row postheader --- */
 	#postheader input, #postheader.input-group {
@@ -422,11 +466,12 @@
 	#mobileheader img.menu{
 		float: right;
 		margin-top: 5px;
+        margin-right: 0;
 		height: 22px
 	}	
 
 	#mobileheader h1 {
-		margin: 45px 0 135px 0;
+		margin: 45px 0 163px 0;
 		font-size: 26px
 	}
 	

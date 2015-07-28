@@ -323,20 +323,110 @@ height: 95%;
 	margin-left: 10px;
 	padding: 0
 }
+.unihut {
+    height: 120px;
+    width: 183px;
+    margin-top: 15px;
+    margin-bottom: 15px
+}
 
 /* ---------- Dotted Border ---------- */
-.dots {
+.dots, .dots-inline, .dots-grey {
 	font-family: Lato, san-serif;
 	font-size: 24px;
 	text-align: center;
 	overflow: hidden; 
 	color: #333;
-	letter-spacing: 0.15em
+	font-weight: 700;
+	letter-spacing: 0.15em;
+}
+
+.dots-inline {
+	display: inline;
+	overflow: hidden !important;
+	margin: 0 10px 0 15px;
+    vertical-align: middle;
+}
+
+.inline {
+	vertical-align: middle;
+	display: inline;
+	overflow: hidden; 
+}
+
+img.totop {
+	height: 36px;
+    margin-top: 5px;
+	padding: 0 -5px 0 -5px
+}
+
+#totopbg{
+    background: #fff;
+    position: relative;
+    z-index: 1;
+    margin: -1px 0 -1px 0
+}
+
+/* ---------- Row menu ---------- */
+#menubg, #indexmenubg {
+    background: #fff;
+	position: fixed;
+	top: 0;
+	z-index: 2;
+	width: 100%;
+    height: 100px;
+    padding-top: 25px;
+	-webkit-box-shadow: 0 0 2px 0 #808080;
+	-moz-box-shadow: 0 0 2px 0 #808080;
+	box-shadow: 0 0 2px 0 #808080;
+	display: none;
+}
+
+#menu img.mdlglogo {
+	height: 55px;
+}
+
+#menu img.logo {
+	height: 44px;
+	width: 200px;
+	margin-top: 7px
+}
+
+#menu a:hover {
+    text-decoration:none
+}
+
+#menu a.menu {
+    color: #173343;
+    margin: 0 20px 0 20px;
+    font-size: 18px;
+}
+
+#menu a.menu:hover {
+    color: #173343;
+    text-decoration: none
+
+}
+
+#menu button {
+    margin: 8px 0 8px 20px;
+	padding: 5px 25px 5px 25px
+}
+
+#menu .menu {
+    margin-right: -20px
 }
 
 /* ---------- Row yourregistry ---------- */
+#yourregistrybg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #yourregistry {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #yourregistry p {
@@ -375,8 +465,15 @@ height: 95%;
 	border-bottom: none;
 }
 /* ---------- Row footer ---------- */
+#footerbg {
+	background: #fff;
+    position: relative;
+    z-index: 1
+}
+
 #footer {
-	margin: 90px auto 90px auto
+	margin: 0 auto 0 auto;
+    padding: 90px 0 90px 0
 }
 
 #footer .xs {
@@ -404,8 +501,18 @@ height: 95%;
 	font-weight: 400
 }
 
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) and (max-width: 991px) {
+    	
+    /* --- Row dots --- */
+    img.totop {
+	    margin-top: -46px;
+        background: #fff
+    }
+}
+
 /* ---------- Mobile ---------- */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
 
 	*,p, a, a:hover{
 		font-family: 'Lato', san-serif;
@@ -439,6 +546,11 @@ height: 95%;
 	{
 		cursor: pointer
 	}
+
+    /* --- Row menu --- */
+    #menubg, #indexmenubg {
+        visibility: hidden;
+    }
 	
 	/* --- Row yourregistry --- */
 	#yourregistry {
@@ -459,9 +571,14 @@ height: 95%;
 	
 	/* --- Row dots --- */
 	.dots {
-		margin-left: 15px;
-		margin-right: 15px;
+		margin: 0 15px 0 15px
 	}
+
+    img.totop {
+	    margin-top: -46px;
+        background: #fff
+    }
+
 	/* --- Row mobilefooter --- */
 	#mobilefooter {
 		margin: 30px auto 30px auto
@@ -484,7 +601,7 @@ height: 95%;
 	}
 
 	#mobilefooter .sn a {
-		margin: 0
+		margin: 0 10px 0 10px
 	}
 
 	#mobilefooter p, #mobilefooter a, #mobilefooter a:hover,

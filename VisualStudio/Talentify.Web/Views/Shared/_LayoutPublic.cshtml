@@ -72,6 +72,20 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="/Scripts/talentify-utils.min.js"></script>
     <script src="/Scripts/api.min.js"></script>
+    <script>
+    $("#footer_slide").click(function () {
+        $('html, body').animate({
+            scrollTop: 0
+            /*scrollTop: $("#header").offset().top*/
+        }, 1000);
+    });
+    $("#mobilefooter_slide").click(function () {
+        $('html, body').animate({
+            scrollTop: $("#mobileheader").offset().top
+        }, 1000);
+    });
+    </script>
+
     @RenderSection("CustomJavascript", required: false)
 
 </body>
